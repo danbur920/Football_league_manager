@@ -1,0 +1,62 @@
+﻿@page "/leagues"
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+@using System_do_zarządzania_ligą_piłkarską.Shared
+@using System_do_zarządzania_ligą_piłkarską.Shared.Models
+@attribute [Authorize]
+@inject HttpClient Http
+
+<PageTitle>Ligi</PageTitle>
+
+<h1>Dostępne ligi</h1>
+
+@if (_allLeagues == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nazwa</th>
+                <th>Kraj</th>
+                <th>Poziom</th>
+                <th>Sezon</th>
+                <th>Rozegrane mecze</th>
+                <th>Start ligi</th>
+                <th>Koniec ligi</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var league in _allLeagues)
+            {
+                <tr>
+                    <td>@league.Name</td>
+                    <td>@league.Country</td>
+                    <td>@league.Level</td>
+                    <td>@league.Season</td>
+                    <td>@league.MatchesPlayed</td>
+                    <td>@league.LeagueStartDate</td>
+                    <td>@league.LeagueEndDate</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private LeagueDTO[]? _allLeagues;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            _allLeagues = await Http.GetFromJsonAsync<LeagueDTO[]>("api/leagues");
+        }
+        catch (AccessTokenNotAvailableException exception)
+        {
+            exception.Redirect();
+        }
+    }
+}

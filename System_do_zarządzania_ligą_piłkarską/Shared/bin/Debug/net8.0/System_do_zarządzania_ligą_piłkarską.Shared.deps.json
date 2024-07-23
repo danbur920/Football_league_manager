@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "System_do_zarządzania_ligą_piłkarską.Shared/1.0.0": {
+        "runtime": {
+          "System_do_zarządzania_ligą_piłkarską.Shared.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "System_do_zarządzania_ligą_piłkarską.Shared/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

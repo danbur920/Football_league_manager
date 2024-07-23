@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\System_do_zarządzania_ligą_piłkarską.Server.props" />
+</Project>

@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\System_do_zarządzania_ligą_piłkarską.Client.props" />
+</Project>
