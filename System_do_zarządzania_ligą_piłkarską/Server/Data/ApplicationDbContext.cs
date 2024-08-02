@@ -20,6 +20,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Data
         public DbSet<Team> Teams { get; set; }
         public DbSet<TeamStat> TeamStats { get; set; }
         public DbSet<Trophy> Trophies { get; set; }
+        public DbSet<Favourite> Favourites { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options,
             IOptions<OperationalStoreOptions> operationalStoreOptions,
@@ -33,9 +34,17 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Data
         {
             base.OnModelCreating(modelBuilder);
 
+            // Konwersje na string w bazie danych:
+
             modelBuilder.Entity<Trophy>()
                .Property(t => t.TrophyOwner)
                .HasConversion<string>();
+
+            modelBuilder.Entity<Favourite>()
+               .Property(f => f.FavouriteType)
+               .HasConversion<string>();
+
+            // -----------------------------------
 
             modelBuilder.Entity<Match>()
                  .HasOne(m => m.HomeTeam)

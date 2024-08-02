@@ -2,15 +2,19 @@
 @using Microsoft.AspNetCore.Authorization
 @using Microsoft.AspNetCore.Components.WebAssembly.Authentication
 @using System_do_zarządzania_ligą_piłkarską.Shared
-@using System_do_zarządzania_ligą_piłkarską.Shared.Models
+@using System_do_zarządzania_ligą_piłkarską.Shared.DTOs
 @attribute [Authorize]
 @inject HttpClient Http
+@inject AuthenticationStateProvider AuthenticationStateProvider
 
 <PageTitle>Ligi</PageTitle>
 
 <h1>Dostępne ligi</h1>
 
-@if (_allLeagues == null)
+<input type="text" @bind="searchQuery" placeholder="Szukaj ligi po nazwie..." class="form-control mb-3" />
+
+
+    @if (_allLeagues == null)
 {
     <p><em>Loading...</em></p>
 }
@@ -26,10 +30,12 @@ else
                 <th>Rozegrane mecze</th>
                 <th>Start ligi</th>
                 <th>Koniec ligi</th>
+                <th>Dodaj do ulubionych</th>
+                <th>Przejdź do ligi</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var league in _allLeagues)
+            @foreach (var league in FilteredLeagues)
             {
                 <tr>
                     <td>@league.Name</td>
@@ -39,6 +45,16 @@ else
                     <td>@league.MatchesPlayed</td>
                     <td>@league.LeagueStartDate</td>
                     <td>@league.LeagueEndDate</td>
+                    <th>
+                        <button class="btn btn-primary" @onclick="() => AddToFavourites(league.Id)">
+                            <i class="fas fa-star"></i>
+                        </button>
+                    </th>
+                    <td>
+                        <NavLink href="@($"/leagues/{league.Id}")" class="nav-link">
+                            <i class="fas fa-trophy"></i>
+                        </NavLink>
+                    </td>
                 </tr>
             }
         </tbody>
@@ -47,6 +63,7 @@ else
 
 @code {
     private LeagueDTO[]? _allLeagues;
+    private string searchQuery = string.Empty;
 
     protected override async Task OnInitializedAsync()
     {
@@ -59,4 +76,14 @@ else
             exception.Redirect();
         }
     }
+   
+    private async Task AddToFavourites(int leagueId)
+    {
+        var response = await Http.PostAsync($"api/favourites/league/{leagueId}", null);
+    }
+
+    private IEnumerable<LeagueDTO> FilteredLeagues =>
+    string.IsNullOrWhiteSpace(searchQuery)
+    ? _allLeagues
+    : _allLeagues?.Where(league => league.Name.Contains(searchQuery, StringComparison.OrdinalIgnoreCase));
 }

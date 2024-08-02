@@ -6,10 +6,8 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories.Interface
     public interface ILeagueRepository
     {
         Task<List<League>> GetAllLeagues();
-
-        //Task AddAddress(Address address);
-        //Task DeleteAddress(Address address);
-        //Task UpdateAddress(int id, Address address);
-        //Task SaveAddress();
+        Task<League> GetLeagueById(int id);
+        Task<List<TeamStat>> GetLeagueTable(int leagueId);
+        Task<List<FootballerStat>> GetLeagueScorers(int leagueId);
     }
 }

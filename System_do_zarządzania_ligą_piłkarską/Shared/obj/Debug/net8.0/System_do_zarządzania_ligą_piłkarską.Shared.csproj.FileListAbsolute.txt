@@ -9,3 +9,5 @@ C:\Users\danbu\Desktop\PRACA INŻYNIERSKA\System_do_zarządzania_ligą_piłkarsk
 C:\Users\danbu\Desktop\PRACA INŻYNIERSKA\System_do_zarządzania_ligą_piłkarską\System_do_zarządzania_ligą_piłkarską\Shared\obj\Debug\net8.0\refint\System_do_zarządzania_ligą_piłkarską.Shared.dll
 C:\Users\danbu\Desktop\PRACA INŻYNIERSKA\System_do_zarządzania_ligą_piłkarską\System_do_zarządzania_ligą_piłkarską\Shared\obj\Debug\net8.0\System_do_zarządzania_ligą_piłkarską.Shared.pdb
 C:\Users\danbu\Desktop\PRACA INŻYNIERSKA\System_do_zarządzania_ligą_piłkarską\System_do_zarządzania_ligą_piłkarską\Shared\obj\Debug\net8.0\ref\System_do_zarządzania_ligą_piłkarską.Shared.dll
+C:\Users\danbu\Desktop\PRACA INŻYNIERSKA\System_do_zarządzania_ligą_piłkarską\System_do_zarządzania_ligą_piłkarską\Shared\obj\Debug\net8.0\System_do_zarządzania_ligą_piłkarską.Shared.sourcelink.json
+C:\Users\danbu\Desktop\PRACA INŻYNIERSKA\System_do_zarządzania_ligą_piłkarską\System_do_zarządzania_ligą_piłkarską\Shared\obj\Debug\net8.0\System_do_zarządzania_ligą_piłkarską.Shared.csproj.AssemblyReference.cache

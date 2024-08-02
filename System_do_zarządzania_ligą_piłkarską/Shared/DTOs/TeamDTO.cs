@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace System_do_zarządzania_ligą_piłkarską.Shared.Models
+namespace System_do_zarządzania_ligą_piłkarską.Shared.DTOs
 {
     public class TeamDTO
     {

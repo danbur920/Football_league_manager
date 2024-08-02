@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace System_do_zarządzania_ligą_piłkarską.Shared.Models
+namespace System_do_zarządzania_ligą_piłkarską.Shared.DTOs
 {
     public class TeamStatDTO
     {
         public int Id { get; set; }
+        public string? TeamName { get; set; }
         public int TeamId { get; set; }
         public int LeagueId { get; set; }
         public int MatchesPlayed { get; set; }

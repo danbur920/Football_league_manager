@@ -379,6 +379,32 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Data.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("System_do_zarządzania_ligą_piłkarską.Server.Models.Favourite", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("FavouriteId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("FavouriteType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Favourites");
+                });
+
             modelBuilder.Entity("System_do_zarządzania_ligą_piłkarską.Server.Models.Footballer", b =>
                 {
                     b.Property<int>("Id")
@@ -803,6 +829,17 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("System_do_zarządzania_ligą_piłkarską.Server.Models.Favourite", b =>
+                {
+                    b.HasOne("System_do_zarządzania_ligą_piłkarską.Server.Models.ApplicationUser", "User")
+                        .WithMany("Favourites")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("System_do_zarządzania_ligą_piłkarską.Server.Models.Footballer", b =>
                 {
                     b.HasOne("System_do_zarządzania_ligą_piłkarską.Server.Models.Team", "Team")
@@ -930,6 +967,8 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Data.Migrations
 
             modelBuilder.Entity("System_do_zarządzania_ligą_piłkarską.Server.Models.ApplicationUser", b =>
                 {
+                    b.Navigation("Favourites");
+
                     b.Navigation("Teams");
                 });
 

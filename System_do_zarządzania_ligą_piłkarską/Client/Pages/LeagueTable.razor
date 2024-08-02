@@ -1,0 +1,75 @@
+﻿@page "/leagues/{leagueId:int}/table"
+@using System.Net.Http
+@using System_do_zarządzania_ligą_piłkarską.Shared.DTOs
+@inject HttpClient Http
+@inject NavigationManager Navigation
+
+<h3>Tabela Ligi</h3>
+
+<div class="button-container">
+    <button class="btn btn-secondary" @onclick="GoBack">Wróć</button>
+</div>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Drużyna</th>
+            <th>M</th>
+            <th>W</th>
+            <th>R</th>
+            <th>P</th>
+            <th>G+/-</th>
+            <th>Punkty</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (teamStats == null)
+        {
+            <tr>
+                <td colspan="8">Ładowanie...</td>
+            </tr>
+        }
+        else if (teamStats.Length == 0)
+        {
+            <tr>
+                <td colspan="8">Brak danych do wyświetlenia</td>
+            </tr>
+        }
+        else
+        {
+            int position = 1;
+            foreach (var teamStat in teamStats)
+            {
+                <tr>
+                    <td>@position</td>
+                    <td>@teamStat.TeamName</td>
+                    <td>@teamStat.MatchesPlayed</td>
+                    <td>@teamStat.Wins</td>
+                    <td>@teamStat.Draws</td>
+                    <td>@teamStat.Losses</td>
+                    <td>@teamStat.GoalBalance</td>
+                    <td>@teamStat.Points</td>
+                </tr>
+                position++;
+            }
+        }
+    </tbody>
+</table>
+
+@code {
+    [Parameter]
+    public int leagueId { get; set; }
+
+    private TeamStatDTO[] teamStats;
+
+    protected override async Task OnInitializedAsync() 
+    {
+        teamStats = await Http.GetFromJsonAsync<TeamStatDTO[]>($"api/leagues/{leagueId}/table");
+    }
+
+    private void GoBack()
+    {
+        Navigation.NavigateTo($"/leagues/{leagueId}");
+    }
+}

@@ -30,20 +30,24 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXV0aGVudGljYXRpb24ucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/danbu/Desktop/PRACA INŻYNIERSKA/System_do_zarządzania_ligą_piłkarską/System_do_zarządzania_ligą_piłkarską/Client/Pages/Counter.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ291bnRlci5yYXpvcg==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/danbu/Desktop/PRACA INŻYNIERSKA/System_do_zarządzania_ligą_piłkarską/System_do_zarządzania_ligą_piłkarską/Client/Pages/FetchData.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRmV0Y2hEYXRhLnJhem9y
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/danbu/Desktop/PRACA INŻYNIERSKA/System_do_zarządzania_ligą_piłkarską/System_do_zarządzania_ligą_piłkarską/Client/Pages/Index.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXgucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/danbu/Desktop/PRACA INŻYNIERSKA/System_do_zarządzania_ligą_piłkarską/System_do_zarządzania_ligą_piłkarską/Client/Pages/LeagueDetails.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTGVhZ3VlRGV0YWlscy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/danbu/Desktop/PRACA INŻYNIERSKA/System_do_zarządzania_ligą_piłkarską/System_do_zarządzania_ligą_piłkarską/Client/Pages/Leagues.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTGVhZ3Vlcy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/danbu/Desktop/PRACA INŻYNIERSKA/System_do_zarządzania_ligą_piłkarską/System_do_zarządzania_ligą_piłkarską/Client/Pages/LeagueScorers.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTGVhZ3VlU2NvcmVycy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/danbu/Desktop/PRACA INŻYNIERSKA/System_do_zarządzania_ligą_piłkarską/System_do_zarządzania_ligą_piłkarską/Client/Pages/LeagueTable.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTGVhZ3VlVGFibGUucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/danbu/Desktop/PRACA INŻYNIERSKA/System_do_zarządzania_ligą_piłkarską/System_do_zarządzania_ligą_piłkarską/Client/Shared/LoginDisplay.razor]
