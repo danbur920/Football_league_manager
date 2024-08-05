@@ -9,6 +9,7 @@ using System_do_zarządzania_ligą_piłkarską.Server.Repositories.Interfaces;
 using System_do_zarządzania_ligą_piłkarską.Server.Repositories;
 using System_do_zarządzania_ligą_piłkarską.Server.Services.Interfaces;
 using System_do_zarządzania_ligą_piłkarską.Server.Services;
+using Microsoft.AspNetCore.Components.Authorization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,9 +25,13 @@ builder.Services.AddScoped<ILeagueService, LeagueService>();
 builder.Services.AddScoped<IFavouriteRepository, FavouriteRepository>();
 builder.Services.AddScoped<IFavouriteService, FavouriteService>();
 
+builder.Services.AddScoped<UserManager<ApplicationUser>>();
+builder.Services.AddScoped<SignInManager<ApplicationUser>>();
+
 builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 builder.Services.AddIdentityServer()

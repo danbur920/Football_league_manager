@@ -13,8 +13,7 @@
 
 <input type="text" @bind="searchQuery" placeholder="Szukaj ligi po nazwie..." class="form-control mb-3" />
 
-
-    @if (_allLeagues == null)
+@if (_allLeagues == null)
 {
     <p><em>Loading...</em></p>
 }
@@ -46,9 +45,18 @@ else
                     <td>@league.LeagueStartDate</td>
                     <td>@league.LeagueEndDate</td>
                     <th>
-                        <button class="btn btn-primary" @onclick="() => AddToFavourites(league.Id)">
-                            <i class="fas fa-star"></i>
-                        </button>
+                        @if (_allFavourites.FirstOrDefault(x => x.FavouriteId == league.Id) == null)
+                        {
+                            <button class="btn btn-secondary" @onclick="() => AddToFavourites(league.Id)">
+                                <i class="fas fa-star"></i>
+                            </button>
+                        }
+                        else
+                        {
+                            <button class="btn btn-primary" @onclick="() => RemoveFromFavourites(league.Id)">
+                                <i class="fas fa-star"></i>
+                            </button>
+                        }
                     </th>
                     <td>
                         <NavLink href="@($"/leagues/{league.Id}")" class="nav-link">
@@ -63,27 +71,79 @@ else
 
 @code {
     private LeagueDTO[]? _allLeagues;
+    private FavouriteDTO[]? _allFavourites;
+
+    string userId = string.Empty;
     private string searchQuery = string.Empty;
 
     protected override async Task OnInitializedAsync()
     {
         try
         {
+            userId = await GetUserId();
             _allLeagues = await Http.GetFromJsonAsync<LeagueDTO[]>("api/leagues");
+            await RefreshFavourites();
         }
         catch (AccessTokenNotAvailableException exception)
         {
             exception.Redirect();
         }
     }
-   
+
+    private async Task RefreshFavourites()
+    {
+        _allFavourites = await Http.GetFromJsonAsync<FavouriteDTO[]>($"api/favourites/league");
+    }
+
+    private async Task<string?> GetUserId()
+    {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+        return user.FindFirst(c => c.Type == "sub")?.Value;
+    }
+
     private async Task AddToFavourites(int leagueId)
     {
-        var response = await Http.PostAsync($"api/favourites/league/{leagueId}", null);
+        var userId = await GetUserId();
+
+        if (userId != null)
+        {
+            var response = await Http.PostAsync($"api/favourites/league/{leagueId}", null);
+
+            if (response.IsSuccessStatusCode)
+            {
+                Console.WriteLine("Dodano do ulubionych.");
+                await RefreshFavourites();
+            }
+            else
+            {
+                Console.WriteLine("Nie udało się dodać do ulubionych.");
+            }
+        }
+    }
+
+    private async Task RemoveFromFavourites(int leagueId)
+    {
+        var userId = await GetUserId();
+
+        if (userId != null)
+        {
+            var response = await Http.DeleteAsync($"api/favourites/league/{leagueId}/{userId}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                Console.WriteLine("Usunięto z ulubionych.");
+                await RefreshFavourites();
+            }
+            else
+            {
+                Console.WriteLine("Nie udało się usunąć z ulubionych.");
+            }
+        }
     }
 
     private IEnumerable<LeagueDTO> FilteredLeagues =>
-    string.IsNullOrWhiteSpace(searchQuery)
-    ? _allLeagues
-    : _allLeagues?.Where(league => league.Name.Contains(searchQuery, StringComparison.OrdinalIgnoreCase));
+        string.IsNullOrWhiteSpace(searchQuery)
+        ? _allLeagues
+        : _allLeagues?.Where(league => league.Name.Contains(searchQuery, StringComparison.OrdinalIgnoreCase));
 }

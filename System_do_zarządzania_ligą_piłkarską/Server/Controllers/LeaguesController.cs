@@ -13,9 +13,6 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Controllers
     {
         private readonly ILeagueService _leagueService;
 
-        //league = await Http.GetFromJsonAsync<LeagueDTO>($"api/leagues/{leagueId}");
-        //teamStats = await Http.GetFromJsonAsync<TeamStatDTO[]>($"api/leagues/{leagueId}/team-stats");
-
         public LeaguesController(ILeagueService leagueService)
         {
             _leagueService = leagueService;
