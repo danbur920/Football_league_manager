@@ -1,4 +1,4 @@
-﻿@page "/leagues"
+﻿@page "/teams"
 @using Microsoft.AspNetCore.Authorization
 @using Microsoft.AspNetCore.Components.WebAssembly.Authentication
 @using System_do_zarządzania_ligą_piłkarską.Shared
@@ -8,7 +8,7 @@
 @inject HttpClient Http
 @inject AuthenticationStateProvider AuthenticationStateProvider
 
-<PageTitle>Ligi</PageTitle>
+<PageTitle>Drużyny</PageTitle>
 
 @if (_alertManager.alertVisibility)
 {
@@ -18,9 +18,10 @@
     </div>
 }
 
-<input type="text" @bind="searchQuery" placeholder="Szukaj ligę po nazwie..." class="form-control mb-3" />
+<input type="text" @bind="searchQueryName" placeholder="Szukaj drużynę po nazwie..." class="form-control mb-3" />
+<input type="text" @bind="searchQueryNationality" placeholder="Szukaj drużynę po kraju..." class="form-control mb-3" />
 
-@if (_allLeagues == null)
+@if (_allTeams == null)
 {
     <p><em>Loading...</em></p>
 }
@@ -31,42 +32,36 @@ else
             <tr>
                 <th>Nazwa</th>
                 <th>Kraj</th>
-                <th>Poziom</th>
-                <th>Sezon</th>
-                <th>Rozegrane mecze</th>
-                <th>Start ligi</th>
-                <th>Koniec ligi</th>
+                <th>Miasto</th>
+                <th>Stadion</th>
                 <th>Dodaj do ulubionych</th>
-                <th>Przejdź do ligi</th>
+                <th>Przejdź do drużyny</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var league in FilteredLeagues)
+            @foreach (var team in filteredTeams)
             {
                 <tr>
-                    <td>@league.Name</td>
-                    <td>@league.Country</td>
-                    <td>@league.Level</td>
-                    <td>@league.Season</td>
-                    <td>@league.MatchesPlayed</td>
-                    <td>@league.LeagueStartDate</td>
-                    <td>@league.LeagueEndDate</td>
+                    <td>@team.Name</td>
+                    <td>@team.Country</td>
+                    <td>@team.City</td>
+                    <td>@team.Stadium</td>
                     <td>
-                        @if (IsFavourite(league.Id))
+                        @if (IsFavourite(team.Id))
                         {
-                            <button class="btn btn-primary" @onclick="() => RemoveFromFavourites(league.Id)">
+                            <button class="btn btn-primary" @onclick="() => RemoveFromFavourites(team.Id)">
                                 <i class="fas fa-star"></i>
                             </button>
                         }
                         else
                         {
-                            <button class="btn btn-secondary" @onclick="() => AddToFavourites(league.Id)">
+                            <button class="btn btn-secondary" @onclick="() => AddToFavourites(team.Id)">
                                 <i class="fas fa-star"></i>
                             </button>
                         }
                     </td>
                     <td>
-                        <NavLink href="@($"/leagues/{league.Id}")" class="nav-link">
+                        <NavLink href="@($"/teams/{team.Id}")" class="nav-link">
                             <i class="fas fa-trophy"></i>
                         </NavLink>
                     </td>
@@ -77,19 +72,25 @@ else
 }
 
 @code {
-    private LeagueDTO[]? _allLeagues;
+    private TeamDTO[]? _allTeams;
     private FavouriteDTO[]? _allFavourites;
     private AlertManager _alertManager = new AlertManager();
 
     string userId = string.Empty;
-    private string searchQuery = string.Empty;
+
+    private string searchQueryName = string.Empty;
+    private string searchQueryNationality = string.Empty;
+
+    private string alertMessage = string.Empty;
+    private string alertType = string.Empty;
+    private bool alertVisibility = false;
 
     protected override async Task OnInitializedAsync()
     {
         try
         {
             userId = await GetUserId();
-            _allLeagues = await Http.GetFromJsonAsync<LeagueDTO[]>("api/leagues");
+            _allTeams = await Http.GetFromJsonAsync<TeamDTO[]>("api/teams");
             await RefreshFavourites();
         }
         catch (AccessTokenNotAvailableException exception)
@@ -98,15 +99,15 @@ else
         }
     }
 
-    private bool IsFavourite(int leagueId)
+    private bool IsFavourite(int teamId)
     {
-        var isFavourite = _allFavourites.FirstOrDefault(x => x.FavouriteId == leagueId) != null;
+        var isFavourite = _allFavourites.FirstOrDefault(x => x.FavouriteId == teamId) != null;
         return isFavourite;
     }
 
     private async Task RefreshFavourites()
     {
-        _allFavourites = await Http.GetFromJsonAsync<FavouriteDTO[]>($"api/favourites/league");
+        _allFavourites = await Http.GetFromJsonAsync<FavouriteDTO[]>($"api/favourites/team");
     }
 
     private async Task<string?> GetUserId()
@@ -116,50 +117,47 @@ else
         return user.FindFirst(c => c.Type == "sub")?.Value;
     }
 
-    private async Task AddToFavourites(int leagueId)
+    private async Task AddToFavourites(int teamId)
     {
-        var userId = await GetUserId();
-
         if (userId != null)
         {
-            var response = await Http.PostAsync($"api/favourites/league/{leagueId}", null);
-            var league = _allLeagues.FirstOrDefault(l => l.Id == leagueId);
+            var response = await Http.PostAsync($"api/favourites/team/{teamId}", null);
+            var team = _allTeams.FirstOrDefault(t => t.Id == teamId);
 
             if (response.IsSuccessStatusCode)
             {
-                _alertManager.ShowAlert($"Dodano ligę {league?.Name} do ulubionych!", "success");
+                _alertManager.ShowAlert($"Dodano drużynę {team?.Name} do ulubionych!", "success");
                 await RefreshFavourites();
             }
             else
             {
-                _alertManager.ShowAlert($"Nie udało się dodać ligi {league?.Name} do ulubionych.", "danger");
+                _alertManager.ShowAlert($"Nie udało się dodać drużyny {team?.Name} do ulubionych.", "danger");
             }
         }
     }
 
-    private async Task RemoveFromFavourites(int leagueId)
+    private async Task RemoveFromFavourites(int teamId)
     {
-        var userId = await GetUserId();
-
         if (userId != null)
         {
-            var response = await Http.DeleteAsync($"api/favourites/league/{leagueId}/{userId}");
-            var league = _allLeagues.FirstOrDefault(l => l.Id == leagueId);
+            var response = await Http.DeleteAsync($"api/favourites/team/{teamId}/{userId}");
+            var team = _allTeams.FirstOrDefault(t => t.Id == teamId);
 
             if (response.IsSuccessStatusCode)
             {
-                _alertManager.ShowAlert($"Usunięto ligę {league?.Name} z ulubionych.", "info");
+                _alertManager.ShowAlert($"Usunięto drużynę {team?.Name} z ulubionych.", "info");
                 await RefreshFavourites();
             }
             else
             {
-                _alertManager.ShowAlert($"Nie udało się usunąć ligi {league?.Name} z ulubionych.", "danger");
+                _alertManager.ShowAlert($"Nie udało się usunąć drużyny {team?.Name} z ulubionych.", "danger");
             }
         }
     }
 
-    private IEnumerable<LeagueDTO> FilteredLeagues =>
-        string.IsNullOrWhiteSpace(searchQuery)
-        ? _allLeagues
-        : _allLeagues?.Where(league => league.Name.Contains(searchQuery, StringComparison.OrdinalIgnoreCase));
+    private IEnumerable<TeamDTO> filteredTeams =>
+     _allTeams?.Where(team =>
+         (string.IsNullOrWhiteSpace(searchQueryName) || team.Name.Contains(searchQueryName, StringComparison.OrdinalIgnoreCase)) &&
+         (string.IsNullOrWhiteSpace(searchQueryNationality) || team.Country.Contains(searchQueryNationality, StringComparison.OrdinalIgnoreCase))
+     );
 }

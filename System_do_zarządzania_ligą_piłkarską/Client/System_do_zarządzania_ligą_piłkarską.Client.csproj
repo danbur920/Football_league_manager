@@ -24,6 +24,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Update="Pages\Teams.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
     <Content Update="Pages\LeagueScorers.razor">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
     </Content>

@@ -9,11 +9,13 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Mapping
         public MappingProfile()
         {
             CreateMap<League, LeagueDTO>().ReverseMap();
+            CreateMap<FootballerStat, FootballerStatDTO>().ReverseMap();
+            CreateMap<Favourite, FavouriteDTO>().ReverseMap();
+            CreateMap<Team, TeamDTO>().ReverseMap();
+
             CreateMap<TeamStat, TeamStatDTO>()
                 .ForMember(dest => dest.TeamName, opt => opt.MapFrom(src => src.Team.Name))
                 .ReverseMap();
-            CreateMap<FootballerStat, FootballerStatDTO>().ReverseMap();
-            CreateMap<Favourite, FavouriteDTO>().ReverseMap();
         }
     }
 }
