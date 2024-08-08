@@ -18,7 +18,8 @@
     </div>
 }
 
-<input type="text" @bind="searchQuery" placeholder="Szukaj ligę po nazwie..." class="form-control mb-3" />
+<input type="text" @bind="searchQueryName" placeholder="Szukaj ligę po nazwie..." class="form-control mb-3" />
+<input type="text" @bind="searchQueryNationality" placeholder="Szukaj ligę po kraju..." class="form-control mb-3" />
 
 @if (_allLeagues == null)
 {
@@ -41,7 +42,13 @@ else
             </tr>
         </thead>
         <tbody>
-            @foreach (var league in FilteredLeagues)
+            @if(filteredLeagues.Count() == 0)
+            {
+                <tr>
+                    <td colspan="9" style="text-align: center">Brak lig lub żadna liga nie spełnia określonych kryteriów wyszukiwania.</td>
+                </tr>
+            }
+            @foreach (var league in filteredLeagues)
             {
                 <tr>
                     <td>@league.Name</td>
@@ -82,7 +89,8 @@ else
     private AlertManager _alertManager = new AlertManager();
 
     string userId = string.Empty;
-    private string searchQuery = string.Empty;
+    private string searchQueryName = string.Empty;
+    private string searchQueryNationality = string.Empty;
 
     protected override async Task OnInitializedAsync()
     {
@@ -158,8 +166,9 @@ else
         }
     }
 
-    private IEnumerable<LeagueDTO> FilteredLeagues =>
-        string.IsNullOrWhiteSpace(searchQuery)
-        ? _allLeagues
-        : _allLeagues?.Where(league => league.Name.Contains(searchQuery, StringComparison.OrdinalIgnoreCase));
+    private IEnumerable<LeagueDTO> filteredLeagues =>
+    _allLeagues?.Where(league =>
+        (string.IsNullOrWhiteSpace(searchQueryName) || league.Name.Contains(searchQueryName, StringComparison.OrdinalIgnoreCase)) &&
+        (string.IsNullOrWhiteSpace(searchQueryNationality) || league.Country.Contains(searchQueryNationality, StringComparison.OrdinalIgnoreCase))
+    );
 }

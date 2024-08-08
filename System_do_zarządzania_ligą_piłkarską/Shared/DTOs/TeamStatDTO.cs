@@ -24,5 +24,6 @@ namespace System_do_zarządzania_ligą_piłkarską.Shared.DTOs
                                                 // jeśli false to jest to liga, w której grał zespół w przeszłości
         public virtual LeagueDTO? League { get; set; }
         public virtual TeamDTO? Team { get; set; }
+        public virtual ICollection<FootballerStatDTO>? FootballersStats { get; set; } = new List<FootballerStatDTO>();
     }
 }

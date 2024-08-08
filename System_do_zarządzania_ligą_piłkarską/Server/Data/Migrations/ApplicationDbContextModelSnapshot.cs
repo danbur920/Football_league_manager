@@ -479,6 +479,9 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Data.Migrations
                     b.Property<int>("RedCards")
                         .HasColumnType("int");
 
+                    b.Property<int>("TeamStatId")
+                        .HasColumnType("int");
+
                     b.Property<int>("YellowCards")
                         .HasColumnType("int");
 
@@ -487,6 +490,8 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Data.Migrations
                     b.HasIndex("FootballerId");
 
                     b.HasIndex("LeagueId");
+
+                    b.HasIndex("TeamStatId");
 
                     b.ToTable("FootballerStats");
                 });
@@ -863,9 +868,17 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("System_do_zarządzania_ligą_piłkarską.Server.Models.TeamStat", "TeamStat")
+                        .WithMany("FootballersStats")
+                        .HasForeignKey("TeamStatId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Footballer");
 
                     b.Navigation("League");
+
+                    b.Navigation("TeamStat");
                 });
 
             modelBuilder.Entity("System_do_zarządzania_ligą_piłkarską.Server.Models.Match", b =>
@@ -1008,6 +1021,11 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Data.Migrations
                     b.Navigation("TeamStats");
 
                     b.Navigation("Trophies");
+                });
+
+            modelBuilder.Entity("System_do_zarządzania_ligą_piłkarską.Server.Models.TeamStat", b =>
+                {
+                    b.Navigation("FootballersStats");
                 });
 #pragma warning restore 612, 618
         }

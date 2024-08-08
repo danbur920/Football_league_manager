@@ -8,7 +8,6 @@
 <h3>Szczegóły Ligi</h3>
 
 <div class="button-container">
-    <button class="btn btn-primary" @onclick="ShowInformation">Informacje</button>
     <button class="btn btn-primary" @onclick="ShowTable">Tabela</button>
     <button class="btn btn-primary" @onclick="ShowScorers">Strzelcy</button>
     <button class="btn btn-secondary" @onclick="GoBack">Wróć</button>
@@ -17,7 +16,7 @@
 @if (league != null)
 {
     <div>
-        <h4>@league.Name</h4>
+        <h4>@league.Name</h4>  
     </div>
 }
 else
@@ -33,11 +32,6 @@ else
     protected override async Task OnInitializedAsync()
     {
         league = await Http.GetFromJsonAsync<LeagueDTO>($"api/leagues/{leagueId}");
-    }
-
-    private void ShowInformation()
-    {
-        Navigation.NavigateTo($"/leagues/{leagueId}");
     }
 
     private void ShowTable()

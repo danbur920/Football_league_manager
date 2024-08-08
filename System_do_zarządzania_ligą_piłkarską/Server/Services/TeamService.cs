@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using System_do_zarządzania_ligą_piłkarską.Server.Repositories;
 using System_do_zarządzania_ligą_piłkarską.Server.Repositories.Interfaces;
 using System_do_zarządzania_ligą_piłkarską.Server.Services.Interfaces;
 using System_do_zarządzania_ligą_piłkarską.Shared.DTOs;
@@ -19,6 +20,18 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Services
         {
             var teams = await _teamRepository.GetAllTeams();
             return _mapper.Map<List<TeamDTO>>(teams);
+        }
+
+        public async Task<TeamDTO> GetTeamById(int teamId)
+        {
+            var team = await _teamRepository.GetTeamById(teamId);
+            return _mapper.Map<TeamDTO>(team);
+        }
+
+        public async Task<List<FootballerStatDTO>> GetCurrentFootballersStats(int teamId)
+        {
+            var currentFootballersStats = await _teamRepository.GetCurrentFootballersStats(teamId);
+            return _mapper.Map<List<FootballerStatDTO>>(currentFootballersStats);
         }
     }
 }

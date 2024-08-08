@@ -23,5 +23,6 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Models
                                                 // jeśli false to jest to liga, w której grał zespół w przeszłości
         public virtual League? League { get; set; } 
         public virtual Team? Team { get; set; }
+        public virtual ICollection<FootballerStat>? FootballersStats { get; set; } = new List<FootballerStat>();
     }
 }

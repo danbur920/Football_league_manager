@@ -11,6 +11,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Shared.DTOs
         public int Id { get; set; }
         public int FootballerId { get; set; }
         public int LeagueId { get; set; }
+        public int TeamStatId { get; set; }
         public int MatchesPlayed { get; set; }
         public int Goals { get; set; }
         public int Assists { get; set; }
@@ -18,5 +19,6 @@ namespace System_do_zarządzania_ligą_piłkarską.Shared.DTOs
         public int RedCards { get; set; }
         public virtual FootballerDTO? Footballer { get; set; }
         public virtual LeagueDTO? League { get; set; }
+        public virtual TeamStatDTO? TeamStatDTO { get; set; }
     }
 }

@@ -39,6 +39,12 @@ else
             </tr>
         </thead>
         <tbody>
+            @if (filteredTeams.Count() == 0)
+            {
+                <tr>
+                    <td colspan="9" style="text-align: center">Brak drużyn lub żadna drużyna nie spełnia określonych kryteriów wyszukiwania.</td>
+                </tr>
+            }
             @foreach (var team in filteredTeams)
             {
                 <tr>

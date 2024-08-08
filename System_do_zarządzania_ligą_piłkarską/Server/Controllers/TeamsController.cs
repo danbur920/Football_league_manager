@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System_do_zarządzania_ligą_piłkarską.Server.Services;
 using System_do_zarządzania_ligą_piłkarską.Server.Services.Interfaces;
 using System_do_zarządzania_ligą_piłkarską.Shared.DTOs;
 
@@ -21,6 +22,20 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Controllers
         {
             var teams = await _teamService.GetAllTeams();
             return Ok(teams);
+        }
+
+        [HttpGet("{teamId}")]
+        public async Task<ActionResult<List<LeagueDTO>>> GetTeamById(int teamId)
+        {
+            var team = await _teamService.GetTeamById(teamId);
+            return Ok(team);
+        }
+
+        [HttpGet("{teamId}/footballers/stats/current")]
+        public async Task<ActionResult<List<FootballerStatDTO>>> GetCurrentFootballersStats(int teamId)
+        {
+            var stats = await _teamService.GetCurrentFootballersStats(teamId);
+            return Ok(stats);
         }
     }
 }
