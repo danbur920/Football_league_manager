@@ -1560,3 +1560,4 @@ C:\Users\danbu\Desktop\PRACA INŻYNIERSKA\System_do_zarządzania_ligą_piłkarsk
 C:\Users\danbu\Desktop\PRACA INŻYNIERSKA\System_do_zarządzania_ligą_piłkarską\System_do_zarządzania_ligą_piłkarską\Client\obj\Debug\net8.0\compressed\agcss27mym.gz
 C:\Users\danbu\Desktop\PRACA INŻYNIERSKA\System_do_zarządzania_ligą_piłkarską\System_do_zarządzania_ligą_piłkarską\Client\obj\Debug\net8.0\compressed\l9eraxgis5.gz
 C:\Users\danbu\Desktop\PRACA INŻYNIERSKA\System_do_zarządzania_ligą_piłkarską\System_do_zarządzania_ligą_piłkarską\Client\obj\Debug\net8.0\compressed\igfeq5360t.gz
+C:\Users\danbu\Desktop\PRACA INŻYNIERSKA\System_do_zarządzania_ligą_piłkarską\System_do_zarządzania_ligą_piłkarską\Client\obj\Debug\net8.0\scopedcss\Pages\LeagueDetails.razor.rz.scp.css

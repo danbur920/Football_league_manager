@@ -21,6 +21,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Data
         public DbSet<TeamStat> TeamStats { get; set; }
         public DbSet<Trophy> Trophies { get; set; }
         public DbSet<Favourite> Favourites { get; set; }
+        public DbSet<MatchEvent> MatchEvents { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options,
             IOptions<OperationalStoreOptions> operationalStoreOptions,
@@ -42,6 +43,10 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Data
 
             modelBuilder.Entity<Favourite>()
                .Property(f => f.FavouriteType)
+               .HasConversion<string>();
+
+            modelBuilder.Entity<MatchEvent>()
+               .Property(f => f.EventType)
                .HasConversion<string>();
 
             // -----------------------------------

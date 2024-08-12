@@ -18,12 +18,12 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Controllers
             _footballerService = footballerService;
         }
 
-        [HttpGet("{teamId}/scorers")]
-        public async Task<ActionResult<List<FootballerStatDTO>>> GetLeagueScorers(int teamId)
-        {
-            var scorers = await _leagueService.GetLeagueScorers(leagueId);
-            return Ok(scorers);
-        }
+        //[HttpGet("{teamId}/scorers")]
+        //public async Task<ActionResult<List<FootballerStatDTO>>> GetLeagueScorers(int teamId)
+        //{
+        //    var scorers = await _leagueService.GetLeagueScorers(leagueId);
+        //    return Ok(scorers);
+        //}
 
 
         //private FootballerStatDTO[]? teamLineup;

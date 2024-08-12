@@ -476,6 +476,9 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Data.Migrations
                     b.Property<int>("MatchesPlayed")
                         .HasColumnType("int");
 
+                    b.Property<int>("OwnGoals")
+                        .HasColumnType("int");
+
                     b.Property<int>("RedCards")
                         .HasColumnType("int");
 
@@ -591,6 +594,43 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Data.Migrations
                     b.HasIndex("RefereeId");
 
                     b.ToTable("Matches");
+                });
+
+            modelBuilder.Entity("System_do_zarządzania_ligą_piłkarską.Server.Models.MatchEvent", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EventType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("MatchId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Minute")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("PrimaryFootballerId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("SecondaryFootballerId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("TeamId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MatchId");
+
+                    b.ToTable("MatchEvents");
                 });
 
             modelBuilder.Entity("System_do_zarządzania_ligą_piłkarską.Server.Models.Referee", b =>
@@ -916,6 +956,17 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Data.Migrations
                     b.Navigation("Referee");
                 });
 
+            modelBuilder.Entity("System_do_zarządzania_ligą_piłkarską.Server.Models.MatchEvent", b =>
+                {
+                    b.HasOne("System_do_zarządzania_ligą_piłkarską.Server.Models.Match", "Match")
+                        .WithMany("MatchEvents")
+                        .HasForeignKey("MatchId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Match");
+                });
+
             modelBuilder.Entity("System_do_zarządzania_ligą_piłkarską.Server.Models.RefereeStat", b =>
                 {
                     b.HasOne("System_do_zarządzania_ligą_piłkarską.Server.Models.League", "League")
@@ -1001,6 +1052,11 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Data.Migrations
                     b.Navigation("RefereeStats");
 
                     b.Navigation("TeamsStats");
+                });
+
+            modelBuilder.Entity("System_do_zarządzania_ligą_piłkarską.Server.Models.Match", b =>
+                {
+                    b.Navigation("MatchEvents");
                 });
 
             modelBuilder.Entity("System_do_zarządzania_ligą_piłkarską.Server.Models.Referee", b =>

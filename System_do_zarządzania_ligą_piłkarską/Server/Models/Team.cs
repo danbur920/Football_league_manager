@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace System_do_zarządzania_ligą_piłkarską.Server.Models
@@ -20,6 +21,6 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Models
         public virtual ICollection<Match> AwayMatches { get; set; } = new List<Match>();
         public virtual ICollection<TeamStat> TeamStats { get; set; } = new List<TeamStat>();
         public virtual ICollection<Trophy> Trophies { get; set; } = new List<Trophy>();
-        public virtual ICollection<Footballer> Footballers { get; set; } = new List<Footballer>();
+        //public virtual ICollection<Footballer> Footballers { get; set; } = new List<Footballer>();
     }
 }

@@ -14,6 +14,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Models
         public int TeamStatId { get; set; }
         public int MatchesPlayed { get; set; }
         public int Goals {  get; set; }
+        public int OwnGoals {  get; set; }
         public int Assists { get; set; }
         public int YellowCards { get; set; }
         public int RedCards { get; set; }

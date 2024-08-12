@@ -10,6 +10,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Mapping
         {
             CreateMap<League, LeagueDTO>().ReverseMap();
             CreateMap<FootballerStat, FootballerStatDTO>().ReverseMap();
+            CreateMap<Footballer, FootballerDTO>().ReverseMap();
             CreateMap<Favourite, FavouriteDTO>().ReverseMap();
             CreateMap<Team, TeamDTO>().ReverseMap();
 

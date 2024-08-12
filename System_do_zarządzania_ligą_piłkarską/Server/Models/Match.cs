@@ -29,5 +29,6 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Models
         public virtual Referee Referee { get; set; }
         public virtual Team HomeTeam { get; set; }
         public virtual Team AwayTeam { get; set; }
+        public virtual ICollection<MatchEvent> MatchEvents { get; set; } = new List<MatchEvent>();
     }
 }
