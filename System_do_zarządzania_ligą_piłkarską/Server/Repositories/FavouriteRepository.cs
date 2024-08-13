@@ -22,7 +22,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
         }
 
         public async Task RemoveFavourite(Favourite favourite)
-        {             
+        {
             _context.Favourites.Remove(favourite);
             await _context.SaveChangesAsync();
         }
@@ -41,8 +41,26 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
         {
             var favouriteTypeConverted = (Models.FavouriteType)favouriteType;
 
-            var favourites = await _context.Favourites.Where(x=>x.UserId == userId && x.FavouriteType == favouriteTypeConverted).ToListAsync();
+            var favourites = await _context.Favourites.Where(x => x.UserId == userId && x.FavouriteType == favouriteTypeConverted).ToListAsync();
             return favourites;
+        }
+
+        public async Task<List<League>> GetFavouriteLeaguesByUserId(string userId)
+        {
+            var userFavourites = await GetFavouritesByUserId(userId, FavouriteType.League);
+            var userFavouritesId = userFavourites.Select(x => x.FavouriteId).ToList();
+
+            var userFavouriteLeagues = await _context.Leagues.Where(league => userFavouritesId.Contains(league.Id)).ToListAsync();
+            return userFavouriteLeagues;
+        }
+
+        public async Task<List<Team>> GetFavouriteTeamsByUserId(string userId)
+        {
+            var userFavourites = await GetFavouritesByUserId(userId, FavouriteType.Team);
+            var userFavouritesId = userFavourites.Select(x => x.FavouriteId).ToList();
+
+            var userFavouriteTeams = await _context.Teams.Where(team => userFavouritesId.Contains(team.Id)).ToListAsync();
+            return userFavouriteTeams;
         }
     }
 }

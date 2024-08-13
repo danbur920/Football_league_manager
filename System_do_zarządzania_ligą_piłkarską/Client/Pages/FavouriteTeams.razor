@@ -1,0 +1,153 @@
+﻿@page "/favourites/teams"
+@using System.Net.Http
+@using System_do_zarządzania_ligą_piłkarską.Shared.DTOs
+@using System_do_zarządzania_ligą_piłkarską.Client.Extensions
+@using System_do_zarządzania_ligą_piłkarską.Client.Components
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+@attribute [Authorize]
+@inject HttpClient Http
+@inject NavigationManager Navigation
+@inject AuthenticationStateProvider AuthenticationStateProvider
+
+<PageTitle>Ulubione drużyny</PageTitle>
+
+@if (_showModal)
+{
+    <Modal Title="Usuń" Body="Czy na pewno chcesz usunąć wybraną drużynę z ulubionch?" OnConfirm="HandleConfirm" OnCancel="HandleCancel" />
+}
+
+@if (alertManager.alertVisibility)
+{
+    <div class="alert @($"alert-{alertManager.alertType}") alert-dismissible fade show" role="alert">
+        @alertManager.alertMessage
+        <button type="button" class="btn-close" aria-label="Close" @onclick="() => alertManager.alertVisibility = false"></button>
+    </div>
+}
+
+@if (favouriteTeams == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nazwa</th>
+                <th>Kraj</th>
+                <th>Miasto</th>
+                <th>Stadion</th>
+                <th>Usuń z ulubionych</th>
+                <th>Przejdź do drużyny</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (favouriteTeams.Count() == 0)
+            {
+                <tr>
+                    <td colspan="9" style="text-align: center">Brak ulubionych drużyn</td>
+                </tr>
+            }
+            @foreach (var team in favouriteTeams)
+            {
+                <tr>
+                    <td>@team.Name</td>
+                    <td>@team.Country</td>
+                    <td>@team.City</td>
+                    <td>@team.Stadium</td>
+                    <td>
+                        <button class="btn btn-primary" @onclick="() => ShowRemoveModal(team.Id)">
+                            <i class="fas fa-trash"></i> Usuń
+                        </button>
+                    </td>
+                    <td>
+                        <button class="btn btn-link" @onclick="() => NavigateToTeamDetails(team.Id)">
+                            <i class="fas fa-arrow-right"></i> Szczegóły
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<TeamDTO>? favouriteTeams;
+    private AlertManager alertManager = new AlertManager();
+
+    private string _userId = string.Empty;
+    private bool _showModal = false;
+    private int _teamIdToRemove;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            _userId = await GetUserId();
+            await RefreshFavourites();
+        }
+        catch (AccessTokenNotAvailableException exception)
+        {
+            exception.Redirect();
+        }
+    }
+
+    private async Task RefreshFavourites()
+    {
+        favouriteTeams = await Http.GetFromJsonAsync<List<TeamDTO>>("api/favourites/favourite-teams");
+    }
+
+    private void ShowRemoveModal(int teamId)
+    {
+        _teamIdToRemove = teamId;
+        _showModal = true;
+    }
+
+    private async Task HandleConfirm(bool confirmed)
+    {
+        if (confirmed)
+        {
+            await RemoveFromFavourites(_teamIdToRemove);
+        }
+        _showModal = false;
+    }
+
+    private async Task HandleCancel()
+    {
+        _showModal = false;
+    }
+
+    private async Task<string?> GetUserId()
+    {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+        return user.FindFirst(c => c.Type == "sub")?.Value;
+    }
+
+    private async Task RemoveFromFavourites(int teamId)
+    {
+        _userId = await GetUserId();
+
+        if (_userId != null)
+        {
+            var response = await Http.DeleteAsync($"api/favourites/team/{teamId}/{_userId}");
+            var team = favouriteTeams.FirstOrDefault(x => x.Id == teamId);
+
+            if (response.IsSuccessStatusCode)
+            {
+                alertManager.ShowAlert($"Usunięto drużynę {team?.Name} z ulubionych.", "info");
+                await RefreshFavourites();
+            }
+            else
+            {
+                alertManager.ShowAlert($"Nie udało się usunąć drużyny {team?.Name} z ulubionych.", "danger");
+            }
+        }
+    }
+
+    private void NavigateToTeamDetails(int teamId)
+    {
+        Navigation.NavigateTo($"/teams/{teamId}");
+    }
+}

@@ -1,0 +1,159 @@
+﻿@page "/favourites/leagues"
+@using System.Net.Http
+@using System_do_zarządzania_ligą_piłkarską.Shared.DTOs
+@using System_do_zarządzania_ligą_piłkarską.Client.Extensions
+@using System_do_zarządzania_ligą_piłkarską.Client.Components
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+@attribute [Authorize]
+@inject HttpClient Http
+@inject NavigationManager Navigation
+@inject AuthenticationStateProvider AuthenticationStateProvider
+
+<PageTitle>Ulubione ligi</PageTitle>
+
+@if (_showModal)
+{
+    <Modal Title="Usuń" Body="Czy na pewno chcesz usunąć wybraną ligę z ulubionch?" OnConfirm="HandleConfirm" OnCancel="HandleCancel" />
+}
+
+@if (alertManager.alertVisibility)
+{
+    <div class="alert @($"alert-{alertManager.alertType}") alert-dismissible fade show" role="alert">
+        @alertManager.alertMessage
+        <button type="button" class="btn-close" aria-label="Close" @onclick="() => alertManager.alertVisibility = false"></button>
+    </div>
+}
+
+@if (favouriteLeagues == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nazwa</th>
+                <th>Kraj</th>
+                <th>Poziom</th>
+                <th>Sezon</th>
+                <th>Rozegrane mecze</th>
+                <th>Start ligi</th>
+                <th>Koniec ligi</th>
+                <th>Usuń z ulubionych</th>
+                <th>Przejdź do ligi</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (favouriteLeagues.Count() == 0)
+            {
+                <tr>
+                    <td colspan="9" style="text-align: center">Brak ulubionych lig.</td>
+                </tr>
+            }
+            @foreach (var league in favouriteLeagues)
+            {
+                <tr>
+                    <td>@league.Name</td>
+                    <td>@league.Country</td>
+                    <td>@league.Level</td>
+                    <td>@league.Season</td>
+                    <td>@league.MatchesPlayed</td>
+                    <td>@league.LeagueStartDate</td>
+                    <td>@league.LeagueEndDate</td>
+                    <td>
+                        <button class="btn btn-primary" @onclick="() => ShowRemoveModal(league.Id)">
+                            <i class="fas fa-trash"></i> Usuń
+                        </button>
+                    </td>
+                    <td>
+                        <button class="btn btn-link" @onclick="() => NavigateToLeagueDetails(league.Id)">
+                            <i class="fas fa-arrow-right"></i> Szczegóły
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<LeagueDTO>? favouriteLeagues;
+    private AlertManager alertManager = new AlertManager();
+
+    private string _userId = string.Empty;
+    private bool _showModal = false;
+    private int _leagueIdToRemove;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            _userId = await GetUserId();
+            await RefreshFavourites();
+        }
+        catch (AccessTokenNotAvailableException exception)
+        {
+            exception.Redirect();
+        }
+    }
+
+    private async Task RefreshFavourites()
+    {
+        favouriteLeagues = await Http.GetFromJsonAsync<List<LeagueDTO>>("api/favourites/favourite-leagues");
+    }
+
+    private void ShowRemoveModal(int leagueId)
+    {
+        _leagueIdToRemove = leagueId;
+        _showModal = true;
+    }
+
+    private async Task HandleConfirm(bool confirmed)
+    {
+        if (confirmed)
+        {
+            await RemoveFromFavourites(_leagueIdToRemove);
+        }
+        _showModal = false;
+    }
+
+    private async Task HandleCancel()
+    {
+        _showModal = false;
+    }
+
+    private async Task<string?> GetUserId()
+    {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+        return user.FindFirst(c => c.Type == "sub")?.Value;
+    }
+
+    private async Task RemoveFromFavourites(int leagueId)
+    {
+        _userId = await GetUserId();
+
+        if (_userId != null)
+        {
+            var response = await Http.DeleteAsync($"api/favourites/league/{leagueId}/{_userId}");
+            var league = favouriteLeagues.FirstOrDefault(l => l.Id == leagueId);
+
+            if (response.IsSuccessStatusCode)
+            {
+                alertManager.ShowAlert($"Usunięto ligę {league?.Name} z ulubionych.", "info");
+                await RefreshFavourites();
+            }
+            else
+            {
+                alertManager.ShowAlert($"Nie udało się usunąć ligi {league?.Name} z ulubionych.", "danger");
+            }
+        }
+    }
+
+    private void NavigateToLeagueDetails(int leagueId)
+    {
+        Navigation.NavigateTo($"/leagues/{leagueId}");
+    }
+}

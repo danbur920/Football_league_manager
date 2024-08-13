@@ -40,6 +40,34 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Controllers
             return Ok(favourites);
         }
 
+        [HttpGet("favourite-leagues")]
+        public async Task<IActionResult> GetFavouriteLeagues()
+        {
+            var userId = _httpContextAccessor.HttpContext.User.Identity.GetUserId();
+
+            if (userId == null)
+            {
+                return Unauthorized();
+            }
+
+            var favouriteLeagues = await _favouriteService.GetFavouriteLeaguesByUserId(userId);
+            return Ok(favouriteLeagues);
+        }
+
+        [HttpGet("favourite-teams")]
+        public async Task<IActionResult> GetFavouriteTeams()
+        {
+            var userId = _httpContextAccessor.HttpContext.User.Identity.GetUserId();
+
+            if (userId == null)
+            {
+                return Unauthorized();
+            }
+
+            var favouriteTeams = await _favouriteService.GetFavouriteTeamsByUserId(userId);
+            return Ok(favouriteTeams);
+        }
+
         [HttpPost("{favouriteType}/{favouriteId}")]
         public async Task<IActionResult> AddFavourite(FavouriteType favouriteType, int favouriteId)
         {
@@ -60,8 +88,6 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Controllers
             await _favouriteService.AddFavourite(favouriteDTO);
             return Ok();
         }
-
-        //var response = await Http.DeleteAsync($"api/favourites/league/{leagueId}/{userId}");
 
         [HttpDelete("{favouriteType}/{favouriteId}/{userId}")]
         public async Task<IActionResult> RemoveFavourite(string userId, int favouriteId, string favouriteType)
