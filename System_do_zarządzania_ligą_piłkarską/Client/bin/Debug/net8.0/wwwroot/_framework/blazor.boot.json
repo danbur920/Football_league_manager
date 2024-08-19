@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "System_do_zarządzania_ligą_piłkarską.Client",
   "resources": {
-    "hash": "sha256-5yxzHdZdjrbpYO1T2TZu5hTaELx9ozXBC7+u4REeQgU=",
+    "hash": "sha256-BYmuKn43okf4LOwM5Ernp/1wzKuDVn6t7wgIMRqctMU=",
     "jsModuleNative": {
       "dotnet.native.8.0.5.kzb1ntacew.js": "sha256-boyHe+0RMZDkzBKGhsrnXPhPg3oZ6UqJnTUzngJPjNY="
     },
@@ -260,12 +260,12 @@
       "mscorlib.wasm": "sha256-XvLAB5IyfVSmj5aaGnPwgVFaaZz8jXmbN8WmeopiPBM=",
       "netstandard.wasm": "sha256-TbMssdnuTiKq1gjTPkpgROAuWN0uhvPnagvWR+wAgNs=",
       "System.Private.CoreLib.wasm": "sha256-sscg+Efk8ROPq+q4IVmhShzITuoOYvB8Bsc+Mp9vcSM=",
-      "System_do_zarządzania_ligą_piłkarską.Shared.wasm": "sha256-wqIjMFSBztn2ZSWZnNyH1efyq1WfB9DnjTsrEsRDIGg=",
-      "System_do_zarządzania_ligą_piłkarską.Client.wasm": "sha256-DkSCW8fb1Moer7QUcaP7r1LM7eE6UW/hkFTis40+lys="
+      "System_do_zarządzania_ligą_piłkarską.Shared.wasm": "sha256-G80Sfbai1Ys3C8Qt2FIQcF5EhMC9Xce/VcH34jyZ98c=",
+      "System_do_zarządzania_ligą_piłkarską.Client.wasm": "sha256-Z/5evML6KSHGBkfelVyGg2A9xQHgvNvS7VssIg8JA/8="
     },
     "pdb": {
-      "System_do_zarządzania_ligą_piłkarską.Shared.pdb": "sha256-CJO/KyEbLb6SyEH6epT0vH956df/hsRRFIdu30kD3+M=",
-      "System_do_zarządzania_ligą_piłkarską.Client.pdb": "sha256-YwuwrwpkGc3DVvqvc6oMmJFOxHdOB6t/irVNH+jIZAM="
+      "System_do_zarządzania_ligą_piłkarską.Shared.pdb": "sha256-80QFKf4+2Uw7npnGczUDNI05luW0Exzh9kRjv+bLmO8=",
+      "System_do_zarządzania_ligą_piłkarską.Client.pdb": "sha256-yyEDbSprL/Tp7rFjwGsGBJhmiwLQYlz+KqW7YebEClU="
     },
     "satelliteResources": {
       "cs": {

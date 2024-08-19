@@ -402,7 +402,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Favourites");
+                    b.ToTable("Favourites", (string)null);
                 });
 
             modelBuilder.Entity("System_do_zarządzania_ligą_piłkarską.Server.Models.Footballer", b =>
@@ -450,7 +450,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Data.Migrations
 
                     b.HasIndex("TeamId");
 
-                    b.ToTable("Footballers");
+                    b.ToTable("Footballers", (string)null);
                 });
 
             modelBuilder.Entity("System_do_zarządzania_ligą_piłkarską.Server.Models.FootballerStat", b =>
@@ -496,7 +496,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Data.Migrations
 
                     b.HasIndex("TeamStatId");
 
-                    b.ToTable("FootballerStats");
+                    b.ToTable("FootballerStats", (string)null);
                 });
 
             modelBuilder.Entity("System_do_zarządzania_ligą_piłkarską.Server.Models.League", b =>
@@ -532,7 +532,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Leagues");
+                    b.ToTable("Leagues", (string)null);
                 });
 
             modelBuilder.Entity("System_do_zarządzania_ligą_piłkarską.Server.Models.Match", b =>
@@ -593,7 +593,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Data.Migrations
 
                     b.HasIndex("RefereeId");
 
-                    b.ToTable("Matches");
+                    b.ToTable("Matches", (string)null);
                 });
 
             modelBuilder.Entity("System_do_zarządzania_ligą_piłkarską.Server.Models.MatchEvent", b =>
@@ -630,7 +630,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Data.Migrations
 
                     b.HasIndex("MatchId");
 
-                    b.ToTable("MatchEvents");
+                    b.ToTable("MatchEvents", (string)null);
                 });
 
             modelBuilder.Entity("System_do_zarządzania_ligą_piłkarską.Server.Models.Referee", b =>
@@ -661,7 +661,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Referees");
+                    b.ToTable("Referees", (string)null);
                 });
 
             modelBuilder.Entity("System_do_zarządzania_ligą_piłkarską.Server.Models.RefereeStat", b =>
@@ -699,7 +699,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Data.Migrations
 
                     b.HasIndex("RefereeId");
 
-                    b.ToTable("RefereeStats");
+                    b.ToTable("RefereeStats", (string)null);
                 });
 
             modelBuilder.Entity("System_do_zarządzania_ligą_piłkarską.Server.Models.Team", b =>
@@ -736,7 +736,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Data.Migrations
 
                     b.HasIndex("CoachId");
 
-                    b.ToTable("Teams");
+                    b.ToTable("Teams", (string)null);
                 });
 
             modelBuilder.Entity("System_do_zarządzania_ligą_piłkarską.Server.Models.TeamStat", b =>
@@ -786,7 +786,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Data.Migrations
 
                     b.HasIndex("TeamId");
 
-                    b.ToTable("TeamStats");
+                    b.ToTable("TeamStats", (string)null);
                 });
 
             modelBuilder.Entity("System_do_zarządzania_ligą_piłkarską.Server.Models.Trophy", b =>
@@ -820,7 +820,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Data.Migrations
 
                     b.HasIndex("TeamId");
 
-                    b.ToTable("Trophies");
+                    b.ToTable("Trophies", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

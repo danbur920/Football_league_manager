@@ -1227,7 +1227,6 @@ C:\Users\danbu\Desktop\PRACA INŻYNIERSKA\System_do_zarządzania_ligą_piłkarsk
 C:\Users\danbu\Desktop\PRACA INŻYNIERSKA\System_do_zarządzania_ligą_piłkarską\System_do_zarządzania_ligą_piłkarską\Client\obj\Debug\net8.0\scopedcss\Shared\NavMenu.razor.rz.scp.css
 C:\Users\danbu\Desktop\PRACA INŻYNIERSKA\System_do_zarządzania_ligą_piłkarską\System_do_zarządzania_ligą_piłkarską\Client\obj\Debug\net8.0\scopedcss\bundle\System_do_zarządzania_ligą_piłkarską.Client.styles.css
 C:\Users\danbu\Desktop\PRACA INŻYNIERSKA\System_do_zarządzania_ligą_piłkarską\System_do_zarządzania_ligą_piłkarską\Client\obj\Debug\net8.0\scopedcss\projectbundle\System_do_zarządzania_ligą_piłkarską.Client.bundle.scp.css
-C:\Users\danbu\Desktop\PRACA INŻYNIERSKA\System_do_zarządzania_ligą_piłkarską\System_do_zarządzania_ligą_piłkarską\Client\obj\Debug\net8.0\compressed\xgrg32a8te.gz
 C:\Users\danbu\Desktop\PRACA INŻYNIERSKA\System_do_zarządzania_ligą_piłkarską\System_do_zarządzania_ligą_piłkarską\Client\obj\Debug\net8.0\compressed\hb1iqsgpno.gz
 C:\Users\danbu\Desktop\PRACA INŻYNIERSKA\System_do_zarządzania_ligą_piłkarską\System_do_zarządzania_ligą_piłkarską\Client\obj\Debug\net8.0\compressed\6vo5em9fq2.gz
 C:\Users\danbu\Desktop\PRACA INŻYNIERSKA\System_do_zarządzania_ligą_piłkarską\System_do_zarządzania_ligą_piłkarską\Client\obj\Debug\net8.0\compressed\8gq39infa9.gz
@@ -1561,3 +1560,4 @@ C:\Users\danbu\Desktop\PRACA INŻYNIERSKA\System_do_zarządzania_ligą_piłkarsk
 C:\Users\danbu\Desktop\PRACA INŻYNIERSKA\System_do_zarządzania_ligą_piłkarską\System_do_zarządzania_ligą_piłkarską\Client\obj\Debug\net8.0\compressed\l9eraxgis5.gz
 C:\Users\danbu\Desktop\PRACA INŻYNIERSKA\System_do_zarządzania_ligą_piłkarską\System_do_zarządzania_ligą_piłkarską\Client\obj\Debug\net8.0\compressed\igfeq5360t.gz
 C:\Users\danbu\Desktop\PRACA INŻYNIERSKA\System_do_zarządzania_ligą_piłkarską\System_do_zarządzania_ligą_piłkarską\Client\obj\Debug\net8.0\scopedcss\Pages\LeagueDetails.razor.rz.scp.css
+C:\Users\danbu\Desktop\PRACA INŻYNIERSKA\System_do_zarządzania_ligą_piłkarską\System_do_zarządzania_ligą_piłkarską\Client\obj\Debug\net8.0\compressed\v9bgjm4pno.gz

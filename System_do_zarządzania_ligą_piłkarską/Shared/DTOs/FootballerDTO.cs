@@ -21,7 +21,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Shared.DTOs
         public int? Height { get; set; } // [cm]
         public int? Weight { get; set; } // [kg]
         public virtual TeamDTO? Team { get; set; }
-        public virtual ICollection<FootballerStatDTO> FootballlerStats { get; set; } = new List<FootballerStatDTO>();
-        public virtual ICollection<TrophyDTO> Trophies { get; set; } = new List<TrophyDTO>();
+        //public virtual ICollection<FootballerStatDTO> FootballlerStats { get; set; } = new List<FootballerStatDTO>();
+        //public virtual ICollection<TrophyDTO> Trophies { get; set; } = new List<TrophyDTO>();
     }
 }

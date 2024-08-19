@@ -10,6 +10,7 @@ using System_do_zarządzania_ligą_piłkarską.Server.Repositories;
 using System_do_zarządzania_ligą_piłkarską.Server.Services.Interfaces;
 using System_do_zarządzania_ligą_piłkarską.Server.Services;
 using Microsoft.AspNetCore.Components.Authorization;
+using System_do_zarządzania_ligą_piłkarską.Client.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,6 +28,11 @@ builder.Services.AddScoped<IFavouriteService, FavouriteService>();
 
 builder.Services.AddScoped<ITeamRepository, TeamRepository>();
 builder.Services.AddScoped<ITeamService, TeamService>();
+
+builder.Services.AddScoped<IFootballerRepository, FootballerRepository>();
+builder.Services.AddScoped<IFootballerService, FootballerService>();
+
+//builder.Services.AddScoped<SearchQueryManager>();
 
 builder.Services.AddScoped<UserManager<ApplicationUser>>();
 builder.Services.AddScoped<SignInManager<ApplicationUser>>();

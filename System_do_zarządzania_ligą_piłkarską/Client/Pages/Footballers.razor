@@ -1,0 +1,193 @@
+﻿@page "/footballers"
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+@using System_do_zarządzania_ligą_piłkarską.Shared
+@using System_do_zarządzania_ligą_piłkarską.Shared.DTOs
+@using System_do_zarządzania_ligą_piłkarską.Client.Extensions
+@attribute [Authorize]
+@inject HttpClient Http
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject SearchQueryManager SearchQueryManager
+
+<PageTitle>Piłkarze</PageTitle>
+
+@if (alertManager.alertVisibility)
+{
+    <div class="alert @($"alert-{alertManager.alertType}") alert-dismissible fade show" role="alert">
+        @alertManager.alertMessage
+        <button type="button" class="btn-close" aria-label="Close" @onclick="() => alertManager.alertVisibility = false"></button>
+    </div>
+}
+
+<input type="text" @bind="SearchQueryManager.FirstName" placeholder="Szukaj piłkarza po imieniu..." class="form-control mb-3" />
+<input type="text" @bind="SearchQueryManager.LastName" placeholder="Szukaj piłkarza po nazwisku..." class="form-control mb-3" />
+<input type="text" @bind="SearchQueryManager.Country" placeholder="Szukaj piłkarza po kraju..." class="form-control mb-3" />
+<input type="text" @bind="SearchQueryManager.Team" placeholder="Szukaj piłkarza po drużynie..." class="form-control mb-3" />
+<input type="text" @bind="SearchQueryManager.Position" placeholder="Szukaj piłkarza po pozycji..." class="form-control mb-3" />
+
+@if (allFootballers == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Imię</th>
+                <th>Nazwisko</th>
+                <th>Ksywa</th>
+                <th>Narodowość</th>
+                <th>Pozycja</th>
+                <th>Klub</th>
+                <th>Dodaj do ulubionych</th>
+                <th>Profil piłkarza</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (allFootballers.Count() == 0)
+            {
+                <tr>
+                    <td colspan="9" style="text-align: center">Brak piłkarzy lub żaden piłkarz nie spełnia określonych kryteriów wyszukiwania.</td>
+                </tr>
+            }
+            @foreach (var footballer in filteredFootballer)
+            {
+                <tr>
+                    <td>@footballer.FirstName</td>
+                    <td>@footballer.LastName</td>
+                    <td>@footballer.NickName</td>
+                    <td>@footballer.Nationality</td>
+                    <td>@footballer.Position</td>
+                    <td>@footballer.Team.Name</td>
+                    <td>
+                        @if (IsFavourite(footballer.Id))
+                        {
+                            <button class="btn btn-primary" @onclick="() => RemoveFromFavourites(footballer.Id)">
+                                <i class="fas fa-star"></i>
+                            </button>
+                        }
+                        else
+                        {
+                            <button class="btn btn-secondary" @onclick="() => AddToFavourites(footballer.Id)">
+                                <i class="fas fa-star"></i>
+                            </button>
+                        }
+                    </td>
+                    <td>
+                        <NavLink href="@($"/footballers/{footballer.Id}")" class="nav-link">
+                            <i class="fas fa-trophy"></i>
+                        </NavLink>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <button @onclick="LoadMorePlayers">Pokaż więcej</button>
+}
+
+@code {
+    private List<FootballerDTO> allFootballers = new List<FootballerDTO>();
+    private FavouriteDTO[]? allFavourites;
+    private AlertManager alertManager = new AlertManager();
+
+    private string _userId = string.Empty;
+    private int _pageNumber = 1;
+    private int _pageSize = 2;
+
+    private string _alertMessage = string.Empty;
+    private string _alertType = string.Empty;
+    private bool _alertVisibility = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            _userId = await GetUserId();
+            await LoadPlayers();
+            await RefreshFavourites();
+        }
+        catch (AccessTokenNotAvailableException exception)
+        {
+            exception.Redirect();
+        }
+    }
+
+    private bool IsFavourite(int footballerId)
+    {
+        var isFavourite = allFavourites.FirstOrDefault(x => x.FavouriteId == footballerId) != null;
+        return isFavourite;
+    }
+
+    private async Task RefreshFavourites()
+    {
+        allFavourites = await Http.GetFromJsonAsync<FavouriteDTO[]>($"api/favourites/footballer");
+    }
+
+    private async Task<string?> GetUserId()
+    {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+        return user.FindFirst(c => c.Type == "sub")?.Value;
+    }
+
+    private async Task LoadPlayers()
+    {
+        var response = await Http.GetFromJsonAsync<List<FootballerDTO>>($"api/footballers?pageNumber={_pageNumber}&pageSize={_pageSize}");
+        allFootballers.AddRange(response); 
+    }
+    //
+    private async Task LoadMorePlayers()
+    {
+        _pageNumber++;
+        await LoadPlayers();
+    }
+
+    private async Task AddToFavourites(int footballerId)
+    {
+        if (_userId != null)
+        {
+            var response = await Http.PostAsync($"api/favourites/footballer/{footballerId}", null);
+            var footballer = allFootballers.FirstOrDefault(t => t.Id == footballerId);
+
+            if (response.IsSuccessStatusCode)
+            {
+                alertManager.ShowAlert($"Dodano piłkarza {footballer?.FirstName + " " + footballer?.LastName} do ulubionych!", "success");
+                await RefreshFavourites();
+            }
+            else
+            {
+                alertManager.ShowAlert($"Nie udało się dodać piłkarza {footballer?.FirstName + " " + footballer?.LastName} do ulubionych.", "danger");
+            }
+        }
+    }
+
+    private async Task RemoveFromFavourites(int footballerId)
+    {
+        if (_userId != null)
+        {
+            var response = await Http.DeleteAsync($"api/favourites/footballer/{footballerId}/{_userId}");
+            var footballer = allFootballers.FirstOrDefault(t => t.Id == footballerId);
+
+            if (response.IsSuccessStatusCode)
+            {
+                alertManager.ShowAlert($"Usunięto piłkarza {footballer?.FirstName + " " + footballer?.LastName} z ulubionych.", "info");
+                await RefreshFavourites();
+            }
+            else
+            {
+                alertManager.ShowAlert($"Nie udało się usunąć piłkarza {footballer?.FirstName + " " + footballer?.LastName} z ulubionych.", "danger");
+            }
+        }
+    }
+
+    private IEnumerable<FootballerDTO>? filteredFootballer =>
+     allFootballers?.Where(footballer =>
+         (string.IsNullOrWhiteSpace(SearchQueryManager.FirstName) || footballer.FirstName.Contains(SearchQueryManager.FirstName, StringComparison.OrdinalIgnoreCase)) &&
+         (string.IsNullOrWhiteSpace(SearchQueryManager.LastName) || footballer.LastName.Contains(SearchQueryManager.LastName, StringComparison.OrdinalIgnoreCase)) &&
+         (string.IsNullOrWhiteSpace(SearchQueryManager.Country) || footballer.Nationality.Contains(SearchQueryManager.Country, StringComparison.OrdinalIgnoreCase)) &&
+         (string.IsNullOrWhiteSpace(SearchQueryManager.Team) || footballer.Team.Name.Contains(SearchQueryManager.Team, StringComparison.OrdinalIgnoreCase)) &&
+         (string.IsNullOrWhiteSpace(SearchQueryManager.Position) || footballer.Position.Contains(SearchQueryManager.Position, StringComparison.OrdinalIgnoreCase))
+     );
+}

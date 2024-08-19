@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "4iL/IXB9+jepxPF/LsndBLd0LBdDleenN54CBt1gMnI=",
+  "Hash": "khXc9ADwWGiWWfynO6WB8vBCi7lylCUsKu33f0fgQPY=",
   "Source": "System_do_zarządzania_ligą_piłkarską.Client",
   "BasePath": "/",
   "Mode": "Root",
@@ -17,10 +17,10 @@
   ],
   "Assets": [
     {
-      "Identity": "C:\\Users\\danbu\\.nuget\\packages\\microsoft.aspnetcore.components.webassembly.authentication\\8.0.7\\staticwebassets\\AuthenticationService.js",
+      "Identity": "C:\\Users\\danbu\\.nuget\\packages\\microsoft.aspnetcore.components.webassembly.authentication\\8.0.8\\staticwebassets\\AuthenticationService.js",
       "SourceId": "Microsoft.AspNetCore.Components.WebAssembly.Authentication",
       "SourceType": "Package",
-      "ContentRoot": "C:\\Users\\danbu\\.nuget\\packages\\microsoft.aspnetcore.components.webassembly.authentication\\8.0.7\\staticwebassets\\",
+      "ContentRoot": "C:\\Users\\danbu\\.nuget\\packages\\microsoft.aspnetcore.components.webassembly.authentication\\8.0.8\\staticwebassets\\",
       "BasePath": "_content/Microsoft.AspNetCore.Components.WebAssembly.Authentication",
       "RelativePath": "AuthenticationService.js",
       "AssetKind": "All",
@@ -33,7 +33,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\danbu\\.nuget\\packages\\microsoft.aspnetcore.components.webassembly.authentication\\8.0.7\\staticwebassets\\AuthenticationService.js"
+      "OriginalItemSpec": "C:\\Users\\danbu\\.nuget\\packages\\microsoft.aspnetcore.components.webassembly.authentication\\8.0.8\\staticwebassets\\AuthenticationService.js"
     },
     {
       "Identity": "C:\\Users\\danbu\\Desktop\\PRACA INŻYNIERSKA\\System_do_zarządzania_ligą_piłkarską\\System_do_zarządzania_ligą_piłkarską\\Client\\bin\\Debug\\net8.0\\wwwroot\\_framework\\Azure.Core.wasm",
@@ -109,7 +109,7 @@
       "AssetTraitValue": "boot",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\danbu\\.nuget\\packages\\microsoft.aspnetcore.components.webassembly\\8.0.7\\build\\net8.0\\blazor.webassembly.js"
+      "OriginalItemSpec": "C:\\Users\\danbu\\.nuget\\packages\\microsoft.aspnetcore.components.webassembly\\8.0.8\\build\\net8.0\\blazor.webassembly.js"
     },
     {
       "Identity": "C:\\Users\\danbu\\Desktop\\PRACA INŻYNIERSKA\\System_do_zarządzania_ligą_piłkarską\\System_do_zarządzania_ligą_piłkarską\\Client\\bin\\Debug\\net8.0\\wwwroot\\_framework\\cs\\Microsoft.CodeAnalysis.CSharp.resources.wasm",
@@ -11037,6 +11037,25 @@
       "OriginalItemSpec": "C:\\Users\\danbu\\Desktop\\PRACA INŻYNIERSKA\\System_do_zarządzania_ligą_piłkarską\\System_do_zarządzania_ligą_piłkarską\\Client\\bin\\Debug\\net8.0\\wwwroot\\_framework\\System.Resources.ResourceManager.wasm"
     },
     {
+      "Identity": "C:\\Users\\danbu\\Desktop\\PRACA INŻYNIERSKA\\System_do_zarządzania_ligą_piłkarską\\System_do_zarządzania_ligą_piłkarską\\Client\\obj\\Debug\\net8.0\\compressed\\v9bgjm4pno.gz",
+      "SourceId": "System_do_zarządzania_ligą_piłkarską.Client",
+      "SourceType": "Computed",
+      "ContentRoot": "C:\\Users\\danbu\\Desktop\\PRACA INŻYNIERSKA\\System_do_zarządzania_ligą_piłkarską\\System_do_zarządzania_ligą_piłkarską\\Client\\bin\\Debug\\net8.0\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "_framework/blazor.webassembly.js.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "C:\\Users\\danbu\\Desktop\\PRACA INŻYNIERSKA\\System_do_zarządzania_ligą_piłkarską\\System_do_zarządzania_ligą_piłkarską\\Client\\bin\\Debug\\net8.0\\wwwroot\\_framework\\blazor.webassembly.js",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "CopyToOutputDirectory": "PreserveNewest",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "C:\\Users\\danbu\\Desktop\\PRACA INŻYNIERSKA\\System_do_zarządzania_ligą_piłkarską\\System_do_zarządzania_ligą_piłkarską\\Client\\bin\\Debug\\net8.0\\wwwroot\\_framework\\blazor.webassembly.js"
+    },
+    {
       "Identity": "C:\\Users\\danbu\\Desktop\\PRACA INŻYNIERSKA\\System_do_zarządzania_ligą_piłkarską\\System_do_zarządzania_ligą_piłkarską\\Client\\obj\\Debug\\net8.0\\compressed\\vcrwj72rkr.gz",
       "SourceId": "System_do_zarządzania_ligą_piłkarską.Client",
       "SourceType": "Computed",
@@ -11396,25 +11415,6 @@
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Users\\danbu\\Desktop\\PRACA INŻYNIERSKA\\System_do_zarządzania_ligą_piłkarską\\System_do_zarządzania_ligą_piłkarską\\Client\\bin\\Debug\\net8.0\\wwwroot\\_framework\\System.Reflection.TypeExtensions.wasm"
-    },
-    {
-      "Identity": "C:\\Users\\danbu\\Desktop\\PRACA INŻYNIERSKA\\System_do_zarządzania_ligą_piłkarską\\System_do_zarządzania_ligą_piłkarską\\Client\\obj\\Debug\\net8.0\\compressed\\xgrg32a8te.gz",
-      "SourceId": "System_do_zarządzania_ligą_piłkarską.Client",
-      "SourceType": "Computed",
-      "ContentRoot": "C:\\Users\\danbu\\Desktop\\PRACA INŻYNIERSKA\\System_do_zarządzania_ligą_piłkarską\\System_do_zarządzania_ligą_piłkarską\\Client\\bin\\Debug\\net8.0\\wwwroot\\",
-      "BasePath": "/",
-      "RelativePath": "_framework/blazor.webassembly.js.gz",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Alternative",
-      "AssetMergeBehavior": "",
-      "AssetMergeSource": "",
-      "RelatedAsset": "C:\\Users\\danbu\\Desktop\\PRACA INŻYNIERSKA\\System_do_zarządzania_ligą_piłkarską\\System_do_zarządzania_ligą_piłkarską\\Client\\bin\\Debug\\net8.0\\wwwroot\\_framework\\blazor.webassembly.js",
-      "AssetTraitName": "Content-Encoding",
-      "AssetTraitValue": "gzip",
-      "CopyToOutputDirectory": "PreserveNewest",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\danbu\\Desktop\\PRACA INŻYNIERSKA\\System_do_zarządzania_ligą_piłkarską\\System_do_zarządzania_ligą_piłkarską\\Client\\bin\\Debug\\net8.0\\wwwroot\\_framework\\blazor.webassembly.js"
     },
     {
       "Identity": "C:\\Users\\danbu\\Desktop\\PRACA INŻYNIERSKA\\System_do_zarządzania_ligą_piłkarską\\System_do_zarządzania_ligą_piłkarską\\Client\\obj\\Debug\\net8.0\\compressed\\xop98l8ivx.gz",
