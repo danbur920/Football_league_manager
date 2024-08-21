@@ -3,8 +3,60 @@
   "WorkspaceRootPath": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{EEBF038C-4CF7-4DF6-A4DF-8BC8C8F18679}|System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105.Client.csproj|c:\\users\\danbu\\desktop\\praca in\u017Cynierska\\system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\client\\pages\\favouriteleagues.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{EEBF038C-4CF7-4DF6-A4DF-8BC8C8F18679}|System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105.Client.csproj|solutionrelative:system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\client\\pages\\favouriteleagues.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EEBF038C-4CF7-4DF6-A4DF-8BC8C8F18679}|System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105.Client.csproj|c:\\users\\danbu\\desktop\\praca in\u017Cynierska\\system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\client\\pages\\favouritefootballers .razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{EEBF038C-4CF7-4DF6-A4DF-8BC8C8F18679}|System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105.Client.csproj|solutionrelative:system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\client\\pages\\favouritefootballers .razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{EEBF038C-4CF7-4DF6-A4DF-8BC8C8F18679}|System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105.Client.csproj|c:\\users\\danbu\\desktop\\praca in\u017Cynierska\\system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\client\\pages\\footballers.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{EEBF038C-4CF7-4DF6-A4DF-8BC8C8F18679}|System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105.Client.csproj|solutionrelative:system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\client\\pages\\footballers.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4A16D225-03CC-426F-9785-82B07D7D7F02}|System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Shared\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105.Shared.csproj|c:\\users\\danbu\\desktop\\praca in\u017Cynierska\\system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\shared\\dtos\\footballerdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4A16D225-03CC-426F-9785-82B07D7D7F02}|System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Shared\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105.Shared.csproj|solutionrelative:system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\shared\\dtos\\footballerdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E4072B11-85C4-4CDA-8339-9D4584456839}|System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105.Server.csproj|c:\\users\\danbu\\desktop\\praca in\u017Cynierska\\system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\server\\repositories\\favouriterepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E4072B11-85C4-4CDA-8339-9D4584456839}|System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105.Server.csproj|solutionrelative:system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\server\\repositories\\favouriterepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E4072B11-85C4-4CDA-8339-9D4584456839}|System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105.Server.csproj|c:\\users\\danbu\\desktop\\praca in\u017Cynierska\\system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\server\\services\\favouriteservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E4072B11-85C4-4CDA-8339-9D4584456839}|System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105.Server.csproj|solutionrelative:system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\server\\services\\favouriteservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E4072B11-85C4-4CDA-8339-9D4584456839}|System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105.Server.csproj|c:\\users\\danbu\\desktop\\praca in\u017Cynierska\\system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\server\\models\\footballer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E4072B11-85C4-4CDA-8339-9D4584456839}|System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105.Server.csproj|solutionrelative:system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\server\\models\\footballer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E4072B11-85C4-4CDA-8339-9D4584456839}|System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105.Server.csproj|c:\\users\\danbu\\desktop\\praca in\u017Cynierska\\system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\server\\controllers\\favouritescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E4072B11-85C4-4CDA-8339-9D4584456839}|System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105.Server.csproj|solutionrelative:system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\server\\controllers\\favouritescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E4072B11-85C4-4CDA-8339-9D4584456839}|System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105.Server.csproj|c:\\users\\danbu\\desktop\\praca in\u017Cynierska\\system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\server\\services\\interfaces\\ifavouriteservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E4072B11-85C4-4CDA-8339-9D4584456839}|System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105.Server.csproj|solutionrelative:system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\server\\services\\interfaces\\ifavouriteservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E4072B11-85C4-4CDA-8339-9D4584456839}|System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105.Server.csproj|c:\\users\\danbu\\desktop\\praca in\u017Cynierska\\system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\server\\repositories\\interfaces\\ifavouriterepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E4072B11-85C4-4CDA-8339-9D4584456839}|System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105.Server.csproj|solutionrelative:system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\server\\repositories\\interfaces\\ifavouriterepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E4072B11-85C4-4CDA-8339-9D4584456839}|System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105.Server.csproj|c:\\users\\danbu\\desktop\\praca in\u017Cynierska\\system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\server\\repositories\\interfaces\\ifootballerrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E4072B11-85C4-4CDA-8339-9D4584456839}|System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105.Server.csproj|solutionrelative:system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\server\\repositories\\interfaces\\ifootballerrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E4072B11-85C4-4CDA-8339-9D4584456839}|System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105.Server.csproj|c:\\users\\danbu\\desktop\\praca in\u017Cynierska\\system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\server\\repositories\\footballerrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E4072B11-85C4-4CDA-8339-9D4584456839}|System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105.Server.csproj|solutionrelative:system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\server\\repositories\\footballerrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EEBF038C-4CF7-4DF6-A4DF-8BC8C8F18679}|System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105.Client.csproj|c:\\users\\danbu\\desktop\\praca in\u017Cynierska\\system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\client\\pages\\favouriteteams.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{EEBF038C-4CF7-4DF6-A4DF-8BC8C8F18679}|System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105.Client.csproj|solutionrelative:system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\client\\pages\\favouriteteams.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EEBF038C-4CF7-4DF6-A4DF-8BC8C8F18679}|System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105.Client.csproj|c:\\users\\danbu\\desktop\\praca in\u017Cynierska\\system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\client\\pages\\favouritereferees.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{EEBF038C-4CF7-4DF6-A4DF-8BC8C8F18679}|System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105.Client.csproj|solutionrelative:system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\client\\pages\\favouritereferees.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{E4072B11-85C4-4CDA-8339-9D4584456839}|System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105.Server.csproj|c:\\users\\danbu\\desktop\\praca in\u017Cynierska\\system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\server\\controllers\\footballerscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -17,34 +69,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{E4072B11-85C4-4CDA-8339-9D4584456839}|System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105.Server.csproj|c:\\users\\danbu\\desktop\\praca in\u017Cynierska\\system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\server\\services\\interfaces\\ifootballerservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E4072B11-85C4-4CDA-8339-9D4584456839}|System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105.Server.csproj|solutionrelative:system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\server\\services\\interfaces\\ifootballerservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E4072B11-85C4-4CDA-8339-9D4584456839}|System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105.Server.csproj|c:\\users\\danbu\\desktop\\praca in\u017Cynierska\\system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\server\\repositories\\interfaces\\ifootballerrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E4072B11-85C4-4CDA-8339-9D4584456839}|System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105.Server.csproj|solutionrelative:system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\server\\repositories\\interfaces\\ifootballerrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E4072B11-85C4-4CDA-8339-9D4584456839}|System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105.Server.csproj|c:\\users\\danbu\\desktop\\praca in\u017Cynierska\\system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\server\\repositories\\footballerrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E4072B11-85C4-4CDA-8339-9D4584456839}|System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105.Server.csproj|solutionrelative:system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\server\\repositories\\footballerrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E4072B11-85C4-4CDA-8339-9D4584456839}|System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105.Server.csproj|c:\\users\\danbu\\desktop\\praca in\u017Cynierska\\system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\server\\controllers\\favouritescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E4072B11-85C4-4CDA-8339-9D4584456839}|System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105.Server.csproj|solutionrelative:system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\server\\controllers\\favouritescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E4072B11-85C4-4CDA-8339-9D4584456839}|System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105.Server.csproj|c:\\users\\danbu\\desktop\\praca in\u017Cynierska\\system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\server\\services\\favouriteservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E4072B11-85C4-4CDA-8339-9D4584456839}|System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105.Server.csproj|solutionrelative:system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\server\\services\\favouriteservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E4072B11-85C4-4CDA-8339-9D4584456839}|System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105.Server.csproj|c:\\users\\danbu\\desktop\\praca in\u017Cynierska\\system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\server\\repositories\\favouriterepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E4072B11-85C4-4CDA-8339-9D4584456839}|System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105.Server.csproj|solutionrelative:system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\server\\repositories\\favouriterepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4A16D225-03CC-426F-9785-82B07D7D7F02}|System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Shared\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105.Shared.csproj|c:\\users\\danbu\\desktop\\praca in\u017Cynierska\\system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\shared\\dtos\\footballerdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4A16D225-03CC-426F-9785-82B07D7D7F02}|System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Shared\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105.Shared.csproj|solutionrelative:system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\shared\\dtos\\footballerdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E4072B11-85C4-4CDA-8339-9D4584456839}|System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105.Server.csproj|c:\\users\\danbu\\desktop\\praca in\u017Cynierska\\system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\server\\models\\footballer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E4072B11-85C4-4CDA-8339-9D4584456839}|System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105.Server.csproj|solutionrelative:system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\server\\models\\footballer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{EEBF038C-4CF7-4DF6-A4DF-8BC8C8F18679}|System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105.Client.csproj|c:\\users\\danbu\\desktop\\praca in\u017Cynierska\\system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\client\\pages\\leaguescorers.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -83,10 +107,6 @@
       "RelativeMoniker": "D:0:0:{4A16D225-03CC-426F-9785-82B07D7D7F02}|System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Shared\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105.Shared.csproj|solutionrelative:system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\shared\\system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105.shared.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E4072B11-85C4-4CDA-8339-9D4584456839}|System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105.Server.csproj|c:\\users\\danbu\\desktop\\praca in\u017Cynierska\\system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\server\\services\\interfaces\\ifavouriteservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E4072B11-85C4-4CDA-8339-9D4584456839}|System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105.Server.csproj|solutionrelative:system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\server\\services\\interfaces\\ifavouriteservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{E4072B11-85C4-4CDA-8339-9D4584456839}|System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105.Server.csproj|c:\\users\\danbu\\desktop\\praca in\u017Cynierska\\system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\server\\mapping\\mappingprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E4072B11-85C4-4CDA-8339-9D4584456839}|System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105.Server.csproj|solutionrelative:system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\server\\mapping\\mappingprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -101,10 +121,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{EEBF038C-4CF7-4DF6-A4DF-8BC8C8F18679}|System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105.Client.csproj|c:\\users\\danbu\\desktop\\praca in\u017Cynierska\\system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\client\\extensions\\searchquerymanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{EEBF038C-4CF7-4DF6-A4DF-8BC8C8F18679}|System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105.Client.csproj|solutionrelative:system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\client\\extensions\\searchquerymanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E4072B11-85C4-4CDA-8339-9D4584456839}|System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105.Server.csproj|c:\\users\\danbu\\desktop\\praca in\u017Cynierska\\system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\server\\repositories\\interfaces\\ifavouriterepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E4072B11-85C4-4CDA-8339-9D4584456839}|System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105.Server.csproj|solutionrelative:system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\server\\repositories\\interfaces\\ifavouriterepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{E4072B11-85C4-4CDA-8339-9D4584456839}|System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105.Server.csproj|c:\\users\\danbu\\desktop\\praca in\u017Cynierska\\system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\server\\controllers\\leaguescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -141,22 +157,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{4A16D225-03CC-426F-9785-82B07D7D7F02}|System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Shared\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105.Shared.csproj|c:\\users\\danbu\\desktop\\praca in\u017Cynierska\\system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\shared\\dtos\\teamdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4A16D225-03CC-426F-9785-82B07D7D7F02}|System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Shared\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105.Shared.csproj|solutionrelative:system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\shared\\dtos\\teamdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EEBF038C-4CF7-4DF6-A4DF-8BC8C8F18679}|System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105.Client.csproj|c:\\users\\danbu\\desktop\\praca in\u017Cynierska\\system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\client\\pages\\favouriteteams.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{EEBF038C-4CF7-4DF6-A4DF-8BC8C8F18679}|System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105.Client.csproj|solutionrelative:system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\client\\pages\\favouriteteams.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EEBF038C-4CF7-4DF6-A4DF-8BC8C8F18679}|System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105.Client.csproj|c:\\users\\danbu\\desktop\\praca in\u017Cynierska\\system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\client\\pages\\favouritereferees.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{EEBF038C-4CF7-4DF6-A4DF-8BC8C8F18679}|System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105.Client.csproj|solutionrelative:system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\client\\pages\\favouritereferees.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EEBF038C-4CF7-4DF6-A4DF-8BC8C8F18679}|System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105.Client.csproj|c:\\users\\danbu\\desktop\\praca in\u017Cynierska\\system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\client\\pages\\favouriteleagues.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{EEBF038C-4CF7-4DF6-A4DF-8BC8C8F18679}|System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105.Client.csproj|solutionrelative:system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\client\\pages\\favouriteleagues.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EEBF038C-4CF7-4DF6-A4DF-8BC8C8F18679}|System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105.Client.csproj|c:\\users\\danbu\\desktop\\praca in\u017Cynierska\\system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\client\\pages\\favouritefootballers .razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{EEBF038C-4CF7-4DF6-A4DF-8BC8C8F18679}|System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105.Client.csproj|solutionrelative:system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\client\\pages\\favouritefootballers .razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{EEBF038C-4CF7-4DF6-A4DF-8BC8C8F18679}|System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105.Client.csproj|c:\\users\\danbu\\desktop\\praca in\u017Cynierska\\system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\system_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\client\\pages\\index.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -230,297 +230,115 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 7,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Footballers.razor",
-              "DocumentMoniker": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Pages\\Footballers.razor",
-              "RelativeDocumentMoniker": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Pages\\Footballers.razor",
-              "ToolTip": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Pages\\Footballers.razor",
-              "RelativeToolTip": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Pages\\Footballers.razor",
-              "ViewState": "AQIAAEUAAAAAAAAAAAAAAFIAAAANAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-08-17T11:16:48.183Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "FootballersController.cs",
-              "DocumentMoniker": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Controllers\\FootballersController.cs",
-              "RelativeDocumentMoniker": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Controllers\\FootballersController.cs",
-              "ToolTip": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Controllers\\FootballersController.cs",
-              "RelativeToolTip": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Controllers\\FootballersController.cs",
-              "ViewState": "AQIAAAkAAAAAAAAAAAAAABkAAAAJAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-19T13:15:54.371Z",
+              "Title": "FavouriteFootballers .razor",
+              "DocumentMoniker": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Pages\\FavouriteFootballers .razor",
+              "RelativeDocumentMoniker": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Pages\\FavouriteFootballers .razor",
+              "ToolTip": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Pages\\FavouriteFootballers .razor",
+              "RelativeToolTip": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Pages\\FavouriteFootballers .razor",
+              "ViewState": "AQIAAEUAAAAAAAAAAAAAAEAAAAA9AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-08-13T12:03:29.9Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "FavouritesController.cs",
               "DocumentMoniker": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Controllers\\FavouritesController.cs",
               "RelativeDocumentMoniker": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Controllers\\FavouritesController.cs",
               "ToolTip": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Controllers\\FavouritesController.cs",
               "RelativeToolTip": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Controllers\\FavouritesController.cs",
-              "ViewState": "AQIAABsAAAAAAAAAAAAMwCgAAAAIAAAA",
+              "ViewState": "AQIAADwAAAAAAAAAAAAAwE8AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-08-13T12:20:03.98Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "Leagues.razor",
-              "DocumentMoniker": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Pages\\Leagues.razor",
-              "RelativeDocumentMoniker": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Pages\\Leagues.razor",
-              "ToolTip": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Pages\\Leagues.razor",
-              "RelativeToolTip": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Pages\\Leagues.razor",
-              "ViewState": "AQIAAAoAAAAAAAAAAADwv5MAAAAQAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-08-13T12:20:38.585Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "FootballerRepository.cs",
-              "DocumentMoniker": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Repositories\\FootballerRepository.cs",
-              "RelativeDocumentMoniker": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Repositories\\FootballerRepository.cs",
-              "ToolTip": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Repositories\\FootballerRepository.cs",
-              "RelativeToolTip": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Repositories\\FootballerRepository.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAABBAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-19T17:05:36.231Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "IFootballerService.cs",
-              "DocumentMoniker": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Services\\Interfaces\\IFootballerService.cs",
-              "RelativeDocumentMoniker": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Services\\Interfaces\\IFootballerService.cs",
-              "ToolTip": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Services\\Interfaces\\IFootballerService.cs",
-              "RelativeToolTip": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Services\\Interfaces\\IFootballerService.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAABAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-19T16:50:02.551Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "FootballerService.cs",
-              "DocumentMoniker": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Services\\FootballerService.cs",
-              "RelativeDocumentMoniker": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Services\\FootballerService.cs",
-              "ToolTip": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Services\\FootballerService.cs",
-              "RelativeToolTip": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Services\\FootballerService.cs",
-              "ViewState": "AQIAAAEAAAAAAAAAAAAYwBAAAAAJAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-19T16:50:33.745Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "IFootballerRepository.cs",
-              "DocumentMoniker": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Repositories\\Interfaces\\IFootballerRepository.cs",
-              "RelativeDocumentMoniker": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Repositories\\Interfaces\\IFootballerRepository.cs",
-              "ToolTip": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Repositories\\Interfaces\\IFootballerRepository.cs",
-              "RelativeToolTip": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Repositories\\Interfaces\\IFootballerRepository.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAFAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-19T17:05:38.679Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "FavouriteService.cs",
-              "DocumentMoniker": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Services\\FavouriteService.cs",
-              "RelativeDocumentMoniker": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Services\\FavouriteService.cs",
-              "ToolTip": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Services\\FavouriteService.cs",
-              "RelativeToolTip": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Services\\FavouriteService.cs",
-              "ViewState": "AQIAADsAAAAAAAAAAAAIwEYAAAAIAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-13T12:52:58.605Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
               "Title": "FavouriteRepository.cs",
               "DocumentMoniker": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Repositories\\FavouriteRepository.cs",
               "RelativeDocumentMoniker": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Repositories\\FavouriteRepository.cs",
               "ToolTip": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Repositories\\FavouriteRepository.cs",
               "RelativeToolTip": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Repositories\\FavouriteRepository.cs",
-              "ViewState": "AQIAACYAAAAAAAAAAAAIwC0AAAAIAAAA",
+              "ViewState": "AQIAADwAAAAAAAAAAAAmwFAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-08-13T12:42:13.293Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "LeagueScorers.razor",
-              "DocumentMoniker": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Pages\\LeagueScorers.razor",
-              "RelativeDocumentMoniker": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Pages\\LeagueScorers.razor",
-              "ToolTip": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Pages\\LeagueScorers.razor",
-              "RelativeToolTip": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Pages\\LeagueScorers.razor",
-              "ViewState": "AQIAADAAAAAAAAAAAAAAACgAAAAUAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-08-19T13:38:59.872Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "FootballerDTO.cs",
-              "DocumentMoniker": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Shared\\DTOs\\FootballerDTO.cs",
-              "RelativeDocumentMoniker": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Shared\\DTOs\\FootballerDTO.cs",
-              "ToolTip": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Shared\\DTOs\\FootballerDTO.cs",
-              "RelativeToolTip": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Shared\\DTOs\\FootballerDTO.cs",
-              "ViewState": "AQIAAA0AAAAAAAAAAAAIwBYAAAAnAAAA",
+              "DocumentIndex": 5,
+              "Title": "FavouriteService.cs",
+              "DocumentMoniker": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Services\\FavouriteService.cs",
+              "RelativeDocumentMoniker": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Services\\FavouriteService.cs",
+              "ToolTip": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Services\\FavouriteService.cs",
+              "RelativeToolTip": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Services\\FavouriteService.cs",
+              "ViewState": "AQIAAEYAAAAAAAAAAAAcwFYAAABhAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-17T12:46:01.475Z",
+              "WhenOpened": "2024-08-13T12:52:58.605Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 6,
               "Title": "Footballer.cs",
               "DocumentMoniker": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Models\\Footballer.cs",
               "RelativeDocumentMoniker": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Models\\Footballer.cs",
               "ToolTip": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Models\\Footballer.cs",
               "RelativeToolTip": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Models\\Footballer.cs",
-              "ViewState": "AQIAAAgAAAAAAAAAAAAxwBQAAAAwAAAA",
+              "ViewState": "AQIAAAkAAAAAAAAAAAAAABQAAAAwAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-08-13T13:07:14.564Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Program.cs",
-              "RelativeDocumentMoniker": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Program.cs",
-              "ToolTip": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Program.cs",
-              "RelativeToolTip": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Program.cs",
-              "ViewState": "AQIAAA0AAAAAAAAAAAAAABMAAAAEAAAA",
+              "DocumentIndex": 3,
+              "Title": "FootballerDTO.cs",
+              "DocumentMoniker": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Shared\\DTOs\\FootballerDTO.cs",
+              "RelativeDocumentMoniker": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Shared\\DTOs\\FootballerDTO.cs",
+              "ToolTip": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Shared\\DTOs\\FootballerDTO.cs",
+              "RelativeToolTip": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Shared\\DTOs\\FootballerDTO.cs",
+              "ViewState": "AQIAAA0AAAAAAAAAAAAwwBYAAAAnAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-19T16:51:15.537Z",
+              "WhenOpened": "2024-08-17T12:46:01.475Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "LeagueService.cs",
-              "DocumentMoniker": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Services\\LeagueService.cs",
-              "RelativeDocumentMoniker": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Services\\LeagueService.cs",
-              "ToolTip": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Services\\LeagueService.cs",
-              "RelativeToolTip": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Services\\LeagueService.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-19T19:46:18.872Z",
+              "DocumentIndex": 2,
+              "Title": "Footballers.razor",
+              "DocumentMoniker": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Pages\\Footballers.razor",
+              "RelativeDocumentMoniker": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Pages\\Footballers.razor",
+              "ToolTip": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Pages\\Footballers.razor",
+              "RelativeToolTip": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Pages\\Footballers.razor",
+              "ViewState": "AQIAABgAAAAAAAAAAAAAACQAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-08-17T11:16:48.183Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "AlertManager.cs",
-              "DocumentMoniker": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Extensions\\AlertManager.cs",
-              "RelativeDocumentMoniker": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Extensions\\AlertManager.cs",
-              "ToolTip": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Extensions\\AlertManager.cs",
-              "RelativeToolTip": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Extensions\\AlertManager.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAqwAQAAAAWAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-13T14:54:40.799Z",
+              "DocumentIndex": 0,
+              "Title": "FavouriteLeagues.razor",
+              "DocumentMoniker": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Pages\\FavouriteLeagues.razor",
+              "RelativeDocumentMoniker": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Pages\\FavouriteLeagues.razor",
+              "ToolTip": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Pages\\FavouriteLeagues.razor",
+              "RelativeToolTip": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Pages\\FavouriteLeagues.razor",
+              "ViewState": "AQIAAFQAAAAAAAAAAAAAADMAAABTAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-08-13T12:03:31.46Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "20240819193547_ninth.cs",
-              "DocumentMoniker": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Data\\Migrations\\20240819193547_ninth.cs",
-              "RelativeDocumentMoniker": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Data\\Migrations\\20240819193547_ninth.cs",
-              "ToolTip": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Data\\Migrations\\20240819193547_ninth.cs",
-              "RelativeToolTip": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Data\\Migrations\\20240819193547_ninth.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-19T19:35:47.143Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "League.cs",
-              "DocumentMoniker": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Models\\League.cs",
-              "RelativeDocumentMoniker": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Models\\League.cs",
-              "ToolTip": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Models\\League.cs",
-              "RelativeToolTip": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Models\\League.cs",
-              "ViewState": "AQIAAAsAAAAAAAAAAAAowBQAAABNAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-19T13:57:10.946Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "LeagueRepository.cs",
-              "DocumentMoniker": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Repositories\\LeagueRepository.cs",
-              "RelativeDocumentMoniker": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Repositories\\LeagueRepository.cs",
-              "ToolTip": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Repositories\\LeagueRepository.cs",
-              "RelativeToolTip": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Repositories\\LeagueRepository.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-19T19:03:20.525Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 19,
-              "Title": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105.Shared",
-              "DocumentMoniker": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Shared\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105.Shared.csproj",
-              "RelativeDocumentMoniker": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Shared\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105.Shared.csproj",
-              "ToolTip": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Shared\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105.Shared.csproj",
-              "RelativeToolTip": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Shared\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105.Shared.csproj",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2024-08-19T19:17:02.787Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 21,
-              "Title": "MappingProfile.cs",
-              "DocumentMoniker": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Mapping\\MappingProfile.cs",
-              "RelativeDocumentMoniker": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Mapping\\MappingProfile.cs",
-              "ToolTip": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Mapping\\MappingProfile.cs",
-              "RelativeToolTip": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Mapping\\MappingProfile.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-19T16:52:41.078Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 24,
-              "Title": "SearchQueryManager.cs",
-              "DocumentMoniker": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Extensions\\SearchQueryManager.cs",
-              "RelativeDocumentMoniker": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Extensions\\SearchQueryManager.cs",
-              "ToolTip": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Extensions\\SearchQueryManager.cs",
-              "RelativeToolTip": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Extensions\\SearchQueryManager.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAAjAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-19T13:18:47.086Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 8,
               "Title": "IFavouriteService.cs",
               "DocumentMoniker": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Services\\Interfaces\\IFavouriteService.cs",
               "RelativeDocumentMoniker": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Services\\Interfaces\\IFavouriteService.cs",
@@ -533,150 +351,59 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Program.cs",
-              "RelativeDocumentMoniker": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Program.cs",
-              "ToolTip": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Program.cs",
-              "RelativeToolTip": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Program.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-19T17:37:14.196Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 23,
-              "Title": "NavMenu.razor",
-              "DocumentMoniker": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Shared\\NavMenu.razor",
-              "RelativeDocumentMoniker": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Shared\\NavMenu.razor",
-              "ToolTip": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Shared\\NavMenu.razor",
-              "RelativeToolTip": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Shared\\NavMenu.razor",
-              "ViewState": "AQIAAA8AAAAAAAAAAAAAABkAAAAOAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-08-13T15:17:21.784Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 9,
               "Title": "IFavouriteRepository.cs",
               "DocumentMoniker": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Repositories\\Interfaces\\IFavouriteRepository.cs",
               "RelativeDocumentMoniker": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Repositories\\Interfaces\\IFavouriteRepository.cs",
               "ToolTip": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Repositories\\Interfaces\\IFavouriteRepository.cs",
               "RelativeToolTip": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Repositories\\Interfaces\\IFavouriteRepository.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAfAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAABNAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-08-13T12:58:07.976Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
-              "Title": "LeaguesController.cs",
-              "DocumentMoniker": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Controllers\\LeaguesController.cs",
-              "RelativeDocumentMoniker": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Controllers\\LeaguesController.cs",
-              "ToolTip": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Controllers\\LeaguesController.cs",
-              "RelativeToolTip": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Controllers\\LeaguesController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "DocumentIndex": 10,
+              "Title": "IFootballerRepository.cs",
+              "DocumentMoniker": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Repositories\\Interfaces\\IFootballerRepository.cs",
+              "RelativeDocumentMoniker": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Repositories\\Interfaces\\IFootballerRepository.cs",
+              "ToolTip": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Repositories\\Interfaces\\IFootballerRepository.cs",
+              "RelativeToolTip": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Repositories\\Interfaces\\IFootballerRepository.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-19T16:26:01.608Z",
+              "WhenOpened": "2024-08-19T17:05:38.679Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
-              "Title": "Trophy.cs",
-              "DocumentMoniker": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Models\\Trophy.cs",
-              "RelativeDocumentMoniker": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Models\\Trophy.cs",
-              "ToolTip": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Models\\Trophy.cs",
-              "RelativeToolTip": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Models\\Trophy.cs",
-              "ViewState": "AQIAAAYAAAAAAAAAAAAAABQAAAAbAAAA",
+              "DocumentIndex": 11,
+              "Title": "FootballerRepository.cs",
+              "DocumentMoniker": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Repositories\\FootballerRepository.cs",
+              "RelativeDocumentMoniker": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Repositories\\FootballerRepository.cs",
+              "ToolTip": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Repositories\\FootballerRepository.cs",
+              "RelativeToolTip": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Repositories\\FootballerRepository.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAABBAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-19T14:10:56.589Z",
+              "WhenOpened": "2024-08-19T17:05:36.231Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
-              "Title": "Match.cs",
-              "DocumentMoniker": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Models\\Match.cs",
-              "RelativeDocumentMoniker": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Models\\Match.cs",
-              "ToolTip": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Models\\Match.cs",
-              "RelativeToolTip": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Models\\Match.cs",
-              "ViewState": "AQIAAA8AAAAAAAAAAAAowAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-19T14:11:59.475Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 29,
-              "Title": "Referee.cs",
-              "DocumentMoniker": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Models\\Referee.cs",
-              "RelativeDocumentMoniker": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Models\\Referee.cs",
-              "ToolTip": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Models\\Referee.cs",
-              "RelativeToolTip": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Models\\Referee.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-19T14:09:50.812Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 30,
-              "Title": "RefereeStat.cs",
-              "DocumentMoniker": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Models\\RefereeStat.cs",
-              "RelativeDocumentMoniker": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Models\\RefereeStat.cs",
-              "ToolTip": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Models\\RefereeStat.cs",
-              "RelativeToolTip": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Models\\RefereeStat.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-19T14:09:50.311Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 33,
-              "Title": "Team.cs",
-              "DocumentMoniker": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Models\\Team.cs",
-              "RelativeDocumentMoniker": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Models\\Team.cs",
-              "ToolTip": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Models\\Team.cs",
-              "RelativeToolTip": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Models\\Team.cs",
-              "ViewState": "AQIAAAkAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-19T13:52:21.898Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 31,
-              "Title": "Teams.razor",
-              "DocumentMoniker": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Pages\\Teams.razor",
-              "RelativeDocumentMoniker": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Pages\\Teams.razor",
-              "ToolTip": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Pages\\Teams.razor",
-              "RelativeToolTip": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Pages\\Teams.razor",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-08-13T15:25:58.423Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 35,
+              "DocumentIndex": 12,
               "Title": "FavouriteTeams.razor",
               "DocumentMoniker": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Pages\\FavouriteTeams.razor",
               "RelativeDocumentMoniker": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Pages\\FavouriteTeams.razor",
               "ToolTip": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Pages\\FavouriteTeams.razor",
               "RelativeToolTip": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Pages\\FavouriteTeams.razor",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAJgAAAABAAAA",
+              "ViewState": "AQIAAIEAAAAAAAAAAAAAAEIAAAAhAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2024-08-13T12:44:56.829Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 36,
+              "DocumentIndex": 13,
               "Title": "FavouriteReferees.razor",
               "DocumentMoniker": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Pages\\FavouriteReferees.razor",
               "RelativeDocumentMoniker": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Pages\\FavouriteReferees.razor",
@@ -689,7 +416,283 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "FootballerService.cs",
+              "DocumentMoniker": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Services\\FootballerService.cs",
+              "RelativeDocumentMoniker": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Services\\FootballerService.cs",
+              "ToolTip": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Services\\FootballerService.cs",
+              "RelativeToolTip": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Services\\FootballerService.cs",
+              "ViewState": "AQIAAAEAAAAAAAAAAAAYwBAAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-19T16:50:33.745Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "IFootballerService.cs",
+              "DocumentMoniker": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Services\\Interfaces\\IFootballerService.cs",
+              "RelativeDocumentMoniker": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Services\\Interfaces\\IFootballerService.cs",
+              "ToolTip": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Services\\Interfaces\\IFootballerService.cs",
+              "RelativeToolTip": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Services\\Interfaces\\IFootballerService.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-19T16:50:02.551Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "Leagues.razor",
+              "DocumentMoniker": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Pages\\Leagues.razor",
+              "RelativeDocumentMoniker": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Pages\\Leagues.razor",
+              "ToolTip": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Pages\\Leagues.razor",
+              "RelativeToolTip": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Pages\\Leagues.razor",
+              "ViewState": "AQIAAAoAAAAAAAAAAADwv5MAAAAQAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-08-13T12:20:38.585Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "FootballersController.cs",
+              "DocumentMoniker": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Controllers\\FootballersController.cs",
+              "RelativeDocumentMoniker": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Controllers\\FootballersController.cs",
+              "ToolTip": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Controllers\\FootballersController.cs",
+              "RelativeToolTip": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Controllers\\FootballersController.cs",
+              "ViewState": "AQIAAAkAAAAAAAAAAAAAABkAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-19T13:15:54.371Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "LeagueScorers.razor",
+              "DocumentMoniker": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Pages\\LeagueScorers.razor",
+              "RelativeDocumentMoniker": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Pages\\LeagueScorers.razor",
+              "ToolTip": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Pages\\LeagueScorers.razor",
+              "RelativeToolTip": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Pages\\LeagueScorers.razor",
+              "ViewState": "AQIAADAAAAAAAAAAAAAAACgAAAAUAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-08-19T13:38:59.872Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Program.cs",
+              "RelativeDocumentMoniker": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Program.cs",
+              "ToolTip": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Program.cs",
+              "RelativeToolTip": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Program.cs",
+              "ViewState": "AQIAAA0AAAAAAAAAAAAAABMAAAAEAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-19T16:51:15.537Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "LeagueService.cs",
+              "DocumentMoniker": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Services\\LeagueService.cs",
+              "RelativeDocumentMoniker": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Services\\LeagueService.cs",
+              "ToolTip": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Services\\LeagueService.cs",
+              "RelativeToolTip": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Services\\LeagueService.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-19T19:46:18.872Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "AlertManager.cs",
+              "DocumentMoniker": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Extensions\\AlertManager.cs",
+              "RelativeDocumentMoniker": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Extensions\\AlertManager.cs",
+              "ToolTip": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Extensions\\AlertManager.cs",
+              "RelativeToolTip": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Extensions\\AlertManager.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAqwAQAAAAWAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-13T14:54:40.799Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "20240819193547_ninth.cs",
+              "DocumentMoniker": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Data\\Migrations\\20240819193547_ninth.cs",
+              "RelativeDocumentMoniker": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Data\\Migrations\\20240819193547_ninth.cs",
+              "ToolTip": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Data\\Migrations\\20240819193547_ninth.cs",
+              "RelativeToolTip": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Data\\Migrations\\20240819193547_ninth.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-19T19:35:47.143Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "League.cs",
+              "DocumentMoniker": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Models\\League.cs",
+              "RelativeDocumentMoniker": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Models\\League.cs",
+              "ToolTip": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Models\\League.cs",
+              "RelativeToolTip": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Models\\League.cs",
+              "ViewState": "AQIAAAsAAAAAAAAAAAAowBQAAABNAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-19T13:57:10.946Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "LeagueRepository.cs",
+              "DocumentMoniker": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Repositories\\LeagueRepository.cs",
+              "RelativeDocumentMoniker": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Repositories\\LeagueRepository.cs",
+              "ToolTip": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Repositories\\LeagueRepository.cs",
+              "RelativeToolTip": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Repositories\\LeagueRepository.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-19T19:03:20.525Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105.Shared.csproj",
+              "DocumentMoniker": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Shared\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105.Shared.csproj",
+              "RelativeDocumentMoniker": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Shared\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105.Shared.csproj",
+              "ToolTip": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Shared\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105.Shared.csproj",
+              "RelativeToolTip": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Shared\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105.Shared.csproj",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2024-08-19T19:17:02.787Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "MappingProfile.cs",
+              "DocumentMoniker": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Mapping\\MappingProfile.cs",
+              "RelativeDocumentMoniker": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Mapping\\MappingProfile.cs",
+              "ToolTip": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Mapping\\MappingProfile.cs",
+              "RelativeToolTip": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Mapping\\MappingProfile.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-19T16:52:41.078Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "SearchQueryManager.cs",
+              "DocumentMoniker": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Extensions\\SearchQueryManager.cs",
+              "RelativeDocumentMoniker": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Extensions\\SearchQueryManager.cs",
+              "ToolTip": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Extensions\\SearchQueryManager.cs",
+              "RelativeToolTip": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Extensions\\SearchQueryManager.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAAjAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-19T13:18:47.086Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Program.cs",
+              "RelativeDocumentMoniker": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Program.cs",
+              "ToolTip": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Program.cs",
+              "RelativeToolTip": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Program.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-19T17:37:14.196Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "NavMenu.razor",
+              "DocumentMoniker": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Shared\\NavMenu.razor",
+              "RelativeDocumentMoniker": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Shared\\NavMenu.razor",
+              "ToolTip": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Shared\\NavMenu.razor",
+              "RelativeToolTip": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Shared\\NavMenu.razor",
+              "ViewState": "AQIAAA8AAAAAAAAAAAAAABkAAAAOAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-08-13T15:17:21.784Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "LeaguesController.cs",
+              "DocumentMoniker": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Controllers\\LeaguesController.cs",
+              "RelativeDocumentMoniker": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Controllers\\LeaguesController.cs",
+              "ToolTip": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Controllers\\LeaguesController.cs",
+              "RelativeToolTip": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Controllers\\LeaguesController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-19T16:26:01.608Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "Trophy.cs",
+              "DocumentMoniker": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Models\\Trophy.cs",
+              "RelativeDocumentMoniker": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Models\\Trophy.cs",
+              "ToolTip": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Models\\Trophy.cs",
+              "RelativeToolTip": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Models\\Trophy.cs",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAABQAAAAbAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-19T14:10:56.589Z"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 32,
+              "Title": "Match.cs",
+              "DocumentMoniker": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Models\\Match.cs",
+              "RelativeDocumentMoniker": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Models\\Match.cs",
+              "ToolTip": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Models\\Match.cs",
+              "RelativeToolTip": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Models\\Match.cs",
+              "ViewState": "AQIAAA8AAAAAAAAAAAAowAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-19T14:11:59.475Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "Referee.cs",
+              "DocumentMoniker": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Models\\Referee.cs",
+              "RelativeDocumentMoniker": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Models\\Referee.cs",
+              "ToolTip": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Models\\Referee.cs",
+              "RelativeToolTip": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Models\\Referee.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-19T14:09:50.812Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "RefereeStat.cs",
+              "DocumentMoniker": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Models\\RefereeStat.cs",
+              "RelativeDocumentMoniker": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Models\\RefereeStat.cs",
+              "ToolTip": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Models\\RefereeStat.cs",
+              "RelativeToolTip": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Models\\RefereeStat.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-19T14:09:50.311Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 37,
+              "Title": "Team.cs",
+              "DocumentMoniker": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Models\\Team.cs",
+              "RelativeDocumentMoniker": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Models\\Team.cs",
+              "ToolTip": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Models\\Team.cs",
+              "RelativeToolTip": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Models\\Team.cs",
+              "ViewState": "AQIAAAkAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-19T13:52:21.898Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "Teams.razor",
+              "DocumentMoniker": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Pages\\Teams.razor",
+              "RelativeDocumentMoniker": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Pages\\Teams.razor",
+              "ToolTip": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Pages\\Teams.razor",
+              "RelativeToolTip": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Pages\\Teams.razor",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-08-13T15:25:58.423Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
               "Title": "Authentication.razor",
               "DocumentMoniker": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Pages\\Authentication.razor",
               "RelativeDocumentMoniker": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Pages\\Authentication.razor",
@@ -697,38 +700,11 @@
               "RelativeToolTip": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Pages\\Authentication.razor",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-08-19T13:39:49.67Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 37,
-              "Title": "FavouriteLeagues.razor",
-              "DocumentMoniker": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Pages\\FavouriteLeagues.razor",
-              "RelativeDocumentMoniker": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Pages\\FavouriteLeagues.razor",
-              "ToolTip": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Pages\\FavouriteLeagues.razor",
-              "RelativeToolTip": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Pages\\FavouriteLeagues.razor",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAADMAAABTAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-08-13T12:03:31.46Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-19T13:39:49.67Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 38,
-              "Title": "FavouriteFootballers .razor",
-              "DocumentMoniker": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Pages\\FavouriteFootballers .razor",
-              "RelativeDocumentMoniker": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Pages\\FavouriteFootballers .razor",
-              "ToolTip": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Pages\\FavouriteFootballers .razor",
-              "RelativeToolTip": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Pages\\FavouriteFootballers .razor",
-              "ViewState": "AQIAAAYAAAAAAAAAAAAAADcAAAAqAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-08-13T12:03:29.9Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 34,
               "Title": "TeamDTO.cs",
               "DocumentMoniker": "C:\\Users\\danbu\\Desktop\\PRACA IN\u017BYNIERSKA\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Shared\\DTOs\\TeamDTO.cs",
               "RelativeDocumentMoniker": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Shared\\DTOs\\TeamDTO.cs",
@@ -736,8 +712,7 @@
               "RelativeToolTip": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Shared\\DTOs\\TeamDTO.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-17T12:46:13.324Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-17T12:46:13.324Z"
             },
             {
               "$type": "Document",
@@ -749,8 +724,7 @@
               "RelativeToolTip": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Pages\\Index.razor",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-08-13T13:47:11.823Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-13T13:47:11.823Z"
             },
             {
               "$type": "Document",
@@ -762,8 +736,7 @@
               "RelativeToolTip": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Pages\\LeagueDetails.razor",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-08-13T12:42:19.523Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-13T12:42:19.523Z"
             },
             {
               "$type": "Document",
@@ -775,8 +748,7 @@
               "RelativeToolTip": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Pages\\LeagueTable.razor",
               "ViewState": "AQIAAAwAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-08-19T13:38:57.087Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-19T13:38:57.087Z"
             },
             {
               "$type": "Document",
@@ -788,8 +760,7 @@
               "RelativeToolTip": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Pages\\TeamLineup.razor",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-08-19T13:38:47.357Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-19T13:38:47.357Z"
             },
             {
               "$type": "Document",
@@ -801,8 +772,7 @@
               "RelativeToolTip": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Pages\\TeamDetails.razor",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAABXAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-08-13T15:26:05.425Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-13T15:26:05.425Z"
             },
             {
               "$type": "Document",
@@ -814,8 +784,7 @@
               "RelativeToolTip": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Shared\\DTOs\\FootballerStatDTO.cs",
               "ViewState": "AQIAAAgAAAAAAAAAAAAxwA0AAAArAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-17T12:46:24.143Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-17T12:46:24.143Z"
             },
             {
               "$type": "Document",
@@ -827,8 +796,7 @@
               "RelativeToolTip": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Shared\\DTOs\\FavouriteDTO.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-13T12:04:24.154Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-13T12:04:24.154Z"
             },
             {
               "$type": "Document",
@@ -840,8 +808,7 @@
               "RelativeToolTip": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2024-08-13T15:09:59.254Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-13T15:09:59.254Z"
             },
             {
               "$type": "Document",
@@ -853,8 +820,7 @@
               "RelativeToolTip": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\wwwroot\\js\\site.js",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2024-08-13T15:05:02.591Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-13T15:05:02.591Z"
             },
             {
               "$type": "Document",
@@ -866,8 +832,7 @@
               "RelativeToolTip": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\wwwroot\\css\\site.css",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAAaAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2024-08-13T15:05:05.166Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-13T15:05:05.166Z"
             },
             {
               "$type": "Document",
@@ -879,8 +844,7 @@
               "RelativeToolTip": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
               "ViewState": "AQIAAGwWAAAAAAAAAIBJwKYVAAAkAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2024-08-13T15:07:23.068Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-13T15:07:23.068Z"
             },
             {
               "$type": "Document",
@@ -892,8 +856,7 @@
               "RelativeToolTip": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2024-08-13T15:10:02.284Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-13T15:10:02.284Z"
             },
             {
               "$type": "Document",
@@ -905,8 +868,7 @@
               "RelativeToolTip": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Components\\Modal.razor",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAACYAAAAkAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-08-13T12:02:30.616Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-13T12:02:30.616Z"
             },
             {
               "$type": "Document",
@@ -918,8 +880,7 @@
               "RelativeToolTip": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Models\\FootballerStat.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-13T13:07:14.088Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-13T13:07:14.088Z"
             },
             {
               "$type": "Document",
@@ -931,8 +892,7 @@
               "RelativeToolTip": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Server\\Models\\Favourite.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-13T13:02:47.232Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-13T13:02:47.232Z"
             },
             {
               "$type": "Document",
@@ -944,8 +904,7 @@
               "RelativeToolTip": "System_do_zarz\u0105dzania_lig\u0105_pi\u0142karsk\u0105\\Client\\Other\\FavouriteLeagues.razor",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-08-13T12:37:21.031Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-13T12:37:21.031Z"
             }
           ]
         }

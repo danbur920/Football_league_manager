@@ -17,9 +17,6 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Services.Interfaces
         // Metody sprecyzowane:
         Task<List<LeagueDTO>> GetFavouriteLeaguesByUserId(string userId);
         Task<List<TeamDTO>> GetFavouriteTeamsByUserId(string userId);
-
-
-
-        //Task<List<FootballerDTO>> GetFavouriteFootballersByUserId(string userId);
+        Task<List<FootballerDTO>> GetFavouriteFootballersByUserId(string userId);
     }
 }

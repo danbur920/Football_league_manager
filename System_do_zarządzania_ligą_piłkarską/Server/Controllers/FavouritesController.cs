@@ -68,6 +68,20 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Controllers
             return Ok(favouriteTeams);
         }
 
+        [HttpGet("favourite-footballers")]
+        public async Task<IActionResult> GetFavouriteFootballers()
+        {
+            var userId = _httpContextAccessor.HttpContext.User.Identity.GetUserId();
+
+            if (userId == null)
+            {
+                return Unauthorized();
+            }
+
+            var favouriteFootballers = await _favouriteService.GetFavouriteFootballersByUserId(userId);
+            return Ok(favouriteFootballers);
+        }
+
         [HttpPost("{favouriteType}/{favouriteId}")]
         public async Task<IActionResult> AddFavourite(FavouriteType favouriteType, int favouriteId)
         {

@@ -14,5 +14,6 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories.Interface
 
         Task<List<League>> GetFavouriteLeaguesByUserId(string userId);
         Task<List<Team>> GetFavouriteTeamsByUserId(string userId);
+        Task<List<Footballer>> GetFavouriteFootballersByUserId(string userId);
     }
 }

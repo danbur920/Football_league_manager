@@ -41,7 +41,9 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
         {
             var favouriteTypeConverted = (Models.FavouriteType)favouriteType;
 
-            var favourites = await _context.Favourites.Where(x => x.UserId == userId && x.FavouriteType == favouriteTypeConverted).ToListAsync();
+            var favourites = await _context.Favourites.
+                Where(x => x.UserId == userId && x.FavouriteType == favouriteTypeConverted).
+                ToListAsync();
             return favourites;
         }
 
@@ -50,7 +52,9 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
             var userFavourites = await GetFavouritesByUserId(userId, FavouriteType.League);
             var userFavouritesId = userFavourites.Select(x => x.FavouriteId).ToList();
 
-            var userFavouriteLeagues = await _context.Leagues.Where(league => userFavouritesId.Contains(league.Id)).ToListAsync();
+            var userFavouriteLeagues = await _context.Leagues.
+                Where(league => userFavouritesId.Contains(league.Id)).
+                ToListAsync();
             return userFavouriteLeagues;
         }
 
@@ -59,8 +63,23 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
             var userFavourites = await GetFavouritesByUserId(userId, FavouriteType.Team);
             var userFavouritesId = userFavourites.Select(x => x.FavouriteId).ToList();
 
-            var userFavouriteTeams = await _context.Teams.Where(team => userFavouritesId.Contains(team.Id)).ToListAsync();
+            var userFavouriteTeams = await _context.Teams.
+                Where(team => userFavouritesId.Contains(team.Id)).
+                ToListAsync();
             return userFavouriteTeams;
+        }
+
+        public async Task<List<Footballer>> GetFavouriteFootballersByUserId(string userId)
+        {
+            var userFavourites = await GetFavouritesByUserId(userId, FavouriteType.Footballer);
+            var userFavouritesId = userFavourites.Select(x => x.FavouriteId).ToList();
+
+            var userFavouriteFootballers = await _context.Footballers.
+                Where(footballer => userFavouritesId.Contains(footballer.Id)).
+                Include(x=>x.Team).
+                ToListAsync();
+
+            return userFavouriteFootballers;
         }
     }
 }

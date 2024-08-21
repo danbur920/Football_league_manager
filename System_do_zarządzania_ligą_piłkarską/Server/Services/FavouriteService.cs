@@ -81,5 +81,11 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Services
             var favouriteTeams = await _favouriteRepository.GetFavouriteTeamsByUserId(userId);
             return _mapper.Map<List<TeamDTO>>(favouriteTeams);
         }
+
+        public async Task<List<FootballerDTO>> GetFavouriteFootballersByUserId(string userId)
+        {
+            var favouriteFootballers = await _favouriteRepository.GetFavouriteFootballersByUserId(userId);
+            return _mapper.Map<List<FootballerDTO>>(favouriteFootballers);
+        }
     }
 }

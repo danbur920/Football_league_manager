@@ -14,7 +14,7 @@
 
 @if (_showModal)
 {
-    <Modal Title="Usuń" Body="Czy na pewno chcesz usunąć wybraną drużynę z ulubionch?" OnConfirm="HandleConfirm" OnCancel="HandleCancel" />
+    <Modal Title="Usuń" Body="Czy na pewno chcesz usunąć wybranego piłkarza z ulubionch?" OnConfirm="HandleConfirm" OnCancel="HandleCancel" />
 }
 
 @if (alertManager.alertVisibility)
@@ -25,7 +25,7 @@
     </div>
 }
 
-@if (favouriteTeams == null)
+@if (favouriteFootballers == null)
 {
     <p><em>Loading...</em></p>
 }
@@ -34,35 +34,39 @@ else
     <table class="table">
         <thead>
             <tr>
-                <th>Nazwa</th>
-                <th>Kraj</th>
-                <th>Miasto</th>
-                <th>Stadion</th>
+                <th>Imię</th>
+                <th>Nazwisko</th>
+                <th>Ksywa</th>
+                <th>Narodowość</th>
+                <th>Pozycja</th>
+                <th>Klub</th>
                 <th>Usuń z ulubionych</th>
-                <th>Przejdź do drużyny</th>
+                <th>Profil piłkarza</th>
             </tr>
         </thead>
         <tbody>
-            @if (favouriteTeams.Count() == 0)
+            @if (favouriteFootballers.Count() == 0)
             {
                 <tr>
-                    <td colspan="9" style="text-align: center">Brak ulubionych drużyn</td>
+                    <td colspan="9" style="text-align: center">Brak ulubionych piłkarzy</td>
                 </tr>
             }
-            @foreach (var team in favouriteTeams)
+            @foreach (var footballer in favouriteFootballers)
             {
                 <tr>
-                    <td>@team.Name</td>
-                    <td>@team.Country</td>
-                    <td>@team.City</td>
-                    <td>@team.Stadium</td>
+                    <td>@footballer.FirstName</td>
+                    <td>@footballer.LastName</td>
+                    <td>@footballer.NickName</td>
+                    <td>@footballer.Nationality</td>
+                    <td>@footballer.Position</td>
+                    <td>@footballer.Team.Name</td>
                     <td>
-                        <button class="btn btn-primary" @onclick="() => ShowRemoveModal(team.Id)">
+                        <button class="btn btn-primary" @onclick="() => ShowRemoveModal(footballer.Id)">
                             <i class="fas fa-trash"></i> Usuń
                         </button>
                     </td>
                     <td>
-                        <button class="btn btn-link" @onclick="() => NavigateToTeamDetails(team.Id)">
+                        <button class="btn btn-link" @onclick="() => NavigateToTeamDetails(footballer.Id)">
                             <i class="fas fa-arrow-right"></i> Szczegóły
                         </button>
                     </td>
@@ -73,12 +77,12 @@ else
 }
 
 @code {
-    private List<TeamDTO>? favouriteTeams;
+    private List<FootballerDTO>? favouriteFootballers;
     private AlertManager alertManager = new AlertManager();
 
     private string _userId = string.Empty;
     private bool _showModal = false;
-    private int _teamIdToRemove;
+    private int _footballerIdToRemove;
 
     protected override async Task OnInitializedAsync()
     {
@@ -95,12 +99,12 @@ else
 
     private async Task RefreshFavourites()
     {
-        favouriteTeams = await Http.GetFromJsonAsync<List<TeamDTO>>("api/favourites/favourite-teams");
+        favouriteFootballers = await Http.GetFromJsonAsync<List<FootballerDTO>>("api/favourites/favourite-footballers");
     }
 
-    private void ShowRemoveModal(int teamId)
+    private void ShowRemoveModal(int footballerId)
     {
-        _teamIdToRemove = teamId;
+        _footballerIdToRemove = footballerId;
         _showModal = true;
     }
 
@@ -108,7 +112,7 @@ else
     {
         if (confirmed)
         {
-            await RemoveFromFavourites(_teamIdToRemove);
+            await RemoveFromFavourites(_footballerIdToRemove);
         }
         _showModal = false;
     }
@@ -125,29 +129,29 @@ else
         return user.FindFirst(c => c.Type == "sub")?.Value;
     }
 
-    private async Task RemoveFromFavourites(int teamId)
+    private async Task RemoveFromFavourites(int footballerId)
     {
         _userId = await GetUserId();
 
         if (_userId != null)
         {
-            var response = await Http.DeleteAsync($"api/favourites/team/{teamId}/{_userId}");
-            var team = favouriteTeams.FirstOrDefault(x => x.Id == teamId);
+            var response = await Http.DeleteAsync($"api/favourites/footballer/{footballerId}/{_userId}");
+            var footballer = favouriteFootballers.FirstOrDefault(x => x.Id == footballerId);
 
             if (response.IsSuccessStatusCode)
             {
-                alertManager.ShowAlert($"Usunięto drużynę {team?.Name} z ulubionych.", "info");
+                alertManager.ShowAlert($"Usunięto piłkarza {footballer?.FirstName + " " + footballer?.LastName} z ulubionych.", "info");
                 await RefreshFavourites();
             }
             else
             {
-                alertManager.ShowAlert($"Nie udało się usunąć drużyny {team?.Name} z ulubionych.", "danger");
+                alertManager.ShowAlert($"Nie udało się usunąć piłkarza {footballer?.FirstName + " " + footballer?.LastName} z ulubionych.", "danger");
             }
         }
     }
 
-    private void NavigateToTeamDetails(int teamId)
+    private void NavigateToTeamDetails(int footballerId)
     {
-        Navigation.NavigateTo($"/teams/{teamId}");
+        Navigation.NavigateTo($"/footballers/{footballerId}");
     }
 }
