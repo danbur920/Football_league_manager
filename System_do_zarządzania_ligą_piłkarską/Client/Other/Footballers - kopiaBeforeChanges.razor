@@ -1,4 +1,4 @@
-﻿@page "/footballers"
+﻿@page "/footballerssssssssssss"
 @using Microsoft.AspNetCore.Authorization
 @using Microsoft.AspNetCore.Components.WebAssembly.Authentication
 @using System_do_zarządzania_ligą_piłkarską.Shared
@@ -55,7 +55,7 @@ else
                     <td colspan="9" style="text-align: center">Brak piłkarzy lub żaden piłkarz nie spełnia określonych kryteriów wyszukiwania.</td>
                 </tr>
             }
-            @foreach (var footballer in allFootballers)
+            @foreach (var footballer in filteredFootballer)
             {
                 <tr>
                     <td>@footballer.FirstName</td>
@@ -90,26 +90,21 @@ else
 
     <nav aria-label="Page navigation">
         <ul class="pagination">
-            <li class="page-item @(_pageNumber == 1 ? "disabled" : "")">
-                <a class="page-link" @onclick="PreviousPage">Previous</a>
+            <li class="page-item disabled">
+                <a class="page-link" href="#" tabindex="-1">Previous</a>
             </li>
-
-
-            @for (int i = 1; i <= 5; i++)
-            {
-                var pageValue = _pageIndex + i;
-                <li class="page-item @(_pageNumber == pageValue ? "active" : "")">
-                    <a class="page-link" @onclick="() => GoToPage(pageValue)">@pageValue</a>
-                </li>
-            }
-
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">4</a></li>
+            <li class="page-item"><a class="page-link" href="#">5</a></li>
             <li class="page-item">
-                <a class="page-link" @onclick="NextPage">Next</a>
+                <a class="page-link" href="#">Next</a>
             </li>
         </ul>
     </nav>
 
-    <button @onclick="NextPage">Pokaż więcej</button>
+    <button @onclick="LoadMorePlayers">Pokaż więcej</button>
 }
 
 @code {
@@ -119,7 +114,7 @@ else
 
     private string _userId = string.Empty;
     private int _pageNumber = 1;
-    private int _pageIndex = 0; // na potrzeby pętli for
+    private int _pageSize = 2;
 
     protected override async Task OnInitializedAsync()
     {
@@ -135,45 +130,15 @@ else
         }
     }
 
-
-
     private async Task SearchFootballersByFilters()
     {
         allFootballers = await Http.GetFromJsonAsync<List<FootballerDTO>>($"api/footballers?firstName={SearchQueryManager.FirstName}&lastName={SearchQueryManager.LastName}&country={SearchQueryManager.Country}&team={SearchQueryManager.Team}&position={SearchQueryManager.Position}");
     }
 
-
-    private async Task LoadPlayers()
+    private bool IsFavourite(int footballerId)
     {
-        var response = await Http.GetFromJsonAsync<List<FootballerDTO>>($"api/footballers?pageNumber={_pageNumber}");
-        allFootballers = response;     //.AddRange(response);
-    }
-
-    private async Task GoToPage(int pageNumber)
-    {
-        _pageNumber = pageNumber;
-        await LoadPlayers();
-    }
-
-    private async Task PreviousPage()
-    {
-        if (_pageNumber > 1)
-        {
-            _pageNumber--;
-            if (_pageNumber % 5 == 0)
-                _pageIndex -= 5;
-
-            await LoadPlayers();
-        }
-    }
-
-    private async Task NextPage()
-    {
-        _pageNumber++;
-        if (_pageNumber % 5 == 1)
-            _pageIndex += 5;
-
-        await LoadPlayers();
+        var isFavourite = allFavourites.FirstOrDefault(x => x.FavouriteId == footballerId) != null;
+        return isFavourite;
     }
 
     private async Task RefreshFavourites()
@@ -188,10 +153,16 @@ else
         return user.FindFirst(c => c.Type == "sub")?.Value;
     }
 
-    private bool IsFavourite(int footballerId)
+    private async Task LoadPlayers()
     {
-        var isFavourite = allFavourites.FirstOrDefault(x => x.FavouriteId == footballerId) != null;
-        return isFavourite;
+        var response = await Http.GetFromJsonAsync<List<FootballerDTO>>($"api/footballers?pageNumber={_pageNumber}&pageSize={_pageSize}");
+        allFootballers.AddRange(response); 
+    }
+    //
+    private async Task LoadMorePlayers()
+    {
+        _pageNumber++;
+        await LoadPlayers();
     }
 
     private async Task AddToFavourites(int footballerId)
@@ -231,6 +202,18 @@ else
             }
         }
     }
+
+    private IEnumerable<FootballerDTO>? filteredFootballer =>
+     allFootballers?.Where(footballer => (string.IsNullOrWhiteSpace(SearchQueryManager.FirstName) || footballer.FirstName.Contains(SearchQueryManager.FirstName, StringComparison.OrdinalIgnoreCase)) &&
+     (string.IsNullOrWhiteSpace(SearchQueryManager.LastName) || footballer.LastName.Contains(SearchQueryManager.LastName, StringComparison.OrdinalIgnoreCase)) &&
+     (string.IsNullOrWhiteSpace(SearchQueryManager.Country) || footballer.Nationality.Contains(SearchQueryManager.Country, StringComparison.OrdinalIgnoreCase)) &&
+     (string.IsNullOrWhiteSpace(SearchQueryManager.Team) || footballer.Team.Name.Contains(SearchQueryManager.Team, StringComparison.OrdinalIgnoreCase)) &&
+     (string.IsNullOrWhiteSpace(SearchQueryManager.Position) || footballer.Position.Contains(SearchQueryManager.Position, StringComparison.OrdinalIgnoreCase)));
+
+
+    // Było to przypisywane do filteredFootballer jednakże zmienił się zamysł:
+
+
 }
 
 <style>
@@ -263,14 +246,13 @@ else
                 text-decoration: none;
                 background-color: #e9ecef;
                 border-color: #dee2e6;
-                cursor: pointer;
             }
 
         .page-item.active .page-link {
             z-index: 1;
             color: #fff;
-            background-color: #0056b3;
-            border-color: #0056b3;
+            background-color: #007bff;
+            border-color: #007bff;
         }
 
         .page-item.disabled .page-link {
@@ -279,5 +261,6 @@ else
             background-color: #fff;
             border-color: #dee2e6;
         }
+
 </style>
 

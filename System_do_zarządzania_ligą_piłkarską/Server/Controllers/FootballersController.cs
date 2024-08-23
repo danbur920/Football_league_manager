@@ -19,9 +19,9 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetPlayers(int pageNumber = 1, int pageSize = 2)
+        public async Task<IActionResult> GetPlayers(int pageNumber = 1)
         {
-            var players = await _footballerService.GetPlayers(pageNumber, pageSize);
+            var players = await _footballerService.GetPlayers(pageNumber);
             return Ok(players);
         }
     }

@@ -15,9 +15,9 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Services
             _footballerRepository = footballerRepository;
             _mapper = mapper;
         }
-        public async Task<List<FootballerDTO>> GetPlayers(int pageNumber, int pageSize)
+        public async Task<List<FootballerDTO>> GetPlayers(int pageNumber)
         {
-            var players = await _footballerRepository.GetPlayers(pageNumber, pageSize);
+            var players = await _footballerRepository.GetPlayers(pageNumber, 2); // drugi argument to pageSize (ilość elementów na stronie)
             return _mapper.Map<List<FootballerDTO>>(players);
         }
     }

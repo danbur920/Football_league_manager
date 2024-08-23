@@ -11,7 +11,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Controllers
     {
         private readonly IRefereeService _refereeService;
 
-        public FootballersController(IRefereeService refereeService)
+        public RefereesController(IRefereeService refereeService)
         {
             _refereeService = refereeService;
         }
@@ -19,7 +19,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Controllers
         [HttpGet]
         public async Task<IActionResult> GetReferees(int pageNumber = 1, int pageSize = 2)
         {
-            var referees = await _refereeService.GetReferees(pageNumber, pageSize);
+            var referees = await _refereeService.GetReferees();
             return Ok(referees);
         }
     }
