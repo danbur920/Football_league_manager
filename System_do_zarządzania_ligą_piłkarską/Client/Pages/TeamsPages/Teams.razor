@@ -10,11 +10,11 @@
 
 <PageTitle>Drużyny</PageTitle>
 
-@if (_alertManager.alertVisibility)
+@if (_alertManager.AlertVisibility)
 {
-    <div class="alert @($"alert-{_alertManager.alertType}") alert-dismissible fade show" role="alert">
-        @_alertManager.alertMessage
-        <button type="button" class="btn-close" aria-label="Close" @onclick="() => _alertManager.alertVisibility = false"></button>
+    <div class="alert @($"alert-{_alertManager.AlertType}") alert-dismissible fade show" role="alert">
+        @_alertManager.AlertMessage
+        <button type="button" class="btn-close" aria-label="Close" @onclick="() => _alertManager.AlertVisibility = false"></button>
     </div>
 }
 

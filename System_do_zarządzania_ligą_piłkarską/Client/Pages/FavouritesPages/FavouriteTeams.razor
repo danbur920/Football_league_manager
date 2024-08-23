@@ -17,11 +17,11 @@
     <Modal Title="Usuń" Body="Czy na pewno chcesz usunąć wybraną drużynę z ulubionch?" OnConfirm="HandleConfirm" OnCancel="HandleCancel" />
 }
 
-@if (alertManager.alertVisibility)
+@if (alertManager.AlertVisibility)
 {
-    <div class="alert @($"alert-{alertManager.alertType}") alert-dismissible fade show" role="alert">
-        @alertManager.alertMessage
-        <button type="button" class="btn-close" aria-label="Close" @onclick="() => alertManager.alertVisibility = false"></button>
+    <div class="alert @($"alert-{alertManager.AlertType}") alert-dismissible fade show" role="alert">
+        @alertManager.AlertMessage
+        <button type="button" class="btn-close" aria-label="Close" @onclick="() => alertManager.AlertVisibility = false"></button>
     </div>
 }
 

@@ -16,7 +16,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Shared.DTOs
         public int RedCardsGiven { get; set; }
         public int PenaltiesAwarded { get; set; }
         public int FoulsCalled { get; set; }
-        public virtual Referee? Referee { get; set; }
+        public virtual RefereeDTO? Referee { get; set; }
         public virtual LeagueDTO? League { get; set; }
     }
 }

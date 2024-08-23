@@ -1,88 +1,88 @@
 /* Plik CSS dla LeagueDetails.razor */
 
 /* Ustawienia kontenera */
-.container[b-0vkxkrosj4] {
+.container[b-ty57r2olw1] {
     max-width: 900px;
 }
 
 /* Karta */
-.card[b-0vkxkrosj4] {
+.card[b-ty57r2olw1] {
     background: linear-gradient(to right, #ffffff, #f0f8ff);
 }
 
 /* Styl karty */
-.card-body[b-0vkxkrosj4] {
+.card-body[b-ty57r2olw1] {
     padding: 2rem;
 }
 
 /* Nagłówek karty */
-.card-title[b-0vkxkrosj4] {
+.card-title[b-ty57r2olw1] {
     font-size: 1.8rem;
     color: #007bff;
     font-weight: bold;
 }
 
 /* Tekst w karcie */
-.card-text[b-0vkxkrosj4] {
+.card-text[b-ty57r2olw1] {
     font-size: 1.1rem;
     color: #333;
 }
 
 /* Przyciski */
-.btn[b-0vkxkrosj4] {
+.btn[b-ty57r2olw1] {
     transition: all 0.3s ease;
 }
 
-    .btn:hover[b-0vkxkrosj4] {
+    .btn:hover[b-ty57r2olw1] {
         background-color: #0056b3;
         border-color: #004494;
     }
 
 /* Kolory przycisków */
-.btn-primary[b-0vkxkrosj4] {
+.btn-primary[b-ty57r2olw1] {
     background-color: #007bff;
     border-color: #007bff;
 }
 
-.btn-secondary[b-0vkxkrosj4] {
+.btn-secondary[b-ty57r2olw1] {
     background-color: #6c757d;
     border-color: #6c757d;
 }
 
 /* Cienie */
-.shadow-sm[b-0vkxkrosj4] {
+.shadow-sm[b-ty57r2olw1] {
     box-shadow: 0 1px 2px rgba(0,0,0,.05);
 }
 
-.shadow-lg[b-0vkxkrosj4] {
+.shadow-lg[b-ty57r2olw1] {
     box-shadow: 0 10px 15px rgba(0,0,0,.2);
 }
 
 /* Styl dla ikon flag */
-.flag-icon[b-0vkxkrosj4] {
+.flag-icon[b-ty57r2olw1] {
     font-size: 2rem; /* Można dostosować rozmiar */
 }
 
 /* Styl dla flagi w nagłówku */
-.rounded-circle[b-0vkxkrosj4] {
+.rounded-circle[b-ty57r2olw1] {
     border-radius: 50%;
 }
 
 /* Alert */
-.alert-info[b-0vkxkrosj4] {
+.alert-info[b-ty57r2olw1] {
     background-color: #e7f0ff;
     color: #31708f;
     border-color: #bce8f1;
 }
 
 /* Spinner ładowania */
-.spinner-border[b-0vkxkrosj4] {
+.spinner-border[b-ty57r2olw1] {
     width: 3rem;
     height: 3rem;
     border-width: 0.4em;
 }
 
 /* Ikony Font Awesome */
-.fa-solid[b-0vkxkrosj4] {
+.fa-solid[b-ty57r2olw1] {
     font-size: 1.5rem;
 }

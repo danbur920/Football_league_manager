@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace System_do_zarządzania_ligą_piłkarską.Shared.DTOs
 {
-    public class Referee
+    public class RefereeDTO
     {
         public int Id { get; set; }
         public string FirstName { get; set; }

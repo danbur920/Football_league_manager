@@ -13,7 +13,7 @@
   <ItemGroup>
     <None Include="Other\FavouriteLeagues.razor" />
   </ItemGroup>
-
+	
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.8" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="8.0.8" PrivateAssets="all" />
@@ -32,25 +32,28 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Update="Pages\FavouriteLeagues.razor">
+    <Content Update="Pages\FavouritesPages\FavouriteLeagues.razor">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
     </Content>
-    <Content Update="Pages\TeamDetails.razor">
+    <Content Update="Pages\RefereesPages\Referees.razor">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
     </Content>
-    <Content Update="Pages\Footballers.razor">
+    <Content Update="Pages\TeamsPages\TeamDetails.razor">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
     </Content>
-    <Content Update="Pages\Teams.razor">
+    <Content Update="Pages\FootballersPages\Footballers.razor">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
     </Content>
-    <Content Update="Pages\LeagueScorers.razor">
+    <Content Update="Pages\TeamsPages\Teams.razor">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
     </Content>
-    <Content Update="Pages\LeagueTable.razor">
+    <Content Update="Pages\LeaguesPages\LeagueScorers.razor">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
     </Content>
-    <Content Update="Pages\Leagues.razor">
+    <Content Update="Pages\LeaguesPages\LeagueTable.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Pages\LeaguesPages\Leagues.razor">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
     </Content>
   </ItemGroup>

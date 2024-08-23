@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "System_do_zarządzania_ligą_piłkarską.Client",
   "resources": {
-    "hash": "sha256-4Ax5bUAVWgCQALKSa4beCEAl3e9b7lHBobJ3yLeVnaE=",
+    "hash": "sha256-ISlj7mgtqZ5D7gbx4X3nTfNNYD3zXqJHHQUr4rOhv3o=",
     "jsModuleNative": {
       "dotnet.native.8.0.5.kzb1ntacew.js": "sha256-boyHe+0RMZDkzBKGhsrnXPhPg3oZ6UqJnTUzngJPjNY="
     },
@@ -24,25 +24,25 @@
       "Humanizer.wasm": "sha256-4NbSboZzzP9nikRtXapUZNzOyITt7ht9TNqCIQHr5OE=",
       "Microsoft.AspNet.Identity.Core.wasm": "sha256-x1LEQ12jzs1PJPgblWofp6wG8vSMGZXVbcF4oShzaq8=",
       "Microsoft.AspNet.Identity.EntityFramework.wasm": "sha256-Akj2Nx6BeDCX2qbgj5Jd7SkXcBp1cHe9HUf6zZkqQ/s=",
-      "Microsoft.AspNetCore.Authorization.wasm": "sha256-tZ3Z0q6xQTgUxlWgiWvzS4SBQeBqETtRGtUWvVaU31w=",
-      "Microsoft.AspNetCore.Components.wasm": "sha256-O1efzZ+VlmJ3lOWndJZV5tR5TGF3PS5viT8tqgf8wRU=",
-      "Microsoft.AspNetCore.Components.Authorization.wasm": "sha256-BCPKMbkDKppx2pgC6nZbJaAlm3G8ykAYqS28aHPVIy0=",
-      "Microsoft.AspNetCore.Components.Forms.wasm": "sha256-jF61/tMVhyfIJeua/KURR4OBR1xOxFpZGWa/OvX+Juk=",
-      "Microsoft.AspNetCore.Components.Web.wasm": "sha256-xUXkW7JRXPVjIOKez4b8snSiAM4j0j94by1z9OMW2UA=",
-      "Microsoft.AspNetCore.Components.WebAssembly.wasm": "sha256-gbP3w8Fy8u6E/VxRmH65xv70D88hF37gvIe3dsVTE4k=",
-      "Microsoft.AspNetCore.Components.WebAssembly.Authentication.wasm": "sha256-ZsLuKzXWVs0ajojVhhGJeX1GNL1lGD7c4CgRxgqAXZA=",
-      "Microsoft.AspNetCore.Metadata.wasm": "sha256-H+Or4mx9ew+622c40gHkM70UI+dPHz2Hpa4CGjtF1RA=",
+      "Microsoft.AspNetCore.Authorization.wasm": "sha256-H1yH7iBNYt/rilvQT6qsv2frcFFOBUKBnRrGQ1AIHnI=",
+      "Microsoft.AspNetCore.Components.wasm": "sha256-kPAmhH4D4UN/DyWkGyB1Sxs7tQyVDV150swtUfTSJJ8=",
+      "Microsoft.AspNetCore.Components.Authorization.wasm": "sha256-V1DjV5FIfpwmhLHgE+6Sv/E95t+50ilGiAk6J5mqNFA=",
+      "Microsoft.AspNetCore.Components.Forms.wasm": "sha256-ZB9Iu49s5SYUpy+xnFe+KIg2LeHGglqjWkohvxQ8m30=",
+      "Microsoft.AspNetCore.Components.Web.wasm": "sha256-AXG8nDVuFAkAqYk+rpFBOg7YgamHxzut3Upfr4na8wA=",
+      "Microsoft.AspNetCore.Components.WebAssembly.wasm": "sha256-6tnMX4ZUNb9MmcIXWPmq2IFtKS7q7xsafG8+oeE62uk=",
+      "Microsoft.AspNetCore.Components.WebAssembly.Authentication.wasm": "sha256-iqU1rt64IjJ60eAGbgaXPiPxX1PzX81e/FoR2vvk2QU=",
+      "Microsoft.AspNetCore.Metadata.wasm": "sha256-EYT9/h/Kkwk4uu2T+qwhrF7jHJ/1nGEphQJCSlwzA5Y=",
       "Microsoft.Bcl.AsyncInterfaces.wasm": "sha256-CzqiBEDNy/iyYG+5x03+QuEyH04nXmhRAvV1dhDqS28=",
       "Microsoft.CodeAnalysis.wasm": "sha256-FNcUlwQAhUuyKTkzNHnnGK7dsTWXCVCHmBKafb1dKTE=",
       "Microsoft.CodeAnalysis.CSharp.wasm": "sha256-hbgCTCC1cVFSAzWG44XsaCvVecGygE1kM+jDf8eXVXw=",
       "Microsoft.CodeAnalysis.CSharp.Workspaces.wasm": "sha256-N37Z9e7UiT71C2nh0932YvLtU31G0lr+VN8Kd494vQs=",
       "Microsoft.CodeAnalysis.Workspaces.wasm": "sha256-WkF8ia12xo3VHZjd+SYdd1FeRQUS+0GaigUcIjSVgv0=",
       "Microsoft.Data.SqlClient.wasm": "sha256-788n92/1qdWDiGgzMY33kyjmfeVBu3UemJLWkOi0A9Q=",
-      "Microsoft.EntityFrameworkCore.wasm": "sha256-7fSb2cix6eYFWRp3GE9BNYF1kJDpGd8BYDQQguMYY+8=",
-      "Microsoft.EntityFrameworkCore.Abstractions.wasm": "sha256-2QXv1VSzY/hx2sAlze6Gv54lMM8JHc6dBeXFjKJjGl0=",
-      "Microsoft.EntityFrameworkCore.Design.wasm": "sha256-3OxlphZaQqzI0gLMMza2Ih3cj78jWjKu7EX2hRHop4k=",
-      "Microsoft.EntityFrameworkCore.Relational.wasm": "sha256-EJIIG1PqtFvsOCHvHHgdPYiyQ795Ju+nmS1lluwH4pg=",
-      "Microsoft.EntityFrameworkCore.SqlServer.wasm": "sha256-2heQvoxU+eSnjolu9CJEPESCMVelTZbzL7iSj4oXSmk=",
+      "Microsoft.EntityFrameworkCore.wasm": "sha256-mIOHyFcuxNQyM0oGXeVv3QivomutU1pEslp4af88SOk=",
+      "Microsoft.EntityFrameworkCore.Abstractions.wasm": "sha256-CfYJimpm2eEVxfaALuhb91gDx7hEU2ADtxlP6iFJLlM=",
+      "Microsoft.EntityFrameworkCore.Design.wasm": "sha256-y1TTj7lhbUuGarnxEjC7Tqnljo7kVLSnc7CLytcTBfQ=",
+      "Microsoft.EntityFrameworkCore.Relational.wasm": "sha256-M9KZv+JLjXNSltm0M3c24n8TNjf/dD3nlHqEGFJTj4w=",
+      "Microsoft.EntityFrameworkCore.SqlServer.wasm": "sha256-H7mJ9x/J2GhIhGEfe0z9+zouPFiEyBnQm9hHYeKJmSM=",
       "Microsoft.Extensions.Caching.Abstractions.wasm": "sha256-ygxx8pKlN4YllvAX2HADU+dKWSOZRMNfSP4nHkPMH+8=",
       "Microsoft.Extensions.Caching.Memory.wasm": "sha256-K0Qzxs1gptgogO6juGZzfFp3Q7gUtMCJbo7ateym6cw=",
       "Microsoft.Extensions.Configuration.wasm": "sha256-UDGEQR7J3WTfzYMgOzxVIBwFQtKEeJvO8UgrWagypdE=",
@@ -72,8 +72,8 @@
       "Microsoft.IdentityModel.Protocols.wasm": "sha256-qCZWN08Qq6E9fBApMutJZBSq1N7wWMKLsRqrfOtBd74=",
       "Microsoft.IdentityModel.Protocols.OpenIdConnect.wasm": "sha256-RgOe7J9L12oMsSaprXN4sC9zXbwXOeqduQY0fz5J0tA=",
       "Microsoft.IdentityModel.Tokens.wasm": "sha256-aRkBevAl9X4Lsxqf6yFoTtx1W3wtpcifUVrVNu6ju70=",
-      "Microsoft.JSInterop.wasm": "sha256-ujAR3ldYmTi++VGM1Np5SMOEC+mP4m6Uva9Sgj54ZVs=",
-      "Microsoft.JSInterop.WebAssembly.wasm": "sha256-gxsImbLQUP0+xBtL1HjJHY4TK2kv0b55tv61C2OHsUU=",
+      "Microsoft.JSInterop.wasm": "sha256-okH//v00d9qA97lMQaTcXOMrfK8IIcOYOfzcEhcQle8=",
+      "Microsoft.JSInterop.WebAssembly.wasm": "sha256-FWBbfufvNOmor0iVsxtEPG3l1VI97wMYStE1/bHHo9w=",
       "Microsoft.SqlServer.Server.wasm": "sha256-Fig+5hq00gGQlXAgSnyFlUlWyhlx9f+yPJb4INt3gNc=",
       "Microsoft.Win32.SystemEvents.wasm": "sha256-1kUoFxSGzlbndQM4zal3G/YBdouUTf444lDjqhuWALU=",
       "Mono.TextTemplating.wasm": "sha256-7QALsAd1aPqJcMOmMeb5rR069c58graCXhDCadJIhoE=",
@@ -260,12 +260,12 @@
       "mscorlib.wasm": "sha256-XvLAB5IyfVSmj5aaGnPwgVFaaZz8jXmbN8WmeopiPBM=",
       "netstandard.wasm": "sha256-TbMssdnuTiKq1gjTPkpgROAuWN0uhvPnagvWR+wAgNs=",
       "System.Private.CoreLib.wasm": "sha256-sscg+Efk8ROPq+q4IVmhShzITuoOYvB8Bsc+Mp9vcSM=",
-      "System_do_zarządzania_ligą_piłkarską.Shared.wasm": "sha256-G80Sfbai1Ys3C8Qt2FIQcF5EhMC9Xce/VcH34jyZ98c=",
-      "System_do_zarządzania_ligą_piłkarską.Client.wasm": "sha256-MMxFWQwv4TtRIT4I2qAMmUkiAsv8N3DehMIE0+4TPBY="
+      "System_do_zarządzania_ligą_piłkarską.Shared.wasm": "sha256-Ehx1jACOS/gCzVW439I37gA0A5sBVROdo69LxGPpVvI=",
+      "System_do_zarządzania_ligą_piłkarską.Client.wasm": "sha256-P7uItNWWZETy8lxsYkw1OY/PMVrQ/AexmZmXy70vWhs="
     },
     "pdb": {
-      "System_do_zarządzania_ligą_piłkarską.Shared.pdb": "sha256-80QFKf4+2Uw7npnGczUDNI05luW0Exzh9kRjv+bLmO8=",
-      "System_do_zarządzania_ligą_piłkarską.Client.pdb": "sha256-j3F7tV5Bq8qL+7R/eawVfeqCvMNuGVgJjVFaZz+YVp0="
+      "System_do_zarządzania_ligą_piłkarską.Shared.pdb": "sha256-+wlrU8Rc+Nc5XkENkJarspzDPDzfHQ3BaxT3V3Wqtug=",
+      "System_do_zarządzania_ligą_piłkarską.Client.pdb": "sha256-aRVDjXRB+bsgC9+hwcNHiAwNWWf00V/xfF7KE/tQ/Io="
     },
     "satelliteResources": {
       "cs": {

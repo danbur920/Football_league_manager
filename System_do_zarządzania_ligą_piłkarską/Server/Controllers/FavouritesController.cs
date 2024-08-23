@@ -40,8 +40,10 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Controllers
             return Ok(favourites);
         }
 
-        [HttpGet("favourite-leagues")]
-        public async Task<IActionResult> GetFavouriteLeagues()
+
+
+        [HttpGet("favourite-{favouriteType}")]
+        public async Task<IActionResult> GetFavouriteCollection([FromRoute] string favouriteType)
         {
             var userId = _httpContextAccessor.HttpContext.User.Identity.GetUserId();
 
@@ -50,37 +52,74 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Controllers
                 return Unauthorized();
             }
 
-            var favouriteLeagues = await _favouriteService.GetFavouriteLeaguesByUserId(userId);
-            return Ok(favouriteLeagues);
-        }
-
-        [HttpGet("favourite-teams")]
-        public async Task<IActionResult> GetFavouriteTeams()
-        {
-            var userId = _httpContextAccessor.HttpContext.User.Identity.GetUserId();
-
-            if (userId == null)
+            switch (favouriteType)
             {
-                return Unauthorized();
+                case "teams":
+                    {
+                        var favourite = await _favouriteService.GetFavouriteTeamsByUserId(userId);
+                        return Ok(favourite);
+                    }
+                case "footballers":
+                    {
+                        var favourite = await _favouriteService.GetFavouriteFootballersByUserId(userId);
+                        return Ok(favourite);
+                    }
+                case "leagues":
+                    {
+                        var favourite = await _favouriteService.GetFavouriteLeaguesByUserId(userId);
+                        return Ok(favourite);
+                    }
             }
 
-            var favouriteTeams = await _favouriteService.GetFavouriteTeamsByUserId(userId);
-            return Ok(favouriteTeams);
+            //var favouriteTeams = await _favouriteService.GetFavouriteTeamsByUserId(userId);
+            return NotFound();
         }
 
-        [HttpGet("favourite-footballers")]
-        public async Task<IActionResult> GetFavouriteFootballers()
-        {
-            var userId = _httpContextAccessor.HttpContext.User.Identity.GetUserId();
+        // Poniższe 3 metody zostały zastąpione powyższą metodą dynamiczną,
+        // wybierającą odpowiednie działanie na podstawie parametru w endpoincie
 
-            if (userId == null)
-            {
-                return Unauthorized();
-            }
 
-            var favouriteFootballers = await _favouriteService.GetFavouriteFootballersByUserId(userId);
-            return Ok(favouriteFootballers);
-        }
+        //[HttpGet("favourite-teams")]
+        //public async Task<IActionResult> GetFavouriteTeams()
+        //{
+        //    var userId = _httpContextAccessor.HttpContext.User.Identity.GetUserId();
+
+        //    if (userId == null)
+        //    {
+        //        return Unauthorized();
+        //    }
+
+        //    var favouriteTeams = await _favouriteService.GetFavouriteTeamsByUserId(userId);
+        //    return Ok(favouriteTeams);
+        //}
+
+        //[HttpGet("favourite-leagues")]
+        //public async Task<IActionResult> GetFavouriteLeagues()
+        //{
+        //    var userId = _httpContextAccessor.HttpContext.User.Identity.GetUserId();
+
+        //    if (userId == null)
+        //    {
+        //        return Unauthorized();
+        //    }
+
+        //    var favouriteLeagues = await _favouriteService.GetFavouriteLeaguesByUserId(userId);
+        //    return Ok(favouriteLeagues);
+        //}
+
+        //[HttpGet("favourite-footballers")]
+        //public async Task<IActionResult> GetFavouriteFootballers()
+        //{
+        //    var userId = _httpContextAccessor.HttpContext.User.Identity.GetUserId();
+
+        //    if (userId == null)
+        //    {
+        //        return Unauthorized();
+        //    }
+
+        //    var favouriteFootballers = await _favouriteService.GetFavouriteFootballersByUserId(userId);
+        //    return Ok(favouriteFootballers);
+        //}
 
         [HttpPost("{favouriteType}/{favouriteId}")]
         public async Task<IActionResult> AddFavourite(FavouriteType favouriteType, int favouriteId)

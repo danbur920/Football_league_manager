@@ -1,0 +1,175 @@
+﻿@page "/referees"
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+@using System_do_zarządzania_ligą_piłkarską.Shared
+@using System_do_zarządzania_ligą_piłkarską.Shared.DTOs
+@using System_do_zarządzania_ligą_piłkarską.Client.Extensions
+@attribute [Authorize]
+@inject HttpClient Http
+@inject NavigationManager Navigation
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject SearchQueryManager SearchQueryManager
+@inject AlertManager AlertManager
+
+<PageTitle>Sędziowie</PageTitle>
+
+@if (AlertManager.AlertVisibility)
+{
+    <div class="alert @($"alert-{AlertManager.AlertType}") alert-dismissible fade show" role="alert">
+        @AlertManager.AlertMessage
+        <button type="button" class="btn-close" aria-label="Close" @onclick="() => AlertManager.AlertVisibility = false"></button>
+    </div>
+}
+
+<input type="text" @bind="SearchQueryManager.FirstName" placeholder="Szukaj sędziego po imieniu..." class="form-control mb-3" />
+<input type="text" @bind="SearchQueryManager.LastName" placeholder="Szukaj sędziego po nazwisku..." class="form-control mb-3" />
+
+@if (allReferees == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Imię</th>
+                <th>Nazwisko</th>
+                <th>Narodowość</th>
+                <th>Poziom</th>
+                <th>Dodaj do ulubionych</th>
+                <th>Przejdź do szczegółów</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (filteredReferees.Count() == 0)
+            {
+                <tr>
+                    <td colspan="9" style="text-align: center">Brak sędziów lub żaden sędzia nie spełnia określonych kryteriów wyszukiwania.</td>
+                </tr>
+            }
+            @foreach (var referee in filteredReferees)
+            {
+                <tr>
+                    <td>@referee.FirstName</td>
+                    <td>@referee.LastName</td>
+                    <td>@referee.Nationality</td>
+                    <td>@referee.Level</td>
+                    <td>
+                        @if (IsFavourite(referee.Id))
+                        {
+                            <button class="btn btn-primary" @onclick="() => RemoveFromFavourites(referee.Id)">
+                                <i class="fas fa-star"></i> Usuń z ulubionych
+                            </button>
+                        }
+                        else
+                        {
+                            <button class="btn btn-secondary" @onclick="() => AddToFavourites(referee.Id)">
+                                <i class="fas fa-star"></i> Dodaj do ulubionych
+                            </button>
+                        }
+                    </td>
+                    <td>
+                        <button class="btn btn-link" @onclick="() => NavigateToRefereeDetails(referee.Id)">
+                            <i class="fas fa-arrow-right"></i> Szczegóły
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<RefereeDTO>? allReferees;
+    private List<FavouriteDTO>? userFavouriteReferees;
+
+    private string _userId = string.Empty;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            _userId = await GetUserId();
+            allReferees = await Http.GetFromJsonAsync<List<RefereeDTO>>("api/referees");
+            await RefreshFavourites();
+        }
+        catch (AccessTokenNotAvailableException exception)
+        {
+            exception.Redirect();
+        }
+    }
+
+    private async Task<string?> GetUserId()
+    {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+
+        return user.FindFirst(c => c.Type == "sub")?.Value;
+    }
+
+    private IEnumerable<RefereeDTO>? filteredReferees =>
+    allReferees?.Where(referee =>
+        (string.IsNullOrWhiteSpace(SearchQueryManager.FirstName) || referee.FirstName.Contains(SearchQueryManager.FirstName, StringComparison.OrdinalIgnoreCase)) &&
+        (string.IsNullOrWhiteSpace(SearchQueryManager.LastName) || referee.LastName.Contains(SearchQueryManager.LastName, StringComparison.OrdinalIgnoreCase)) &&
+        (string.IsNullOrWhiteSpace(SearchQueryManager.Country) || referee.Nationality.Contains(SearchQueryManager.Country, StringComparison.OrdinalIgnoreCase))
+    );
+
+    private bool IsFavourite(int refereeId)
+    {
+        var isFavourite = userFavouriteReferees.FirstOrDefault(x => x.FavouriteId == refereeId) != null;
+        return isFavourite;
+    }
+
+    private async Task RefreshFavourites()
+    {
+        userFavouriteReferees = await Http.GetFromJsonAsync<List<FavouriteDTO>>($"api/favourites/referee");
+    }
+
+    private async Task AddToFavourites(int refereeId)
+    {
+        var userId = await GetUserId();
+
+        if (userId != null)
+        {
+            var response = await Http.PostAsync($"api/favourites/referee/{refereeId}", null);
+            var referee = allReferees.FirstOrDefault(l => l.Id == refereeId);
+
+            if (response.IsSuccessStatusCode)
+            {
+                AlertManager.ShowAlert($"Dodano sędziego {referee?.FirstName + " " + referee?.LastName} do ulubionych!", "success");
+                await RefreshFavourites();
+            }
+            else
+            {
+                AlertManager.ShowAlert($"Nie udało się dodać sędziego {referee?.FirstName + " " + referee?.LastName} do ulubionych.", "danger");
+            }
+        }
+    }
+
+    private async Task RemoveFromFavourites(int refereeId)
+    {
+        var userId = await GetUserId();
+
+        if (userId != null)
+        {
+            var response = await Http.DeleteAsync($"api/favourites/referee/{refereeId}/{userId}");
+            var referee = allReferees.FirstOrDefault(l => l.Id == refereeId);
+
+            if (response.IsSuccessStatusCode)
+            {
+                AlertManager.ShowAlert($"Usunięto sędziego {referee?.FirstName + " " + referee?.LastName} z ulubionych.", "info");
+                await RefreshFavourites();
+            }
+            else
+            {
+                AlertManager.ShowAlert($"Nie udało się usunąć sędziego {referee?.FirstName + " " + referee?.LastName} z ulubionych.", "danger");
+            }
+        }
+    }
+
+    private void NavigateToRefereeDetails(int refereeId)
+    {
+        Navigation.NavigateTo($"/referees/{refereeId}");
+    }
+}

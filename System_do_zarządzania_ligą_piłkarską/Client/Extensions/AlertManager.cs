@@ -2,15 +2,15 @@
 {
     public class AlertManager
     {
-        public string alertMessage { get; set; } = string.Empty;
-        public string alertType { get; set; } = string.Empty;
-        public bool alertVisibility { get; set; } = false;
+        public string AlertMessage { get; set; } = string.Empty;
+        public string AlertType { get; set; } = string.Empty;
+        public bool AlertVisibility { get; set; } = false;
 
         public void ShowAlert(string message, string type)
         {
-            alertMessage = message;
-            alertType = type;
-            alertVisibility = true;
+            AlertMessage = message;
+            AlertType = type;
+            AlertVisibility = true;
         }
     }
 }

@@ -32,6 +32,9 @@ builder.Services.AddScoped<ITeamService, TeamService>();
 builder.Services.AddScoped<IFootballerRepository, FootballerRepository>();
 builder.Services.AddScoped<IFootballerService, FootballerService>();
 
+builder.Services.AddScoped<IRefereeRepository, RefereeRepository>();
+builder.Services.AddScoped<IRefereeService, RefereeService>();
+
 //builder.Services.AddScoped<SearchQueryManager>();
 
 builder.Services.AddScoped<UserManager<ApplicationUser>>();
