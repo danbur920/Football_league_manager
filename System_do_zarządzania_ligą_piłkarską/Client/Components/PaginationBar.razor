@@ -1,0 +1,75 @@
+﻿<nav aria-label="Page navigation">
+    <ul class="pagination">
+        <li class="page-item @(PageNumber == 1 ? "disabled" : "")">
+            <a class="page-link" @onclick="() => OnPreviousPage.InvokeAsync(null)">Previous</a>
+        </li>
+
+        @for (int i = 1; i <= 5; i++)
+        {
+            var pageValue = PageIndex + i;
+            <li class="page-item @(PageNumber == pageValue ? "active" : "")">
+                <a class="page-link" @onclick="() => OnGoToPage.InvokeAsync(pageValue)">@pageValue</a>
+            </li>
+        }
+
+        <li class="page-item">
+            <a class="page-link" @onclick="() => OnNextPage.InvokeAsync(null)">Next</a>
+        </li>
+    </ul>
+</nav>
+
+@code {
+    [Parameter] public int PageNumber { get; set; }
+    [Parameter] public int PageIndex { get; set; }
+    [Parameter] public EventCallback OnNextPage { get; set; }
+    [Parameter] public EventCallback OnPreviousPage { get; set; }
+    [Parameter] public EventCallback<int> OnGoToPage { get; set; }
+}
+
+<style>
+    .pagination {
+        display: flex;
+        padding-left: 0;
+        list-style: none;
+        border-radius: 0.25rem;
+    }
+
+    .page-item {
+        margin: 0 0.25rem;
+    }
+
+        .page-item .page-link {
+            position: relative;
+            display: block;
+            padding: 0.5rem 0.75rem;
+            margin-left: -1px;
+            line-height: 1.25;
+            color: #007bff;
+            background-color: #fff;
+            border: 1px solid #dee2e6;
+            border-radius: 0.25rem;
+            transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+        }
+
+            .page-item .page-link:hover {
+                color: #0056b3;
+                text-decoration: none;
+                background-color: #e9ecef;
+                border-color: #dee2e6;
+                cursor: pointer;
+            }
+
+        .page-item.active .page-link {
+            z-index: 1;
+            color: #fff;
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+
+        .page-item.disabled .page-link {
+            color: #6c757d;
+            pointer-events: none;
+            background-color: #fff;
+            border-color: #dee2e6;
+        }
+</style>

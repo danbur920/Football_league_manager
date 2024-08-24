@@ -4,19 +4,15 @@
 @using System_do_zarządzania_ligą_piłkarską.Shared
 @using System_do_zarządzania_ligą_piłkarską.Shared.DTOs
 @using System_do_zarządzania_ligą_piłkarską.Client.Extensions
+@using System_do_zarządzania_ligą_piłkarską.Client.Components
 @attribute [Authorize]
 @inject HttpClient Http
 @inject AuthenticationStateProvider AuthenticationStateProvider
+@inject AlertManager AlertManager
 
 <PageTitle>Drużyny</PageTitle>
 
-@if (_alertManager.AlertVisibility)
-{
-    <div class="alert @($"alert-{_alertManager.AlertType}") alert-dismissible fade show" role="alert">
-        @_alertManager.AlertMessage
-        <button type="button" class="btn-close" aria-label="Close" @onclick="() => _alertManager.AlertVisibility = false"></button>
-    </div>
-}
+<Alert Message="@AlertManager.Message" Type="@AlertManager.Type" IsVisible="@AlertManager.IsVisible" />
 
 <input type="text" @bind="searchQueryName" placeholder="Szukaj drużynę po nazwie..." class="form-control mb-3" />
 <input type="text" @bind="searchQueryNationality" placeholder="Szukaj drużynę po kraju..." class="form-control mb-3" />
@@ -132,12 +128,12 @@ else
 
             if (response.IsSuccessStatusCode)
             {
-                _alertManager.ShowAlert($"Dodano drużynę {team?.Name} do ulubionych!", "success");
+                AlertManager.DisplayAlert($"Dodano drużynę {team?.Name} do ulubionych!", "success");
                 await RefreshFavourites();
             }
             else
             {
-                _alertManager.ShowAlert($"Nie udało się dodać drużyny {team?.Name} do ulubionych.", "danger");
+                AlertManager.DisplayAlert($"Nie udało się dodać drużyny {team?.Name} do ulubionych.", "danger");
             }
         }
     }
@@ -151,17 +147,17 @@ else
 
             if (response.IsSuccessStatusCode)
             {
-                _alertManager.ShowAlert($"Usunięto drużynę {team?.Name} z ulubionych.", "info");
+                AlertManager.DisplayAlert($"Usunięto drużynę {team?.Name} z ulubionych.", "info");
                 await RefreshFavourites();
             }
             else
             {
-                _alertManager.ShowAlert($"Nie udało się usunąć drużyny {team?.Name} z ulubionych.", "danger");
+                AlertManager.DisplayAlert($"Nie udało się usunąć drużyny {team?.Name} z ulubionych.", "danger");
             }
         }
     }
 
-    private IEnumerable<TeamDTO> filteredTeams =>
+    private IEnumerable<TeamDTO>? filteredTeams =>
      _allTeams?.Where(team =>
          (string.IsNullOrWhiteSpace(searchQueryName) || team.Name.Contains(searchQueryName, StringComparison.OrdinalIgnoreCase)) &&
          (string.IsNullOrWhiteSpace(searchQueryNationality) || team.Country.Contains(searchQueryNationality, StringComparison.OrdinalIgnoreCase))

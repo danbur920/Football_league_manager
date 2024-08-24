@@ -4,6 +4,7 @@
 @using System_do_zarządzania_ligą_piłkarską.Shared
 @using System_do_zarządzania_ligą_piłkarską.Shared.DTOs
 @using System_do_zarządzania_ligą_piłkarską.Client.Extensions
+@using System_do_zarządzania_ligą_piłkarską.Client.Components
 @attribute [Authorize]
 @inject HttpClient Http
 @inject NavigationManager Navigation
@@ -13,13 +14,7 @@
 
 <PageTitle>Sędziowie</PageTitle>
 
-@if (AlertManager.AlertVisibility)
-{
-    <div class="alert @($"alert-{AlertManager.AlertType}") alert-dismissible fade show" role="alert">
-        @AlertManager.AlertMessage
-        <button type="button" class="btn-close" aria-label="Close" @onclick="() => AlertManager.AlertVisibility = false"></button>
-    </div>
-}
+<Alert Message="@AlertManager.Message" Type="@AlertManager.Type" IsVisible="@AlertManager.IsVisible" />
 
 <input type="text" @bind="SearchQueryManager.FirstName" placeholder="Szukaj sędziego po imieniu..." class="form-control mb-3" />
 <input type="text" @bind="SearchQueryManager.LastName" placeholder="Szukaj sędziego po nazwisku..." class="form-control mb-3" />
@@ -137,12 +132,12 @@ else
 
             if (response.IsSuccessStatusCode)
             {
-                AlertManager.ShowAlert($"Dodano sędziego {referee?.FirstName + " " + referee?.LastName} do ulubionych!", "success");
+                AlertManager.DisplayAlert($"Dodano sędziego {referee?.FirstName + " " + referee?.LastName} do ulubionych!", "success");
                 await RefreshFavourites();
             }
             else
             {
-                AlertManager.ShowAlert($"Nie udało się dodać sędziego {referee?.FirstName + " " + referee?.LastName} do ulubionych.", "danger");
+                AlertManager.DisplayAlert($"Nie udało się dodać sędziego {referee?.FirstName + " " + referee?.LastName} do ulubionych.", "danger");
             }
         }
     }
@@ -158,12 +153,12 @@ else
 
             if (response.IsSuccessStatusCode)
             {
-                AlertManager.ShowAlert($"Usunięto sędziego {referee?.FirstName + " " + referee?.LastName} z ulubionych.", "info");
+                AlertManager.DisplayAlert($"Usunięto sędziego {referee?.FirstName + " " + referee?.LastName} z ulubionych.", "info");
                 await RefreshFavourites();
             }
             else
             {
-                AlertManager.ShowAlert($"Nie udało się usunąć sędziego {referee?.FirstName + " " + referee?.LastName} z ulubionych.", "danger");
+                AlertManager.DisplayAlert($"Nie udało się usunąć sędziego {referee?.FirstName + " " + referee?.LastName} z ulubionych.", "danger");
             }
         }
     }

@@ -13,7 +13,11 @@ builder.Services.AddHttpClient("System_do_zarządzania_ligą_piłkarską.ServerA
 
 // Supply HttpClient instances that include access tokens when making requests to the server project
 builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient("System_do_zarządzania_ligą_piłkarską.ServerAPI"));
+
 builder.Services.AddScoped<SearchQueryManager>();
+builder.Services.AddTransient<AlertManager>(); // transient aby każdy komponent miał własną instancję 
+builder.Services.AddTransient<PaginationManager>();
+
 builder.Services.AddApiAuthorization();
 
 await builder.Build().RunAsync();

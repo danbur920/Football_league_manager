@@ -9,6 +9,7 @@
 @inject HttpClient Http
 @inject NavigationManager Navigation
 @inject AuthenticationStateProvider AuthenticationStateProvider
+@inject AlertManager AlertManager
 
 <PageTitle>Ulubione ligi</PageTitle>
 
@@ -17,13 +18,7 @@
     <Modal Title="Usuń" Body="Czy na pewno chcesz usunąć wybraną ligę z ulubionch?" OnConfirm="HandleConfirm" OnCancel="HandleCancel" />
 }
 
-@if (alertManager.AlertVisibility)
-{
-    <div class="alert @($"alert-{alertManager.AlertType}") alert-dismissible fade show" role="alert">
-        @alertManager.AlertMessage
-        <button type="button" class="btn-close" aria-label="Close" @onclick="() => alertManager.AlertVisibility = false"></button>
-    </div>
-}
+<Alert Message="@AlertManager.Message" Type="@AlertManager.Type" IsVisible="@AlertManager.IsVisible" />
 
 @if (favouriteLeagues == null)
 {
@@ -80,7 +75,6 @@ else
 
 @code {
     private List<LeagueDTO>? favouriteLeagues;
-    private AlertManager alertManager = new AlertManager();
 
     private string _userId = string.Empty;
     private bool _showModal = false;
@@ -142,12 +136,12 @@ else
 
             if (response.IsSuccessStatusCode)
             {
-                alertManager.ShowAlert($"Usunięto ligę {league?.Name} z ulubionych.", "info");
+                AlertManager.DisplayAlert($"Usunięto ligę {league?.Name} z ulubionych.", "info");
                 await RefreshFavourites();
             }
             else
             {
-                alertManager.ShowAlert($"Nie udało się usunąć ligi {league?.Name} z ulubionych.", "danger");
+                AlertManager.DisplayAlert($"Nie udało się usunąć ligi {league?.Name} z ulubionych.", "danger");
             }
         }
     }

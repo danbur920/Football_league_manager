@@ -32,6 +32,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Update="Components\PaginationBar.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Components\Alert.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
     <Content Update="Pages\FavouritesPages\FavouriteLeagues.razor">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
     </Content>

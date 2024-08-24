@@ -1241,7 +1241,6 @@ C:\Users\danbu\Desktop\PRACA INŻYNIERSKA\System_do_zarządzania_ligą_piłkarsk
 C:\Users\danbu\Desktop\PRACA INŻYNIERSKA\System_do_zarządzania_ligą_piłkarską\System_do_zarządzania_ligą_piłkarską\Client\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.System_do_zarządzania_ligą_piłkarską.Client.props
 C:\Users\danbu\Desktop\PRACA INŻYNIERSKA\System_do_zarządzania_ligą_piłkarską\System_do_zarządzania_ligą_piłkarską\Client\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.System_do_zarządzania_ligą_piłkarską.Client.props
 C:\Users\danbu\Desktop\PRACA INŻYNIERSKA\System_do_zarządzania_ligą_piłkarską\System_do_zarządzania_ligą_piłkarską\Client\obj\Debug\net8.0\staticwebassets.pack.json
-C:\Users\danbu\Desktop\PRACA INŻYNIERSKA\System_do_zarządzania_ligą_piłkarską\System_do_zarządzania_ligą_piłkarską\Client\obj\Debug\net8.0\scopedcss\Pages\LeaguesPages\LeagueDetails.razor.rz.scp.css
 C:\Users\danbu\Desktop\PRACA INŻYNIERSKA\System_do_zarządzania_ligą_piłkarską\System_do_zarządzania_ligą_piłkarską\Client\obj\Debug\net8.0\scopedcss\Shared\MainLayout.razor.rz.scp.css
 C:\Users\danbu\Desktop\PRACA INŻYNIERSKA\System_do_zarządzania_ligą_piłkarską\System_do_zarządzania_ligą_piłkarską\Client\obj\Debug\net8.0\scopedcss\Shared\NavMenu.razor.rz.scp.css
 C:\Users\danbu\Desktop\PRACA INŻYNIERSKA\System_do_zarządzania_ligą_piłkarską\System_do_zarządzania_ligą_piłkarską\Client\obj\Debug\net8.0\scopedcss\bundle\System_do_zarządzania_ligą_piłkarską.Client.styles.css

@@ -4,20 +4,16 @@
 @using System_do_zarządzania_ligą_piłkarską.Shared
 @using System_do_zarządzania_ligą_piłkarską.Shared.DTOs
 @using System_do_zarządzania_ligą_piłkarską.Client.Extensions
+@using System_do_zarządzania_ligą_piłkarską.Client.Components
 @attribute [Authorize]
 @inject HttpClient Http
 @inject NavigationManager Navigation
 @inject AuthenticationStateProvider AuthenticationStateProvider
+@inject AlertManager AlertManager
 
 <PageTitle>Ligi</PageTitle>
 
-@if (_alertManager.AlertVisibility)
-{
-    <div class="alert @($"alert-{_alertManager.AlertType}") alert-dismissible fade show" role="alert">
-        @_alertManager.AlertMessage
-        <button type="button" class="btn-close" aria-label="Close" @onclick="() => _alertManager.AlertVisibility = false"></button>
-    </div>
-}
+<Alert Message="@AlertManager.Message" Type="@AlertManager.Type" IsVisible="@AlertManager.IsVisible" />
 
 <input type="text" @bind="searchQueryName" placeholder="Szukaj ligę po nazwie..." class="form-control mb-3" />
 <input type="text" @bind="searchQueryNationality" placeholder="Szukaj ligę po kraju..." class="form-control mb-3" />
@@ -87,7 +83,6 @@ else
 @code {
     private LeagueDTO[]? _allLeagues;
     private FavouriteDTO[]? _userFavouriteLeagues;
-    private AlertManager _alertManager = new AlertManager();
 
     string userId = string.Empty;
     private string searchQueryName = string.Empty;
@@ -142,12 +137,12 @@ else
 
             if (response.IsSuccessStatusCode)
             {
-                _alertManager.ShowAlert($"Dodano ligę {league?.Name} do ulubionych!", "success");
+                AlertManager.DisplayAlert($"Dodano ligę {league?.Name} do ulubionych!", "success");
                 await RefreshFavourites();
             }
             else
             {
-                _alertManager.ShowAlert($"Nie udało się dodać ligi {league?.Name} do ulubionych.", "danger");
+                AlertManager.DisplayAlert($"Nie udało się dodać ligi {league?.Name} do ulubionych.", "danger");
             }
         }
     }
@@ -163,12 +158,12 @@ else
 
             if (response.IsSuccessStatusCode)
             {
-                _alertManager.ShowAlert($"Usunięto ligę {league?.Name} z ulubionych.", "info");
+                AlertManager.DisplayAlert($"Usunięto ligę {league?.Name} z ulubionych.", "info");
                 await RefreshFavourites();
             }
             else
             {
-                _alertManager.ShowAlert($"Nie udało się usunąć ligi {league?.Name} z ulubionych.", "danger");
+                AlertManager.DisplayAlert($"Nie udało się usunąć ligi {league?.Name} z ulubionych.", "danger");
             }
         }
     }

@@ -11,13 +11,13 @@
 
 <PageTitle>Piłkarze</PageTitle>
 
-@if (alertManager.AlertVisibility)
+@* @if (alertManager.AlertVisibility)
 {
     <div class="alert @($"alert-{alertManager.AlertType}") alert-dismissible fade show" role="alert">
         @alertManager.AlertMessage
         <button type="button" class="btn-close" aria-label="Close" @onclick="() => alertManager.AlertVisibility = false"></button>
     </div>
-}
+} *@
 
 <input type="text" @bind="SearchQueryManager.FirstName" placeholder="Szukaj piłkarza po imieniu..." class="form-control mb-3" />
 <input type="text" @bind="SearchQueryManager.LastName" placeholder="Szukaj piłkarza po nazwisku..." class="form-control mb-3" />
@@ -172,15 +172,15 @@ else
             var response = await Http.PostAsync($"api/favourites/footballer/{footballerId}", null);
             var footballer = allFootballers.FirstOrDefault(t => t.Id == footballerId);
 
-            if (response.IsSuccessStatusCode)
-            {
-                alertManager.ShowAlert($"Dodano piłkarza {footballer?.FirstName + " " + footballer?.LastName} do ulubionych!", "success");
-                await RefreshFavourites();
-            }
-            else
-            {
-                alertManager.ShowAlert($"Nie udało się dodać piłkarza {footballer?.FirstName + " " + footballer?.LastName} do ulubionych.", "danger");
-            }
+            // if (response.IsSuccessStatusCode)
+            // {
+            //     alertManager.ShowAlert($"Dodano piłkarza {footballer?.FirstName + " " + footballer?.LastName} do ulubionych!", "success");
+            //     await RefreshFavourites();
+            // }
+            // else
+            // {
+            //     alertManager.ShowAlert($"Nie udało się dodać piłkarza {footballer?.FirstName + " " + footballer?.LastName} do ulubionych.", "danger");
+            // }
         }
     }
 
@@ -191,15 +191,15 @@ else
             var response = await Http.DeleteAsync($"api/favourites/footballer/{footballerId}/{_userId}");
             var footballer = allFootballers.FirstOrDefault(t => t.Id == footballerId);
 
-            if (response.IsSuccessStatusCode)
-            {
-                alertManager.ShowAlert($"Usunięto piłkarza {footballer?.FirstName + " " + footballer?.LastName} z ulubionych.", "info");
-                await RefreshFavourites();
-            }
-            else
-            {
-                alertManager.ShowAlert($"Nie udało się usunąć piłkarza {footballer?.FirstName + " " + footballer?.LastName} z ulubionych.", "danger");
-            }
+            // if (response.IsSuccessStatusCode)
+            // {
+            //     alertManager.ShowAlert($"Usunięto piłkarza {footballer?.FirstName + " " + footballer?.LastName} z ulubionych.", "info");
+            //     await RefreshFavourites();
+            // }
+            // else
+            // {
+            //     alertManager.ShowAlert($"Nie udało się usunąć piłkarza {footballer?.FirstName + " " + footballer?.LastName} z ulubionych.", "danger");
+            // }
         }
     }
 
