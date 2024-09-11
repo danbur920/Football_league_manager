@@ -16,9 +16,9 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Services
             _leagueRepository = leagueRepository;
             _mapper = mapper;
         }
-        public async Task<List<LeagueDTO>> GetAllLeagues()
+        public async Task<List<LeagueDTO>> GetLeaguesByPage(int pageNumber, int pageSize)
         {
-            var leagues = await _leagueRepository.GetAllLeagues();
+            var leagues = await _leagueRepository.GetLeaguesByPage(pageNumber, pageSize);
             return _mapper.Map<List<LeagueDTO>>(leagues);
         }
 

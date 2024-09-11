@@ -4,6 +4,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories.Interface
 {
     public interface IFootballerRepository
     {
-        Task<List<Footballer>> GetPlayers(int pageNumber, int pageSize);
+        Task<List<Footballer>> GetPlayersByPage(int pageNumber, int pageSize);
+        Task<int> GetTotalPlayersCount();
     }
 }

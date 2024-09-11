@@ -76,10 +76,22 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
 
             var userFavouriteFootballers = await _context.Footballers.
                 Where(footballer => userFavouritesId.Contains(footballer.Id)).
-                Include(x=>x.Team).
+                Include(x => x.Team).
                 ToListAsync();
 
             return userFavouriteFootballers;
+        }
+
+        public async Task<List<Referee>> GetFavouriteRefereesByUserId(string userId)
+        {
+            var userFavourites = await GetFavouritesByUserId(userId, FavouriteType.Referee);
+            var userFavouritesId = userFavourites.Select(x => x.FavouriteId).ToList();
+
+            var userFavouriteReferees = await _context.Referees.
+                Where(referee => userFavouritesId.Contains(referee.Id)).
+                ToListAsync();
+
+            return userFavouriteReferees;
         }
     }
 }

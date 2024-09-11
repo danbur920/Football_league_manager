@@ -5,7 +5,9 @@
 @using System_do_zarządzania_ligą_piłkarską.Shared.DTOs
 @using System_do_zarządzania_ligą_piłkarską.Client.Extensions
 @using System_do_zarządzania_ligą_piłkarską.Client.Components
-@attribute [Authorize]
+@using System.Text.Json
+@using Newtonsoft.Json
+
 @inject HttpClient Http
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject SearchQueryManager SearchQueryManager
@@ -52,7 +54,7 @@ else
                     <td colspan="9" style="text-align: center">Brak piłkarzy lub żaden piłkarz nie spełnia określonych kryteriów wyszukiwania.</td>
                 </tr>
             }
-            @foreach (var footballer in allFootballers)
+            @foreach (var footballer in filteredFootballer)
             {
                 <tr>
                     <td>@footballer.FirstName</td>
@@ -87,6 +89,8 @@ else
 
     <PaginationBar PageNumber="PaginationManager.PageNumber"
                    PageIndex="PaginationManager.PageIndex"
+                   PageMax="PaginationManager.PageMax"
+                   CollectionCount="PaginationManager.CollectionCount"
                    OnNextPage="() => PaginationManager.NextPage(LoadPlayers)"
                    OnPreviousPage="() => PaginationManager.PreviousPage(LoadPlayers)"
                    OnGoToPage="(pageNumber) => PaginationManager.GoToPage(pageNumber, LoadPlayers)">
@@ -94,8 +98,8 @@ else
 }
 
 @code {
-    private List<FootballerDTO> allFootballers = new List<FootballerDTO>();
-    private FavouriteDTO[]? allFavourites;
+    private List<FootballerDTO>? allFootballers = new List<FootballerDTO>();
+    private List<FavouriteDTO>? allFavourites;
 
     private string _userId = string.Empty;
 
@@ -103,7 +107,10 @@ else
     {
         try
         {
-            _userId = await GetUserId();
+            PaginationManager.CollectionCount = await Http.GetFromJsonAsync<int>("api/footballers/count"); // nie wiadomo dlaczego nie działa (postman zwraca prawidłowo)
+            PaginationManager.PageMax = (int)Math.Ceiling((double)PaginationManager.CollectionCount / PaginationManager.PageSize);
+
+            await GetUserId();
             await LoadPlayers();
             await RefreshFavourites();
         }
@@ -113,30 +120,33 @@ else
         }
     }
 
-
-
     private async Task SearchFootballersByFilters()
     {
         allFootballers = await Http.GetFromJsonAsync<List<FootballerDTO>>($"api/footballers?firstName={SearchQueryManager.FirstName}&lastName={SearchQueryManager.LastName}&country={SearchQueryManager.Country}&team={SearchQueryManager.Team}&position={SearchQueryManager.Position}");
     }
 
-
-    private async Task LoadPlayers()
+    private async Task<bool> LoadPlayers()
     {
-        var response = await Http.GetFromJsonAsync<List<FootballerDTO>>($"api/footballers?pageNumber={PaginationManager.PageNumber}");
-        allFootballers = response;
+        var response = await Http.GetFromJsonAsync<List<FootballerDTO>>($"api/footballers?pageNumber={PaginationManager.PageNumber}&pageSize={PaginationManager.PageSize}");
+        if (response != null && response.Any())
+        {
+            allFootballers = response;
+            return true;
+        }
+        return false;
     }
+
 
     private async Task RefreshFavourites()
     {
-        allFavourites = await Http.GetFromJsonAsync<FavouriteDTO[]>($"api/favourites/footballer");
+        allFavourites = await Http.GetFromJsonAsync<List<FavouriteDTO>>($"api/favourites/footballer");
     }
 
-    private async Task<string?> GetUserId()
+    private async Task GetUserId()
     {
         var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
         var user = authState.User;
-        return user.FindFirst(c => c.Type == "sub")?.Value;
+        _userId = user.FindFirst(c => c.Type == "sub")?.Value;
     }
 
     private bool IsFavourite(int footballerId)
@@ -182,6 +192,13 @@ else
             }
         }
     }
+
+    private IEnumerable<FootballerDTO>? filteredFootballer =>
+     allFootballers?.Where(footballer => (string.IsNullOrWhiteSpace(SearchQueryManager.FirstName) || footballer.FirstName.Contains(SearchQueryManager.FirstName, StringComparison.OrdinalIgnoreCase)) &&
+     (string.IsNullOrWhiteSpace(SearchQueryManager.LastName) || footballer.LastName.Contains(SearchQueryManager.LastName, StringComparison.OrdinalIgnoreCase)) &&
+     (string.IsNullOrWhiteSpace(SearchQueryManager.Country) || footballer.Nationality.Contains(SearchQueryManager.Country, StringComparison.OrdinalIgnoreCase)) &&
+     (string.IsNullOrWhiteSpace(SearchQueryManager.Team) || footballer.Team.Name.Contains(SearchQueryManager.Team, StringComparison.OrdinalIgnoreCase)) &&
+     (string.IsNullOrWhiteSpace(SearchQueryManager.Position) || footballer.Position.Contains(SearchQueryManager.Position, StringComparison.OrdinalIgnoreCase)));
 }
 
 <style>

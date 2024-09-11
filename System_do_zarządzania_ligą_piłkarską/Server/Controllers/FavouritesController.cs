@@ -69,9 +69,13 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Controllers
                         var favourite = await _favouriteService.GetFavouriteLeaguesByUserId(userId);
                         return Ok(favourite);
                     }
+                case "referees":
+                    {
+                        var favourite = await _favouriteService.GetFavouriteRefereesByUserId(userId);
+                        return Ok(favourite);
+                    }
             }
 
-            //var favouriteTeams = await _favouriteService.GetFavouriteTeamsByUserId(userId);
             return NotFound();
         }
 

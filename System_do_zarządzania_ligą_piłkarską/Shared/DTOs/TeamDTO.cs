@@ -17,11 +17,15 @@ namespace System_do_zarządzania_ligą_piłkarską.Shared.DTOs
         public string Stadium { get; set; }
         public int YearOfFoundation { get; set; }
         public virtual ApplicationUserDTO? Coach { get; set; }
+        [JsonIgnore]
         public virtual ICollection<MatchDTO> HomeMatches { get; set; } = new List<MatchDTO>();
+        [JsonIgnore]
         public virtual ICollection<MatchDTO> AwayMatches { get; set; } = new List<MatchDTO>();
         [JsonIgnore]
         public virtual ICollection<TeamStatDTO> TeamStats { get; set; } = new List<TeamStatDTO>();
         public virtual ICollection<TrophyDTO> Trophies { get; set; } = new List<TrophyDTO>();
         public virtual ICollection<FootballerDTO> Footballers { get; set; } = new List<FootballerDTO>();
+
+        public int LeagueId { get; set; }
     }
 }

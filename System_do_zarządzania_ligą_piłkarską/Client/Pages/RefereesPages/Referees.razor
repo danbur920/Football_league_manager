@@ -1,16 +1,18 @@
 ﻿@page "/referees"
+
 @using Microsoft.AspNetCore.Authorization
 @using Microsoft.AspNetCore.Components.WebAssembly.Authentication
 @using System_do_zarządzania_ligą_piłkarską.Shared
 @using System_do_zarządzania_ligą_piłkarską.Shared.DTOs
 @using System_do_zarządzania_ligą_piłkarską.Client.Extensions
 @using System_do_zarządzania_ligą_piłkarską.Client.Components
-@attribute [Authorize]
+
 @inject HttpClient Http
 @inject NavigationManager Navigation
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject SearchQueryManager SearchQueryManager
 @inject AlertManager AlertManager
+@inject PaginationManager PaginationManager
 
 <PageTitle>Sędziowie</PageTitle>
 
@@ -73,6 +75,15 @@ else
             }
         </tbody>
     </table>
+
+    <PaginationBar PageNumber="PaginationManager.PageNumber"
+                   PageIndex="PaginationManager.PageIndex"
+                   PageMax="PaginationManager.PageMax"
+                   CollectionCount="PaginationManager.CollectionCount"
+                   OnNextPage="() => PaginationManager.NextPage(LoadReferees)"
+                   OnPreviousPage="() => PaginationManager.PreviousPage(LoadReferees)"
+                   OnGoToPage="(pageNumber) => PaginationManager.GoToPage(pageNumber, LoadReferees)">
+    </PaginationBar>
 }
 
 @code {
@@ -85,8 +96,9 @@ else
     {
         try
         {
-            _userId = await GetUserId();
-            allReferees = await Http.GetFromJsonAsync<List<RefereeDTO>>("api/referees");
+            PaginationManager.PageMax = (int)Math.Ceiling((double)PaginationManager.CollectionCount / PaginationManager.PageSize);
+            await GetUserId();
+            await LoadReferees();
             await RefreshFavourites();
         }
         catch (AccessTokenNotAvailableException exception)
@@ -95,12 +107,19 @@ else
         }
     }
 
-    private async Task<string?> GetUserId()
+    private async Task<bool> LoadReferees()
+    {
+        var response = await Http.GetFromJsonAsync<List<RefereeDTO>>($"api/referees?pageNumber={PaginationManager.PageNumber}&pageSize={PaginationManager.PageSize}");
+        allReferees = response;
+
+        return (allReferees != null && allReferees.Any());
+    }
+
+    private async Task GetUserId()
     {
         var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
         var user = authState.User;
-
-        return user.FindFirst(c => c.Type == "sub")?.Value;
+        _userId = user.FindFirst(c => c.Type == "sub")?.Value;
     }
 
     private IEnumerable<RefereeDTO>? filteredReferees =>
@@ -123,9 +142,7 @@ else
 
     private async Task AddToFavourites(int refereeId)
     {
-        var userId = await GetUserId();
-
-        if (userId != null)
+        if (_userId != null)
         {
             var response = await Http.PostAsync($"api/favourites/referee/{refereeId}", null);
             var referee = allReferees.FirstOrDefault(l => l.Id == refereeId);
@@ -144,11 +161,9 @@ else
 
     private async Task RemoveFromFavourites(int refereeId)
     {
-        var userId = await GetUserId();
-
-        if (userId != null)
+        if (_userId != null)
         {
-            var response = await Http.DeleteAsync($"api/favourites/referee/{refereeId}/{userId}");
+            var response = await Http.DeleteAsync($"api/favourites/referee/{refereeId}/{_userId}");
             var referee = allReferees.FirstOrDefault(l => l.Id == refereeId);
 
             if (response.IsSuccessStatusCode)

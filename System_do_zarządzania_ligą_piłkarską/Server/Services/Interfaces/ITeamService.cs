@@ -1,4 +1,5 @@
-﻿using System_do_zarządzania_ligą_piłkarską.Shared.DTOs;
+﻿using System_do_zarządzania_ligą_piłkarską.Server.Models;
+using System_do_zarządzania_ligą_piłkarską.Shared.DTOs;
 
 namespace System_do_zarządzania_ligą_piłkarską.Server.Services.Interfaces
 {
@@ -7,5 +8,6 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Services.Interfaces
         Task<List<TeamDTO>> GetAllTeams();
         Task<TeamDTO> GetTeamById(int teamId);
         Task<List<FootballerStatDTO>> GetCurrentFootballersStats(int teamId);
+        Task<List<MatchDTO>> GetPastMatchesByTeam(int teamId);
     }
 }

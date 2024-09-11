@@ -25,13 +25,22 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Services
         public async Task<TeamDTO> GetTeamById(int teamId)
         {
             var team = await _teamRepository.GetTeamById(teamId);
-            return _mapper.Map<TeamDTO>(team);
+            var mappedTeam = _mapper.Map<TeamDTO>(team);
+
+            mappedTeam.LeagueId = await _teamRepository.GetCurrentLeagueIdByTeam(teamId);
+            return mappedTeam;
         }
 
         public async Task<List<FootballerStatDTO>> GetCurrentFootballersStats(int teamId)
         {
             var currentFootballersStats = await _teamRepository.GetCurrentFootballersStats(teamId);
             return _mapper.Map<List<FootballerStatDTO>>(currentFootballersStats);
+        }
+
+        public async Task<List<MatchDTO>> GetPastMatchesByTeam(int teamId)
+        {
+            var matches = await _teamRepository.GetPastMatchesByTeam(teamId);
+            return _mapper.Map<List<MatchDTO>>(matches);
         }
     }
 }

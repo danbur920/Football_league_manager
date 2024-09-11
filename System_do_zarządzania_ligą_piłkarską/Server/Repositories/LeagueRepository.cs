@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Drawing.Printing;
 using System_do_zarządzania_ligą_piłkarską.Server.Data;
 using System_do_zarządzania_ligą_piłkarską.Server.Models;
 using System_do_zarządzania_ligą_piłkarską.Server.Repositories.Interfaces;
@@ -13,9 +14,13 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
         {
             _context = context;
         }
-        public async Task<List<League>> GetAllLeagues()
+        public async Task<List<League>> GetLeaguesByPage(int pageNumber, int pageSize)
         {
-            var leagues = await _context.Leagues.ToListAsync();
+            var leagues = await _context.Leagues.
+                Skip((pageNumber - 1) * pageSize).
+                Take(pageSize).
+                ToListAsync();
+
             return leagues;
         }
 
@@ -31,7 +36,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
                 .Where(x => x.LeagueId == leagueId
                  && (x.Goals + x.Assists) > 0)
                 .Include(x => x.Footballer)
-                .ThenInclude(x=>x.Team)
+                .ThenInclude(x => x.Team)
                 .OrderByDescending(x => x.Goals)
                 .ThenByDescending(x => x.Assists)
                 .ThenBy(x => x.MatchesPlayed)
@@ -44,7 +49,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
         {
             var teamsStats = await _context.TeamStats
                 .Where(x => x.LeagueId == leagueId)
-                .Include(x => x.Team) // jeśli by coś nie działało to zmienić lekko :)
+                .Include(x => x.Team)
                 .OrderByDescending(x => x.Points)
                 .ThenByDescending(x => x.GoalBalance)
                 .ToListAsync();

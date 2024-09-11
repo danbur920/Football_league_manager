@@ -37,5 +37,12 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Controllers
             var stats = await _teamService.GetCurrentFootballersStats(teamId);
             return Ok(stats);
         }
+
+        [HttpGet("{teamId}/matches/past")]
+        public async Task<ActionResult<List<FootballerStatDTO>>> GetPastMatches(int teamId)
+        {
+            var matches = await _teamService.GetPastMatchesByTeam(teamId);
+            return Ok(matches);
+        }
     }
 }

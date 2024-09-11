@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using NuGet.Protocol;
+using System.Text.Json;
 using System_do_zarządzania_ligą_piłkarską.Server.Services;
 using System_do_zarządzania_ligą_piłkarską.Server.Services.Interfaces;
 using System_do_zarządzania_ligą_piłkarską.Shared.DTOs;
@@ -19,10 +21,24 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetPlayers(int pageNumber = 1)
+        public async Task<IActionResult> GetPlayersByPage(int pageNumber = 1, int pageSize = 2)
         {
-            var players = await _footballerService.GetPlayers(pageNumber);
+            var players = await _footballerService.GetPlayersByPage(pageNumber, pageSize);
             return Ok(players);
+        }
+
+        //[HttpGet("count")]
+        //public async Task<IActionResult> GetTotalPlayersCount()
+        //{
+        //    int playersCount = await _footballerService.GetTotalPlayersCount();
+        //    return Ok(playersCount);
+        //}
+
+        [HttpGet("count")]
+        public async Task<IActionResult> GetTotalPlayersCount()
+        {
+            var playersCount = await _footballerService.GetTotalPlayersCount();
+            return Ok(playersCount); 
         }
     }
 }

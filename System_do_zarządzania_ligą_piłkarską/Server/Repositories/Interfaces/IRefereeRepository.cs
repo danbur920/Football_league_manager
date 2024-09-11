@@ -4,6 +4,6 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories.Interface
 {
     public interface IRefereeRepository
     {
-        Task<List<Referee>> GetReferees();
+        Task<List<Referee>> GetRefereesByPage(int pageNumber, int pageSize);
     }
 }

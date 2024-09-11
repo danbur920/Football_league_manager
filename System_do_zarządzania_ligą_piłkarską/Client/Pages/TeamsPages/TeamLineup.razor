@@ -1,6 +1,9 @@
 ﻿@page "/teams/{teamId:int}/lineup"
+
 @using System.Net.Http
 @using System_do_zarządzania_ligą_piłkarską.Shared.DTOs
+@using System_do_zarządzania_ligą_piłkarską.Client.Components
+
 @inject HttpClient Http
 @inject NavigationManager Navigation
 
@@ -12,9 +15,17 @@
 
 @if (teamLineup != null)
 {
-    <div>
-        <h4>nie jest nullem :D</h4>  
-    </div>
+    <p>Bramkarze:</p>
+    <Lineup players="goalkeepers"></Lineup>
+
+    <p>Obrońcy:</p>
+    <Lineup players="defenders"></Lineup>
+
+    <p>Pomocnicy:</p>
+    <Lineup players="midfielders"></Lineup>
+
+    <p>Napastnicy:</p>
+    <Lineup players="forwards"></Lineup>
 }
 else
 {
@@ -24,14 +35,28 @@ else
 @code {
     [Parameter]
     public int teamId { get; set; }
-    private FootballerStatDTO[]? teamLineup;
+    private List<FootballerStatDTO>? teamLineup;
+
+    private List<FootballerStatDTO> goalkeepers;
+    private List<FootballerStatDTO> defenders;
+    private List<FootballerStatDTO> midfielders;
+    private List<FootballerStatDTO> forwards;
 
     protected override async Task OnInitializedAsync()
     {
-        teamLineup = await Http.GetFromJsonAsync<FootballerStatDTO[]>($"api/teams/{teamId}/footballers/stats/current");
+        teamLineup = await Http.GetFromJsonAsync<List<FootballerStatDTO>>($"api/teams/{teamId}/footballers/stats/current");
+        SortPlayers();
     }
     private void GoBack()
     {
         Navigation.NavigateTo($"/teams/{teamId}");
+    }
+
+    private void SortPlayers()
+    {
+        goalkeepers = teamLineup.Where(x => x.Footballer.Position == "Goalkeeper").ToList();
+        defenders = teamLineup.Where(x => x.Footballer.Position == "Defender").ToList();
+        midfielders = teamLineup.Where(x => x.Footballer.Position == "Midfielder").ToList();
+        forwards = teamLineup.Where(x => x.Footballer.Position == "Forward").ToList();
     }
 }

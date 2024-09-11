@@ -13,7 +13,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
         {
             _context = context;
         }
-        public async Task<List<Footballer>> GetPlayers(int pageNumber, int pageSize)
+        public async Task<List<Footballer>> GetPlayersByPage(int pageNumber, int pageSize)
         {
             var players = await _context.Footballers.
                 Include(x => x.Team).
@@ -21,6 +21,13 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
                 Take(pageSize).
                 ToListAsync();
             return players;
+        }
+
+        public async Task<int> GetTotalPlayersCount()
+        {
+            int playersCount = await _context.Footballers.CountAsync();
+            Console.WriteLine("coos");
+            return playersCount;
         }
     }
 }

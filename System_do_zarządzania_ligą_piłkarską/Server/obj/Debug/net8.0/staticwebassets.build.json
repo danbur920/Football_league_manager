@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "336nZ4btpLX0yUyPYYA6O+rxYodTzIN1oPKOU4+6LoQ=",
+  "Hash": "odfDnc+oOWUKt8jgCgeg35BX3BDJuX77PGjpuNbVCZY=",
   "Source": "System_do_zarządzania_ligą_piłkarską.Server",
   "BasePath": "_content/System_do_zarządzania_ligą_piłkarską.Server",
   "Mode": "Default",
@@ -3207,6 +3207,25 @@
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Users\\danbu\\Desktop\\PRACA INŻYNIERSKA\\System_do_zarządzania_ligą_piłkarską\\System_do_zarządzania_ligą_piłkarską\\Client\\obj\\Debug\\net8.0\\webcil\\netstandard.wasm"
+    },
+    {
+      "Identity": "C:\\Users\\danbu\\Desktop\\PRACA INŻYNIERSKA\\System_do_zarządzania_ligą_piłkarską\\System_do_zarządzania_ligą_piłkarską\\Client\\bin\\Debug\\net8.0\\wwwroot\\_framework\\Newtonsoft.Json.wasm",
+      "SourceId": "System_do_zarządzania_ligą_piłkarską.Client",
+      "SourceType": "Project",
+      "ContentRoot": "C:\\Users\\danbu\\Desktop\\PRACA INŻYNIERSKA\\System_do_zarządzania_ligą_piłkarską\\System_do_zarządzania_ligą_piłkarską\\Client\\bin\\Debug\\net8.0\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "_framework/Newtonsoft.Json.wasm",
+      "AssetKind": "Build",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "WasmResource",
+      "AssetTraitValue": "runtime",
+      "CopyToOutputDirectory": "PreserveNewest",
+      "CopyToPublishDirectory": "Never",
+      "OriginalItemSpec": "C:\\Users\\danbu\\Desktop\\PRACA INŻYNIERSKA\\System_do_zarządzania_ligą_piłkarską\\System_do_zarządzania_ligą_piłkarską\\Client\\obj\\Debug\\net8.0\\webcil\\Newtonsoft.Json.wasm"
     },
     {
       "Identity": "C:\\Users\\danbu\\Desktop\\PRACA INŻYNIERSKA\\System_do_zarządzania_ligą_piłkarską\\System_do_zarządzania_ligą_piłkarską\\Client\\bin\\Debug\\net8.0\\wwwroot\\_framework\\pl\\Microsoft.CodeAnalysis.CSharp.resources.wasm",
@@ -10351,6 +10370,25 @@
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Users\\danbu\\Desktop\\PRACA INŻYNIERSKA\\System_do_zarządzania_ligą_piłkarską\\System_do_zarządzania_ligą_piłkarską\\Client\\bin\\Debug\\net8.0\\wwwroot\\_framework\\System.Net.Primitives.wasm"
+    },
+    {
+      "Identity": "C:\\Users\\danbu\\Desktop\\PRACA INŻYNIERSKA\\System_do_zarządzania_ligą_piłkarską\\System_do_zarządzania_ligą_piłkarską\\Client\\obj\\Debug\\net8.0\\compressed\\jbg1f2xb51.gz",
+      "SourceId": "System_do_zarządzania_ligą_piłkarską.Client",
+      "SourceType": "Project",
+      "ContentRoot": "C:\\Users\\danbu\\Desktop\\PRACA INŻYNIERSKA\\System_do_zarządzania_ligą_piłkarską\\System_do_zarządzania_ligą_piłkarską\\Client\\bin\\Debug\\net8.0\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "_framework/Newtonsoft.Json.wasm.gz",
+      "AssetKind": "Build",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "C:\\Users\\danbu\\Desktop\\PRACA INŻYNIERSKA\\System_do_zarządzania_ligą_piłkarską\\System_do_zarządzania_ligą_piłkarską\\Client\\bin\\Debug\\net8.0\\wwwroot\\_framework\\Newtonsoft.Json.wasm",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "CopyToOutputDirectory": "PreserveNewest",
+      "CopyToPublishDirectory": "Never",
+      "OriginalItemSpec": "C:\\Users\\danbu\\Desktop\\PRACA INŻYNIERSKA\\System_do_zarządzania_ligą_piłkarską\\System_do_zarządzania_ligą_piłkarską\\Client\\bin\\Debug\\net8.0\\wwwroot\\_framework\\Newtonsoft.Json.wasm"
     },
     {
       "Identity": "C:\\Users\\danbu\\Desktop\\PRACA INŻYNIERSKA\\System_do_zarządzania_ligą_piłkarską\\System_do_zarządzania_ligą_piłkarską\\Client\\obj\\Debug\\net8.0\\compressed\\jo26icmwku.gz",

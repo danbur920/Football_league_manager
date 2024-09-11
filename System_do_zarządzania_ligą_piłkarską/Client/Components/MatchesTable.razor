@@ -1,0 +1,89 @@
+﻿@using System_do_zarządzania_ligą_piłkarską.Shared.DTOs
+@inject NavigationManager Navigation
+
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>Kolejka</th>
+            <th>Data</th>
+            <th>Godzina</th>
+            <th>Wynik</th>
+            <th>Rezultat</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var match in Matches)
+        {
+            <tr>
+                <td>@match.Round</td>
+                <td>@match.MatchDate</td>
+                <td>@match.MatchTime</td>
+                <td>@match.HomeTeam.Name  @match.GoalsHome:@match.GoalsAway  @match.AwayTeam.Name</td>
+                <td>@ShowResult(match.Id)</td>
+                <td>
+                    <button class="btn btn-link" @onclick="() => ShowMatchDetails(match.Id)">
+                        <i class="fas fa-arrow-right"></i> Szczegóły
+                    </button>
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+
+@code {
+    [Parameter]
+    public List<MatchDTO> Matches { get; set; }
+
+    public string ShowResult(int matchId)
+    {
+        var match = Matches.FirstOrDefault(m => m.Id == matchId);
+
+        if (match == null || match.GoalsHome == null || match.GoalsAway == null)
+        {
+            return "-";
+        }
+        if (match.GoalsHome == match.GoalsAway)
+        {
+            return "Remis";
+        }
+        if (match.GoalsHome > match.GoalsAway)
+        {
+            return match.HomeTeam.Name;
+        }
+        return match.AwayTeam.Name;
+    }
+
+    public void ShowMatchDetails(int matchId)
+    {
+        Navigation.NavigateTo($"/matches/{matchId}");
+    }
+}
+
+<style>
+    .table thead {
+        background-color: #4CAF50;
+        color: white;
+    }
+
+    .table tbody tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    .table tbody tr:hover {
+        background-color: #f1f1f1;
+    }
+
+    .table th {
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+
+    .table td, .table th {
+        vertical-align: middle;
+        padding: 12px 15px;
+    }
+</style>
+
+

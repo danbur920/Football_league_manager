@@ -19,6 +19,7 @@
           "Microsoft.EntityFrameworkCore.Sqlite": "8.0.8",
           "Microsoft.EntityFrameworkCore.Tools": "8.0.8",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "8.0.4",
+          "Newtonsoft.Json": "13.0.3",
           "System_do_zarządzania_ligą_piłkarską.Client": "1.0.0",
           "System_do_zarządzania_ligą_piłkarską.Shared": "1.0.0"
         },
@@ -2526,6 +2527,7 @@
           "Microsoft.EntityFrameworkCore": "8.0.8",
           "Microsoft.EntityFrameworkCore.SqlServer": "8.0.8",
           "Microsoft.Extensions.Http": "8.0.0",
+          "Newtonsoft.Json": "13.0.3",
           "System_do_zarządzania_ligą_piłkarską.Shared": "1.0.0"
         },
         "runtime": {

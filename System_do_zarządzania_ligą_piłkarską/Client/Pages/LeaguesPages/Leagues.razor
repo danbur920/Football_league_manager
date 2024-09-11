@@ -1,24 +1,27 @@
 ﻿@page "/leagues"
+
 @using Microsoft.AspNetCore.Authorization
 @using Microsoft.AspNetCore.Components.WebAssembly.Authentication
 @using System_do_zarządzania_ligą_piłkarską.Shared
 @using System_do_zarządzania_ligą_piłkarską.Shared.DTOs
 @using System_do_zarządzania_ligą_piłkarską.Client.Extensions
 @using System_do_zarządzania_ligą_piłkarską.Client.Components
-@attribute [Authorize]
+
 @inject HttpClient Http
 @inject NavigationManager Navigation
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject AlertManager AlertManager
+@inject PaginationManager PaginationManager
+@inject SearchQueryManager SearchQueryManager
 
 <PageTitle>Ligi</PageTitle>
 
 <Alert Message="@AlertManager.Message" Type="@AlertManager.Type" IsVisible="@AlertManager.IsVisible" />
 
-<input type="text" @bind="searchQueryName" placeholder="Szukaj ligę po nazwie..." class="form-control mb-3" />
-<input type="text" @bind="searchQueryNationality" placeholder="Szukaj ligę po kraju..." class="form-control mb-3" />
+<input type="text" @bind="SearchQueryManager.Name" placeholder="Szukaj ligę po nazwie..." class="form-control mb-3" />
+<input type="text" @bind="SearchQueryManager.Country" placeholder="Szukaj ligę po kraju..." class="form-control mb-3" />
 
-@if (_allLeagues == null)
+@if (allLeagues == null)
 {
     <p><em>Loading...</em></p>
 }
@@ -31,7 +34,7 @@ else
                 <th>Kraj</th>
                 <th>Poziom</th>
                 <th>Sezon</th>
-                <th>Rozegrane mecze</th>
+                <th>Ilość kolejek</th>
                 <th>Start ligi</th>
                 <th>Koniec ligi</th>
                 <th>Dodaj do ulubionych</th>
@@ -39,7 +42,7 @@ else
             </tr>
         </thead>
         <tbody>
-            @if(filteredLeagues.Count() == 0)
+            @if (filteredLeagues.Count() == 0)
             {
                 <tr>
                     <td colspan="9" style="text-align: center">Brak lig lub żadna liga nie spełnia określonych kryteriów wyszukiwania.</td>
@@ -78,22 +81,30 @@ else
             }
         </tbody>
     </table>
+
+    <PaginationBar PageNumber="PaginationManager.PageNumber"
+                   PageIndex="PaginationManager.PageIndex"
+                   PageMax="PaginationManager.PageMax"
+                   CollectionCount="PaginationManager.CollectionCount"
+                   OnNextPage="() => PaginationManager.NextPage(LoadLeagues)"
+                   OnPreviousPage="() => PaginationManager.PreviousPage(LoadLeagues)"
+                   OnGoToPage="(pageNumber) => PaginationManager.GoToPage(pageNumber, LoadLeagues)">
+    </PaginationBar>
 }
 
 @code {
-    private LeagueDTO[]? _allLeagues;
-    private FavouriteDTO[]? _userFavouriteLeagues;
+    private List<LeagueDTO>? allLeagues;
+    private List<FavouriteDTO>? userFavouriteLeagues;
 
-    string userId = string.Empty;
-    private string searchQueryName = string.Empty;
-    private string searchQueryNationality = string.Empty;
+    string _userId = string.Empty;
 
     protected override async Task OnInitializedAsync()
     {
         try
         {
-            userId = await GetUserId();
-            _allLeagues = await Http.GetFromJsonAsync<LeagueDTO[]>("api/leagues");
+            PaginationManager.PageMax = (int)Math.Ceiling((double)PaginationManager.CollectionCount / PaginationManager.PageSize);
+            await GetUserId();
+            await LoadLeagues();
             await RefreshFavourites();
         }
         catch (AccessTokenNotAvailableException exception)
@@ -102,38 +113,44 @@ else
         }
     }
 
-    private async Task<string?> GetUserId()
+    private async Task<bool> LoadLeagues()
+    {
+        var response = await Http.GetFromJsonAsync<List<LeagueDTO>>($"api/leagues?pageNumber={PaginationManager.PageNumber}&pageSize={PaginationManager.PageSize}");
+        allLeagues = response;
+
+        return (allLeagues != null && allLeagues.Any());
+    }
+
+    private async Task GetUserId()
     {
         var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
         var user = authState.User;
-        return user.FindFirst(c => c.Type == "sub")?.Value;
+        _userId = user.FindFirst(c => c.Type == "sub")?.Value;
     }
 
-    private IEnumerable<LeagueDTO> filteredLeagues =>
-    _allLeagues?.Where(league =>
-        (string.IsNullOrWhiteSpace(searchQueryName) || league.Name.Contains(searchQueryName, StringComparison.OrdinalIgnoreCase)) &&
-        (string.IsNullOrWhiteSpace(searchQueryNationality) || league.Country.Contains(searchQueryNationality, StringComparison.OrdinalIgnoreCase))
+    private IEnumerable<LeagueDTO>? filteredLeagues =>
+    allLeagues?.Where(league =>
+        (string.IsNullOrWhiteSpace(SearchQueryManager.Name) || league.Name.Contains(SearchQueryManager.Name, StringComparison.OrdinalIgnoreCase)) &&
+        (string.IsNullOrWhiteSpace(SearchQueryManager.Country) || league.Country.Contains(SearchQueryManager.Country, StringComparison.OrdinalIgnoreCase))
     );
 
     private bool IsFavourite(int leagueId)
     {
-        var isFavourite = _userFavouriteLeagues.FirstOrDefault(x => x.FavouriteId == leagueId) != null;
+        var isFavourite = userFavouriteLeagues.FirstOrDefault(x => x.FavouriteId == leagueId) != null;
         return isFavourite;
     }
 
     private async Task RefreshFavourites()
     {
-        _userFavouriteLeagues = await Http.GetFromJsonAsync<FavouriteDTO[]>($"api/favourites/league");
+        userFavouriteLeagues = await Http.GetFromJsonAsync<List<FavouriteDTO>>($"api/favourites/league");
     }
 
     private async Task AddToFavourites(int leagueId)
     {
-        var userId = await GetUserId();
-
-        if (userId != null)
+        if (_userId != null)
         {
             var response = await Http.PostAsync($"api/favourites/league/{leagueId}", null);
-            var league = _allLeagues.FirstOrDefault(l => l.Id == leagueId);
+            var league = allLeagues.FirstOrDefault(l => l.Id == leagueId);
 
             if (response.IsSuccessStatusCode)
             {
@@ -149,12 +166,10 @@ else
 
     private async Task RemoveFromFavourites(int leagueId)
     {
-        var userId = await GetUserId();
-
-        if (userId != null)
+        if (_userId != null)
         {
-            var response = await Http.DeleteAsync($"api/favourites/league/{leagueId}/{userId}");
-            var league = _allLeagues.FirstOrDefault(l => l.Id == leagueId);
+            var response = await Http.DeleteAsync($"api/favourites/league/{leagueId}/{_userId}");
+            var league = allLeagues.FirstOrDefault(l => l.Id == leagueId);
 
             if (response.IsSuccessStatusCode)
             {

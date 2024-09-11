@@ -1,7 +1,149 @@
 ﻿@page "/favourites/referees"
+@attribute [Authorize]
+
 @using System.Net.Http
 @using System_do_zarządzania_ligą_piłkarską.Shared.DTOs
 @using System_do_zarządzania_ligą_piłkarską.Client.Extensions
+@using System_do_zarządzania_ligą_piłkarską.Client.Components
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+
 @inject HttpClient Http
 @inject NavigationManager Navigation
+@inject AuthenticationStateProvider AuthenticationStateProvider
 @inject AlertManager AlertManager
+
+<PageTitle>Ulubieni sędziowie</PageTitle>
+
+@if (_showModal)
+{
+    <Modal Title="Usuń" Body="Czy na pewno chcesz usunąć wybranego sędziego z ulubionch?" OnConfirm="HandleConfirm" OnCancel="HandleCancel" />
+}
+
+<Alert Message="@AlertManager.Message" Type="@AlertManager.Type" IsVisible="@AlertManager.IsVisible" />
+
+@if (favouriteReferees == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Imię</th>
+                <th>Nazwisko</th>
+                <th>Narodowość</th>
+                <th>Poziom</th>
+                <th>Usuń z ulubionych</th>
+                <th>Przejdź do sędziego</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (favouriteReferees.Count() == 0)
+            {
+                <tr>
+                    <td colspan="9" style="text-align: center">Brak ulubionych sędziów</td>
+                </tr>
+            }
+            @foreach (var referee in favouriteReferees)
+            {
+                <tr>
+                    <td>@referee.FirstName</td>
+                    <td>@referee.LastName</td>
+                    <td>@referee.Nationality</td>
+                    <td>@referee.Level</td>
+                    <td>
+                        <button class="btn btn-primary" @onclick="() => ShowRemoveModal(referee.Id)">
+                            <i class="fas fa-trash"></i> Usuń
+                        </button>
+                    </td>
+                    <td>
+                        <button class="btn btn-link" @onclick="() => NavigateToTeamDetails(referee.Id)">
+                            <i class="fas fa-arrow-right"></i> Szczegóły
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<RefereeDTO>? favouriteReferees;
+
+    private string _userId = string.Empty;
+    private bool _showModal = false;
+    private int _refereeIdToRemove;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            _userId = await GetUserId();
+            await RefreshFavourites();
+        }
+        catch (AccessTokenNotAvailableException exception)
+        {
+            exception.Redirect();
+        }
+    }
+
+    private async Task RefreshFavourites()
+    {
+        favouriteReferees = await Http.GetFromJsonAsync<List<RefereeDTO>>("api/favourites/favourite-referees");
+    }
+
+    private void ShowRemoveModal(int refereeId)
+    {
+        _refereeIdToRemove = refereeId;
+        _showModal = true;
+    }
+
+    private async Task HandleConfirm(bool confirmed)
+    {
+        if (confirmed)
+        {
+            await RemoveFromFavourites(_refereeIdToRemove);
+        }
+        _showModal = false;
+    }
+
+    private async Task HandleCancel()
+    {
+        _showModal = false;
+    }
+
+    private async Task<string?> GetUserId()
+    {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+        return user.FindFirst(c => c.Type == "sub")?.Value;
+    }
+
+    private async Task RemoveFromFavourites(int refereeId)
+    {
+        _userId = await GetUserId();
+
+        if (_userId != null)
+        {
+            var response = await Http.DeleteAsync($"api/favourites/referee/{refereeId}/{_userId}");
+            var referee = favouriteReferees.FirstOrDefault(x => x.Id == refereeId);
+
+            if (response.IsSuccessStatusCode)
+            {
+                AlertManager.DisplayAlert($"Usunięto sędziego {referee.FirstName + " " + referee.LastName} z ulubionych.", "info");
+                await RefreshFavourites();
+            }
+            else
+            {
+                AlertManager.DisplayAlert($"Nie udało się usunąć sędziego {referee.FirstName + " " + referee.LastName} z ulubionych.", "danger");
+            }
+        }
+    }
+
+    private void NavigateToTeamDetails(int refereeId)
+    {
+        Navigation.NavigateTo($"/referees/{refereeId}");
+    }
+}

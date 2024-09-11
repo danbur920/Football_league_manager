@@ -1,26 +1,31 @@
 ﻿<nav aria-label="Page navigation">
     <ul class="pagination">
         <li class="page-item @(PageNumber == 1 ? "disabled" : "")">
-            <a class="page-link" @onclick="() => OnPreviousPage.InvokeAsync(null)">Previous</a>
+            <a class="page-link" @onclick="() => OnPreviousPage.InvokeAsync(null)">Poprzednia</a>
         </li>
 
-        @for (int i = 1; i <= 5; i++)
+        @for (int i = 1; i <= PageMax; i++)
         {
-            var pageValue = PageIndex + i;
+            //var pageValue = PageIndex + i;
+            var pageValue = i;
             <li class="page-item @(PageNumber == pageValue ? "active" : "")">
                 <a class="page-link" @onclick="() => OnGoToPage.InvokeAsync(pageValue)">@pageValue</a>
             </li>
         }
 
         <li class="page-item">
-            <a class="page-link" @onclick="() => OnNextPage.InvokeAsync(null)">Next</a>
+            <a class="page-link" @onclick="() => OnNextPage.InvokeAsync(null)">Następna</a>
         </li>
     </ul>
 </nav>
 
 @code {
-    [Parameter] public int PageNumber { get; set; }
-    [Parameter] public int PageIndex { get; set; }
+    [Parameter] public int PageNumber { get; set; } // numer strony
+    [Parameter] public int PageIndex { get; set; } // indeks strony
+    [Parameter] public int PageMax { get; set; } // maksymalna ilość stron
+    [Parameter] public int PageSize { get; set; } // ilość elementów na stronie
+    [Parameter] public int CollectionCount { get; set; } // ilość elementów w kolekcji
+
     [Parameter] public EventCallback OnNextPage { get; set; }
     [Parameter] public EventCallback OnPreviousPage { get; set; }
     [Parameter] public EventCallback<int> OnGoToPage { get; set; }

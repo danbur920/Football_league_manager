@@ -15,9 +15,9 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Services
             _refereeRepository = refereeRepository;
             _mapper = mapper;
         }
-        public async Task<List<RefereeDTO>> GetReferees()
+        public async Task<List<RefereeDTO>> GetRefereesByPage(int pageNumber, int pageSize)
         {
-            var referees = await _refereeRepository.GetReferees();
+            var referees = await _refereeRepository.GetRefereesByPage(pageNumber, pageSize);
             return _mapper.Map<List<RefereeDTO>>(referees);
         }
     }

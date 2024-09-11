@@ -1560,3 +1560,8 @@ C:\Users\danbu\Desktop\PRACA INŻYNIERSKA\System_do_zarządzania_ligą_piłkarsk
 C:\Users\danbu\Desktop\PRACA INŻYNIERSKA\System_do_zarządzania_ligą_piłkarską\System_do_zarządzania_ligą_piłkarską\Client\obj\Debug\net8.0\refint\System_do_zarządzania_ligą_piłkarską.Client.dll
 C:\Users\danbu\Desktop\PRACA INŻYNIERSKA\System_do_zarządzania_ligą_piłkarską\System_do_zarządzania_ligą_piłkarską\Client\obj\Debug\net8.0\System_do_zarządzania_ligą_piłkarską.Client.pdb
 C:\Users\danbu\Desktop\PRACA INŻYNIERSKA\System_do_zarządzania_ligą_piłkarską\System_do_zarządzania_ligą_piłkarską\Client\obj\Debug\net8.0\ref\System_do_zarządzania_ligą_piłkarską.Client.dll
+C:\Users\danbu\Desktop\PRACA INŻYNIERSKA\System_do_zarządzania_ligą_piłkarską\System_do_zarządzania_ligą_piłkarską\Client\bin\Debug\net8.0\wwwroot\_framework\Newtonsoft.Json.wasm
+C:\Users\danbu\Desktop\PRACA INŻYNIERSKA\System_do_zarządzania_ligą_piłkarską\System_do_zarządzania_ligą_piłkarską\Client\bin\Debug\net8.0\wwwroot\_framework\Newtonsoft.Json.wasm.gz
+C:\Users\danbu\Desktop\PRACA INŻYNIERSKA\System_do_zarządzania_ligą_piłkarską\System_do_zarządzania_ligą_piłkarską\Client\bin\Debug\net8.0\Newtonsoft.Json.dll
+C:\Users\danbu\Desktop\PRACA INŻYNIERSKA\System_do_zarządzania_ligą_piłkarską\System_do_zarządzania_ligą_piłkarską\Client\obj\Debug\net8.0\webcil\Newtonsoft.Json.wasm
+C:\Users\danbu\Desktop\PRACA INŻYNIERSKA\System_do_zarządzania_ligą_piłkarską\System_do_zarządzania_ligą_piłkarską\Client\obj\Debug\net8.0\compressed\jbg1f2xb51.gz

@@ -4,7 +4,7 @@
 
 .top-row {
     height: 3.5rem;
-    background-color: rgba(0,0,0,0.4);
+    background-color: rgba(0, 0, 0, 0.4);
 }
 
 .navbar-brand {
@@ -19,10 +19,16 @@
 }
 
 .nav-info {
-    font-size: 0.9rem;
-    color: #d7d7d7;
-    padding: 0.5rem 0;
+    font-size: 1rem; /* Zwiêkszenie rozmiaru czcionki */
+    color: #ffffff;
+    padding: 0.75rem 0;
     text-align: center;
+    background-color: rgba(0, 0, 0, 0.6); /* T³o dla sekcji faworytów */
+    border-top: 1px solid rgba(255, 255, 255, 0.3); /* Linia oddzielaj¹ca */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3); /* Linia oddzielaj¹ca */
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.05rem; /* Dodanie odstêpów miêdzy literami */
 }
 
 .nav-item {
@@ -45,15 +51,16 @@
         display: flex;
         align-items: center;
         line-height: 3rem;
+        padding: 0 0.75rem; /* Dodanie wewnêtrznego odstêpu */
     }
 
         .nav-item ::deep a.active {
-            background-color: rgba(255,255,255,0.25);
+            background-color: rgba(255, 255, 255, 0.25);
             color: white;
         }
 
         .nav-item ::deep a:hover, .nav-info ::deep span:hover {
-            background-color: rgba(255,255,255,0.1);
+            background-color: rgba(255, 255, 255, 0.1);
             color: white;
         }
 
@@ -63,12 +70,13 @@
     }
 
     .collapse {
-        /* Never collapse the sidebar for wide screens */
+        /* Nigdy nie zwijaj paska bocznego na szerokich ekranach */
         display: block;
     }
 
     .nav-scrollable {
-        /* Allow sidebar to scroll for tall menus */
+        /* Umo¿liwia przewijanie paska bocznego dla wysokich menu */
         height: calc(100vh - 3.5rem);
         overflow-y: auto;
     }
+}

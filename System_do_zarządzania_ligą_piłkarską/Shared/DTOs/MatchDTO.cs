@@ -29,5 +29,6 @@ namespace System_do_zarządzania_ligą_piłkarską.Shared.DTOs
         public virtual RefereeDTO Referee { get; set; }
         public virtual TeamDTO HomeTeam { get; set; }
         public virtual TeamDTO AwayTeam { get; set; }
+        public virtual ICollection<MatchEventDTO> MatchEvents { get; set; } = new List<MatchEventDTO>();
     }
 }

@@ -17,9 +17,9 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetReferees(int pageNumber = 1, int pageSize = 2)
+        public async Task<IActionResult> GetRefereesByPage(int pageNumber = 1, int pageSize = 2)
         {
-            var referees = await _refereeService.GetReferees();
+            var referees = await _refereeService.GetRefereesByPage(pageNumber, pageSize);
             return Ok(referees);
         }
     }

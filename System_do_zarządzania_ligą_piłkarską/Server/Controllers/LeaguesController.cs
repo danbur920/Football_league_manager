@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System_do_zarządzania_ligą_piłkarską.Server.Services;
 using System_do_zarządzania_ligą_piłkarską.Server.Services.Interfaces;
 using System_do_zarządzania_ligą_piłkarską.Shared.DTOs;
 using static System.Net.WebRequestMethods;
@@ -18,10 +19,19 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Controllers
             _leagueService = leagueService;
         }
 
+        //[HttpGet]
+        //public async Task<IActionResult> GetPlayersByPage(int pageNumber = 1, int pageSize = 2)
+        //{
+        //    var players = await _footballerService.GetPlayersByPage(pageNumber, pageSize);
+        //    return Ok(players);
+        //}
+
+
+
         [HttpGet]
-        public async Task<ActionResult<List<LeagueDTO>>> GetAllLeagues()
+        public async Task<ActionResult<List<LeagueDTO>>> GetLeaguesByPage(int pageNumber, int pageSize)
         {
-            var leagues = await _leagueService.GetAllLeagues();
+            var leagues = await _leagueService.GetLeaguesByPage(pageNumber, pageSize);
             return Ok(leagues);
         }
 

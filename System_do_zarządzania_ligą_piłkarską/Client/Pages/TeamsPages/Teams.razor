@@ -1,11 +1,12 @@
 ﻿@page "/teams"
+
 @using Microsoft.AspNetCore.Authorization
 @using Microsoft.AspNetCore.Components.WebAssembly.Authentication
 @using System_do_zarządzania_ligą_piłkarską.Shared
 @using System_do_zarządzania_ligą_piłkarską.Shared.DTOs
 @using System_do_zarządzania_ligą_piłkarską.Client.Extensions
 @using System_do_zarządzania_ligą_piłkarską.Client.Components
-@attribute [Authorize]
+
 @inject HttpClient Http
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject AlertManager AlertManager
