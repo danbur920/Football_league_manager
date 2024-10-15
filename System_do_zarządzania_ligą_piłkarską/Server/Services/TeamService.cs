@@ -37,9 +37,9 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Services
             return _mapper.Map<List<FootballerStatDTO>>(currentFootballersStats);
         }
 
-        public async Task<List<MatchDTO>> GetPastMatchesByTeam(int teamId)
+        public async Task<List<MatchDTO>> GetMatchesByTeam(int teamId, bool isFinished)
         {
-            var matches = await _teamRepository.GetPastMatchesByTeam(teamId);
+            var matches = await _teamRepository.GetMatchesByTeam(teamId, isFinished);
             return _mapper.Map<List<MatchDTO>>(matches);
         }
     }

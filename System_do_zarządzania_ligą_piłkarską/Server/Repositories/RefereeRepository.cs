@@ -14,6 +14,17 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
         {
             _context = context;
         }
+
+        public async Task<Referee> GetRefereeInfoById(int refereeId)
+        {
+            var referee = await _context.Referees
+                .Where(x => x.Id == refereeId)
+                .Include(x => x.RefereeStats)       
+                .FirstOrDefaultAsync();
+
+            return referee;
+        }
+
         public async Task<List<Referee>> GetRefereesByPage(int pageNumber, int pageSize)
         {
             var referees = await _context.Referees.

@@ -40,6 +40,13 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Controllers
             var playersCount = await _footballerService.GetTotalPlayersCount();
             return Ok(playersCount); 
         }
+
+        [HttpGet("{footballerId}")]
+        public async Task<IActionResult> GetFootballerInfoById(int footballerId)
+        {
+            var footballer = await _footballerService.GetFootballerInfoById(footballerId);
+            return Ok(footballer);
+        }
     }
 }
 

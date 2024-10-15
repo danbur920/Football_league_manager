@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System_do_zarządzania_ligą_piłkarską.Server.Services;
@@ -25,8 +26,6 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Controllers
         //    var players = await _footballerService.GetPlayersByPage(pageNumber, pageSize);
         //    return Ok(players);
         //}
-
-
 
         [HttpGet]
         public async Task<ActionResult<List<LeagueDTO>>> GetLeaguesByPage(int pageNumber, int pageSize)

@@ -8,6 +8,6 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories.Interface
         Task<Team> GetTeamById(int teamId);
         Task<List<FootballerStat>> GetCurrentFootballersStats(int teamId);
         Task<int> GetCurrentLeagueIdByTeam(int teamId);
-        Task<List<Match>> GetPastMatchesByTeam (int teamId);
+        Task<List<Match>> GetMatchesByTeam (int teamId, bool isFinished);
     }
 }

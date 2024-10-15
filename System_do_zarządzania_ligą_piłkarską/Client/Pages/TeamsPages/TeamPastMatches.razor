@@ -33,11 +33,11 @@ else
     protected override async Task OnInitializedAsync()
     {
         team = await Http.GetFromJsonAsync<TeamDTO>($"api/teams/{teamId}");
-        matches = await Http.GetFromJsonAsync<List<MatchDTO>>($"api/teams/{teamId}/matches/past");
+        matches = await Http.GetFromJsonAsync<List<MatchDTO>>($"api/teams/{teamId}/matches?isFinished=true");
     }
 
     private void GoBack()
     {
-        Navigation.NavigateTo("/teams");
+        Navigation.NavigateTo($"/teams/{teamId}");
     }
 }

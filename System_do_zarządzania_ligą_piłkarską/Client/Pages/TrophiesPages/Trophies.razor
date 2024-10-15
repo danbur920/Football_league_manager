@@ -1,0 +1,90 @@
+﻿@page "/trophies"
+@attribute [AllowAnonymous]
+
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+@using System_do_zarządzania_ligą_piłkarską.Shared
+@using System_do_zarządzania_ligą_piłkarską.Shared.DTOs
+@using System_do_zarządzania_ligą_piłkarską.Client.Extensions
+@using System_do_zarządzania_ligą_piłkarską.Client.Components
+
+@inject HttpClient Http
+@inject NavigationManager Navigation
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject SearchQueryManager SearchQueryManager
+@inject AlertManager AlertManager
+@inject PaginationManager PaginationManager
+
+<PageTitle>Trofea</PageTitle>
+
+
+@if (trophies == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nazwa</th>
+                <th>Typ</th>
+                <th>Posiadacz</th>
+                <th>Rok wygrania</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (trophies.Count() == 0)
+            {
+                <tr>
+                    <td colspan="9" style="text-align: center">Brak trofeów.</td>
+                </tr>
+            }
+            @foreach (var trophy in trophies)
+            {
+                <tr>
+                    <td>@trophy.TrophyName</td>
+                    <td>@ShowTrophyType(trophy)</td>
+                    <td>@ShowOwner(trophy)</td>
+                    <td>@trophy.YearWon</td>
+ @*                    <td>
+                        <button class="btn btn-link" @onclick="() => GoToTrophyDetails(referee.Id)">
+                            <i class="fas fa-arrow-right"></i> Szczegóły
+                        </button>
+                    </td> *@
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<TrophyDTO>? trophies;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            trophies = await Http.GetFromJsonAsync<List<TrophyDTO>>("api/trophies");
+        }
+        catch (AccessTokenNotAvailableException exception)
+        {
+            exception.Redirect();
+        }
+    }
+
+    private void GoToTrophyDetails(int trophyId)
+    {
+        Navigation.NavigateTo($"/trophies/{trophyId}");
+    }
+
+    private string ShowOwner(TrophyDTO trophy)
+    {
+        return trophy.TrophyOwner == 0 ? $"{trophy.Footballer.FirstName} {trophy.Footballer.LastName}" : $"{trophy.Team.Name}";
+    } 
+    
+    private string ShowTrophyType(TrophyDTO trophy)
+    {
+        return trophy.TrophyOwner == 0 ? "Indywidualne" : "Drużynowe";
+    }
+}

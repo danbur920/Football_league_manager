@@ -1,11 +1,19 @@
 ﻿@using Microsoft.AspNetCore.Components.Authorization
 @using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+@using System.Security.Claims
 @inject NavigationManager Navigation
+@inject AuthenticationStateProvider AuthenticationStateProvider
 
 <AuthorizeView>
     <Authorized>
         <a href="authentication/profile">Hello, @context.User.Identity?.Name!</a>
         <button class="nav-link btn btn-link" @onclick="BeginLogOut">Log out</button>
+
+        @if (checkUserRole)
+        {
+            <a href="admin/start">Admin Panel</a>
+        }
+
     </Authorized>
     <NotAuthorized>
         <a href="authentication/register">Register</a>
@@ -13,9 +21,23 @@
     </NotAuthorized>
 </AuthorizeView>
 
-@code{
+@code {
+    bool checkUserRole;
+    protected override async Task OnInitializedAsync()
+    {
+        await CheckUserRole();
+    }
     private void BeginLogOut()
     {
+
         Navigation.NavigateToLogout("authentication/logout");
+    }
+
+    private async Task CheckUserRole()
+    {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+
+        checkUserRole = user.IsInRole("Admin");
     }
 }

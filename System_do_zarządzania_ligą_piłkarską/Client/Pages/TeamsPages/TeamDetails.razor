@@ -6,7 +6,7 @@
 @inject HttpClient Http
 @inject NavigationManager Navigation
 
-<h3>Szczegóły drużyny</h3>
+<h3 class="page-title">Szczegóły drużyny</h3>
 
 <div class="button-container">
     <button class="btn btn-primary" @onclick="ShowPastMatches">Rozegrane mecze</button>
@@ -18,8 +18,17 @@
 
 @if (team != null)
 {
-    <div>
-        <h4>@team.Name</h4>  
+    <div class="team-profile-grid">
+        <div class="team-details-container">
+            <h4>@team.Name</h4>
+            <div class="team-info">
+                <p><strong>Miasto:</strong> @team.City</p>
+                <p><strong>Kraj:</strong> @team.Country</p>
+                <p><strong>Stadion:</strong> @team.Stadium</p>
+                <p><strong>Rok założenia:</strong> @team.YearOfFoundation</p>
+                <p><strong>Trener:</strong> @team.Coach?.FirstName ?? "Brak trenera"</p>
+            </div>
+        </div>
     </div>
 }
 else
@@ -30,7 +39,6 @@ else
 @code {
     [Parameter]
     public int teamId { get; set; }
-    public int leagueId { get; set; }
     private TeamDTO team;
 
     protected override async Task OnInitializedAsync()
@@ -63,3 +71,84 @@ else
         Navigation.NavigateTo("/teams");
     }
 }
+
+<style>
+    .page-title {
+        text-align: center;
+        font-size: 28px;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    .button-container {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+
+    .btn {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn:hover {
+        background-color: #0056b3;
+    }
+
+    .team-profile-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .team-details-container, 
+    .team-additional-info-container {
+        padding: 20px;
+        background-color: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+    }
+
+    .team-details-container:hover,
+    .team-additional-info-container:hover {
+        transform: scale(1.02);
+    }
+
+    .team-details-container h4,
+    .team-additional-info-container h4 {
+        text-align: center;
+        color: #333;
+        margin-bottom: 20px;
+        font-size: 22px;
+    }
+
+    .team-info p,
+    .team-additional-info-container p {
+        font-size: 16px;
+        color: #555;
+        margin: 10px 0;
+    }
+
+    .team-info p strong,
+    .team-additional-info-container p strong {
+        color: #333;
+    }
+
+    @@media (max-width: 768px) {
+        .team-profile-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>

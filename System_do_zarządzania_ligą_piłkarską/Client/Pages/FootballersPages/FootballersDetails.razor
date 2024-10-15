@@ -1,0 +1,161 @@
+﻿@page "/footballers/{footballerId:int}"
+
+@using System_do_zarządzania_ligą_piłkarską.Shared.DTOs
+@using System.Net.Http
+@using System.Threading.Tasks
+@using Microsoft.AspNetCore.Components
+
+@inject HttpClient Http
+@inject NavigationManager Navigation
+
+<PageTitle>Szczegóły piłkarza</PageTitle>
+
+<div class="button-container">
+    <button class="btn btn-primary" @onclick="GoToFootballers">Wróć</button>
+</div>
+
+<div class="footballer-grid">
+    <div class="footballer-details-container">
+        @if (footballer == null)
+        {
+            <p><em>Loading...</em></p>
+        }
+        else
+        {
+            <div class="footballer-details">
+                <h2>@footballer.Footballer.FirstName @footballer.Footballer.LastName</h2>
+                @if (!string.IsNullOrEmpty(footballer.Footballer.NickName))
+                {
+                    <p><strong>Nickname:</strong> @footballer.Footballer.NickName</p>
+                }
+                <p><strong>Shirt Number:</strong> @footballer.Footballer.ShirtNumber</p>
+                <p><strong>Date of Birth:</strong> @footballer.Footballer.DateOfBirth.ToString("dd MMMM yyyy")</p>
+                <p><strong>Nationality:</strong> @footballer.Footballer.Nationality</p>
+                <p><strong>Position:</strong> @footballer.Footballer.Position</p>
+                @if (footballer.Footballer.Height.HasValue)
+                {
+                    <p><strong>Height:</strong> @footballer.Footballer.Height.Value cm</p>
+                }
+                @if (footballer.Footballer.Weight.HasValue)
+                {
+                    <p><strong>Weight:</strong> @footballer.Footballer.Weight.Value kg</p>
+                }
+                @if (footballer.Footballer.Team != null)
+                {
+                    <p><strong>Team:</strong> @footballer.Footballer.Team.Name</p>
+                }
+            </div>
+        }
+    </div>
+
+    <div class="footballer-stats-container">
+        @if (footballer == null)
+        {
+            <p><em>Loading...</em></p>
+        }
+        else
+        {
+            <div class="footballer-details">
+                <h2>Statystyki obecnego sezonu</h2>
+                <p><strong>Gole:</strong> @footballer.Goals</p>
+                <p><strong>Gole samobójcze:</strong> @footballer.OwnGoals</p>
+                <p><strong>Asysty:</strong> @footballer.Assists</p>
+                <p><strong>Rozegrane mecze:</strong> @footballer.MatchesPlayed</p>
+                <p><strong>Żółte kartki:</strong> @footballer.YellowCards</p>
+                <p><strong>Czerwone kartki:</strong> @footballer.RedCards</p>
+            </div>
+        }
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public int footballerId { get; set; }
+
+    private FootballerStatDTO? footballer;
+
+    protected override async Task OnInitializedAsync()
+    {
+        footballer = await Http.GetFromJsonAsync<FootballerStatDTO>($"api/footballers/{footballerId}");
+    }
+
+    private void GoToFootballers()
+    {
+        Navigation.NavigateTo("/footballers");
+    }
+}
+
+<style>
+    .button-container {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+
+    .btn {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn:hover {
+        background-color: #0056b3;
+    }
+
+    .footballer-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .footballer-details-container,
+    .footballer-stats-container {
+        padding: 20px;
+        background-color: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+    }
+
+    .footballer-details-container:hover,
+    .footballer-stats-container:hover {
+        transform: scale(1.02);
+    }
+
+    .footballer-details {
+        text-align: center;
+    }
+
+    .footballer-details h2 {
+        font-size: 24px;
+        color: #333;
+        margin-bottom: 20px;
+        font-weight: 600;
+    }
+
+    .footballer-details p {
+        font-size: 16px;
+        color: #555;
+        margin: 10px 0;
+    }
+
+    .footballer-details p strong {
+        color: #000;
+    }
+
+    @@media (max-width: 768px) {
+        .footballer-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>

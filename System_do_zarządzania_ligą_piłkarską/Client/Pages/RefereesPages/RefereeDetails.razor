@@ -1,0 +1,168 @@
+﻿@page "/referees/{refereeId:int}"
+
+@using Microsoft.AspNetCore.Components
+@using System_do_zarządzania_ligą_piłkarską.Shared.DTOs
+
+@inject HttpClient Http
+@inject NavigationManager Navigation
+
+<PageTitle>Szczegóły sędziego</PageTitle>
+
+<div class="button-container">
+    <button class="btn btn-primary" @onclick="GoToReferees">Wróć</button>
+</div>
+
+<div class="referee-grid">
+    <div class="referee-details-container">
+        @if (referee == null)
+        {
+            <p><em>Ładowanie...</em></p>
+        }
+        else
+        {
+            <div class="referee-details">
+                <h2>@referee.FirstName @referee.LastName</h2>
+                <p><strong>Data urodzenia:</strong> @referee.DateOfBirth.ToString("dd MMMM yyyy")</p>
+                <p><strong>Narodowość:</strong> @referee.Nationality</p>
+                @if (!string.IsNullOrEmpty(referee.Level))
+                {
+                    <p><strong>Poziom:</strong> @referee.Level</p>
+                }
+                <p><strong>Sędziowane mecze:</strong> @referee.TotalRefereedMatches</p>
+            </div>
+        }
+    </div>
+
+    <div class="referee-stats-container">
+        @if (referee == null)
+        {
+            <p><em>Ładowanie...</em></p>
+        }
+        else
+        {
+            <div class="referee-stats">
+                <h3>Statystyki kariery</h3>
+                <p><strong>Łączna liczba żółtych kartek:</strong> @referee.TotalYellowCards</p>
+                <p><strong>Łączna liczba czerwonych kartek:</strong> @referee.TotalRedCards</p>
+                <p><strong>Łączna liczba przyznanych rzutów karnych:</strong> @referee.TotalPenaltiesAwarded</p>
+                <p><strong>Łączna liczba odgwizdanych fauli:</strong> @referee.TotalFoulsCalled</p>
+            </div>
+        }
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public int refereeId { get; set; }
+    private RefereeDTO? referee;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            referee = await Http.GetFromJsonAsync<RefereeDTO>($"api/referees/{refereeId}");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Błąd podczas ładowania danych: {ex.Message}");
+        }
+    }
+
+    private void GoToReferees()
+    {
+        Navigation.NavigateTo("/referees");
+    }
+}
+
+<style>
+    .button-container {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+
+    .btn {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn:hover {
+        background-color: #0056b3;
+    }
+
+    .referee-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #f4f4f4;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .referee-details-container,
+    .referee-stats-container {
+        padding: 20px;
+        background-color: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+    }
+
+    .referee-details-container:hover,
+    .referee-stats-container:hover {
+        transform: scale(1.02);
+    }
+
+    .referee-details {
+        text-align: center;
+    }
+
+    .referee-details h2 {
+        font-size: 24px;
+        color: #333;
+        margin-bottom: 20px;
+        font-weight: 600;
+    }
+
+    .referee-details p {
+        font-size: 16px;
+        color: #555;
+        margin: 10px 0;
+    }
+
+    .referee-details p strong {
+        color: #000;
+    }
+
+    .referee-stats h3 {
+        font-size: 20px;
+        color: #333;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .referee-stats p {
+        font-size: 16px;
+        color: #555;
+        margin: 10px 0;
+    }
+
+    .referee-stats p strong {
+        color: #000;
+    }
+
+    @@media (max-width: 768px) {
+        .referee-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>

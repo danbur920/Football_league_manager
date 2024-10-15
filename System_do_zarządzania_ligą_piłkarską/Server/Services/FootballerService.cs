@@ -15,6 +15,13 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Services
             _footballerRepository = footballerRepository;
             _mapper = mapper;
         }
+
+        public async Task<FootballerStatDTO> GetFootballerInfoById(int footballerId)
+        {
+            var footballer = await _footballerRepository.GetFootballerInfoById(footballerId);
+            return _mapper.Map<FootballerStatDTO>(footballer);
+        }
+
         public async Task<List<FootballerDTO>> GetPlayersByPage(int pageNumber, int pageSize)
         {
             var players = await _footballerRepository.GetPlayersByPage(pageNumber, pageSize); // numer strony, ilość elementów na stronie

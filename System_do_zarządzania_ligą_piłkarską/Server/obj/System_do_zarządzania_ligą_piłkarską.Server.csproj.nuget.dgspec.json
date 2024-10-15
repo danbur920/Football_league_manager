@@ -1,40 +1,37 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\danbu\\Desktop\\PRACA INŻYNIERSKA\\System_do_zarządzania_ligą_piłkarską\\System_do_zarządzania_ligą_piłkarską\\Server\\System_do_zarządzania_ligą_piłkarską.Server.csproj": {}
+    "C:\\Users\\Daniel\\Desktop\\PRACA INŻYNIERSKA\\Backup\\System_do_zarządzania_ligą_piłkarską\\System_do_zarządzania_ligą_piłkarską\\Server\\System_do_zarządzania_ligą_piłkarską.Server.csproj": {}
   },
   "projects": {
-    "C:\\Users\\danbu\\Desktop\\PRACA INŻYNIERSKA\\System_do_zarządzania_ligą_piłkarską\\System_do_zarządzania_ligą_piłkarską\\Client\\System_do_zarządzania_ligą_piłkarską.Client.csproj": {
+    "C:\\Users\\Daniel\\Desktop\\PRACA INŻYNIERSKA\\Backup\\System_do_zarządzania_ligą_piłkarską\\System_do_zarządzania_ligą_piłkarską\\Client\\System_do_zarządzania_ligą_piłkarską.Client.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\danbu\\Desktop\\PRACA INŻYNIERSKA\\System_do_zarządzania_ligą_piłkarską\\System_do_zarządzania_ligą_piłkarską\\Client\\System_do_zarządzania_ligą_piłkarską.Client.csproj",
+        "projectUniqueName": "C:\\Users\\Daniel\\Desktop\\PRACA INŻYNIERSKA\\Backup\\System_do_zarządzania_ligą_piłkarską\\System_do_zarządzania_ligą_piłkarską\\Client\\System_do_zarządzania_ligą_piłkarską.Client.csproj",
         "projectName": "System_do_zarządzania_ligą_piłkarską.Client",
-        "projectPath": "C:\\Users\\danbu\\Desktop\\PRACA INŻYNIERSKA\\System_do_zarządzania_ligą_piłkarską\\System_do_zarządzania_ligą_piłkarską\\Client\\System_do_zarządzania_ligą_piłkarską.Client.csproj",
-        "packagesPath": "C:\\Users\\danbu\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\danbu\\Desktop\\PRACA INŻYNIERSKA\\System_do_zarządzania_ligą_piłkarską\\System_do_zarządzania_ligą_piłkarską\\Client\\obj\\",
+        "projectPath": "C:\\Users\\Daniel\\Desktop\\PRACA INŻYNIERSKA\\Backup\\System_do_zarządzania_ligą_piłkarską\\System_do_zarządzania_ligą_piłkarską\\Client\\System_do_zarządzania_ligą_piłkarską.Client.csproj",
+        "packagesPath": "C:\\Users\\Daniel\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Daniel\\Desktop\\PRACA INŻYNIERSKA\\Backup\\System_do_zarządzania_ligą_piłkarską\\System_do_zarządzania_ligą_piłkarską\\Client\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+          "D:\\Visual Udostępnione\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\danbu\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\Daniel\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "D:\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\danbu\\Desktop\\PRACA INŻYNIERSKA\\System_do_zarządzania_ligą_piłkarską\\System_do_zarządzania_ligą_piłkarską\\Shared\\System_do_zarządzania_ligą_piłkarską.Shared.csproj": {
-                "projectPath": "C:\\Users\\danbu\\Desktop\\PRACA INŻYNIERSKA\\System_do_zarządzania_ligą_piłkarską\\System_do_zarządzania_ligą_piłkarską\\Shared\\System_do_zarządzania_ligą_piłkarską.Shared.csproj"
+              "C:\\Users\\Daniel\\Desktop\\PRACA INŻYNIERSKA\\Backup\\System_do_zarządzania_ligą_piłkarską\\System_do_zarządzania_ligą_piłkarską\\Shared\\System_do_zarządzania_ligą_piłkarską.Shared.csproj": {
+                "projectPath": "C:\\Users\\Daniel\\Desktop\\PRACA INŻYNIERSKA\\Backup\\System_do_zarządzania_ligą_piłkarską\\System_do_zarządzania_ligą_piłkarską\\Shared\\System_do_zarządzania_ligą_piłkarską.Shared.csproj"
               }
             }
           }
@@ -43,11 +40,6 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -88,13 +80,13 @@
             "Microsoft.NET.ILLink.Tasks": {
               "suppressParent": "All",
               "target": "Package",
-              "version": "[8.0.5, )",
+              "version": "[8.0.1, )",
               "autoReferenced": true
             },
             "Microsoft.NET.Sdk.WebAssembly.Pack": {
               "suppressParent": "All",
               "target": "Package",
-              "version": "[8.0.5, )",
+              "version": "[8.0.1, )",
               "autoReferenced": true
             },
             "Newtonsoft.Json": {
@@ -116,7 +108,7 @@
           "downloadDependencies": [
             {
               "name": "Microsoft.NETCore.App.Runtime.Mono.browser-wasm",
-              "version": "[8.0.5, 8.0.5]"
+              "version": "[8.0.1, 8.0.1]"
             }
           ],
           "frameworkReferences": {
@@ -124,7 +116,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101/PortableRuntimeIdentifierGraph.json"
         }
       },
       "runtimes": {
@@ -133,40 +125,37 @@
         }
       }
     },
-    "C:\\Users\\danbu\\Desktop\\PRACA INŻYNIERSKA\\System_do_zarządzania_ligą_piłkarską\\System_do_zarządzania_ligą_piłkarską\\Server\\System_do_zarządzania_ligą_piłkarską.Server.csproj": {
+    "C:\\Users\\Daniel\\Desktop\\PRACA INŻYNIERSKA\\Backup\\System_do_zarządzania_ligą_piłkarską\\System_do_zarządzania_ligą_piłkarską\\Server\\System_do_zarządzania_ligą_piłkarską.Server.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\danbu\\Desktop\\PRACA INŻYNIERSKA\\System_do_zarządzania_ligą_piłkarską\\System_do_zarządzania_ligą_piłkarską\\Server\\System_do_zarządzania_ligą_piłkarską.Server.csproj",
+        "projectUniqueName": "C:\\Users\\Daniel\\Desktop\\PRACA INŻYNIERSKA\\Backup\\System_do_zarządzania_ligą_piłkarską\\System_do_zarządzania_ligą_piłkarską\\Server\\System_do_zarządzania_ligą_piłkarską.Server.csproj",
         "projectName": "System_do_zarządzania_ligą_piłkarską.Server",
-        "projectPath": "C:\\Users\\danbu\\Desktop\\PRACA INŻYNIERSKA\\System_do_zarządzania_ligą_piłkarską\\System_do_zarządzania_ligą_piłkarską\\Server\\System_do_zarządzania_ligą_piłkarską.Server.csproj",
-        "packagesPath": "C:\\Users\\danbu\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\danbu\\Desktop\\PRACA INŻYNIERSKA\\System_do_zarządzania_ligą_piłkarską\\System_do_zarządzania_ligą_piłkarską\\Server\\obj\\",
+        "projectPath": "C:\\Users\\Daniel\\Desktop\\PRACA INŻYNIERSKA\\Backup\\System_do_zarządzania_ligą_piłkarską\\System_do_zarządzania_ligą_piłkarską\\Server\\System_do_zarządzania_ligą_piłkarską.Server.csproj",
+        "packagesPath": "C:\\Users\\Daniel\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Daniel\\Desktop\\PRACA INŻYNIERSKA\\Backup\\System_do_zarządzania_ligą_piłkarską\\System_do_zarządzania_ligą_piłkarską\\Server\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+          "D:\\Visual Udostępnione\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\danbu\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\Daniel\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "D:\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\danbu\\Desktop\\PRACA INŻYNIERSKA\\System_do_zarządzania_ligą_piłkarską\\System_do_zarządzania_ligą_piłkarską\\Client\\System_do_zarządzania_ligą_piłkarską.Client.csproj": {
-                "projectPath": "C:\\Users\\danbu\\Desktop\\PRACA INŻYNIERSKA\\System_do_zarządzania_ligą_piłkarską\\System_do_zarządzania_ligą_piłkarską\\Client\\System_do_zarządzania_ligą_piłkarską.Client.csproj"
+              "C:\\Users\\Daniel\\Desktop\\PRACA INŻYNIERSKA\\Backup\\System_do_zarządzania_ligą_piłkarską\\System_do_zarządzania_ligą_piłkarską\\Client\\System_do_zarządzania_ligą_piłkarską.Client.csproj": {
+                "projectPath": "C:\\Users\\Daniel\\Desktop\\PRACA INŻYNIERSKA\\Backup\\System_do_zarządzania_ligą_piłkarską\\System_do_zarządzania_ligą_piłkarską\\Client\\System_do_zarządzania_ligą_piłkarską.Client.csproj"
               },
-              "C:\\Users\\danbu\\Desktop\\PRACA INŻYNIERSKA\\System_do_zarządzania_ligą_piłkarską\\System_do_zarządzania_ligą_piłkarską\\Shared\\System_do_zarządzania_ligą_piłkarską.Shared.csproj": {
-                "projectPath": "C:\\Users\\danbu\\Desktop\\PRACA INŻYNIERSKA\\System_do_zarządzania_ligą_piłkarską\\System_do_zarządzania_ligą_piłkarską\\Shared\\System_do_zarządzania_ligą_piłkarską.Shared.csproj"
+              "C:\\Users\\Daniel\\Desktop\\PRACA INŻYNIERSKA\\Backup\\System_do_zarządzania_ligą_piłkarską\\System_do_zarządzania_ligą_piłkarską\\Shared\\System_do_zarządzania_ligą_piłkarską.Shared.csproj": {
+                "projectPath": "C:\\Users\\Daniel\\Desktop\\PRACA INŻYNIERSKA\\Backup\\System_do_zarządzania_ligą_piłkarską\\System_do_zarządzania_ligą_piłkarską\\Shared\\System_do_zarządzania_ligą_piłkarską.Shared.csproj"
               }
             }
           }
@@ -175,11 +164,6 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -230,7 +214,7 @@
             },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
-              "version": "[8.0.4, )"
+              "version": "[8.0.6, )"
             },
             "Newtonsoft.Json": {
               "target": "Package",
@@ -256,33 +240,30 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\danbu\\Desktop\\PRACA INŻYNIERSKA\\System_do_zarządzania_ligą_piłkarską\\System_do_zarządzania_ligą_piłkarską\\Shared\\System_do_zarządzania_ligą_piłkarską.Shared.csproj": {
+    "C:\\Users\\Daniel\\Desktop\\PRACA INŻYNIERSKA\\Backup\\System_do_zarządzania_ligą_piłkarską\\System_do_zarządzania_ligą_piłkarską\\Shared\\System_do_zarządzania_ligą_piłkarską.Shared.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\danbu\\Desktop\\PRACA INŻYNIERSKA\\System_do_zarządzania_ligą_piłkarską\\System_do_zarządzania_ligą_piłkarską\\Shared\\System_do_zarządzania_ligą_piłkarską.Shared.csproj",
+        "projectUniqueName": "C:\\Users\\Daniel\\Desktop\\PRACA INŻYNIERSKA\\Backup\\System_do_zarządzania_ligą_piłkarską\\System_do_zarządzania_ligą_piłkarską\\Shared\\System_do_zarządzania_ligą_piłkarską.Shared.csproj",
         "projectName": "System_do_zarządzania_ligą_piłkarską.Shared",
-        "projectPath": "C:\\Users\\danbu\\Desktop\\PRACA INŻYNIERSKA\\System_do_zarządzania_ligą_piłkarską\\System_do_zarządzania_ligą_piłkarską\\Shared\\System_do_zarządzania_ligą_piłkarską.Shared.csproj",
-        "packagesPath": "C:\\Users\\danbu\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\danbu\\Desktop\\PRACA INŻYNIERSKA\\System_do_zarządzania_ligą_piłkarską\\System_do_zarządzania_ligą_piłkarską\\Shared\\obj\\",
+        "projectPath": "C:\\Users\\Daniel\\Desktop\\PRACA INŻYNIERSKA\\Backup\\System_do_zarządzania_ligą_piłkarską\\System_do_zarządzania_ligą_piłkarską\\Shared\\System_do_zarządzania_ligą_piłkarską.Shared.csproj",
+        "packagesPath": "C:\\Users\\Daniel\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Daniel\\Desktop\\PRACA INŻYNIERSKA\\Backup\\System_do_zarządzania_ligą_piłkarską\\System_do_zarządzania_ligą_piłkarską\\Shared\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+          "D:\\Visual Udostępnione\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\danbu\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\Daniel\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "D:\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -295,11 +276,6 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -327,7 +303,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

@@ -1,0 +1,55 @@
+﻿@using System_do_zarządzania_ligą_piłkarską.Client.Areas.Admin.Shared
+@using Microsoft.AspNetCore.Authorization
+@using System_do_zarządzania_ligą_piłkarską.Shared.DTOs
+
+@page "/admin/users"
+@layout AdminLayout
+
+@inject HttpClient Http
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@attribute [Authorize(Roles = "Admin")]
+
+<h1>Admin Dashboard</h1>
+
+<p>Użytkownicy:</p>
+
+@if (users == null || users.Count == 0)
+{
+    <p>Brak użytkowników do wyświetlenia.</p>
+}
+else
+{
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Imię</th>
+                <th>Nazwisko</th>
+                <th>Email</th>
+                <th>Rola</th>
+                <th>Stan</th>
+                <th>Data rejestracji</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in users)
+            {
+                <tr>
+                    <td>@user.FirstName</td>
+                    <td>@user.LastName</td>
+                    <td>@user.Email</td>
+                    <td>@user.Roles.FirstOrDefault()</td>
+                    <td>@(user.LockoutEndDateUtc == null ? "Aktywny" : $"Zablokowany do {@user.LockoutEndDateUtc}")</td>
+                    <td>@user.RegistrationDate</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+@code {
+    private List<ApplicationUserDTO>? users;
+
+    protected override async Task OnInitializedAsync()
+    {
+        users = await Http.GetFromJsonAsync<List<ApplicationUserDTO>>("/api/users");
+    }
+}

@@ -50,10 +50,10 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
             return leagueId;
         }
 
-        public async Task<List<Match>> GetPastMatchesByTeam(int teamId)
+        public async Task<List<Match>> GetMatchesByTeam(int teamId, bool isFinished)
         {
             var matches = await _context.Matches.
-                Where(x => x.AwayTeamId == teamId || x.HomeTeamId == teamId).
+                Where(x => (x.AwayTeamId == teamId || x.HomeTeamId == teamId) && x.IsFinished == isFinished).
                 Include(x => x.HomeTeam).
                 Include(x => x.AwayTeam).
                 ToListAsync();

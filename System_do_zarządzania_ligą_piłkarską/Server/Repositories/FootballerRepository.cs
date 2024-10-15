@@ -13,6 +13,17 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
         {
             _context = context;
         }
+
+        public async Task<FootballerStat> GetFootballerInfoById(int footballerId)
+        {
+            var footballer = await _context.FootballerStats.
+                Where(x => x.Id == footballerId).
+                Include(x => x.Footballer).
+                FirstOrDefaultAsync();
+
+            return footballer;
+        }
+
         public async Task<List<Footballer>> GetPlayersByPage(int pageNumber, int pageSize)
         {
             var players = await _context.Footballers.

@@ -1,0 +1,10 @@
+﻿@using System_do_zarządzania_ligą_piłkarską.Client.Areas.Admin.Shared
+@using Microsoft.AspNetCore.Authorization
+
+@page "/admin/start"
+@layout AdminLayout
+@attribute [Authorize(Roles = "Admin")]
+
+<h1>Admin Dashboard</h1>
+
+<p>Welcome to the admin area. This section is restricted to users with the Admin role.</p>

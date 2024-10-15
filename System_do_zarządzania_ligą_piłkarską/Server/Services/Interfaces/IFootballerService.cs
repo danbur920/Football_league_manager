@@ -6,5 +6,6 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Services.Interfaces
     {
         Task<List<FootballerDTO>>GetPlayersByPage(int pageNumber, int pageSize);
         Task<int> GetTotalPlayersCount();
+        Task<FootballerStatDTO> GetFootballerInfoById(int footballerId);
     }
 }

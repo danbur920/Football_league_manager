@@ -16,6 +16,13 @@
 
 <PageTitle>Ligi</PageTitle>
 
+<div>
+    <p>
+        SIEMAAAAAAAAAAAAAAAAAAAAAAAANIIIIIIIIIIIIIIIIIIIOOOOOOOOOOOOOOO
+    </p>
+</div>
+
+
 <Alert Message="@AlertManager.Message" Type="@AlertManager.Type" IsVisible="@AlertManager.IsVisible" />
 
 <input type="text" @bind="SearchQueryManager.Name" placeholder="Szukaj ligę po nazwie..." class="form-control mb-3" />
@@ -59,17 +66,24 @@ else
                     <td>@league.LeagueStartDate</td>
                     <td>@league.LeagueEndDate</td>
                     <td>
-                        @if (IsFavourite(league.Id))
+                        @if (_userId != null)
                         {
-                            <button class="btn btn-primary" @onclick="() => RemoveFromFavourites(league.Id)">
-                                <i class="fas fa-star"></i> Usuń z ulubionych
-                            </button>
+                            @if (IsFavourite(league.Id))
+                            {
+                                <button class="btn btn-primary" @onclick="() => RemoveFromFavourites(league.Id)">
+                                    <i class="fas fa-star"></i> Usuń z ulubionych
+                                </button>
+                            }
+                            else
+                            {
+                                <button class="btn btn-secondary" @onclick="() => AddToFavourites(league.Id)">
+                                    <i class="fas fa-star"></i> Dodaj do ulubionych
+                                </button>
+                            }
                         }
                         else
                         {
-                            <button class="btn btn-secondary" @onclick="() => AddToFavourites(league.Id)">
-                                <i class="fas fa-star"></i> Dodaj do ulubionych
-                            </button>
+                            <i class="fas fa-lock"></i>
                         }
                     </td>
                     <td>
@@ -136,13 +150,16 @@ else
 
     private bool IsFavourite(int leagueId)
     {
-        var isFavourite = userFavouriteLeagues.FirstOrDefault(x => x.FavouriteId == leagueId) != null;
-        return isFavourite;
+            var isFavourite = userFavouriteLeagues.FirstOrDefault(x => x.FavouriteId == leagueId) != null;
+            return isFavourite;
     }
 
     private async Task RefreshFavourites()
     {
-        userFavouriteLeagues = await Http.GetFromJsonAsync<List<FavouriteDTO>>($"api/favourites/league");
+        if (_userId != null)
+        {
+            userFavouriteLeagues = await Http.GetFromJsonAsync<List<FavouriteDTO>>($"api/favourites/league");
+        }
     }
 
     private async Task AddToFavourites(int leagueId)
@@ -188,3 +205,4 @@ else
         Navigation.NavigateTo($"/leagues/{leagueId}");
     }
 }
+ 

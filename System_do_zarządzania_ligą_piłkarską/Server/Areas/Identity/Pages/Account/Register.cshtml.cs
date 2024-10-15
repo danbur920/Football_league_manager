@@ -123,6 +123,8 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Areas.Identity.Pages.A
                 user.RegistrationDate = DateTime.Now;
                 user.DateOfBirth = Input.DateOfBirth;
 
+                await _userManager.AddToRoleAsync(user, "User");
+
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
                 var result = await _userManager.CreateAsync(user, Input.Password);
@@ -159,7 +161,6 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Areas.Identity.Pages.A
                 }
             }
 
-            // If we got this far, something failed, redisplay form
             return Page();
         }
 

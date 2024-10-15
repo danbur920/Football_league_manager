@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace System_do_zarządzania_ligą_piłkarską.Shared.DTOs
@@ -16,6 +17,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Shared.DTOs
         public int RedCardsGiven { get; set; }
         public int PenaltiesAwarded { get; set; }
         public int FoulsCalled { get; set; }
+        [JsonIgnore]
         public virtual RefereeDTO? Referee { get; set; }
         public virtual LeagueDTO? League { get; set; }
     }

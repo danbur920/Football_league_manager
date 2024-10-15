@@ -38,10 +38,10 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Controllers
             return Ok(stats);
         }
 
-        [HttpGet("{teamId}/matches/past")]
-        public async Task<ActionResult<List<FootballerStatDTO>>> GetPastMatches(int teamId)
+        [HttpGet("{teamId}/matches")]
+        public async Task<ActionResult<List<MatchDTO>>> GetMatches(int teamId, [FromQuery] bool isFinished)
         {
-            var matches = await _teamService.GetPastMatchesByTeam(teamId);
+            var matches = await _teamService.GetMatchesByTeam(teamId, isFinished);
             return Ok(matches);
         }
     }

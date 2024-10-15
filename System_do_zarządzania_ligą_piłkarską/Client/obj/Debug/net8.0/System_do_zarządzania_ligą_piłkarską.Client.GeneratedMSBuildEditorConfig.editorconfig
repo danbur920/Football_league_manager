@@ -13,127 +13,159 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = browser
 build_property.RootNamespace = System_do_zarządzania_ligą_piłkarską.Client
 build_property.RootNamespace = System_do_zarządzania_ligą_piłkarską.Client
-build_property.ProjectDir = C:\Users\danbu\Desktop\PRACA INŻYNIERSKA\System_do_zarządzania_ligą_piłkarską\System_do_zarządzania_ligą_piłkarską\Client\
+build_property.ProjectDir = C:\Users\Daniel\Desktop\PRACA INŻYNIERSKA\Backup\System_do_zarządzania_ligą_piłkarską\System_do_zarządzania_ligą_piłkarską\Client\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = false
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\danbu\Desktop\PRACA INŻYNIERSKA\System_do_zarządzania_ligą_piłkarską\System_do_zarządzania_ligą_piłkarską\Client
+build_property.MSBuildProjectDirectory = C:\Users\Daniel\Desktop\PRACA INŻYNIERSKA\Backup\System_do_zarządzania_ligą_piłkarską\System_do_zarządzania_ligą_piłkarską\Client
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/danbu/Desktop/PRACA INŻYNIERSKA/System_do_zarządzania_ligą_piłkarską/System_do_zarządzania_ligą_piłkarską/Client/App.razor]
+[C:/Users/Daniel/Desktop/PRACA INŻYNIERSKA/Backup/System_do_zarządzania_ligą_piłkarską/System_do_zarządzania_ligą_piłkarską/Client/App.razor]
 build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/danbu/Desktop/PRACA INŻYNIERSKA/System_do_zarządzania_ligą_piłkarską/System_do_zarządzania_ligą_piłkarską/Client/Components/Alert.razor]
+[C:/Users/Daniel/Desktop/PRACA INŻYNIERSKA/Backup/System_do_zarządzania_ligą_piłkarską/System_do_zarządzania_ligą_piłkarską/Client/Areas/Admin/Pages/Start.razor]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cUGFnZXNcU3RhcnQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Daniel/Desktop/PRACA INŻYNIERSKA/Backup/System_do_zarządzania_ligą_piłkarską/System_do_zarządzania_ligą_piłkarską/Client/Areas/Admin/Pages/Users.razor]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cUGFnZXNcVXNlcnMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Daniel/Desktop/PRACA INŻYNIERSKA/Backup/System_do_zarządzania_ligą_piłkarską/System_do_zarządzania_ligą_piłkarską/Client/Components/Alert.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xBbGVydC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/danbu/Desktop/PRACA INŻYNIERSKA/System_do_zarządzania_ligą_piłkarską/System_do_zarządzania_ligą_piłkarską/Client/Components/Lineup.razor]
+[C:/Users/Daniel/Desktop/PRACA INŻYNIERSKA/Backup/System_do_zarządzania_ligą_piłkarską/System_do_zarządzania_ligą_piłkarską/Client/Components/Lineup.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMaW5ldXAucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/danbu/Desktop/PRACA INŻYNIERSKA/System_do_zarządzania_ligą_piłkarską/System_do_zarządzania_ligą_piłkarską/Client/Components/MatchesTable.razor]
+[C:/Users/Daniel/Desktop/PRACA INŻYNIERSKA/Backup/System_do_zarządzania_ligą_piłkarską/System_do_zarządzania_ligą_piłkarską/Client/Components/MatchesTable.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xNYXRjaGVzVGFibGUucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/danbu/Desktop/PRACA INŻYNIERSKA/System_do_zarządzania_ligą_piłkarską/System_do_zarządzania_ligą_piłkarską/Client/Components/Modal.razor]
+[C:/Users/Daniel/Desktop/PRACA INŻYNIERSKA/Backup/System_do_zarządzania_ligą_piłkarską/System_do_zarządzania_ligą_piłkarską/Client/Components/Modal.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xNb2RhbC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/danbu/Desktop/PRACA INŻYNIERSKA/System_do_zarządzania_ligą_piłkarską/System_do_zarządzania_ligą_piłkarską/Client/Components/PaginationBar.razor]
+[C:/Users/Daniel/Desktop/PRACA INŻYNIERSKA/Backup/System_do_zarządzania_ligą_piłkarską/System_do_zarządzania_ligą_piłkarską/Client/Components/PaginationBar.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdpbmF0aW9uQmFyLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/danbu/Desktop/PRACA INŻYNIERSKA/System_do_zarządzania_ligą_piłkarską/System_do_zarządzania_ligą_piłkarską/Client/Other/Footballers - kopiaBeforeChanges.razor]
+[C:/Users/Daniel/Desktop/PRACA INŻYNIERSKA/Backup/System_do_zarządzania_ligą_piłkarską/System_do_zarządzania_ligą_piłkarską/Client/Other/Footballers - kopiaBeforeChanges.razor]
 build_metadata.AdditionalFiles.TargetPath = T3RoZXJcRm9vdGJhbGxlcnMgLSBrb3BpYUJlZm9yZUNoYW5nZXMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/danbu/Desktop/PRACA INŻYNIERSKA/System_do_zarządzania_ligą_piłkarską/System_do_zarządzania_ligą_piłkarską/Client/Pages/Authentication.razor]
+[C:/Users/Daniel/Desktop/PRACA INŻYNIERSKA/Backup/System_do_zarządzania_ligą_piłkarską/System_do_zarządzania_ligą_piłkarską/Client/Pages/Authentication.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXV0aGVudGljYXRpb24ucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/danbu/Desktop/PRACA INŻYNIERSKA/System_do_zarządzania_ligą_piłkarską/System_do_zarządzania_ligą_piłkarską/Client/Pages/FavouritesPages/FavouriteFootballers .razor]
+[C:/Users/Daniel/Desktop/PRACA INŻYNIERSKA/Backup/System_do_zarządzania_ligą_piłkarską/System_do_zarządzania_ligą_piłkarską/Client/Pages/FavouritesPages/FavouriteFootballers .razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRmF2b3VyaXRlc1BhZ2VzXEZhdm91cml0ZUZvb3RiYWxsZXJzIC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/danbu/Desktop/PRACA INŻYNIERSKA/System_do_zarządzania_ligą_piłkarską/System_do_zarządzania_ligą_piłkarską/Client/Pages/FavouritesPages/FavouriteLeagues.razor]
+[C:/Users/Daniel/Desktop/PRACA INŻYNIERSKA/Backup/System_do_zarządzania_ligą_piłkarską/System_do_zarządzania_ligą_piłkarską/Client/Pages/FavouritesPages/FavouriteLeagues.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRmF2b3VyaXRlc1BhZ2VzXEZhdm91cml0ZUxlYWd1ZXMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/danbu/Desktop/PRACA INŻYNIERSKA/System_do_zarządzania_ligą_piłkarską/System_do_zarządzania_ligą_piłkarską/Client/Pages/FavouritesPages/FavouriteReferees.razor]
+[C:/Users/Daniel/Desktop/PRACA INŻYNIERSKA/Backup/System_do_zarządzania_ligą_piłkarską/System_do_zarządzania_ligą_piłkarską/Client/Pages/FavouritesPages/FavouriteReferees.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRmF2b3VyaXRlc1BhZ2VzXEZhdm91cml0ZVJlZmVyZWVzLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/danbu/Desktop/PRACA INŻYNIERSKA/System_do_zarządzania_ligą_piłkarską/System_do_zarządzania_ligą_piłkarską/Client/Pages/FavouritesPages/FavouriteTeams.razor]
+[C:/Users/Daniel/Desktop/PRACA INŻYNIERSKA/Backup/System_do_zarządzania_ligą_piłkarską/System_do_zarządzania_ligą_piłkarską/Client/Pages/FavouritesPages/FavouriteTeams.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRmF2b3VyaXRlc1BhZ2VzXEZhdm91cml0ZVRlYW1zLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/danbu/Desktop/PRACA INŻYNIERSKA/System_do_zarządzania_ligą_piłkarską/System_do_zarządzania_ligą_piłkarską/Client/Pages/FootballersPages/Footballers.razor]
+[C:/Users/Daniel/Desktop/PRACA INŻYNIERSKA/Backup/System_do_zarządzania_ligą_piłkarską/System_do_zarządzania_ligą_piłkarską/Client/Pages/FootballersPages/Footballers.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRm9vdGJhbGxlcnNQYWdlc1xGb290YmFsbGVycy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/danbu/Desktop/PRACA INŻYNIERSKA/System_do_zarządzania_ligą_piłkarską/System_do_zarządzania_ligą_piłkarską/Client/Pages/Index.razor]
+[C:/Users/Daniel/Desktop/PRACA INŻYNIERSKA/Backup/System_do_zarządzania_ligą_piłkarską/System_do_zarządzania_ligą_piłkarską/Client/Pages/FootballersPages/FootballersDetails.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRm9vdGJhbGxlcnNQYWdlc1xGb290YmFsbGVyc0RldGFpbHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Daniel/Desktop/PRACA INŻYNIERSKA/Backup/System_do_zarządzania_ligą_piłkarską/System_do_zarządzania_ligą_piłkarską/Client/Pages/Index.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXgucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/danbu/Desktop/PRACA INŻYNIERSKA/System_do_zarządzania_ligą_piłkarską/System_do_zarządzania_ligą_piłkarską/Client/Pages/LeaguesPages/LeagueDetails.razor]
+[C:/Users/Daniel/Desktop/PRACA INŻYNIERSKA/Backup/System_do_zarządzania_ligą_piłkarską/System_do_zarządzania_ligą_piłkarską/Client/Pages/LeaguesPages/LeagueDetails.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTGVhZ3Vlc1BhZ2VzXExlYWd1ZURldGFpbHMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/danbu/Desktop/PRACA INŻYNIERSKA/System_do_zarządzania_ligą_piłkarską/System_do_zarządzania_ligą_piłkarską/Client/Pages/LeaguesPages/Leagues.razor]
+[C:/Users/Daniel/Desktop/PRACA INŻYNIERSKA/Backup/System_do_zarządzania_ligą_piłkarską/System_do_zarządzania_ligą_piłkarską/Client/Pages/LeaguesPages/Leagues.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTGVhZ3Vlc1BhZ2VzXExlYWd1ZXMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/danbu/Desktop/PRACA INŻYNIERSKA/System_do_zarządzania_ligą_piłkarską/System_do_zarządzania_ligą_piłkarską/Client/Pages/LeaguesPages/LeagueScorers.razor]
+[C:/Users/Daniel/Desktop/PRACA INŻYNIERSKA/Backup/System_do_zarządzania_ligą_piłkarską/System_do_zarządzania_ligą_piłkarską/Client/Pages/LeaguesPages/LeagueScorers.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTGVhZ3Vlc1BhZ2VzXExlYWd1ZVNjb3JlcnMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/danbu/Desktop/PRACA INŻYNIERSKA/System_do_zarządzania_ligą_piłkarską/System_do_zarządzania_ligą_piłkarską/Client/Pages/LeaguesPages/LeagueTable.razor]
+[C:/Users/Daniel/Desktop/PRACA INŻYNIERSKA/Backup/System_do_zarządzania_ligą_piłkarską/System_do_zarządzania_ligą_piłkarską/Client/Pages/LeaguesPages/LeagueTable.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTGVhZ3Vlc1BhZ2VzXExlYWd1ZVRhYmxlLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/danbu/Desktop/PRACA INŻYNIERSKA/System_do_zarządzania_ligą_piłkarską/System_do_zarządzania_ligą_piłkarską/Client/Pages/RefereesPages/Referees.razor]
+[C:/Users/Daniel/Desktop/PRACA INŻYNIERSKA/Backup/System_do_zarządzania_ligą_piłkarską/System_do_zarządzania_ligą_piłkarską/Client/Pages/RefereesPages/RefereeDetails.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUmVmZXJlZXNQYWdlc1xSZWZlcmVlRGV0YWlscy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Daniel/Desktop/PRACA INŻYNIERSKA/Backup/System_do_zarządzania_ligą_piłkarską/System_do_zarządzania_ligą_piłkarską/Client/Pages/RefereesPages/Referees.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUmVmZXJlZXNQYWdlc1xSZWZlcmVlcy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/danbu/Desktop/PRACA INŻYNIERSKA/System_do_zarządzania_ligą_piłkarską/System_do_zarządzania_ligą_piłkarską/Client/Pages/TeamsPages/TeamDetails.razor]
+[C:/Users/Daniel/Desktop/PRACA INŻYNIERSKA/Backup/System_do_zarządzania_ligą_piłkarską/System_do_zarządzania_ligą_piłkarską/Client/Pages/TeamsPages/TeamDetails.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVGVhbXNQYWdlc1xUZWFtRGV0YWlscy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/danbu/Desktop/PRACA INŻYNIERSKA/System_do_zarządzania_ligą_piłkarską/System_do_zarządzania_ligą_piłkarską/Client/Pages/TeamsPages/TeamLineup.razor]
+[C:/Users/Daniel/Desktop/PRACA INŻYNIERSKA/Backup/System_do_zarządzania_ligą_piłkarską/System_do_zarządzania_ligą_piłkarską/Client/Pages/TeamsPages/TeamFutureMatches.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVGVhbXNQYWdlc1xUZWFtRnV0dXJlTWF0Y2hlcy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Daniel/Desktop/PRACA INŻYNIERSKA/Backup/System_do_zarządzania_ligą_piłkarską/System_do_zarządzania_ligą_piłkarską/Client/Pages/TeamsPages/TeamLineup.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVGVhbXNQYWdlc1xUZWFtTGluZXVwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/danbu/Desktop/PRACA INŻYNIERSKA/System_do_zarządzania_ligą_piłkarską/System_do_zarządzania_ligą_piłkarską/Client/Pages/TeamsPages/TeamPastMatches.razor]
+[C:/Users/Daniel/Desktop/PRACA INŻYNIERSKA/Backup/System_do_zarządzania_ligą_piłkarską/System_do_zarządzania_ligą_piłkarską/Client/Pages/TeamsPages/TeamPastMatches.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVGVhbXNQYWdlc1xUZWFtUGFzdE1hdGNoZXMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/danbu/Desktop/PRACA INŻYNIERSKA/System_do_zarządzania_ligą_piłkarską/System_do_zarządzania_ligą_piłkarską/Client/Pages/TeamsPages/Teams.razor]
+[C:/Users/Daniel/Desktop/PRACA INŻYNIERSKA/Backup/System_do_zarządzania_ligą_piłkarską/System_do_zarządzania_ligą_piłkarską/Client/Pages/TeamsPages/Teams.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVGVhbXNQYWdlc1xUZWFtcy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/danbu/Desktop/PRACA INŻYNIERSKA/System_do_zarządzania_ligą_piłkarską/System_do_zarządzania_ligą_piłkarską/Client/Shared/LoginDisplay.razor]
+[C:/Users/Daniel/Desktop/PRACA INŻYNIERSKA/Backup/System_do_zarządzania_ligą_piłkarską/System_do_zarządzania_ligą_piłkarską/Client/Pages/TrophiesPages/Trophies.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVHJvcGhpZXNQYWdlc1xUcm9waGllcy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Daniel/Desktop/PRACA INŻYNIERSKA/Backup/System_do_zarządzania_ligą_piłkarską/System_do_zarządzania_ligą_piłkarską/Client/Shared/LoginDisplay.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXExvZ2luRGlzcGxheS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/danbu/Desktop/PRACA INŻYNIERSKA/System_do_zarządzania_ligą_piłkarską/System_do_zarządzania_ligą_piłkarską/Client/Shared/RedirectToLogin.razor]
+[C:/Users/Daniel/Desktop/PRACA INŻYNIERSKA/Backup/System_do_zarządzania_ligą_piłkarską/System_do_zarządzania_ligą_piłkarską/Client/Shared/RedirectToLogin.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXFJlZGlyZWN0VG9Mb2dpbi5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/danbu/Desktop/PRACA INŻYNIERSKA/System_do_zarządzania_ligą_piłkarską/System_do_zarządzania_ligą_piłkarską/Client/Shared/SurveyPrompt.razor]
+[C:/Users/Daniel/Desktop/PRACA INŻYNIERSKA/Backup/System_do_zarządzania_ligą_piłkarską/System_do_zarządzania_ligą_piłkarską/Client/Shared/SurveyPrompt.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXFN1cnZleVByb21wdC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/danbu/Desktop/PRACA INŻYNIERSKA/System_do_zarządzania_ligą_piłkarską/System_do_zarządzania_ligą_piłkarską/Client/_Imports.razor]
+[C:/Users/Daniel/Desktop/PRACA INŻYNIERSKA/Backup/System_do_zarządzania_ligą_piłkarską/System_do_zarządzania_ligą_piłkarską/Client/_Imports.razor]
 build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/danbu/Desktop/PRACA INŻYNIERSKA/System_do_zarządzania_ligą_piłkarską/System_do_zarządzania_ligą_piłkarską/Client/Shared/MainLayout.razor]
+[C:/Users/Daniel/Desktop/PRACA INŻYNIERSKA/Backup/System_do_zarządzania_ligą_piłkarską/System_do_zarządzania_ligą_piłkarską/Client/Areas/Admin/Shared/AdminLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cU2hhcmVkXEFkbWluTGF5b3V0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-jn5elzfk7g
+
+[C:/Users/Daniel/Desktop/PRACA INŻYNIERSKA/Backup/System_do_zarządzania_ligą_piłkarską/System_do_zarządzania_ligą_piłkarską/Client/Areas/Admin/Shared/AdminNavMenu.razor]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cU2hhcmVkXEFkbWluTmF2TWVudS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-s58zxgz4fv
+
+[C:/Users/Daniel/Desktop/PRACA INŻYNIERSKA/Backup/System_do_zarządzania_ligą_piłkarską/System_do_zarządzania_ligą_piłkarską/Client/Shared/MainLayout.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE1haW5MYXlvdXQucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-v94di5oln4
 
-[C:/Users/danbu/Desktop/PRACA INŻYNIERSKA/System_do_zarządzania_ligą_piłkarską/System_do_zarządzania_ligą_piłkarską/Client/Shared/NavMenu.razor]
+[C:/Users/Daniel/Desktop/PRACA INŻYNIERSKA/Backup/System_do_zarządzania_ligą_piłkarską/System_do_zarządzania_ligą_piłkarską/Client/Shared/NavMenu.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE5hdk1lbnUucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-iodi5cxajw

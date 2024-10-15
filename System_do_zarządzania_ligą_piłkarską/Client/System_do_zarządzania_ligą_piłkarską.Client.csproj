@@ -11,6 +11,20 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Areas\Admin\Shared\AdminLayout.razor.css" />
+    <None Remove="Areas\Admin\Shared\AdminNavMenu.razor.css" />
+    <None Remove="Shared\MainLayout.razor.css" />
+    <None Remove="Shared\NavMenu.razor.css" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Areas\Admin\Shared\AdminLayout.razor.css" />
+    <Content Include="Areas\Admin\Shared\AdminNavMenu.razor.css" />
+    <Content Include="Shared\MainLayout.razor.css" />
+    <Content Include="Shared\NavMenu.razor.css" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="Other\FavouriteLeagues.razor" />
   </ItemGroup>
 	
@@ -45,7 +59,13 @@
     <Content Update="Pages\FavouritesPages\FavouriteLeagues.razor">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
     </Content>
+    <Content Update="Pages\RefereesPages\RefereeDetails.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
     <Content Update="Pages\RefereesPages\Referees.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Pages\TeamsPages\TeamFutureMatches.razor">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
     </Content>
     <Content Update="Pages\TeamsPages\TeamPastMatches.razor">
