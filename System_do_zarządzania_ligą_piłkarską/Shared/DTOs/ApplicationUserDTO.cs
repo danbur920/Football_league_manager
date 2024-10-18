@@ -14,6 +14,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Shared.DTOs
         public string LastName { get; set; }
         public DateOnly DateOfBirth { get; set; }
         public DateTime RegistrationDate { get; set; }
+        public string? Role { get; set; }
         public virtual ICollection<TeamDTO> Teams { get; set; } = new List<TeamDTO>();
         public virtual ICollection<FavouriteDTO> Favourites { get; set; } = new List<FavouriteDTO>();
     }

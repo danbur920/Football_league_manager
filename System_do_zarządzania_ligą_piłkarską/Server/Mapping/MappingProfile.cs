@@ -17,7 +17,11 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Mapping
             CreateMap<RefereeStat, RefereeStatDTO>().ReverseMap();
             CreateMap<Match, MatchDTO>().ReverseMap();
             CreateMap<Trophy, TrophyDTO>().ReverseMap();
-            CreateMap<ApplicationUser, ApplicationUserDTO>().ReverseMap();
+
+            CreateMap<ApplicationUser, ApplicationUserDTO>()
+                      .ForMember(dest => dest.LockoutEndDateUtc, opt => opt.MapFrom(src => src.LockoutEnd != null ? (DateTime?)src.LockoutEnd.Value.DateTime : null))
+                      .ReverseMap()
+                      .ForMember(dest => dest.LockoutEnd, opt => opt.MapFrom(src => src.LockoutEndDateUtc));
 
             CreateMap<TeamStat, TeamStatDTO>()
                 .ForMember(dest => dest.TeamName, opt => opt.MapFrom(src => src.Team.Name))

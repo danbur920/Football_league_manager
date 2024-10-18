@@ -5,7 +5,6 @@
                 <NotAuthorized>
                     @if (context.User.Identity?.IsAuthenticated != true)
                     {
-                        <!-- Zamiast przekierowania do logowania, wyświetlamy komunikat lub pozwalamy na nawigację -->
                         <p role="alert">Please log in to access this page.</p>
                     }
                     else

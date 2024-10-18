@@ -125,7 +125,7 @@ builder.Services.Configure<JwtBearerOptions>(IdentityServerJwtConstants.Identity
 {
     options.TokenValidationParameters = new TokenValidationParameters
     {
-        RoleClaimType = ClaimTypes.Role,  // Upewnij się, że claim 'role' jest używany do autoryzacji ról
+        RoleClaimType = ClaimTypes.Role,  
         NameClaimType = ClaimTypes.Name
     };
 });
@@ -133,9 +133,18 @@ builder.Services.Configure<JwtBearerOptions>(IdentityServerJwtConstants.Identity
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAllOrigins", builder =>
+    {
+        builder.AllowAnyOrigin()
+               .AllowAnyMethod()
+               .AllowAnyHeader();
+    });
+});
+
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseMigrationsEndPoint();
@@ -144,9 +153,9 @@ if (app.Environment.IsDevelopment())
 else
 {
     app.UseExceptionHandler("/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+
 
 app.UseHttpsRedirection();
 
@@ -154,7 +163,6 @@ app.UseBlazorFrameworkFiles();
 app.UseStaticFiles();
 
 app.UseRouting();
-
 app.UseIdentityServer();
 
 app.UseAuthentication();

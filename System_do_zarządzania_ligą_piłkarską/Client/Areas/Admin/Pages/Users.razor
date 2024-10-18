@@ -28,6 +28,7 @@ else
                 <th>Rola</th>
                 <th>Stan</th>
                 <th>Data rejestracji</th>
+                <th>Działania</th>
             </tr>
         </thead>
         <tbody>
@@ -37,9 +38,20 @@ else
                     <td>@user.FirstName</td>
                     <td>@user.LastName</td>
                     <td>@user.Email</td>
-                    <td>@user.Roles.FirstOrDefault()</td>
+                    <td>@user.Role</td>
                     <td>@(user.LockoutEndDateUtc == null ? "Aktywny" : $"Zablokowany do {@user.LockoutEndDateUtc}")</td>
                     <td>@user.RegistrationDate</td>
+                    <td>
+                        @if (user.LockoutEndDateUtc != null)
+                        {
+                            <button class="btn btn-info" @onclick="()=>UnlockUser(user.Id)">Odblokuj</button>
+                        }
+                        else
+                        {
+                            <button class="btn btn-warning" @onclick="() => BlockUser(user.Id)">Zablokuj</button>
+                        }
+                        <button class="btn btn-danger" @onclick="()=>DeleteUser(user.Id)">Usuń</button>
+                    </td>
                 </tr>
             }
         </tbody>
@@ -50,6 +62,38 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        users = await Http.GetFromJsonAsync<List<ApplicationUserDTO>>("/api/users");
+        await LoadUsers();
+    }
+
+    private async Task LoadUsers()
+    {
+        users = await Http.GetFromJsonAsync<List<ApplicationUserDTO>>("api/admin/Users");
+    }
+
+    private async Task DeleteUser(string userId)
+    {
+        var result = await Http.DeleteAsync($"api/admin/Users/{userId}");
+        if (result.IsSuccessStatusCode)
+        {
+            await LoadUsers();
+        }
+    }
+
+    private async Task BlockUser(string userId)
+    {
+        var result = await Http.PatchAsync($"api/admin/Users/block/{userId}", null);
+        if (result.IsSuccessStatusCode)
+        {
+            await LoadUsers();
+        }
+    }
+
+    private async Task UnlockUser(string userId)
+    {
+        var result = await Http.PatchAsync($"api/admin/Users/unlock/{userId}", null);
+        if (result.IsSuccessStatusCode)
+        {
+            await LoadUsers();
+        }
     }
 }
