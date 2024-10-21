@@ -11,6 +11,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Areas\LeagueMaster\Shared\AdminLayout.razor.css" />
+    <None Remove="Areas\LeagueMaster\Shared\AdminNavMenu.razor.css" />
     <None Remove="Areas\Admin\Shared\AdminLayout.razor.css" />
     <None Remove="Areas\Admin\Shared\AdminNavMenu.razor.css" />
     <None Remove="Shared\MainLayout.razor.css" />

@@ -8,12 +8,16 @@
     <Authorized>
         <a href="authentication/profile">Hello, @context.User.Identity?.Name!</a>
         <button class="nav-link btn btn-link" @onclick="BeginLogOut">Log out</button>
+        <a href="/">Strona główna</a>
 
-        @if (checkUserRole)
+        @if (checkUserRole == "Admin")
         {
             <a href="admin/start">Admin Panel</a>
         }
-
+        else if(checkUserRole == "LeagueMaster")
+        {
+            <a href="league-master/start">League Master Panel</a>
+        }
     </Authorized>
     <NotAuthorized>
         <a href="authentication/register">Register</a>
@@ -22,10 +26,10 @@
 </AuthorizeView>
 
 @code {
-    bool checkUserRole;
+    string checkUserRole;
     protected override async Task OnInitializedAsync()
     {
-        await CheckUserRole();
+        checkUserRole = await CheckUserRole();
     }
     private void BeginLogOut()
     {
@@ -33,11 +37,12 @@
         Navigation.NavigateToLogout("authentication/logout");
     }
 
-    private async Task CheckUserRole()
+    private async Task<string> CheckUserRole()
     {
         var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
         var user = authState.User;
+        string role;
 
-        checkUserRole = user.IsInRole("Admin");
+        return user.IsInRole("Admin") ? "Admin" : (user.IsInRole("LeagueMaster") ? "LeagueMaster" : "-");
     }
 }

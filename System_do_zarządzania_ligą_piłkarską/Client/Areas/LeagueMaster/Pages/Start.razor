@@ -1,0 +1,9 @@
+﻿@using System_do_zarządzania_ligą_piłkarską.Client.Areas.Admin.Shared
+@using Microsoft.AspNetCore.Authorization
+@using System_do_zarządzania_ligą_piłkarską.Client.Areas.LeagueMaster.Shared
+
+@page "/league-master/start"
+@layout LeagueMasterLayout
+@attribute [Authorize(Roles = "LeagueMaster")]
+
+<h1>League Master Dashboard</h1>

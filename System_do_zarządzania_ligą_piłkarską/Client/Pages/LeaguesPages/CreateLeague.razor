@@ -1,0 +1,103 @@
+﻿@page "/create-league"
+
+@using Microsoft.AspNetCore.Components.Forms
+@using System_do_zarządzania_ligą_piłkarską.Shared.DTOs
+
+@inject HttpClient Http
+@inject NavigationManager Navigation
+@inject AuthenticationStateProvider AuthenticationStateProvider
+
+<PageTitle>Stwórz ligę</PageTitle>
+
+<h2>Stwórz własną ligę</h2>
+
+<EditForm Model="_newLeague" OnValidSubmit="HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="mb-3">
+        <label for="name" class="form-label">Nazwa ligi</label>
+        <InputText id="name" class="form-control" @bind-Value="_newLeague.Name" />
+    </div>
+
+    <div class="mb-3">
+        <label for="country" class="form-label">Kraj</label>
+        <InputText id="country" class="form-control" @bind-Value="_newLeague.Country" />
+    </div>
+
+    <div class="mb-3">
+        <label for="level" class="form-label">Poziom ligi (opcjonalnie)</label>
+        <InputText id="level" class="form-control" @bind-Value="_newLeague.Level" />
+    </div>
+
+    <div class="mb-3">
+        <label for="season" class="form-label">Sezon (opcjonalnie)</label>
+        <InputText id="season" class="form-control" @bind-Value="_newLeague.Season" />
+    </div>
+
+    <div class="mb-3">
+        <label for="startDate" class="form-label">Data rozpoczęcia ligi (opcjonalnie)</label>
+        <InputDate id="startDate" class="form-control" @bind-Value="_newLeague.LeagueStartDate" />
+    </div>
+
+    <div class="mb-3">
+        <label for="endDate" class="form-label">Data zakończenia ligi (opcjonalnie)</label>
+        <InputDate id="endDate" class="form-control" @bind-Value="_newLeague.LeagueEndDate" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Dodaj ligę</button>
+</EditForm>
+
+@if (_isSuccess)
+{
+    <div class="alert alert-success mt-3">Liga została dodana pomyślnie!</div>
+}
+
+@if (_isError)
+{
+    <div class="alert alert-danger mt-3">Wystąpił błąd podczas dodawania ligi.</div>
+}
+
+@code {
+    private LeagueDTO _newLeague = new();
+    private bool _isSuccess = false;
+    private bool _isError = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await GetUserId();
+    }
+
+    private async Task GetUserId()
+    {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+        _userId = user.FindFirst(c => c.Type == "sub")?.Value;
+    }
+
+    private async Task HandleValidSubmit()
+    {
+        try
+        {
+            var response = await Http.PostAsJsonAsync("/api/leagues", _newLeague);
+
+            if (response.IsSuccessStatusCode)
+            {
+                _isSuccess = true;
+                _isError = false;
+            }
+            else
+            {
+                _isError = true;
+                _isSuccess = false;
+            }
+        }
+        catch (Exception)
+        {
+            _isError = true;
+            _isSuccess = false;
+        }
+    }
+
+    private string _userId = string.Empty;
+}
