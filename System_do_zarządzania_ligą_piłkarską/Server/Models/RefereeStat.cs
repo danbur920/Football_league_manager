@@ -17,6 +17,6 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Models
         public int PenaltiesAwarded { get; set; }
         public int FoulsCalled { get; set; }
         public virtual Referee? Referee { get; set; }
-        public virtual League? League { get; set; }
+        public virtual LeagueSeason? League { get; set; }
     }
 }

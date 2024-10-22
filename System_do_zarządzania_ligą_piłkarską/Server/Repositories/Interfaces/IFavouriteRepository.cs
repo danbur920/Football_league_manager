@@ -12,7 +12,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories.Interface
 
         // Metody sprecyzowane:
 
-        Task<List<League>> GetFavouriteLeaguesByUserId(string userId);
+        Task<List<LeagueSeason>> GetFavouriteLeaguesByUserId(string userId);
         Task<List<Team>> GetFavouriteTeamsByUserId(string userId);
         Task<List<Footballer>> GetFavouriteFootballersByUserId(string userId);
         Task<List<Referee>> GetFavouriteRefereesByUserId(string userId);

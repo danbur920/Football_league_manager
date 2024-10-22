@@ -14,19 +14,20 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
         {
             _context = context;
         }
-        public async Task<List<League>> GetLeaguesByPage(int pageNumber, int pageSize)
+        public async Task<List<LeagueSeason>> GetLeaguesByPage(int pageNumber, int pageSize)
         {
-            var leagues = await _context.Leagues.
+            var leagues = await _context.LeagueSeasons.
                 Skip((pageNumber - 1) * pageSize).
                 Take(pageSize).
+                Include(x => x.LeagueInfo).
                 ToListAsync();
 
             return leagues;
         }
 
-        public async Task<League> GetLeagueById(int id)
+        public async Task<LeagueSeason> GetLeagueById(int id)
         {
-            var league = await _context.Leagues.FindAsync(id);
+            var league = await _context.LeagueSeasons.Include(x => x.LeagueInfo).FirstOrDefaultAsync(x => x.Id == id);
             return league;
         }
 
@@ -55,6 +56,18 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
                 .ToListAsync();
 
             return teamsStats;
+        }
+
+        public async Task AddNewLeagueInfo(LeagueInfo leagueInfo)
+        {
+            await _context.LeagueInfos.AddAsync(leagueInfo);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task AddNewLeagueSeason(LeagueSeason leagueSeason)
+        {
+            await _context.LeagueSeasons.AddAsync(leagueSeason);
+            await _context.SaveChangesAsync();
         }
     }
 }

@@ -51,9 +51,9 @@ else
             @foreach (var league in favouriteLeagues)
             {
                 <tr>
-                    <td>@league.Name</td>
-                    <td>@league.Country</td>
-                    <td>@league.Level</td>
+                    <td>@league.LeagueInfo.Name</td>
+                    <td>@league.LeagueInfo.Country</td>
+                    <td>@league.LeagueInfo.Level</td>
                     <td>@league.Season</td>
                     <td>@league.MatchesPlayed</td>
                     <td>@league.LeagueStartDate</td>
@@ -75,7 +75,7 @@ else
 }
 
 @code {
-    private List<LeagueDTO>? favouriteLeagues;
+    private List<LeagueSeasonDTO>? favouriteLeagues;
 
     private string _userId = string.Empty;
     private bool _showModal = false;
@@ -96,7 +96,7 @@ else
 
     private async Task RefreshFavourites()
     {
-        favouriteLeagues = await Http.GetFromJsonAsync<List<LeagueDTO>>("api/favourites/favourite-leagues");
+        favouriteLeagues = await Http.GetFromJsonAsync<List<LeagueSeasonDTO>>("api/favourites/favourite-leagues");
     }
 
     private void ShowRemoveModal(int leagueId)
@@ -137,12 +137,12 @@ else
 
             if (response.IsSuccessStatusCode)
             {
-                AlertManager.DisplayAlert($"Usunięto ligę {league?.Name} z ulubionych.", "info");
+                AlertManager.DisplayAlert($"Usunięto ligę {league?.LeagueInfo.Name} z ulubionych.", "info");
                 await RefreshFavourites();
             }
             else
             {
-                AlertManager.DisplayAlert($"Nie udało się usunąć ligi {league?.Name} z ulubionych.", "danger");
+                AlertManager.DisplayAlert($"Nie udało się usunąć ligi {league?.LeagueInfo.Name} z ulubionych.", "danger");
             }
         }
     }
@@ -151,6 +151,6 @@ else
     {
         Navigation.NavigateTo($"/leagues/{leagueId}");
     }
-} 
+}
 
 

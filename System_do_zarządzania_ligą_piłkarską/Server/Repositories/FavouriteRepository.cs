@@ -47,13 +47,14 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
             return favourites;
         }
 
-        public async Task<List<League>> GetFavouriteLeaguesByUserId(string userId)
+        public async Task<List<LeagueSeason>> GetFavouriteLeaguesByUserId(string userId)
         {
             var userFavourites = await GetFavouritesByUserId(userId, FavouriteType.League);
             var userFavouritesId = userFavourites.Select(x => x.FavouriteId).ToList();
 
-            var userFavouriteLeagues = await _context.Leagues.
+            var userFavouriteLeagues = await _context.LeagueSeasons.
                 Where(league => userFavouritesId.Contains(league.Id)).
+                Include(x=>x.LeagueInfo).
                 ToListAsync();
             return userFavouriteLeagues;
         }

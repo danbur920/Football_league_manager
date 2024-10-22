@@ -1,71 +1,81 @@
 ﻿@page "/create-league"
 
 @using Microsoft.AspNetCore.Components.Forms
-@using System_do_zarządzania_ligą_piłkarską.Shared.DTOs
+@using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Leagues
+@using System_do_zarządzania_ligą_piłkarską.Client.Components
+@using System_do_zarządzania_ligą_piłkarską.Client.Extensions
 
 @inject HttpClient Http
 @inject NavigationManager Navigation
 @inject AuthenticationStateProvider AuthenticationStateProvider
+@inject AlertManager AlertManager
 
 <PageTitle>Stwórz ligę</PageTitle>
 
 <h2>Stwórz własną ligę</h2>
 
-<EditForm Model="_newLeague" OnValidSubmit="HandleValidSubmit">
+<EditForm Model="newLeague" OnValidSubmit="HandleValidSubmit">
     <DataAnnotationsValidator />
     <ValidationSummary />
 
     <div class="mb-3">
         <label for="name" class="form-label">Nazwa ligi</label>
-        <InputText id="name" class="form-control" @bind-Value="_newLeague.Name" />
+        <InputText id="name" class="form-control" @bind-Value="newLeague.LeagueInfo.Name" />
     </div>
 
     <div class="mb-3">
         <label for="country" class="form-label">Kraj</label>
-        <InputText id="country" class="form-control" @bind-Value="_newLeague.Country" />
+        <InputText id="country" class="form-control" @bind-Value="newLeague.LeagueInfo.Country" />
     </div>
 
     <div class="mb-3">
-        <label for="level" class="form-label">Poziom ligi (opcjonalnie)</label>
-        <InputText id="level" class="form-control" @bind-Value="_newLeague.Level" />
+        <label for="level" class="form-label">Poziom (opcjonalnie)</label>
+        <select id="level" class="form-select" @bind="newLeague.LeagueInfo.Level">
+            @foreach (var level in Enum.GetValues(typeof(Level)).Cast<Level>())
+            {
+                <option value="@level">@level</option>
+            }
+        </select>
     </div>
 
     <div class="mb-3">
         <label for="season" class="form-label">Sezon (opcjonalnie)</label>
-        <InputText id="season" class="form-control" @bind-Value="_newLeague.Season" />
+        <select id="season" class="form-select" @bind="newLeague.LeagueSeason.Season">
+            @foreach (var season in Enum.GetValues(typeof(Season)).Cast<Season>())
+            {
+                <option value="@season">@(season.ToString().Substring(1))</option>
+            }
+        </select>
     </div>
 
     <div class="mb-3">
         <label for="startDate" class="form-label">Data rozpoczęcia ligi (opcjonalnie)</label>
-        <InputDate id="startDate" class="form-control" @bind-Value="_newLeague.LeagueStartDate" />
+        <InputDate id="startDate" class="form-control" @bind-Value="newLeague.LeagueSeason.LeagueStartDate" />
     </div>
 
     <div class="mb-3">
         <label for="endDate" class="form-label">Data zakończenia ligi (opcjonalnie)</label>
-        <InputDate id="endDate" class="form-control" @bind-Value="_newLeague.LeagueEndDate" />
+        <InputDate id="endDate" class="form-control" @bind-Value="newLeague.LeagueSeason.LeagueEndDate" />
     </div>
 
     <button type="submit" class="btn btn-primary">Dodaj ligę</button>
 </EditForm>
 
-@if (_isSuccess)
-{
-    <div class="alert alert-success mt-3">Liga została dodana pomyślnie!</div>
-}
-
-@if (_isError)
-{
-    <div class="alert alert-danger mt-3">Wystąpił błąd podczas dodawania ligi.</div>
-}
+<Alert Message="@AlertManager.Message" Type="@AlertManager.Type" IsVisible="@AlertManager.IsVisible" />
 
 @code {
-    private LeagueDTO _newLeague = new();
-    private bool _isSuccess = false;
-    private bool _isError = false;
+    private string _userId = string.Empty;
+    private NewLeagueDTO newLeague = new NewLeagueDTO
+    {
+        LeagueInfo = new NewLeagueInfoDTO(),
+        LeagueSeason = new NewLeagueSeasonDTO()
+    };
+
 
     protected override async Task OnInitializedAsync()
     {
         await GetUserId();
+
     }
 
     private async Task GetUserId()
@@ -79,25 +89,32 @@
     {
         try
         {
-            var response = await Http.PostAsJsonAsync("/api/leagues", _newLeague);
+            var response = await Http.PostAsJsonAsync("/api/leagues", newLeague);
 
             if (response.IsSuccessStatusCode)
             {
-                _isSuccess = true;
-                _isError = false;
+                AlertManager.DisplayAlert($"Dodano ligę {newLeague.LeagueInfo.Name}!", "success");
+                Clear();
             }
             else
             {
-                _isError = true;
-                _isSuccess = false;
+                var content = await response.Content.ReadAsStringAsync();
+                AlertManager.DisplayAlert($"Nie udało się dodać ligi {newLeague.LeagueInfo.Name}.", "danger");
             }
         }
-        catch (Exception)
+        catch (Exception ex)
         {
-            _isError = true;
-            _isSuccess = false;
+            AlertManager.DisplayAlert($"Nie udało się dodać ligi {newLeague.LeagueInfo.Name}.", "danger");
         }
     }
 
-    private string _userId = string.Empty;
+    private void Clear()
+    {
+        newLeague.LeagueInfo.Name = string.Empty;
+        newLeague.LeagueInfo.Country = string.Empty;
+        newLeague.LeagueInfo.Level = null;
+        newLeague.LeagueSeason.Season = null;
+        newLeague.LeagueSeason.LeagueStartDate = null;
+        newLeague.LeagueSeason.LeagueEndDate = null;
+    }
 }

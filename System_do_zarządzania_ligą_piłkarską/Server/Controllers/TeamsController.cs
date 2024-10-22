@@ -25,7 +25,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Controllers
         }
 
         [HttpGet("{teamId}")]
-        public async Task<ActionResult<List<LeagueDTO>>> GetTeamById(int teamId)
+        public async Task<ActionResult<List<LeagueSeasonDTO>>> GetTeamById(int teamId)
         {
             var team = await _teamService.GetTeamById(teamId);
             return Ok(team);

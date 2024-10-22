@@ -499,7 +499,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Data.Migrations
                     b.ToTable("FootballerStats");
                 });
 
-            modelBuilder.Entity("System_do_zarządzania_ligą_piłkarską.Server.Models.League", b =>
+            modelBuilder.Entity("System_do_zarządzania_ligą_piłkarską.Server.Models.LeagueInfo", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -511,28 +511,47 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateOnly?>("LeagueEndDate")
-                        .HasColumnType("date");
-
-                    b.Property<DateOnly?>("LeagueStartDate")
-                        .HasColumnType("date");
-
                     b.Property<string>("Level")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("MatchesPlayed")
-                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.HasKey("Id");
+
+                    b.ToTable("LeagueInfos");
+                });
+
+            modelBuilder.Entity("System_do_zarządzania_ligą_piłkarską.Server.Models.LeagueSeason", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateOnly?>("LeagueEndDate")
+                        .HasColumnType("date");
+
+                    b.Property<int>("LeagueInfoId")
+                        .HasColumnType("int");
+
+                    b.Property<DateOnly?>("LeagueStartDate")
+                        .HasColumnType("date");
+
+                    b.Property<int>("MatchesPlayed")
+                        .HasColumnType("int");
+
                     b.Property<string>("Season")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Leagues");
+                    b.HasIndex("LeagueInfoId");
+
+                    b.ToTable("LeagueSeasons");
                 });
 
             modelBuilder.Entity("System_do_zarządzania_ligą_piłkarską.Server.Models.Match", b =>
@@ -902,7 +921,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("System_do_zarządzania_ligą_piłkarską.Server.Models.League", "League")
+                    b.HasOne("System_do_zarządzania_ligą_piłkarską.Server.Models.LeagueSeason", "League")
                         .WithMany("FootballersStats")
                         .HasForeignKey("LeagueId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -921,6 +940,17 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Data.Migrations
                     b.Navigation("TeamStat");
                 });
 
+            modelBuilder.Entity("System_do_zarządzania_ligą_piłkarską.Server.Models.LeagueSeason", b =>
+                {
+                    b.HasOne("System_do_zarządzania_ligą_piłkarską.Server.Models.LeagueInfo", "LeagueInfo")
+                        .WithMany("LeagueSeasons")
+                        .HasForeignKey("LeagueInfoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("LeagueInfo");
+                });
+
             modelBuilder.Entity("System_do_zarządzania_ligą_piłkarską.Server.Models.Match", b =>
                 {
                     b.HasOne("System_do_zarządzania_ligą_piłkarską.Server.Models.Team", "AwayTeam")
@@ -935,7 +965,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Data.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("System_do_zarządzania_ligą_piłkarską.Server.Models.League", "League")
+                    b.HasOne("System_do_zarządzania_ligą_piłkarską.Server.Models.LeagueSeason", "League")
                         .WithMany("Matches")
                         .HasForeignKey("LeagueId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -969,7 +999,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Data.Migrations
 
             modelBuilder.Entity("System_do_zarządzania_ligą_piłkarską.Server.Models.RefereeStat", b =>
                 {
-                    b.HasOne("System_do_zarządzania_ligą_piłkarską.Server.Models.League", "League")
+                    b.HasOne("System_do_zarządzania_ligą_piłkarską.Server.Models.LeagueSeason", "League")
                         .WithMany("RefereeStats")
                         .HasForeignKey("LeagueId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -997,7 +1027,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Data.Migrations
 
             modelBuilder.Entity("System_do_zarządzania_ligą_piłkarską.Server.Models.TeamStat", b =>
                 {
-                    b.HasOne("System_do_zarządzania_ligą_piłkarską.Server.Models.League", "League")
+                    b.HasOne("System_do_zarządzania_ligą_piłkarską.Server.Models.LeagueSeason", "League")
                         .WithMany("TeamsStats")
                         .HasForeignKey("LeagueId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1041,7 +1071,12 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Data.Migrations
                     b.Navigation("Trophies");
                 });
 
-            modelBuilder.Entity("System_do_zarządzania_ligą_piłkarską.Server.Models.League", b =>
+            modelBuilder.Entity("System_do_zarządzania_ligą_piłkarską.Server.Models.LeagueInfo", b =>
+                {
+                    b.Navigation("LeagueSeasons");
+                });
+
+            modelBuilder.Entity("System_do_zarządzania_ligą_piłkarską.Server.Models.LeagueSeason", b =>
                 {
                     b.Navigation("FootballersStats");
 

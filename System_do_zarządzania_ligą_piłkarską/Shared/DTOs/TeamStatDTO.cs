@@ -22,7 +22,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Shared.DTOs
         public int Points { get; set; }
         public bool CurrentLeague { get; set; } // jeśli true to znaczy, że LeagueId wskazuje na aktualną ligę w jakiej gra zespół,
                                                 // jeśli false to jest to liga, w której grał zespół w przeszłości
-        public virtual LeagueDTO? League { get; set; }
+        public virtual LeagueSeasonDTO? League { get; set; }
         public virtual TeamDTO? Team { get; set; }
         public virtual ICollection<FootballerStatDTO>? FootballersStats { get; set; } = new List<FootballerStatDTO>();
     }

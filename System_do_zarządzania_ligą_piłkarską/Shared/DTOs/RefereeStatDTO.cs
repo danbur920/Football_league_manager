@@ -19,6 +19,6 @@ namespace System_do_zarządzania_ligą_piłkarską.Shared.DTOs
         public int FoulsCalled { get; set; }
         [JsonIgnore]
         public virtual RefereeDTO? Referee { get; set; }
-        public virtual LeagueDTO? League { get; set; }
+        public virtual LeagueSeasonDTO? League { get; set; }
     }
 }

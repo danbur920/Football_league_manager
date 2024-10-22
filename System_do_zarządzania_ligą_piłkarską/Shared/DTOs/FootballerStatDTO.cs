@@ -19,7 +19,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Shared.DTOs
         public int YellowCards { get; set; }
         public int RedCards { get; set; }
         public virtual FootballerDTO? Footballer { get; set; }
-        public virtual LeagueDTO? League { get; set; }
+        public virtual LeagueSeasonDTO? League { get; set; }
         public virtual TeamStatDTO? TeamStatDTO { get; set; }
     }
 }

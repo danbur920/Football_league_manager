@@ -2,9 +2,11 @@
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.VisualBasic;
 using System_do_zarządzania_ligą_piłkarską.Server.Services;
 using System_do_zarządzania_ligą_piłkarską.Server.Services.Interfaces;
 using System_do_zarządzania_ligą_piłkarską.Shared.DTOs;
+using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Leagues;
 using static System.Net.WebRequestMethods;
 
 namespace System_do_zarządzania_ligą_piłkarską.Server.Controllers
@@ -20,22 +22,16 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Controllers
             _leagueService = leagueService;
         }
 
-        //[HttpGet]
-        //public async Task<IActionResult> GetPlayersByPage(int pageNumber = 1, int pageSize = 2)
-        //{
-        //    var players = await _footballerService.GetPlayersByPage(pageNumber, pageSize);
-        //    return Ok(players);
-        //}
 
         [HttpGet]
-        public async Task<ActionResult<List<LeagueDTO>>> GetLeaguesByPage(int pageNumber, int pageSize)
+        public async Task<ActionResult<List<LeagueSeasonDTO>>> GetLeaguesByPage(int pageNumber, int pageSize)
         {
             var leagues = await _leagueService.GetLeaguesByPage(pageNumber, pageSize);
             return Ok(leagues);
         }
 
         [HttpGet("{leagueId}")]
-        public async Task<ActionResult<List<LeagueDTO>>> GetLeagueById(int leagueId)
+        public async Task<ActionResult<List<LeagueSeasonDTO>>> GetLeagueById(int leagueId)
         {
             var league = await _leagueService.GetLeagueById(leagueId);
             return Ok(league);
@@ -52,6 +48,13 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Controllers
         {
             var scorers = await _leagueService.GetLeagueScorers(leagueId);
             return Ok(scorers);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateNewLeague([FromBody] NewLeagueDTO newLeagueDto)
+        {
+            await _leagueService.CreateNewLeague(newLeagueDto);
+            return Ok();
         }
     }
 }

@@ -13,7 +13,8 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Data
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
         public DbSet<Footballer> Footballers { get; set; }
         public DbSet<FootballerStat> FootballerStats { get; set; }
-        public DbSet<League> Leagues { get; set; }
+        public DbSet<LeagueSeason> LeagueSeasons { get; set; }
+        public DbSet<LeagueInfo> LeagueInfos { get; set; }
         public DbSet<Match> Matches { get; set; }
         public DbSet<Referee> Referees { get; set; }
         public DbSet<RefereeStat> RefereeStats { get; set; }
@@ -48,6 +49,14 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Data
             modelBuilder.Entity<MatchEvent>()
                .Property(f => f.EventType)
                .HasConversion<string>();
+
+            modelBuilder.Entity<LeagueSeason>()
+                .Property(x => x.Season)
+                .HasConversion<string>();
+
+            modelBuilder.Entity<LeagueInfo>()
+                .Property(x => x.Level)
+                .HasConversion<string>();
 
             // -----------------------------------
 

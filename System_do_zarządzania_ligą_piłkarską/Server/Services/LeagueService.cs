@@ -3,6 +3,7 @@ using System_do_zarządzania_ligą_piłkarską.Server.Models;
 using System_do_zarządzania_ligą_piłkarską.Server.Repositories.Interfaces;
 using System_do_zarządzania_ligą_piłkarską.Server.Services.Interfaces;
 using System_do_zarządzania_ligą_piłkarską.Shared.DTOs;
+using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Leagues;
 
 namespace System_do_zarządzania_ligą_piłkarską.Server.Services
 {
@@ -16,16 +17,31 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Services
             _leagueRepository = leagueRepository;
             _mapper = mapper;
         }
-        public async Task<List<LeagueDTO>> GetLeaguesByPage(int pageNumber, int pageSize)
+        public async Task<List<LeagueSeasonDTO>> GetLeaguesByPage(int pageNumber, int pageSize)
         {
             var leagues = await _leagueRepository.GetLeaguesByPage(pageNumber, pageSize);
-            return _mapper.Map<List<LeagueDTO>>(leagues);
+
+            // Logowanie danych do debugowania
+            foreach (var league in leagues)
+            {
+                Console.WriteLine($"League ID: {league.Id}, LeagueInfoId: {league.LeagueInfoId}");
+            }
+
+            var leagueSeasonDTOs = _mapper.Map<List<LeagueSeasonDTO>>(leagues);
+
+            // Logowanie po mapowaniu
+            foreach (var leagueDTO in leagueSeasonDTOs)
+            {
+                Console.WriteLine($"LeagueDTO ID: {leagueDTO.Id}, LeagueInfoId: {leagueDTO.LeagueInfoId}");
+            }
+
+            return leagueSeasonDTOs;
         }
 
-        public async Task<LeagueDTO> GetLeagueById(int id)
+        public async Task<LeagueSeasonDTO> GetLeagueById(int id)
         {
             var league = await _leagueRepository.GetLeagueById(id);
-            return _mapper.Map<LeagueDTO>(league);
+            return _mapper.Map<LeagueSeasonDTO>(league);
         }
 
         public async Task<List<FootballerStatDTO>> GetLeagueScorers(int leagueId)
@@ -38,6 +54,16 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Services
         {
             var teamsStats = await _leagueRepository.GetLeagueTable(leagueId);
             return _mapper.Map<List<TeamStatDTO>>(teamsStats);
+        }
+
+        public async Task CreateNewLeague(NewLeagueDTO newLeagueDto)
+        {
+            var leagueInfo = _mapper.Map<LeagueInfo>(newLeagueDto.LeagueInfo);
+            var leagueSeason = _mapper.Map<LeagueSeason>(newLeagueDto.LeagueSeason);
+
+            await _leagueRepository.AddNewLeagueInfo(leagueInfo);
+            leagueSeason.LeagueInfoId = leagueInfo.Id;
+            await _leagueRepository.AddNewLeagueSeason(leagueSeason);
         }
     }
 }

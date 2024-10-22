@@ -21,7 +21,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Models
         public int Points { get; set; }
         public bool CurrentLeague { get; set; } // jeśli true to znaczy, że LeagueId wskazuje na aktualną ligę w jakiej gra zespół,
                                                 // jeśli false to jest to liga, w której grał zespół w przeszłości
-        public virtual League? League { get; set; } 
+        public virtual LeagueSeason? League { get; set; } 
         public virtual Team? Team { get; set; }
         public virtual ICollection<FootballerStat>? FootballersStats { get; set; } = new List<FootballerStat>();
     }

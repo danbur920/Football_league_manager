@@ -19,7 +19,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Models
         public int YellowCards { get; set; }
         public int RedCards { get; set; }
         public virtual Footballer? Footballer { get; set; }
-        public virtual League? League { get; set; }
+        public virtual LeagueSeason? League { get; set; }
         public virtual TeamStat? TeamStat { get; set; }
     }
 }

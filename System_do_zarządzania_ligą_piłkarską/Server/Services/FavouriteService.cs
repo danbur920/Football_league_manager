@@ -70,10 +70,10 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Services
             return _mapper.Map<List<FavouriteDTO>>(favourites);
         }
 
-        public async Task<List<LeagueDTO>> GetFavouriteLeaguesByUserId(string userId)
+        public async Task<List<LeagueSeasonDTO>> GetFavouriteLeaguesByUserId(string userId)
         {
             var favouriteLeagues = await _favouriteRepository.GetFavouriteLeaguesByUserId(userId);
-            return _mapper.Map<List<LeagueDTO>>(favouriteLeagues);
+            return _mapper.Map<List<LeagueSeasonDTO>>(favouriteLeagues);
         }
 
         public async Task<List<TeamDTO>> GetFavouriteTeamsByUserId(string userId)

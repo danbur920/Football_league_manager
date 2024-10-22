@@ -27,11 +27,11 @@
             <div class="card-body">
                 <div class="d-flex align-items-center mb-4">
                     <i class="fas fa-flag flag-icon me-3"></i>
-                    <h4 class="card-title mb-0">@league.Name</h4>
+                    <h4 class="card-title mb-0">@league.LeagueInfo.Name</h4>
                 </div>
                 <div class="mb-4">
                     <p class="card-text"><strong>Sezon:</strong> @league.Season</p>
-                    <p class="card-text"><strong>Poziom:</strong> @league.Level</p>
+                    <p class="card-text"><strong>Poziom:</strong> @league.LeagueInfo.Level</p>
                     <p class="card-text"><strong>Ilość kolejek:</strong> @league.MatchesPlayed</p>
                     <p class="card-text"><strong>Start:</strong> @league.LeagueStartDate?.ToString("dd MMM yyyy")</p>
                     <p class="card-text"><strong>Koniec:</strong> @league.LeagueEndDate?.ToString("dd MMM yyyy")</p>
@@ -56,11 +56,11 @@
 @code {
     [Parameter]
     public int leagueId { get; set; }
-    private LeagueDTO league;
+    private LeagueSeasonDTO league;
 
     protected override async Task OnInitializedAsync()
     {
-        league = await Http.GetFromJsonAsync<LeagueDTO>($"api/leagues/{leagueId}");
+        league = await Http.GetFromJsonAsync<LeagueSeasonDTO>($"api/leagues/{leagueId}");
     }
 
     private void ShowTable()

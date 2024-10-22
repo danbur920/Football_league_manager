@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using System_do_zarządzania_ligą_piłkarską.Server.Models;
 using System_do_zarządzania_ligą_piłkarską.Shared.DTOs;
+using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Leagues;
 
 namespace System_do_zarządzania_ligą_piłkarską.Server.Mapping
 {
@@ -8,7 +9,8 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Mapping
     {
         public MappingProfile()
         {
-            CreateMap<League, LeagueDTO>().ReverseMap();
+            CreateMap<LeagueSeason, LeagueSeasonDTO>().ReverseMap();
+            CreateMap<LeagueInfo, LeagueInfoDTO>().ReverseMap();
             CreateMap<FootballerStat, FootballerStatDTO>().ReverseMap();
             CreateMap<Footballer, FootballerDTO>().ReverseMap();
             CreateMap<Favourite, FavouriteDTO>().ReverseMap();
@@ -18,6 +20,9 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Mapping
             CreateMap<Match, MatchDTO>().ReverseMap();
             CreateMap<Trophy, TrophyDTO>().ReverseMap();
 
+            CreateMap<NewLeagueInfoDTO, LeagueInfo>();
+            CreateMap<NewLeagueSeasonDTO, LeagueSeason>();
+
             CreateMap<ApplicationUser, ApplicationUserDTO>()
                       .ForMember(dest => dest.LockoutEndDateUtc, opt => opt.MapFrom(src => src.LockoutEnd != null ? (DateTime?)src.LockoutEnd.Value.DateTime : null))
                       .ReverseMap()
@@ -26,6 +31,8 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Mapping
             CreateMap<TeamStat, TeamStatDTO>()
                 .ForMember(dest => dest.TeamName, opt => opt.MapFrom(src => src.Team.Name))
                 .ReverseMap();
+
+
         }
     }
 }

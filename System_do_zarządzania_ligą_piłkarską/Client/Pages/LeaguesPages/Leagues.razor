@@ -16,12 +16,6 @@
 
 <PageTitle>Ligi</PageTitle>
 
-<div>
-    <p>
-        SIEMAAAAAAAAAAAAAAAAAAAAAAAANIIIIIIIIIIIIIIIIIIIOOOOOOOOOOOOOOO
-    </p>
-</div>
-
 
 <Alert Message="@AlertManager.Message" Type="@AlertManager.Type" IsVisible="@AlertManager.IsVisible" />
 
@@ -58,10 +52,10 @@ else
             @foreach (var league in filteredLeagues)
             {
                 <tr>
-                    <td>@league.Name</td>
-                    <td>@league.Country</td>
-                    <td>@league.Level</td>
-                    <td>@league.Season</td>
+                    <td>@league.LeagueInfo.Name</td>
+                    <td>@league.LeagueInfo.Country</td>
+                    <td>@league.LeagueInfo.Level</td>
+                    <td>@(league.Season.ToString().Substring(1))</td>
                     <td>@league.MatchesPlayed</td>
                     <td>@league.LeagueStartDate</td>
                     <td>@league.LeagueEndDate</td>
@@ -107,7 +101,7 @@ else
 }
 
 @code {
-    private List<LeagueDTO>? allLeagues;
+    private List<LeagueSeasonDTO>? allLeagues;
     private List<FavouriteDTO>? userFavouriteLeagues;
 
     string _userId = string.Empty;
@@ -129,7 +123,7 @@ else
 
     private async Task<bool> LoadLeagues()
     {
-        var response = await Http.GetFromJsonAsync<List<LeagueDTO>>($"api/leagues?pageNumber={PaginationManager.PageNumber}&pageSize={PaginationManager.PageSize}");
+        var response = await Http.GetFromJsonAsync<List<LeagueSeasonDTO>>($"api/leagues?pageNumber={PaginationManager.PageNumber}&pageSize={PaginationManager.PageSize}");
         allLeagues = response;
 
         return (allLeagues != null && allLeagues.Any());
@@ -142,16 +136,16 @@ else
         _userId = user.FindFirst(c => c.Type == "sub")?.Value;
     }
 
-    private IEnumerable<LeagueDTO>? filteredLeagues =>
+    private IEnumerable<LeagueSeasonDTO>? filteredLeagues =>
     allLeagues?.Where(league =>
-        (string.IsNullOrWhiteSpace(SearchQueryManager.Name) || league.Name.Contains(SearchQueryManager.Name, StringComparison.OrdinalIgnoreCase)) &&
-        (string.IsNullOrWhiteSpace(SearchQueryManager.Country) || league.Country.Contains(SearchQueryManager.Country, StringComparison.OrdinalIgnoreCase))
+        (string.IsNullOrWhiteSpace(SearchQueryManager.Name) || league.LeagueInfo.Name.Contains(SearchQueryManager.Name, StringComparison.OrdinalIgnoreCase)) &&
+        (string.IsNullOrWhiteSpace(SearchQueryManager.Country) || league.LeagueInfo.Country.Contains(SearchQueryManager.Country, StringComparison.OrdinalIgnoreCase))
     );
 
     private bool IsFavourite(int leagueId)
     {
-            var isFavourite = userFavouriteLeagues.FirstOrDefault(x => x.FavouriteId == leagueId) != null;
-            return isFavourite;
+        var isFavourite = userFavouriteLeagues.FirstOrDefault(x => x.FavouriteId == leagueId) != null;
+        return isFavourite;
     }
 
     private async Task RefreshFavourites()
@@ -171,12 +165,12 @@ else
 
             if (response.IsSuccessStatusCode)
             {
-                AlertManager.DisplayAlert($"Dodano ligę {league?.Name} do ulubionych!", "success");
+                AlertManager.DisplayAlert($"Dodano ligę {league?.LeagueInfo.Name} do ulubionych!", "success");
                 await RefreshFavourites();
             }
             else
             {
-                AlertManager.DisplayAlert($"Nie udało się dodać ligi {league?.Name} do ulubionych.", "danger");
+                AlertManager.DisplayAlert($"Nie udało się dodać ligi {league?.LeagueInfo.Name} do ulubionych.", "danger");
             }
         }
     }
@@ -190,12 +184,12 @@ else
 
             if (response.IsSuccessStatusCode)
             {
-                AlertManager.DisplayAlert($"Usunięto ligę {league?.Name} z ulubionych.", "info");
+                AlertManager.DisplayAlert($"Usunięto ligę {league?.LeagueInfo.Name} z ulubionych.", "info");
                 await RefreshFavourites();
             }
             else
             {
-                AlertManager.DisplayAlert($"Nie udało się usunąć ligi {league?.Name} z ulubionych.", "danger");
+                AlertManager.DisplayAlert($"Nie udało się usunąć ligi {league?.LeagueInfo.Name} z ulubionych.", "danger");
             }
         }
     }
@@ -205,4 +199,3 @@ else
         Navigation.NavigateTo($"/leagues/{leagueId}");
     }
 }
- 
