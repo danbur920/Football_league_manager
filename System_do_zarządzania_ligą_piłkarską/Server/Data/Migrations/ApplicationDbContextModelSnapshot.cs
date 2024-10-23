@@ -537,6 +537,9 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Data.Migrations
                     b.Property<int>("LeagueInfoId")
                         .HasColumnType("int");
 
+                    b.Property<string>("LeagueMasterId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<DateOnly?>("LeagueStartDate")
                         .HasColumnType("date");
 
@@ -544,12 +547,13 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Season")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("LeagueInfoId");
+
+                    b.HasIndex("LeagueMasterId");
 
                     b.ToTable("LeagueSeasons");
                 });
@@ -948,7 +952,13 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("System_do_zarządzania_ligą_piłkarską.Server.Models.ApplicationUser", "LeagueMaster")
+                        .WithMany()
+                        .HasForeignKey("LeagueMasterId");
+
                     b.Navigation("LeagueInfo");
+
+                    b.Navigation("LeagueMaster");
                 });
 
             modelBuilder.Entity("System_do_zarządzania_ligą_piłkarską.Server.Models.Match", b =>

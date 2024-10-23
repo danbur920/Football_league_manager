@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualBasic;
+using System.Runtime.CompilerServices;
+using System.Security.Claims;
 using System_do_zarządzania_ligą_piłkarską.Server.Services;
 using System_do_zarządzania_ligą_piłkarską.Server.Services.Interfaces;
 using System_do_zarządzania_ligą_piłkarską.Shared.DTOs;
@@ -16,12 +18,10 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Controllers
     public class LeaguesController : ControllerBase
     {
         private readonly ILeagueService _leagueService;
-
         public LeaguesController(ILeagueService leagueService)
         {
             _leagueService = leagueService;
         }
-
 
         [HttpGet]
         public async Task<ActionResult<List<LeagueSeasonDTO>>> GetLeaguesByPage(int pageNumber, int pageSize)
@@ -53,9 +53,25 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateNewLeague([FromBody] NewLeagueDTO newLeagueDto)
         {
-            await _leagueService.CreateNewLeague(newLeagueDto);
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            await _leagueService.CreateNewLeague(newLeagueDto, userId);
             return Ok();
         }
+
+
+
+        // LeagueMaster Panel:
+
+
+        [HttpGet("league-master")]
+        [Authorize(Roles = "LeagueMaster")]
+        public async Task<IActionResult> GetAllLeaguesByLeagueMaster()
+        {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var leagues = await _leagueService.GetAllLeaguesByLeagueMaster(userId);
+            return Ok(leagues);
+        }
+
     }
 }
 

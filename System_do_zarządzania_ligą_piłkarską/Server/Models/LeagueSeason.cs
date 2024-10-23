@@ -11,11 +11,13 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Models
     {
         public int Id { get; set; }
         public int LeagueInfoId { get; set; }
+        public string? LeagueMasterId {  get; set; } // zarządca ligi
         public Season? Season { get; set; }
         public int MatchesPlayed { get; set; }
         public DateOnly? LeagueStartDate { get; set; }
         public DateOnly? LeagueEndDate { get; set; }
         public virtual LeagueInfo LeagueInfo { get; set; }
+        public virtual ApplicationUser LeagueMaster { get; set; }
         public virtual ICollection<Match> Matches { get; set; } = new List<Match>();
         public virtual ICollection<RefereeStat> RefereeStats { get; set; } = new List<RefereeStat>();
         public virtual ICollection<TeamStat> TeamsStats { get; set; } = new List<TeamStat>();

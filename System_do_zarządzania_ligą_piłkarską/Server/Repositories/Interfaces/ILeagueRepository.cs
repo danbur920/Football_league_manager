@@ -12,5 +12,9 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories.Interface
         
         Task AddNewLeagueInfo(LeagueInfo leagueInfo);
         Task AddNewLeagueSeason(LeagueSeason leagueSeason);
+
+        // League Master Panel:
+
+        Task<List<LeagueSeason>> GetAllLeaguesByLeagueMaster(string leagueMasterId);
     }
 }

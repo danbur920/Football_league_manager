@@ -78,17 +78,18 @@
 
     }
 
-    private async Task GetUserId()
+    private async Task<string> GetUserId()
     {
         var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
         var user = authState.User;
-        _userId = user.FindFirst(c => c.Type == "sub")?.Value;
+        return user.FindFirst(c => c.Type == "sub")?.Value;
     }
 
     private async Task HandleValidSubmit()
     {
         try
         {
+            newLeague.LeagueSeason.LeagueMasterId = await GetUserId();
             var response = await Http.PostAsJsonAsync("/api/leagues", newLeague);
 
             if (response.IsSuccessStatusCode)

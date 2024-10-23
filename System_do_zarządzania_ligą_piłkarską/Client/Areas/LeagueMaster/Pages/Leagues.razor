@@ -1,0 +1,60 @@
+﻿@using System_do_zarządzania_ligą_piłkarską.Shared.DTOs
+@using System_do_zarządzania_ligą_piłkarską.Client.Areas.LeagueMaster.Shared
+
+@page "/league-master/leagues"
+@layout LeagueMasterLayout
+@inject HttpClient Http
+
+
+<PageTitle>Twoje ligi</PageTitle>
+<h3>Twoje ligi</h3>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Nazwa</th>
+            <th>Kraj</th>
+            <th>Poziom ligi</th>
+            <th>Data rozpoczęcia</th>
+            <th>Data zakończenia</th>
+            <th>Liczba zespołów</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (leagues == null)
+        {
+            <tr>
+                <td colspan="8">Ładowanie...</td>
+            </tr>
+        }
+        else if (leagues.Count == 0)
+        {
+            <tr>
+                <td colspan="8">Brak danych do wyświetlenia</td>
+            </tr>
+        }
+        else
+        {
+            @foreach (var league in leagues)
+            {
+                <tr>
+                    <th>@league.LeagueInfo.Name</th>
+                    <th>@league.LeagueInfo.Country</th>
+                    <th>@league.LeagueInfo.Level</th>
+                    <th>@league.LeagueStartDate</th>
+                    <th>@league.LeagueEndDate</th>
+                    <th>ileś tam</th> @* do uzupełnienia *@
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+@code {
+    private List<LeagueSeasonDTO>? leagues;
+
+    protected override async Task OnInitializedAsync()
+    {
+        leagues = await Http.GetFromJsonAsync<List<LeagueSeasonDTO>>("api/leagues/league-master");
+    }
+}

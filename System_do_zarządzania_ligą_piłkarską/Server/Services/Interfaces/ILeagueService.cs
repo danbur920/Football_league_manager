@@ -11,6 +11,10 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Services.Interfaces
         Task<List<TeamStatDTO>> GetLeagueTable(int leagueId);
         Task<List<FootballerStatDTO>> GetLeagueScorers(int leagueId);
 
-        Task CreateNewLeague(NewLeagueDTO newLeagueDto);
+        Task CreateNewLeague(NewLeagueDTO newLeagueDto, string userId);
+
+        // League Master Panel:
+
+        Task<List<LeagueSeasonDTO>> GetAllLeaguesByLeagueMaster(string userId);
     }
 }
