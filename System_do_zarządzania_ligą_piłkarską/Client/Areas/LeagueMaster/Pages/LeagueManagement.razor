@@ -1,0 +1,76 @@
+﻿@using System_do_zarządzania_ligą_piłkarską.Shared.DTOs
+@using System_do_zarządzania_ligą_piłkarską.Client.Areas.LeagueMaster.Shared
+
+@page "/league-master/leagues/{leagueInfoId:int}"
+@layout LeagueMasterLayout
+@inject HttpClient Http
+@inject NavigationManager Navigation
+
+<PageTitle>Zarządzaj ligą</PageTitle>
+<h3>Sezony ligi @leagueName:</h3>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Nazwa</th>
+            <th>Kraj</th>
+            <th>Poziom ligi</th>
+            <th>Przejdź do ligi</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (leagues == null)
+        {
+            <tr>
+                <td colspan="8">Ładowanie...</td>
+            </tr>
+        }
+        else if (leagues.Count == 0)
+        {
+            <tr>
+                <td colspan="8">Brak danych do wyświetlenia</td>
+            </tr>
+        }
+        else
+        {
+            @foreach (var league in leagues)
+            {
+                <tr>
+                    <td>@league.LeagueInfo.Name</td>
+                    <td>@league.LeagueInfo.Country</td>
+                    <td>@league.LeagueInfo.Level</td>
+                    <td>
+                        <button class="btn btn-link" @onclick="() => GoToTheLeague(league.Id)">
+                            <i class="fas fa-arrow-right"></i> Zarządzaj ligą
+                        </button>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+@code {
+    [Parameter]
+    public int leagueInfoId { get; set; }
+    public string? leagueName { get; set; }
+
+    private List<LeagueSeasonDTO>? leagues;
+
+    protected override async Task OnInitializedAsync()
+    {
+        leagues = await Http.GetFromJsonAsync<List<LeagueSeasonDTO>>("api/leagues/league-master");
+        AssignLeagueName();
+    }
+
+    private void AssignLeagueName()
+    {
+        var league = leagues?.FirstOrDefault();
+        leagueName = league?.LeagueInfo.Name;
+    }
+
+    private void GoToTheLeagues()
+    {
+        Navigation.NavigateTo($"/league-master/leagues");
+    }
+}

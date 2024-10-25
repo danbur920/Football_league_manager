@@ -511,6 +511,9 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("LeagueMasterPrimaryId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("Level")
                         .HasColumnType("nvarchar(max)");
 
@@ -519,6 +522,8 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("LeagueMasterPrimaryId");
 
                     b.ToTable("LeagueInfos");
                 });
@@ -537,7 +542,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Data.Migrations
                     b.Property<int>("LeagueInfoId")
                         .HasColumnType("int");
 
-                    b.Property<string>("LeagueMasterId")
+                    b.Property<string>("LeagueMasterSecondaryId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<DateOnly?>("LeagueStartDate")
@@ -553,7 +558,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Data.Migrations
 
                     b.HasIndex("LeagueInfoId");
 
-                    b.HasIndex("LeagueMasterId");
+                    b.HasIndex("LeagueMasterSecondaryId");
 
                     b.ToTable("LeagueSeasons");
                 });
@@ -944,6 +949,15 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Data.Migrations
                     b.Navigation("TeamStat");
                 });
 
+            modelBuilder.Entity("System_do_zarządzania_ligą_piłkarską.Server.Models.LeagueInfo", b =>
+                {
+                    b.HasOne("System_do_zarządzania_ligą_piłkarską.Server.Models.ApplicationUser", "LeagueMasterPrimary")
+                        .WithMany()
+                        .HasForeignKey("LeagueMasterPrimaryId");
+
+                    b.Navigation("LeagueMasterPrimary");
+                });
+
             modelBuilder.Entity("System_do_zarządzania_ligą_piłkarską.Server.Models.LeagueSeason", b =>
                 {
                     b.HasOne("System_do_zarządzania_ligą_piłkarską.Server.Models.LeagueInfo", "LeagueInfo")
@@ -952,13 +966,13 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("System_do_zarządzania_ligą_piłkarską.Server.Models.ApplicationUser", "LeagueMaster")
+                    b.HasOne("System_do_zarządzania_ligą_piłkarską.Server.Models.ApplicationUser", "LeagueMasterSecondary")
                         .WithMany()
-                        .HasForeignKey("LeagueMasterId");
+                        .HasForeignKey("LeagueMasterSecondaryId");
 
                     b.Navigation("LeagueInfo");
 
-                    b.Navigation("LeagueMaster");
+                    b.Navigation("LeagueMasterSecondary");
                 });
 
             modelBuilder.Entity("System_do_zarządzania_ligą_piłkarską.Server.Models.Match", b =>

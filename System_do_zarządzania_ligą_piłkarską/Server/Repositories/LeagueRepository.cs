@@ -76,7 +76,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
         public async Task<List<LeagueSeason>> GetAllLeaguesByLeagueMaster(string leagueMasterId)
         {
             var leagues = await _context.LeagueSeasons.
-                Where(x => x.LeagueMasterId == leagueMasterId).
+                Where(x => x.LeagueMasterSecondaryId == leagueMasterId || x.LeagueInfo.LeagueMasterPrimaryId == leagueMasterId).
                 Include(x => x.LeagueInfo).
                 ToListAsync();
 

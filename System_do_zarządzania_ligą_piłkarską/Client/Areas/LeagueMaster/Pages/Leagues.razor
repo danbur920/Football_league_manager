@@ -4,6 +4,7 @@
 @page "/league-master/leagues"
 @layout LeagueMasterLayout
 @inject HttpClient Http
+@inject NavigationManager Navigation
 
 
 <PageTitle>Twoje ligi</PageTitle>
@@ -15,9 +16,7 @@
             <th>Nazwa</th>
             <th>Kraj</th>
             <th>Poziom ligi</th>
-            <th>Data rozpoczęcia</th>
-            <th>Data zakończenia</th>
-            <th>Liczba zespołów</th>
+            <th>Przejdź do ligi</th>
         </tr>
     </thead>
     <tbody>
@@ -38,12 +37,14 @@
             @foreach (var league in leagues)
             {
                 <tr>
-                    <th>@league.LeagueInfo.Name</th>
-                    <th>@league.LeagueInfo.Country</th>
-                    <th>@league.LeagueInfo.Level</th>
-                    <th>@league.LeagueStartDate</th>
-                    <th>@league.LeagueEndDate</th>
-                    <th>ileś tam</th> @* do uzupełnienia *@
+                    <td>@league.LeagueInfo.Name</td>
+                    <td>@league.LeagueInfo.Country</td>
+                    <td>@league.LeagueInfo.Level</td>
+                    <td>
+                        <button class="btn btn-link" @onclick="() => GoToTheLeague(league.Id)">
+                            <i class="fas fa-arrow-right"></i> Zarządzaj ligą
+                        </button>
+                    </td>
                 </tr>
             }
         }
@@ -56,5 +57,10 @@
     protected override async Task OnInitializedAsync()
     {
         leagues = await Http.GetFromJsonAsync<List<LeagueSeasonDTO>>("api/leagues/league-master");
+    }
+
+    private void GoToTheLeague(int leagueId)
+    {
+        Navigation.NavigateTo($"/league-master/leagues/{leagueId}");
     }
 }

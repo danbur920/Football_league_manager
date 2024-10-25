@@ -11,13 +11,13 @@ namespace System_do_zarządzania_ligą_piłkarską.Shared.DTOs
     {
         public int Id { get; set; }
         public int LeagueInfoId { get; set; }
-        public string? LeagueMasterId { get; set; }
+        public string? LeagueMasterSecondaryId { get; set; }
         public Season? Season { get; set; }
         public int MatchesPlayed { get; set; }
         public DateOnly? LeagueStartDate { get; set; }
         public DateOnly? LeagueEndDate { get; set; }
         public virtual LeagueInfoDTO LeagueInfo { get; set; }
-        public virtual ApplicationUserDTO LeagueMaster { get; set; }
+        public virtual ApplicationUserDTO LeagueMasterSecondary { get; set; }
         public virtual ICollection<MatchDTO> Matches { get; set; } = new List<MatchDTO>();
         public virtual ICollection<RefereeStatDTO> RefereeStats { get; set; } = new List<RefereeStatDTO>();
         public virtual ICollection<TeamStatDTO> TeamsStats { get; set; } = new List<TeamStatDTO>();
