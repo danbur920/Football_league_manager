@@ -62,6 +62,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Controllers
 
         // LeagueMaster Panel:
 
+        // Zwraca wszystkie ligi danego zarządcy 
 
         [HttpGet("league-master")]
         [Authorize(Roles = "LeagueMaster")]
@@ -72,6 +73,27 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Controllers
             return Ok(leagues);
         }
 
+        // Zwraca wszystkie sezony z danej ligi zarządcy 
+
+        [HttpGet("league-master/{leagueInfoId}")]
+        [Authorize(Roles = "LeagueMaster")]
+        public async Task<IActionResult> GetLeagueByLeagueMaster(int leagueInfoId)
+        {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var seasons = await _leagueService.GetLeagueByLeagueMaster(userId, leagueInfoId);
+            return Ok(seasons);
+        }
+
+        // Zwraca wybrany sezon z danej ligi zarządcy
+
+        [HttpGet("league-master/{leagueInfoId}/{leagueSeasonId}")]
+        [Authorize(Roles = "LeagueMaster")]
+        public async Task<IActionResult> GetSeasonByLeagueMaster(int leagueInfoId, int leagueSeasonId)
+        {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var season = await _leagueService.GetSeasonByLeagueMaster(userId, leagueInfoId, leagueSeasonId);
+            return Ok(season);
+        }
     }
 }
 

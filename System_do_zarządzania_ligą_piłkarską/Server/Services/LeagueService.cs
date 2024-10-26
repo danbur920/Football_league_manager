@@ -68,5 +68,17 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Services
             var leagues = await _leagueRepository.GetAllLeaguesByLeagueMaster(userId);
             return _mapper.Map<List<LeagueSeasonDTO>>(leagues);
         }
+
+        public async Task<List<LeagueSeasonDTO>> GetLeagueByLeagueMaster(string userId, int leagueInfoId)
+        {
+            var league = await _leagueRepository.GetLeagueByLeagueMaster(userId, leagueInfoId);
+            return _mapper.Map<List<LeagueSeasonDTO>>(league);
+        }
+
+        public async Task<LeagueSeasonDTO> GetSeasonByLeagueMaster(string userId, int leagueInfoId, int leagueSeasonId)
+        {
+            var season = await _leagueRepository.GetSeasonByLeagueMaster(userId, leagueInfoId, leagueSeasonId);
+            return _mapper.Map<LeagueSeasonDTO>(season);
+        }
     }
 }

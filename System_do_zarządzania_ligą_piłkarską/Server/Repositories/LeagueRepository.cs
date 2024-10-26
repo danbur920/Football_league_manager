@@ -9,7 +9,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
     public class LeagueRepository : ILeagueRepository
     {
         private readonly ApplicationDbContext _context;
-        
+
 
         public LeagueRepository(ApplicationDbContext context)
         {
@@ -81,6 +81,26 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
                 ToListAsync();
 
             return leagues;
+        }
+
+        public async Task<List<LeagueSeason>> GetLeagueByLeagueMaster(string leagueMasterId, int leagueInfoId)
+        {
+            var leagues = await _context.LeagueSeasons.
+                Where(x => (x.LeagueMasterSecondaryId == leagueMasterId || x.LeagueInfo.LeagueMasterPrimaryId == leagueMasterId) && x.LeagueInfoId == leagueInfoId).
+                Include(x => x.LeagueInfo).
+                ToListAsync();
+
+            return leagues;
+        }
+
+        public async Task<LeagueSeason> GetSeasonByLeagueMaster(string leagueMasterId, int leagueInfoId, int leagueSeasonId)
+        {
+            var leagueSeason = await _context.LeagueSeasons.
+                Where(x => (x.LeagueMasterSecondaryId == leagueMasterId || x.LeagueInfo.LeagueMasterPrimaryId == leagueMasterId) && x.LeagueInfoId == leagueInfoId && x.Id == leagueSeasonId).
+                Include(x => x.LeagueInfo).
+                FirstOrDefaultAsync();
+
+            return leagueSeason;
         }
     }
 }
