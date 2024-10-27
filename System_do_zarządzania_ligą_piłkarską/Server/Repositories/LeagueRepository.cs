@@ -102,5 +102,12 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
 
             return leagueSeason;
         }
+
+        public async Task DeleteLeague(int leagueId)
+        {
+            var leagueToDelete = await _context.LeagueInfos.FindAsync(leagueId);
+            _context.LeagueInfos.Remove(leagueToDelete);
+            await _context.SaveChangesAsync();
+        }
     }
 }

@@ -18,5 +18,6 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Services.Interfaces
         Task<List<LeagueSeasonDTO>> GetAllLeaguesByLeagueMaster(string userId);
         Task<List<LeagueSeasonDTO>> GetLeagueByLeagueMaster(string userId, int leagueInfoId);
         Task<LeagueSeasonDTO> GetSeasonByLeagueMaster(string userId, int leagueInfoId, int leagueSeasonId);
+        Task DeleteLeague(int leagueId);
     }
 }

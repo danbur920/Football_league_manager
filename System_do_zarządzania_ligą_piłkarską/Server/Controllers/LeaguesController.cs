@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualBasic;
 using System.Runtime.CompilerServices;
 using System.Security.Claims;
+using System_do_zarządzania_ligą_piłkarską.Client.Areas.Admin.Pages;
 using System_do_zarządzania_ligą_piłkarską.Server.Services;
 using System_do_zarządzania_ligą_piłkarską.Server.Services.Interfaces;
 using System_do_zarządzania_ligą_piłkarską.Shared.DTOs;
@@ -93,6 +94,14 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Controllers
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             var season = await _leagueService.GetSeasonByLeagueMaster(userId, leagueInfoId, leagueSeasonId);
             return Ok(season);
+        }
+
+        [HttpDelete("league-master/{leagueId}")]
+        [Authorize(Roles ="LeagueMaster")]
+        public async Task<IActionResult> DeleteLeague(int leagueId)
+        {
+            await _leagueService.DeleteLeague(leagueId);
+            return Ok();
         }
     }
 }

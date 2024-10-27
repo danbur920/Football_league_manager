@@ -1,13 +1,20 @@
 ﻿@using System_do_zarządzania_ligą_piłkarską.Shared.DTOs
 @using System_do_zarządzania_ligą_piłkarską.Client.Areas.LeagueMaster.Shared
+@using System_do_zarządzania_ligą_piłkarską.Client.Components
 
 @page "/league-master/leagues"
 @layout LeagueMasterLayout
 @inject HttpClient Http
 @inject NavigationManager Navigation
-
+@inject AuthenticationStateProvider AuthenticationStateProvider
 
 <PageTitle>Twoje ligi</PageTitle>
+
+@if (showModal)
+{
+    <Modal Title="Usuń" Body="Czy na pewno chcesz usunąć wybraną ligę? Zmiany są nieodwracalne!" OnConfirm="HandleConfirm" OnCancel="HandleCancel" />
+}
+
 <h3>Twoje ligi</h3>
 
 <table class="table table-striped">
@@ -17,6 +24,7 @@
             <th>Kraj</th>
             <th>Poziom ligi</th>
             <th>Przejdź do ligi</th>
+            <th>Działania</th>
         </tr>
     </thead>
     <tbody>
@@ -45,22 +53,78 @@
                             <i class="fas fa-arrow-right"></i> Zarządzaj ligą
                         </button>
                     </td>
+                    <td>
+                        @if(IsPrimaryLeagueMaster(league.LeagueInfo.LeagueMasterPrimaryId))
+                        {
+                            <button class="btn btn-danger" @onclick="()=>ShowRemoveModal(league.LeagueInfoId)">Usuń ligę</button>
+                        }
+                    </td>
                 </tr>
             }
         }
     </tbody>
 </table>
 
+@* <button class="btn btn-primary" @onclick="() => ShowRemoveModal(league.Id)">
+    <i class="fas fa-trash"></i> Usuń
+</button> *@
+
 @code {
     private List<LeagueSeasonDTO>? leagues;
+    private bool showModal = false;
+    private int leagueIdToDelete;
 
     protected override async Task OnInitializedAsync()
     {
-        leagues = await Http.GetFromJsonAsync<List<LeagueSeasonDTO>>("api/leagues/league-master");
+        await LoadLeagues();
     }
 
     private void GoToTheLeague(int leagueId)
     {
         Navigation.NavigateTo($"/league-master/leagues/{leagueId}");
+    }
+
+    private async Task LoadLeagues()
+    {
+        leagues = await Http.GetFromJsonAsync<List<LeagueSeasonDTO>>("api/leagues/league-master");
+    }
+
+    private bool IsPrimaryLeagueMaster(string leagueMasterPrimaryId)
+    {
+        var userId = GetUserId().Result;
+        return leagueMasterPrimaryId == userId ? true : false;
+    }
+
+    private async Task<string> GetUserId()
+    {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+        return user.FindFirst(c => c.Type == "sub")?.Value;
+    }
+
+    private async Task DeleteLeague(int leagueId)
+    {
+        var result = await Http.DeleteAsync($"api/leagues/league-master/{leagueId}");
+        if (result.IsSuccessStatusCode)
+        {
+            await LoadLeagues();
+        }
+    }
+
+    private void ShowRemoveModal(int leagueId)
+    {
+        leagueIdToDelete = leagueId;
+        showModal = true;
+    }
+
+    private async Task HandleConfirm()
+    {
+        await DeleteLeague(leagueIdToDelete);
+        showModal = false;
+    }
+
+    private async Task HandleCancel()
+    {
+        showModal = false;
     }
 }

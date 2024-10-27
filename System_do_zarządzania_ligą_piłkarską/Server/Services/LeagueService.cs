@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Identity;
+using System_do_zarządzania_ligą_piłkarską.Client.Areas.Admin.Pages;
 using System_do_zarządzania_ligą_piłkarską.Server.Models;
 using System_do_zarządzania_ligą_piłkarską.Server.Repositories.Interfaces;
 using System_do_zarządzania_ligą_piłkarską.Server.Services.Interfaces;
@@ -63,6 +64,8 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Services
             }
         }
 
+        // League Master Panel:
+
         public async Task<List<LeagueSeasonDTO>> GetAllLeaguesByLeagueMaster(string userId)
         {
             var leagues = await _leagueRepository.GetAllLeaguesByLeagueMaster(userId);
@@ -79,6 +82,11 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Services
         {
             var season = await _leagueRepository.GetSeasonByLeagueMaster(userId, leagueInfoId, leagueSeasonId);
             return _mapper.Map<LeagueSeasonDTO>(season);
+        }
+
+        public async Task DeleteLeague(int leagueId)
+        {
+            await _leagueRepository.DeleteLeague(leagueId);
         }
     }
 }

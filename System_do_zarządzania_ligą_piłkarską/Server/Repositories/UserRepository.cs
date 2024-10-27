@@ -19,7 +19,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
 
         public async Task DeleteUser(ApplicationUser user)
         {
-            var userToDelete = _context.Users.Remove(user);
+            _context.Users.Remove(user);
             await _context.SaveChangesAsync();
         }
 
