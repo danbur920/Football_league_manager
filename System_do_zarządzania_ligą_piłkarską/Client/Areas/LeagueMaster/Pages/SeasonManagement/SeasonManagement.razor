@@ -1,0 +1,89 @@
+﻿@using System_do_zarządzania_ligą_piłkarską.Shared.DTOs
+@using System_do_zarządzania_ligą_piłkarską.Client.Areas.LeagueMaster.Shared
+
+@page "/league-master/leagues/{leagueInfoId:int}/{leagueSeasonId:int}"
+@layout LeagueMasterLayout
+@inject HttpClient Http
+@inject NavigationManager Navigation
+
+<PageTitle>Zarządzaj sezonem</PageTitle>
+
+<div class="button-container">
+    <button class="btn btn-secondary" @onclick="BackToTheLeague">Wróć</button>
+    @* <button class="btn btn-secondary" @onclick="ShowMatches">Pokaż mecze</button> *@
+    <button class="btn btn-secondary" @onclick="GoToTheNewMatch">Dodaj mecz</button>
+
+</div>
+
+<h3>Aktualna tabela sezonu @($"{season?.Season.ToString()}"):</h3>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Drużyna</th>
+            <th>M</th>
+            <th>W</th>
+            <th>R</th>
+            <th>P</th>
+            <th>G+/-</th>
+            <th>Punkty</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (teams == null)
+        {
+            <tr>
+                <td colspan="8">Ładowanie...</td>
+            </tr>
+        }
+        else if (teams.Count == 0)
+        {
+            <tr>
+                <td colspan="8">Brak danych do wyświetlenia</td>
+            </tr>
+        }
+        else
+        {
+            int position = 1;
+            foreach (var team in teams)
+            {
+                <tr>
+                    <td>@position</td>
+                    <td>@team.TeamName</td>
+                    <td>@team.MatchesPlayed</td>
+                    <td>@team.Wins</td>
+                    <td>@team.Draws</td>
+                    <td>@team.Losses</td>
+                    <td>@team.GoalBalance</td>
+                    <td>@team.Points</td>
+                </tr>
+                position++;
+            }
+        }
+    </tbody>
+</table>
+
+@code {
+    [Parameter] public int leagueInfoId { get; set; }
+    [Parameter] public int leagueSeasonId { get; set; }
+
+    private LeagueSeasonDTO? season;
+    private List<TeamStatDTO>? teams;
+
+    protected override async Task OnInitializedAsync()
+    {
+        season = await Http.GetFromJsonAsync<LeagueSeasonDTO>($"api/leagues/league-master/{leagueInfoId}/{leagueSeasonId}");
+        teams = await Http.GetFromJsonAsync<List<TeamStatDTO>>($"api/leagues/{leagueInfoId}/table");
+    }
+
+    private void GoToTheNewMatch()
+    {
+        Navigation.NavigateTo($"/league-master/leagues/{leagueInfoId}/{leagueSeasonId}/add-match");
+    }
+
+    private void BackToTheLeague()
+    {
+        Navigation.NavigateTo($"/league-master/leagues/{leagueInfoId}");
+    }
+}
