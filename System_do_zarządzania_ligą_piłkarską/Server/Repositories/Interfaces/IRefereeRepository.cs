@@ -6,5 +6,9 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories.Interface
     {
         Task<List<Referee>> GetRefereesByPage(int pageNumber, int pageSize);
         Task<Referee> GetRefereeInfoById(int refereeId);
+
+        // League Master Panel:
+        Task<List<Referee>> GetAllReferees();
+        Task AddRefereeToTheSeason(RefereeStat newRefereeStat);
     }
 }

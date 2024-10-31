@@ -11,8 +11,8 @@
 <div class="button-container">
     <button class="btn btn-secondary" @onclick="BackToTheLeague">Wróć</button>
     @* <button class="btn btn-secondary" @onclick="ShowMatches">Pokaż mecze</button> *@
-    <button class="btn btn-secondary" @onclick="GoToTheNewMatch">Dodaj mecz</button>
-
+    <button class="btn btn-primary" @onclick="GoToTheNewMatch">Dodaj mecz</button>
+    <button class="btn btn-primary" @onclick="GoToTheNewReferee">Dodaj sędziego</button>
 </div>
 
 <h3>Aktualna tabela sezonu @($"{season?.Season.ToString()}"):</h3>
@@ -80,6 +80,11 @@
     private void GoToTheNewMatch()
     {
         Navigation.NavigateTo($"/league-master/leagues/{leagueInfoId}/{leagueSeasonId}/add-match");
+    }
+
+    private void GoToTheNewReferee()
+    {
+        Navigation.NavigateTo($"/league-master/leagues/{leagueInfoId}/{leagueSeasonId}/add-referee");
     }
 
     private void BackToTheLeague()

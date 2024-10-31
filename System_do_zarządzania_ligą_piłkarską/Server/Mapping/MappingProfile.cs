@@ -2,6 +2,7 @@
 using System_do_zarządzania_ligą_piłkarską.Server.Models;
 using System_do_zarządzania_ligą_piłkarską.Shared.DTOs;
 using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Leagues;
+using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Referees;
 
 namespace System_do_zarządzania_ligą_piłkarską.Server.Mapping
 {
@@ -22,6 +23,9 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Mapping
 
             CreateMap<NewLeagueInfoDTO, LeagueInfo>();
             CreateMap<NewLeagueSeasonDTO, LeagueSeason>();
+
+            CreateMap<Referee, ShortRefereeInfoDTO>();
+            CreateMap<NewRefereeStatDTO, RefereeStat>();
 
             CreateMap<ApplicationUser, ApplicationUserDTO>()
                       .ForMember(dest => dest.LockoutEndDateUtc, opt => opt.MapFrom(src => src.LockoutEnd != null ? (DateTime?)src.LockoutEnd.Value.DateTime : null))

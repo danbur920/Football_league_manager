@@ -1,0 +1,101 @@
+﻿@using System_do_zarządzania_ligą_piłkarską.Shared.DTOs
+@using System_do_zarządzania_ligą_piłkarską.Client.Areas.LeagueMaster.Shared
+@using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Matches
+@using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Referees
+@using System_do_zarządzania_ligą_piłkarską.Client.Extensions
+@using System_do_zarządzania_ligą_piłkarską.Client.Components
+
+@page "/league-master/leagues/{leagueInfoId:int}/{leagueSeasonId:int}/add-referee"
+@layout LeagueMasterLayout
+@inject HttpClient Http
+@inject NavigationManager Navigation
+@inject AlertManager AlertManager
+
+<PageTitle>Dodawanie sędziego</PageTitle>
+
+<div class="button-container">
+    <button class="btn btn-secondary" @onclick="BackToTheSeasonManagement">Wróć</button>
+</div>
+
+<h3>Dodaj sędziego do wybranego sezonu</h3>
+
+@if (referees != null)
+{
+    <EditForm Model="newReferee" OnValidSubmit="HandleValidSubmit">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <div class="mb-3">
+            <label for="referee" class="form-label">Sędzia</label>
+            <select id="referee" class="form-select" @bind="newReferee.RefereeId">
+                @foreach (var referee in referees)
+                {
+                    <option value="@referee.Id">@($"{referee.FirstName} {referee.LastName}")</option>
+                }
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Dodaj mecz</button>
+    </EditForm>
+}
+else
+{
+    <p>Ładowanie...</p>
+}
+
+<Alert Message="@AlertManager.Message" Type="@AlertManager.Type" IsVisible="@AlertManager.IsVisible" />
+
+
+@code {
+    [Parameter] public int leagueInfoId { get; set; }
+    [Parameter] public int leagueSeasonId { get; set; }
+
+    private List<ShortRefereeInfoDTO>? referees;
+    private NewRefereeStatDTO newReferee;
+
+    protected override async Task OnInitializedAsync()
+    {
+        newReferee = new NewRefereeStatDTO();
+        referees = await Http.GetFromJsonAsync<List<ShortRefereeInfoDTO>>("api/referees/league-master/all");
+    }
+    private async Task HandleValidSubmit()
+    {
+        try
+        {
+            newReferee.LeagueId = leagueSeasonId;
+            var response = await Http.PostAsJsonAsync("api/referees", newReferee);
+
+            if (response.IsSuccessStatusCode)
+            {
+                AlertManager.DisplayAlert($"Dodano sędziego {RefereeInfo()} do wybranego sezonu!", "success");
+                Clear();
+            }
+            else
+            {
+                AlertManager.DisplayAlert($"Nie udało się dodać sędziego {RefereeInfo()} do wybranego sezonu.", "danger");
+                Clear();
+            }
+        }
+        catch (Exception ex)
+        {
+            AlertManager.DisplayAlert($"Nie udało się dodać sędziego {RefereeInfo()} do wybranego sezonu.", "danger");
+            Clear();
+        }
+    }
+
+    private string RefereeInfo()
+    {
+        var referee = referees.FirstOrDefault(x => x.Id == newReferee.RefereeId);
+        return $"{referee.FirstName} {referee.LastName}";
+    }
+
+    private void Clear()
+    {
+        newReferee.RefereeId = default;
+    }
+
+    private void BackToTheSeasonManagement()
+    {
+        Navigation.NavigateTo($"/league-master/leagues/{leagueInfoId}/{leagueSeasonId}");
+    }
+}

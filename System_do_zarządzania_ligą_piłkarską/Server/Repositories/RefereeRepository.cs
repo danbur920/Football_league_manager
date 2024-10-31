@@ -1,8 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Identity.Client;
 using System.Drawing.Printing;
 using System_do_zarządzania_ligą_piłkarską.Server.Data;
 using System_do_zarządzania_ligą_piłkarską.Server.Models;
 using System_do_zarządzania_ligą_piłkarską.Server.Repositories.Interfaces;
+using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Referees;
 
 namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
 {
@@ -32,6 +34,20 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
                 Take(pageSize).
                 ToListAsync();
             return referees;
+        }
+
+        // League Master Panel:
+
+        public async Task<List<Referee>> GetAllReferees()
+        {
+            var referees = await _context.Referees.ToListAsync();
+            return referees;
+        }
+
+        public async Task AddRefereeToTheSeason(RefereeStat newRefereeStat)
+        {
+            await _context.RefereeStats.AddAsync(newRefereeStat);
+            await _context.SaveChangesAsync();
         }
     }
 }

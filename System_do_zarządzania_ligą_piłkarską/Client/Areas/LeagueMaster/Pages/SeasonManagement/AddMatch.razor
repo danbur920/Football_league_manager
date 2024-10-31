@@ -42,14 +42,24 @@
         </div>
 
         <div class="mb-3">
+            <label for="round" class="form-label">Kolejka</label>
+            <select id="round" class="form-select" @bind="newMatch.Round">
+                @for(int i = 1; i<= 50; i++)
+                {
+                    <option value="@newMatch.Round">@i</option>
+                }
+            </select>
+        </div>
+
+        <div class="mb-3">
             <label for="matchDate" class="form-label">Data meczu</label>
             <InputDate id="matchDate" class="form-control" @bind-Value="newMatch.MatchDate" />
         </div>
 
-        @*     <div class="mb-3">
-    <label for="matchTime" class="form-label">Godzina meczu</label>
-    <InputText id="matchTime" type="time" class="form-control" @bind-Value="newMatch.MatchTime" />
-    </div> *@
+        <div class="mb-3">
+            <label for="matchTime" class="form-label">Godzina meczu</label>
+            <InputDate Type="InputDateType.Time" id="matchTime" class="form-control" @bind-Value="newMatch.MatchTime" />
+        </div>
 
         <button type="submit" class="btn btn-primary">Dodaj mecz</button>
     </EditForm>

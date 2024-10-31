@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.Design;
+using System_do_zarządzania_ligą_piłkarską.Server.Services;
 using System_do_zarządzania_ligą_piłkarską.Server.Services.Interfaces;
+using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Leagues;
+using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Referees;
 
 namespace System_do_zarządzania_ligą_piłkarską.Server.Controllers
 {
@@ -24,10 +27,26 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Controllers
         }
 
         [HttpGet("{refereeId}")]
-        public async Task<IActionResult> GetRefereesByPage(int refereeId)
+        public async Task<IActionResult> GetRefereeById(int refereeId)
         {
             var referee = await _refereeService.GetRefereeInfoById(refereeId);
             return Ok(referee);
+        }
+
+        // League Master Panel:
+
+        [HttpGet("league-master/all")]
+        public async Task<IActionResult> GetAllReferees()
+        {
+            var referees = await _refereeService.GetAllReferees();
+            return Ok(referees);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddRefereeToTheSeason(NewRefereeStatDTO newRefereeDTO)
+        {
+            await _refereeService.AddRefereeToTheSeason(newRefereeDTO);
+            return Ok();
         }
     }
 }
