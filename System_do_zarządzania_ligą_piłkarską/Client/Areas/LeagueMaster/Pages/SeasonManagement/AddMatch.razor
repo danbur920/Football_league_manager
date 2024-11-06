@@ -1,11 +1,15 @@
 ﻿@using System_do_zarządzania_ligą_piłkarską.Shared.DTOs
 @using System_do_zarządzania_ligą_piłkarską.Client.Areas.LeagueMaster.Shared
 @using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Matches
+@using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Referees
+@using System_do_zarządzania_ligą_piłkarską.Client.Extensions
+@using System_do_zarządzania_ligą_piłkarską.Client.Components
 
 @page "/league-master/leagues/{leagueInfoId:int}/{leagueSeasonId:int}/add-match"
 @layout LeagueMasterLayout
 @inject HttpClient Http
 @inject NavigationManager Navigation
+@inject AlertManager AlertManager
 
 <PageTitle>Dodawanie meczu</PageTitle>
 
@@ -15,7 +19,7 @@
 
 <h3>Dodaj mecz</h3>
 
-@if (teams != null)
+@if (teams != null && newMatch != null)
 {
     <EditForm Model="newMatch" OnValidSubmit="HandleValidSubmit">
         <DataAnnotationsValidator />
@@ -23,7 +27,8 @@
 
         <div class="mb-3">
             <label for="home" class="form-label">Gospodarz</label>
-            <select id="home" class="form-select" @bind="newMatch.HomeTeamId">
+            <select id="home" class="form-select" @onchange="SetHomeTeamAndStadium">
+                <option value="">-- Wybierz gospodarza --</option> 
                 @foreach (var home in teams)
                 {
                     <option value="@home.TeamId">@home.TeamName</option>
@@ -34,6 +39,7 @@
         <div class="mb-3">
             <label for="away" class="form-label">Gość</label>
             <select id="away" class="form-select" @bind="newMatch.AwayTeamId">
+                <option value="">-- Wybierz gościa --</option>
                 @foreach (var away in teams)
                 {
                     <option value="@away.TeamId">@away.TeamName</option>
@@ -42,9 +48,21 @@
         </div>
 
         <div class="mb-3">
+            <label for="referee" class="form-label">Sędzia</label>
+            <select id="referee" class="form-select" @bind="newMatch.RefereeId">
+                <option value="">-- Wybierz sędziego --</option>
+                @foreach (var referee in referees)
+                {
+                    <option value="@referee.Id">@referee.FirstName @referee.LastName</option>
+                }
+            </select>
+        </div>
+
+        <div class="mb-3">
             <label for="round" class="form-label">Kolejka</label>
             <select id="round" class="form-select" @bind="newMatch.Round">
-                @for(int i = 1; i<= 50; i++)
+                <option value="">-- Wybierz kolejkę --</option>
+                @for (int i = 1; i <= 50; i++)
                 {
                     <option value="@newMatch.Round">@i</option>
                 }
@@ -61,6 +79,11 @@
             <InputDate Type="InputDateType.Time" id="matchTime" class="form-control" @bind-Value="newMatch.MatchTime" />
         </div>
 
+        <div class="mb-3">
+            <label for="stadium" class="form-label">Stadion</label>
+            <InputText id="stadium" class="form-control" @bind-Value="newMatch.FootballStadium" readonly />
+        </div>
+
         <button type="submit" class="btn btn-primary">Dodaj mecz</button>
     </EditForm>
 }
@@ -69,6 +92,7 @@ else
     <p>Ładowanie...</p>
 }
 
+<Alert Message="@AlertManager.Message" Type="@AlertManager.Type" IsVisible="@AlertManager.IsVisible" />
 
 
 @code {
@@ -77,38 +101,76 @@ else
 
     private LeagueSeasonDTO? season;
     private List<TeamStatDTO>? teams;
+    private List<ShortRefereeInfoDTO>? referees;
 
     private NewMatchDTO newMatch;
+    private string? stadium = "";
 
     protected override async Task OnInitializedAsync()
     {
         newMatch = new NewMatchDTO();
         season = await Http.GetFromJsonAsync<LeagueSeasonDTO>($"api/leagues/league-master/{leagueInfoId}/{leagueSeasonId}");
         teams = await Http.GetFromJsonAsync<List<TeamStatDTO>>($"api/leagues/{leagueInfoId}/table");
+        referees = await Http.GetFromJsonAsync<List<ShortRefereeInfoDTO>>($"api/referees/league-master/specific-season/{leagueSeasonId}");
     }
 
     private async Task HandleValidSubmit()
     {
-        // try
-        // {
-        //     newLeague.LeagueSeason.LeagueMasterId = await GetUserId();
-        //     var response = await Http.PostAsJsonAsync("/api/leagues", newLeague);
+        try
+        {
+            newMatch.LeagueId = leagueSeasonId;
+            var response = await Http.PostAsJsonAsync("api/matches/league-master", newMatch);
 
-        //     if (response.IsSuccessStatusCode)
-        //     {
-        //         AlertManager.DisplayAlert($"Dodano ligę {newLeague.LeagueInfo.Name}!", "success");
-        //         Clear();
-        //     }
-        //     else
-        //     {
-        //         var content = await response.Content.ReadAsStringAsync();
-        //         AlertManager.DisplayAlert($"Nie udało się dodać ligi {newLeague.LeagueInfo.Name}.", "danger");
-        //     }
-        // }
-        // catch (Exception ex)
-        // {
-        //     AlertManager.DisplayAlert($"Nie udało się dodać ligi {newLeague.LeagueInfo.Name}.", "danger");
-        // }
+            if (response.IsSuccessStatusCode)
+            {
+                AlertManager.DisplayAlert($"Dodano mecz {MatchInfo()} do wybranego sezonu!", "success");
+                Clear();
+            }
+            else
+            {
+                AlertManager.DisplayAlert($"Nie udało się dodać meczu {MatchInfo()} do wybranego sezonu.", "danger");
+                Clear();
+            }
+        }
+        catch (Exception ex)
+        {
+            AlertManager.DisplayAlert($"Nie udało się dodać meczu {MatchInfo()} do wybranego sezonu.", "danger");
+            Clear();
+        }
+    }
+
+    private void SetHomeTeamAndStadium(ChangeEventArgs e)
+    {
+        if (string.IsNullOrEmpty(e.Value?.ToString()))
+        {
+            newMatch.HomeTeamId = default;
+            newMatch.FootballStadium = string.Empty; 
+            return;
+        }
+
+        newMatch.HomeTeamId = int.Parse(e.Value.ToString());
+
+        var homeTeam = teams?.FirstOrDefault(x => x.TeamId == newMatch.HomeTeamId);
+        newMatch.FootballStadium = homeTeam?.Team?.Stadium ?? string.Empty;
+    }
+
+    private string MatchInfo()
+    {
+        var homeTeamName = teams.FirstOrDefault(x => x.TeamId == newMatch.HomeTeamId).TeamName;
+        var awayTeamName = teams.FirstOrDefault(x => x.TeamId == newMatch.AwayTeamId).TeamName;
+        return $"{homeTeamName} vs {awayTeamName}";
+    }
+
+    private void Clear()
+    {
+        newMatch.RefereeId = default;
+        newMatch.LeagueId = default;
+        newMatch.Round = default;
+        newMatch.HomeTeamId = default;
+        newMatch.AwayTeamId = default;
+        newMatch.MatchDate = default;
+        newMatch.MatchTime = default;
+        newMatch.FootballStadium = default;
     }
 
     private void BackToTheSeasonManagement()

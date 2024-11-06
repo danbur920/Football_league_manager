@@ -45,7 +45,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Services
 
         // League Master Panel:
 
-        public async Task<List<ShortRefereeInfoDTO>> GetAllReferees()
+        public async Task<List<ShortRefereeInfoDTO>> GetAllRefereesForLeagueMaster()
         {
             var referees = await _refereeRepository.GetAllReferees();
             return _mapper.Map<List<ShortRefereeInfoDTO>>(referees);
@@ -62,6 +62,12 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Services
             refereeToAdd.FoulsCalled = 0;
 
             await _refereeRepository.AddRefereeToTheSeason(refereeToAdd);
+        }
+
+        public async Task<List<ShortRefereeInfoDTO>> GetAllRefereesFromSpecificSeason(int leagueSeasonId)
+        {
+            var referees = await _refereeRepository.GetAllRefereesFromSpecificSeason(leagueSeasonId);
+            return _mapper.Map<List<ShortRefereeInfoDTO>>(referees);
         }
     }
 }

@@ -2,6 +2,7 @@
 using System_do_zarządzania_ligą_piłkarską.Server.Data;
 using System_do_zarządzania_ligą_piłkarską.Server.Models;
 using System_do_zarządzania_ligą_piłkarską.Server.Repositories.Interfaces;
+using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Teams;
 
 namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
 {
@@ -49,7 +50,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
 
             return leagueId;
         }
-
+        
         public async Task<List<Match>> GetMatchesByTeam(int teamId, bool isFinished)
         {
             var matches = await _context.Matches.
@@ -59,6 +60,14 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
                 ToListAsync();
 
             return matches;
+        }
+
+        // League Master Panel
+
+        public async Task AddTeamToTheSeason(TeamStat newTeamStat)
+        {
+            await _context.TeamStats.AddAsync(newTeamStat);
+            await _context.SaveChangesAsync();
         }
     }
 }

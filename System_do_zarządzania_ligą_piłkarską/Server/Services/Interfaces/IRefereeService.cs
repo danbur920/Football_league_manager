@@ -10,7 +10,8 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Services.Interfaces
 
         // League Master Panel:
 
-        Task<List<ShortRefereeInfoDTO>> GetAllReferees();
+        Task<List<ShortRefereeInfoDTO>> GetAllRefereesForLeagueMaster();
+        Task<List<ShortRefereeInfoDTO>> GetAllRefereesFromSpecificSeason(int leagueSeasonId);
         Task AddRefereeToTheSeason(NewRefereeStatDTO newRefereeDTO);
     }
 }

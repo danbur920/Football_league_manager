@@ -24,7 +24,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Shared.DTOs
         public bool IsFinished { get; set; }
         public int? Result { get; set; }
         public DateOnly? MatchDate { get; set; }
-        public TimeSpan? MatchTime { get; set; }
+        public TimeOnly? MatchTime { get; set; }
         public virtual LeagueSeasonDTO League { get; set; }
         public virtual RefereeDTO Referee { get; set; }
         public virtual TeamDTO HomeTeam { get; set; }

@@ -21,7 +21,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
         {
             var referee = await _context.Referees
                 .Where(x => x.Id == refereeId)
-                .Include(x => x.RefereeStats)       
+                .Include(x => x.RefereeStats)
                 .FirstOrDefaultAsync();
 
             return referee;
@@ -41,6 +41,16 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
         public async Task<List<Referee>> GetAllReferees()
         {
             var referees = await _context.Referees.ToListAsync();
+            return referees;
+        }
+
+        public async Task<List<Referee>> GetAllRefereesFromSpecificSeason(int leagueSeasonId)
+        {
+            var referees = await _context.Referees
+                 .Include(r => r.RefereeStats.Where(rs => rs.LeagueId == leagueSeasonId)) 
+                 .Where(r => r.RefereeStats.Any(rs => rs.LeagueId == leagueSeasonId)) 
+                 .ToListAsync();
+
             return referees;
         }
 

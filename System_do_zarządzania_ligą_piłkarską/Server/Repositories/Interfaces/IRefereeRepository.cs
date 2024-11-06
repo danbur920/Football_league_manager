@@ -9,6 +9,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories.Interface
 
         // League Master Panel:
         Task<List<Referee>> GetAllReferees();
+        Task<List<Referee>> GetAllRefereesFromSpecificSeason(int leagueSeasonId);
         Task AddRefereeToTheSeason(RefereeStat newRefereeStat);
     }
 }

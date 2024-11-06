@@ -1,0 +1,102 @@
+﻿@using System_do_zarządzania_ligą_piłkarską.Shared.DTOs
+@using System_do_zarządzania_ligą_piłkarską.Client.Areas.LeagueMaster.Shared
+@using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Matches
+@using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Teams
+@using System_do_zarządzania_ligą_piłkarską.Client.Extensions
+@using System_do_zarządzania_ligą_piłkarską.Client.Components
+
+@page "/league-master/leagues/{leagueInfoId:int}/{leagueSeasonId:int}/add-team"
+@layout LeagueMasterLayout
+@inject HttpClient Http
+@inject NavigationManager Navigation
+@inject AlertManager AlertManager
+
+<PageTitle>Dodawanie drużyny</PageTitle>
+
+<div class="button-container">
+    <button class="btn btn-secondary" @onclick="BackToTheSeasonManagement">Wróć</button>
+</div>
+
+<h3>Dodaj drużynę do ligi</h3>
+
+@if (teams != null)
+{
+    <EditForm Model="newTeamStat" OnValidSubmit="HandleValidSubmit">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <div class="mb-3">
+            <label for="team" class="form-label">Drużyna</label>
+            <select id="team" class="form-select" @bind="newTeamStat.TeamId">
+                @foreach (var team in teams)
+                {
+                    <option value="@team.Id">@team.Name | @team.City | @team.Country</option>
+                }
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Dodaj mecz</button>
+    </EditForm>
+}
+else
+{
+    <p>Ładowanie...</p>
+}
+
+<Alert Message="@AlertManager.Message" Type="@AlertManager.Type" IsVisible="@AlertManager.IsVisible" />
+
+@code {
+    [Parameter] public int leagueInfoId { get; set; }
+    [Parameter] public int leagueSeasonId { get; set; }
+
+    private List<ShortTeamInfoDTO>? teams;
+
+    private NewTeamStatDTO newTeamStat;
+
+    protected override async Task OnInitializedAsync()
+    {
+        newTeamStat = new NewTeamStatDTO();
+        teams = await Http.GetFromJsonAsync<List<ShortTeamInfoDTO>>("api/teams/league-master/all");
+    }
+
+    private async Task HandleValidSubmit()
+    {
+        try
+        {
+            newTeamStat.LeagueId = leagueSeasonId;
+            var response = await Http.PostAsJsonAsync("api/teams/league-master", newTeamStat);
+
+            if (response.IsSuccessStatusCode)
+            {
+                AlertManager.DisplayAlert($"Dodano drużynę: '{TeamInfo()}' do wybranego sezonu!", "success");
+                Clear();
+            }
+            else
+            {
+                AlertManager.DisplayAlert($"Nie udało się dodać drużyny '{TeamInfo()}' do wybranego sezonu.", "danger");
+                Clear();
+            }
+        }
+        catch (Exception ex)
+        {
+            AlertManager.DisplayAlert($"Nie udało się dodać drużyny '{TeamInfo()}' do wybranego sezonu.", "danger");
+            Clear();
+        }
+    }
+
+    private string TeamInfo()
+    {
+        var team = teams.FirstOrDefault(x => x.Id == newTeamStat.TeamId);
+        return $"{team.Name} | {team.City} | {team.Country}";
+    }
+
+    private void Clear()
+    {
+        newTeamStat.TeamId = default;
+    }
+
+    private void BackToTheSeasonManagement()
+    {
+        Navigation.NavigateTo($"/league-master/leagues/{leagueInfoId}/{leagueSeasonId}");
+    }
+}

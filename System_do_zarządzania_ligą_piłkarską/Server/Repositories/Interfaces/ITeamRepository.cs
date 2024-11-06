@@ -1,4 +1,5 @@
 ﻿using System_do_zarządzania_ligą_piłkarską.Server.Models;
+using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Teams;
 
 namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories.Interfaces
 {
@@ -9,5 +10,9 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories.Interface
         Task<List<FootballerStat>> GetCurrentFootballersStats(int teamId);
         Task<int> GetCurrentLeagueIdByTeam(int teamId);
         Task<List<Match>> GetMatchesByTeam (int teamId, bool isFinished);
+
+        // League Master Panel:
+
+        Task AddTeamToTheSeason(TeamStat newTeamStat);
     }
 }

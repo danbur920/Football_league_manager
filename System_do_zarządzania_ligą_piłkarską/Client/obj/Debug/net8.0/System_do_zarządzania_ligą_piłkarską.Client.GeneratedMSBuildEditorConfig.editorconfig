@@ -50,6 +50,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTGVhZ3VlTWFzdGVyXFBhZ2VzXFNlYXNvbk1hbmFnZW1lbnRcQWRkUmVmZXJlZS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Daniel/Desktop/PRACA INŻYNIERSKA/Backup/System_do_zarządzania_ligą_piłkarską/System_do_zarządzania_ligą_piłkarską/Client/Areas/LeagueMaster/Pages/SeasonManagement/AddTeam.razor]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTGVhZ3VlTWFzdGVyXFBhZ2VzXFNlYXNvbk1hbmFnZW1lbnRcQWRkVGVhbS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Daniel/Desktop/PRACA INŻYNIERSKA/Backup/System_do_zarządzania_ligą_piłkarską/System_do_zarządzania_ligą_piłkarską/Client/Areas/LeagueMaster/Pages/SeasonManagement/SeasonManagement.razor]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTGVhZ3VlTWFzdGVyXFBhZ2VzXFNlYXNvbk1hbmFnZW1lbnRcU2Vhc29uTWFuYWdlbWVudC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 

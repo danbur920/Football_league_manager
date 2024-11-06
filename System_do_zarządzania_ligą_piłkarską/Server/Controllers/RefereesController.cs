@@ -36,13 +36,20 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Controllers
         // League Master Panel:
 
         [HttpGet("league-master/all")]
-        public async Task<IActionResult> GetAllReferees()
+        public async Task<IActionResult> GetAllRefereesForLeagueMaster()
         {
-            var referees = await _refereeService.GetAllReferees();
+            var referees = await _refereeService.GetAllRefereesForLeagueMaster();
             return Ok(referees);
         }
 
-        [HttpPost]
+        [HttpGet("league-master/specific-season/{leagueSeasonId}")]
+        public async Task<IActionResult> GetAllRefereesFromSpecificSeasonForLeagueMaster(int leagueSeasonId)
+        {
+            var referees = await _refereeService.GetAllRefereesFromSpecificSeason(leagueSeasonId);
+            return Ok(referees);
+        }
+
+        [HttpPost("league-master")]
         public async Task<IActionResult> AddRefereeToTheSeason(NewRefereeStatDTO newRefereeDTO)
         {
             await _refereeService.AddRefereeToTheSeason(newRefereeDTO);

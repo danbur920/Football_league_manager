@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using System_do_zarządzania_ligą_piłkarską.Server.Services;
 using System_do_zarządzania_ligą_piłkarską.Server.Services.Interfaces;
 using System_do_zarządzania_ligą_piłkarską.Shared.DTOs;
+using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Referees;
+using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Teams;
 
 namespace System_do_zarządzania_ligą_piłkarską.Server.Controllers
 {
@@ -43,6 +45,22 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Controllers
         {
             var matches = await _teamService.GetMatchesByTeam(teamId, isFinished);
             return Ok(matches);
+        }
+
+        // League Master Panel:
+
+        [HttpGet("league-master/all")]
+        public async Task<IActionResult> GetAllTeamsForLeagueMaster()
+        {
+            var teams = await _teamService.GetAllTeamsForLeagueMaster();
+            return Ok(teams);
+        }
+
+        [HttpPost("league-master")]
+        public async Task<IActionResult> AddTeamToTheSeason(NewTeamStatDTO newTeamStatDTO)
+        {
+            await _teamService.AddTeamToTheSeason(newTeamStatDTO);
+            return Ok();
         }
     }
 }

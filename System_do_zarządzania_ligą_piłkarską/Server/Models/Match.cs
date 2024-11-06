@@ -24,7 +24,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Models
         public bool IsFinished { get; set; }
         public int? Result { get; set; }
         public DateOnly? MatchDate { get; set; }
-        public TimeSpan? MatchTime { get; set; }
+        public TimeOnly? MatchTime { get; set; }
         public virtual LeagueSeason League { get; set; }
         public virtual Referee Referee { get; set; }
         public virtual Team HomeTeam { get; set; }
