@@ -18,11 +18,22 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Controllers
             _matchService = matchService;
         }
 
+        // League Master Panel:
+
         [HttpPost("league-master")]
         public async Task<IActionResult> AddNewMatchToTheSeason(NewMatchDTO newMatch)
         {
             await _matchService.AddNewMatchToTheSeason(newMatch);
             return Ok();
+        }
+
+        // League Master Panel:
+
+        [HttpGet("league-master/{leagueSeasonId}")]
+        public async Task<IActionResult> GetMatchesFromSpecificSeasonForLeagueMaster([FromRoute] int leagueSeasonId)
+        {
+            var matches = await _matchService.GetMatchesFromSpecificSeasonForLeagueMaster(leagueSeasonId);
+            return Ok(matches);
         }
     }
 }

@@ -5,5 +5,6 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories.Interface
     public interface IMatchRepository
     {
         Task AddNewMatchToTheSeason(Match newMatch);
+        Task<List<Match>> GetMatchesFromSpecificSeasonForLeagueMaster(int leagueSeasonId);
     }
 }

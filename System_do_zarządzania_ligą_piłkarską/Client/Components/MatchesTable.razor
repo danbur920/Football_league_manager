@@ -7,9 +7,11 @@
             <th>Kolejka</th>
             <th>Data</th>
             <th>Godzina</th>
+            <th>Gospodarz</th>
+            <th>Gość</th>
             <th>Wynik</th>
             <th>Rezultat</th>
-
+            <th>Przejdź do meczu</th>
         </tr>
     </thead>
     <tbody>
@@ -19,7 +21,9 @@
                 <td>@match.Round</td>
                 <td>@match.MatchDate</td>
                 <td>@match.MatchTime</td>
-                <td>@match.HomeTeam.Name  @match.GoalsHome:@match.GoalsAway  @match.AwayTeam.Name</td>
+                <td>@match.HomeTeam.Name</td>
+                <td>@match.AwayTeam.Name</td>
+                <td>@ShowScore(match)</td>
                 <td>@ShowResult(match.Id)</td>
                 <td>
                     <button class="btn btn-link" @onclick="() => ShowMatchDetails(match.Id)">
@@ -40,7 +44,7 @@
     {
         var match = Matches.FirstOrDefault(m => m.Id == matchId);
 
-        if (match == null || match.GoalsHome == null || match.GoalsAway == null)
+        if (match == null || match.GoalsHome == null || match.GoalsAway == null || !match.IsFinished)
         {
             return "-";
         }
@@ -55,35 +59,18 @@
         return match.AwayTeam.Name;
     }
 
+    public string ShowScore(MatchDTO match)
+    {
+        if (match.IsFinished == false)
+            return "-";
+
+        return $"{match.HomeTeam.Name}  {match.GoalsHome}:{match.GoalsAway}  {match.AwayTeam.Name}";
+    }
+
     public void ShowMatchDetails(int matchId)
     {
         Navigation.NavigateTo($"/matches/{matchId}");
     }
 }
-
-<style>
-    .table thead {
-        background-color: #4CAF50;
-        color: white;
-    }
-
-    .table tbody tr:nth-child(even) {
-        background-color: #f2f2f2;
-    }
-
-    .table tbody tr:hover {
-        background-color: #f1f1f1;
-    }
-
-    .table th {
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-    }
-
-    .table td, .table th {
-        vertical-align: middle;
-        padding: 12px 15px;
-    }
-</style>
 
 

@@ -34,6 +34,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Mapping
             CreateMap<NewTeamStatDTO, TeamStat>();
 
             CreateMap<NewMatchDTO, Match>();
+            CreateMap<Match, ShortMatchInfoDTO>();
 
             CreateMap<ApplicationUser, ApplicationUserDTO>()
                       .ForMember(dest => dest.LockoutEndDateUtc, opt => opt.MapFrom(src => src.LockoutEnd != null ? (DateTime?)src.LockoutEnd.Value.DateTime : null))

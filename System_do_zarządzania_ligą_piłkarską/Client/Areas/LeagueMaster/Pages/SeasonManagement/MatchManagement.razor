@@ -1,0 +1,47 @@
+﻿@page "/league-master/leagues/{leagueInfoId:int}/{leagueSeasonId:int}/manage-matches"
+@using System_do_zarządzania_ligą_piłkarską.Client.Areas.LeagueMaster.Shared
+@using System_do_zarządzania_ligą_piłkarską.Client.Extensions
+@using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Matches
+@using System_do_zarządzania_ligą_piłkarską.Client.Components
+@layout LeagueMasterLayout
+@inject HttpClient Http
+@inject NavigationManager Navigation
+
+<PageTitle>Zarządzanie meczami</PageTitle>
+
+
+
+<div class="button-container">
+    <button class="btn btn-secondary" @onclick="BackToTheSeasonManagement">Wróć</button>
+</div>
+
+@if (matches != null)
+{
+    <h3>Mecze:</h3>
+
+    <MatchesTable Matches="matches"></MatchesTable>
+}
+else
+{
+    <p>Ładowanie...</p>
+}
+
+
+// INFO CO DO ZROBIENIA: NALEZY WYSWIETLIC MatchesTable ktore stworzyłem nowe i otypowane listą ShortMatchInfoDTO i pomyslec czy nie przerobic na ten sam typ wyswietlania meczów dla usera :)
+
+@code {
+    [Parameter] public int leagueInfoId { get; set; }
+    [Parameter] public int leagueSeasonId { get; set; }
+
+    private List<ShortMatchInfoDTO>? matches;
+
+    protected override async Task OnInitializedAsync()
+    {
+        matches = await Http.GetFromJsonAsync<List<ShortMatchInfoDTO>>($"api/matches/league-master/{leagueSeasonId}");
+    }
+
+    private void BackToTheSeasonManagement()
+    {
+        Navigation.NavigateTo($"/league-master/leagues/{leagueInfoId}/{leagueSeasonId}");
+    }
+}

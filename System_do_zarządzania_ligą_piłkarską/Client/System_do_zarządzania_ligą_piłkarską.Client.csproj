@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Areas\LeagueMaster\Pages\SeasonManagement\MatchManagement.razor" />
     <Content Remove="Other\FavouriteLeagues.razor" />
   </ItemGroup>
 
@@ -27,6 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Areas\LeagueMaster\Pages\SeasonManagement\MatchManagement.razor" />
     <None Include="Other\FavouriteLeagues.razor" />
   </ItemGroup>
 	
@@ -91,6 +93,14 @@
     <Content Update="Pages\LeaguesPages\Leagues.razor">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Areas\LeagueMaster\Pages\SeasonManagement\MatchManagement.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Areas\LeagueMaster\Pages\SeasonManagement\MatchManagement.razor" />
   </ItemGroup>
 
 </Project>

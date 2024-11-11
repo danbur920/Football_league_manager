@@ -26,5 +26,11 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Services
 
             await _matchRepository.AddNewMatchToTheSeason(mappedMatch);
         }
+
+        public async Task<List<ShortMatchInfoDTO>> GetMatchesFromSpecificSeasonForLeagueMaster(int leagueSeasonId)
+        {
+            var matches = await _matchRepository.GetMatchesFromSpecificSeasonForLeagueMaster(leagueSeasonId);
+            return _mapper.Map<List<ShortMatchInfoDTO>>(matches);
+        }
     }
 }

@@ -5,5 +5,6 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Services.Interfaces
     public interface IMatchService
     {
         Task AddNewMatchToTheSeason(NewMatchDTO newMatch);
+        Task<List<ShortMatchInfoDTO>> GetMatchesFromSpecificSeasonForLeagueMaster(int leagueSeasonId);
     }
 }

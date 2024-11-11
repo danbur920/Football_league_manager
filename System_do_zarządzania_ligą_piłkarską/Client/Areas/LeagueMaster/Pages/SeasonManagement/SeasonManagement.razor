@@ -11,9 +11,10 @@
 <div class="button-container">
     <button class="btn btn-secondary" @onclick="BackToTheLeague">Wróć</button>
     @* <button class="btn btn-secondary" @onclick="ShowMatches">Pokaż mecze</button> *@
-    <button class="btn btn-primary" @onclick="GoToTheNewMatch">Dodaj mecz</button>
-    <button class="btn btn-primary" @onclick="GoToTheNewReferee">Dodaj sędziego</button>
-    <button class="btn btn-primary" @onclick="GoToTheNewTeam">Dodaj drużynę</button>
+    <button class="btn btn-primary" @onclick="GoToNewMatch">Dodaj mecz</button>
+    <button class="btn btn-primary" @onclick="GoToNewReferee">Dodaj sędziego</button>
+    <button class="btn btn-primary" @onclick="GoToNewTeam">Dodaj drużynę</button>
+    <button class="btn btn-primary" @onclick="GoToMatchManagement">Zarządzaj meczami</button>
 </div>
 
 <h3>Aktualna tabela sezonu @($"{season?.Season.ToString()}"):</h3>
@@ -78,21 +79,25 @@
         teams = await Http.GetFromJsonAsync<List<TeamStatDTO>>($"api/leagues/{leagueInfoId}/table");
     }
 
-    private void GoToTheNewMatch()
+    private void GoToNewMatch()
     {
         Navigation.NavigateTo($"/league-master/leagues/{leagueInfoId}/{leagueSeasonId}/add-match");
     }
 
-    private void GoToTheNewReferee()
+    private void GoToNewReferee()
     {
         Navigation.NavigateTo($"/league-master/leagues/{leagueInfoId}/{leagueSeasonId}/add-referee");
     }
 
-    private void GoToTheNewTeam()
+    private void GoToNewTeam()
     {
         Navigation.NavigateTo($"/league-master/leagues/{leagueInfoId}/{leagueSeasonId}/add-team");
     }
 
+    private void GoToMatchManagement()
+    {
+        Navigation.NavigateTo($"/league-master/leagues/{leagueInfoId}/{leagueSeasonId}/manage-matches");
+    }
 
     private void BackToTheLeague()
     {
