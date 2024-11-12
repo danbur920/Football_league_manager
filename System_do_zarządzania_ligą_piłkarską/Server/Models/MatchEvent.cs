@@ -1,4 +1,6 @@
-﻿namespace System_do_zarządzania_ligą_piłkarską.Server.Models
+﻿using System.Text.Json.Serialization;
+
+namespace System_do_zarządzania_ligą_piłkarską.Server.Models
 {
     public class MatchEvent
     {
@@ -14,6 +16,7 @@
         public int? Minute {  get; set; }
         public string? Description { get; set; }
         public EventType EventType { get; set; }
+        [JsonIgnore]
         public Match? Match { get; set; }
     }
 

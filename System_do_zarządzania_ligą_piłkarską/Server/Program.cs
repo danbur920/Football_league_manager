@@ -16,6 +16,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -134,6 +135,12 @@ builder.Services.Configure<JwtBearerOptions>(IdentityServerJwtConstants.Identity
 });
 
 builder.Services.AddControllersWithViews();
+    //.AddJsonOptions(options =>
+    //{
+    //    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
+    //    options.JsonSerializerOptions.WriteIndented = true;
+    //});
+
 builder.Services.AddRazorPages();
 
 builder.Services.AddCors(options =>

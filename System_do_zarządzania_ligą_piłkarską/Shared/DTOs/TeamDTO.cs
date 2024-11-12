@@ -25,7 +25,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Shared.DTOs
         public virtual ICollection<TeamStatDTO> TeamStats { get; set; } = new List<TeamStatDTO>();
         [JsonIgnore]
         public virtual ICollection<TrophyDTO> Trophies { get; set; } = new List<TrophyDTO>();
-        public virtual ICollection<FootballerDTO> Footballers { get; set; } = new List<FootballerDTO>();
+        //public virtual ICollection<FootballerDTO> Footballers { get; set; } = new List<FootballerDTO>();
 
         public int LeagueId { get; set; }
     }

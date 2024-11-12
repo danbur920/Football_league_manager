@@ -17,10 +17,13 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Models
         public string Stadium { get; set; }
         public int YearOfFoundation { get; set; }
         public virtual ApplicationUser? Coach { get; set; }
+        [JsonIgnore]
         public virtual ICollection<Match> HomeMatches { get; set; } = new List<Match>();
+        [JsonIgnore]
         public virtual ICollection<Match> AwayMatches { get; set; } = new List<Match>();
         public virtual ICollection<TeamStat> TeamStats { get; set; } = new List<TeamStat>();
         public virtual ICollection<Trophy> Trophies { get; set; } = new List<Trophy>();
-        //public virtual ICollection<Footballer> Footballers { get; set; } = new List<Footballer>();
+        //[JsonIgnore]
+        //public virtual ICollection<Footballer> Footballers { get; set; } = new List<Footballer>(); // to było zakomentowane
     }
 }

@@ -54,6 +54,14 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTGVhZ3VlTWFzdGVyXFBhZ2VzXFNlYXNvbk1hbmFnZW1lbnRcQWRkVGVhbS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Daniel/Desktop/PRACA INŻYNIERSKA/Backup/System_do_zarządzania_ligą_piłkarską/System_do_zarządzania_ligą_piłkarską/Client/Areas/LeagueMaster/Pages/SeasonManagement/MatchManagement.razor]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTGVhZ3VlTWFzdGVyXFBhZ2VzXFNlYXNvbk1hbmFnZW1lbnRcTWF0Y2hNYW5hZ2VtZW50LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Daniel/Desktop/PRACA INŻYNIERSKA/Backup/System_do_zarządzania_ligą_piłkarską/System_do_zarządzania_ligą_piłkarską/Client/Areas/LeagueMaster/Pages/SeasonManagement/MatchManagementDetails.razor]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTGVhZ3VlTWFzdGVyXFBhZ2VzXFNlYXNvbk1hbmFnZW1lbnRcTWF0Y2hNYW5hZ2VtZW50RGV0YWlscy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Daniel/Desktop/PRACA INŻYNIERSKA/Backup/System_do_zarządzania_ligą_piłkarską/System_do_zarządzania_ligą_piłkarską/Client/Areas/LeagueMaster/Pages/SeasonManagement/SeasonManagement.razor]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTGVhZ3VlTWFzdGVyXFBhZ2VzXFNlYXNvbk1hbmFnZW1lbnRcU2Vhc29uTWFuYWdlbWVudC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 

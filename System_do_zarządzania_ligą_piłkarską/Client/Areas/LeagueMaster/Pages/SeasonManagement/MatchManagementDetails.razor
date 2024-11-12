@@ -1,0 +1,147 @@
+﻿@page "/league-master/leagues/{leagueInfoId:int}/{leagueSeasonId:int}/manage-matches/{matchId:int}"
+
+@using System_do_zarządzania_ligą_piłkarską.Client.Areas.LeagueMaster.Shared
+@using System_do_zarządzania_ligą_piłkarską.Shared.DTOs
+@using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Matches
+@using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Referees
+
+@layout LeagueMasterLayout
+@inject NavigationManager Navigation
+@inject HttpClient Http
+
+<PageTitle>Zarządzaj meczem</PageTitle>
+
+<h3>Zarządzaj meczem </h3>
+
+<div class="button-container">
+    <button class="btn btn-secondary" @onclick="BackToTheMatchManagement">Wróć</button>
+</div>
+
+@if(editMatch != null)
+{
+    <span>@editMatch.HomeTeam.Name</span>
+    <span>@editMatch.AwayTeam.Name</span>
+}
+else
+{
+    <span>Loading...</span>
+}
+
+@if (editMatch != null)
+{
+    <EditForm Model="editMatch" OnValidSubmit="HandleValidSubmit">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <div class="mb-3">
+            <label for="home" class="form-label">Gospodarz</label>
+            <select id="home" class="form-select" @bind="editMatch.HomeTeamId">
+                <option value="">-- Zmień gospodarza --</option>
+                @foreach (var home in teams)
+                {
+                    <option value="@home.TeamId">@home.TeamName</option>
+                }
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="away" class="form-label">Gość</label>
+            <select id="away" class="form-select" @bind="editMatch.AwayTeamId">
+                <option value="">-- Zmień gościa --</option>
+                @foreach (var away in teams)
+                {
+                    <option value="@away.TeamId">@away.TeamName</option>
+                }
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="referee" class="form-label">Sędzia</label>
+            <select id="referee" class="form-select" @bind="editMatch.RefereeId">
+                <option value="">-- Zmień sędziego --</option>
+                @foreach (var referee in referees)
+                {
+                    <option value="@referee.Id">@referee.FirstName @referee.LastName</option>
+                }
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="round" class="form-label">Kolejka</label>
+            <select id="round" class="form-select" @bind="editMatch.Round">
+                <option value="">-- Zmień kolejkę --</option>
+                @for (int i = 1; i <= 50; i++)
+                {
+                    <option value="@editMatch.Round">@i</option>
+                }
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="matchDate" class="form-label">Data meczu</label>
+            <InputDate id="matchDate" class="form-control" @bind-Value="editMatch.MatchDate" />
+        </div>
+
+        <div class="mb-3">
+            <label for="matchTime" class="form-label">Godzina meczu</label>
+            <InputDate Type="InputDateType.Time" id="matchTime" class="form-control" @bind-Value="editMatch.MatchTime" />
+        </div>
+
+        <div class="mb-3">
+            <label for="stadium" class="form-label">Stadion</label>
+            <InputText id="stadium" class="form-control" @bind-Value="editMatch.FootballStadium" />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Zatwierdź edycję mecz</button>
+    </EditForm>
+}
+
+
+@code {
+    [Parameter] public int leagueInfoId { get; set; }
+    [Parameter] public int leagueSeasonId { get; set; }
+    [Parameter] public int matchId { get; set; }
+
+    private EditMatchDTO? editMatch;
+
+    private List<TeamStatDTO>? teams;
+    private List<ShortRefereeInfoDTO>? referees;
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        editMatch = await Http.GetFromJsonAsync<EditMatchDTO>($"api/matches/league-master/match/{leagueSeasonId}/{matchId}");
+        teams = await Http.GetFromJsonAsync<List<TeamStatDTO>>($"api/leagues/{leagueInfoId}/table");
+        referees = await Http.GetFromJsonAsync<List<ShortRefereeInfoDTO>>($"api/referees/league-master/specific-season/{leagueSeasonId}");
+    }
+
+    private async Task HandleValidSubmit()
+    {
+        // try
+        // {
+        //     newMatch.LeagueId = leagueSeasonId;
+        //     var response = await Http.PostAsJsonAsync("api/matches/league-master", newMatch);
+
+        //     if (response.IsSuccessStatusCode)
+        //     {
+        //         AlertManager.DisplayAlert($"Dodano mecz {MatchInfo()} do wybranego sezonu!", "success");
+        //         Clear();
+        //     }
+        //     else
+        //     {
+        //         AlertManager.DisplayAlert($"Nie udało się dodać meczu {MatchInfo()} do wybranego sezonu.", "danger");
+        //         Clear();
+        //     }
+        // }
+        // catch (Exception ex)
+        // {
+        //     AlertManager.DisplayAlert($"Nie udało się dodać meczu {MatchInfo()} do wybranego sezonu.", "danger");
+        //     Clear();
+        // }
+    }
+
+    private void BackToTheMatchManagement()
+    {
+        Navigation.NavigateTo($"/league-master/leagues/{leagueInfoId}/{leagueSeasonId}/manage-matches");
+    }
+}

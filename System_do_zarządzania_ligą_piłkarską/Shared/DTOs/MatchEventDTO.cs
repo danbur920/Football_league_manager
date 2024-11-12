@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
@@ -19,6 +20,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Shared.DTOs
                                                         // zawodnik wchodzący
         public int? Minute { get; set; }
         public EventType EventType { get; set; }
+        [JsonIgnore]
         public MatchDTO? Match { get; set; }
     }
 
