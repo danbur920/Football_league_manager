@@ -2,6 +2,7 @@
 using System_do_zarządzania_ligą_piłkarską.Server.Repositories.Interfaces;
 using System_do_zarządzania_ligą_piłkarską.Server.Services.Interfaces;
 using System_do_zarządzania_ligą_piłkarską.Shared.DTOs;
+using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Matches;
 
 namespace System_do_zarządzania_ligą_piłkarską.Server.Services
 {
@@ -31,6 +32,12 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Services
         public async Task<int> GetTotalPlayersCount()
         {
             return await _footballerRepository.GetTotalPlayersCount();
+        }
+
+        public async Task<List<ShortFootballerInfoDTO>> GetFootballersFromSpecificTeam(int teamId)
+        {
+            var footballers = await _footballerRepository.GetFootballersFromSpecificTeam(teamId);
+            return _mapper.Map<List<ShortFootballerInfoDTO>>(footballers);
         }
     }
 }

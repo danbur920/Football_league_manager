@@ -1,4 +1,5 @@
 ﻿using System.Text.Json.Serialization;
+using System_do_zarządzania_ligą_piłkarską.Shared.Enums;
 
 namespace System_do_zarządzania_ligą_piłkarską.Server.Models
 {
@@ -13,6 +14,8 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Models
         public int? SecondaryFootballerId { get; set; } // asystent gola,
                                                         // zawodnik wchodzący
         public int? TeamId { get; set; }
+        public int? RefereeId { get; set; }
+        public int? LeagueSeasonId { get; set; }
         public int? Minute {  get; set; }
         public string? Description { get; set; }
         public EventType EventType { get; set; }
@@ -20,14 +23,15 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Models
         public Match? Match { get; set; }
     }
 
-    public enum EventType
-    {
-        Goal,
-        YellowCard,
-        RedCard,
-        Penalty,
-        Substitution
-    }
+
+    //public enum EventType
+    //{
+    //    Goal,
+    //    YellowCard,
+    //    RedCard,
+    //    Penalty,
+    //    Substitution
+    //}
 }
 
 // Info: faule nie będą zdarzeniem meczowym. Ilość fauli będzie można wpisać podczas wpisywania wyniku meczu.

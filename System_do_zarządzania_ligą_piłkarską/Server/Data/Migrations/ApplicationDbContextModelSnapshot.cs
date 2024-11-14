@@ -599,7 +599,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Data.Migrations
                     b.Property<DateOnly?>("MatchDate")
                         .HasColumnType("date");
 
-                    b.Property<TimeSpan?>("MatchTime")
+                    b.Property<TimeOnly?>("MatchTime")
                         .HasColumnType("time");
 
                     b.Property<int>("RefereeId")
@@ -639,6 +639,9 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("LeagueSeasonId")
+                        .HasColumnType("int");
+
                     b.Property<int>("MatchId")
                         .HasColumnType("int");
 
@@ -646,6 +649,9 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<int?>("PrimaryFootballerId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("RefereeId")
                         .HasColumnType("int");
 
                     b.Property<int?>("SecondaryFootballerId")
@@ -1071,7 +1077,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Data.Migrations
             modelBuilder.Entity("System_do_zarządzania_ligą_piłkarską.Server.Models.Trophy", b =>
                 {
                     b.HasOne("System_do_zarządzania_ligą_piłkarską.Server.Models.Footballer", "Footballer")
-                        .WithMany("Trophies")
+                        .WithMany()
                         .HasForeignKey("FootballerId");
 
                     b.HasOne("System_do_zarządzania_ligą_piłkarską.Server.Models.Team", "Team")
@@ -1088,11 +1094,6 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Data.Migrations
                     b.Navigation("Favourites");
 
                     b.Navigation("Teams");
-                });
-
-            modelBuilder.Entity("System_do_zarządzania_ligą_piłkarską.Server.Models.Footballer", b =>
-                {
-                    b.Navigation("Trophies");
                 });
 
             modelBuilder.Entity("System_do_zarządzania_ligą_piłkarską.Server.Models.LeagueInfo", b =>

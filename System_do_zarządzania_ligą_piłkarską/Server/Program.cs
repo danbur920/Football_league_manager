@@ -135,11 +135,6 @@ builder.Services.Configure<JwtBearerOptions>(IdentityServerJwtConstants.Identity
 });
 
 builder.Services.AddControllersWithViews();
-    //.AddJsonOptions(options =>
-    //{
-    //    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
-    //    options.JsonSerializerOptions.WriteIndented = true;
-    //});
 
 builder.Services.AddRazorPages();
 

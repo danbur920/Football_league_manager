@@ -17,57 +17,52 @@
 
 <h3>Twoje ligi</h3>
 
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>Nazwa</th>
-            <th>Kraj</th>
-            <th>Poziom ligi</th>
-            <th>Przejdź do ligi</th>
-            <th>Działania</th>
-        </tr>
-    </thead>
-    <tbody>
-        @if (leagues == null)
-        {
+@if (leagues != null)
+{
+    <table class="table table-striped">
+        <thead>
             <tr>
-                <td colspan="8">Ładowanie...</td>
+                <th>Nazwa</th>
+                <th>Kraj</th>
+                <th>Poziom ligi</th>
+                <th>Przejdź do ligi</th>
+                <th>Działania</th>
             </tr>
-        }
-        else if (leagues.Count == 0)
-        {
-            <tr>
-                <td colspan="8">Brak danych do wyświetlenia</td>
-            </tr>
-        }
-        else
-        {
-            @foreach (var league in leagues)
+        </thead>
+        <tbody>
+            @if (leagues.Count == 0)
             {
                 <tr>
-                    <td>@league.LeagueInfo.Name</td>
-                    <td>@league.LeagueInfo.Country</td>
-                    <td>@league.LeagueInfo.Level</td>
-                    <td>
-                        <button class="btn btn-link" @onclick="() => GoToTheLeague(league.Id)">
-                            <i class="fas fa-arrow-right"></i> Zarządzaj ligą
-                        </button>
-                    </td>
-                    <td>
-                        @if(IsPrimaryLeagueMaster(league.LeagueInfo.LeagueMasterPrimaryId))
-                        {
-                            <button class="btn btn-danger" @onclick="()=>ShowRemoveModal(league.LeagueInfoId)">Usuń ligę</button>
-                        }
-                    </td>
+                    <td colspan="8">Brak danych do wyświetlenia</td>
                 </tr>
             }
-        }
-    </tbody>
-</table>
+            else
+            {
+                @foreach (var league in leagues)
+                {
+                    <tr>
+                        <td>@league.LeagueInfo.Name</td>
+                        <td>@league.LeagueInfo.Country</td>
+                        <td>@league.LeagueInfo.Level</td>
+                        <td>
+                            <button class="btn btn-link" @onclick="() => GoToTheLeague(league.Id)">
+                                <i class="fas fa-arrow-right"></i> Zarządzaj ligą
+                            </button>
+                        </td>
+                        <td>
+                            @if (IsPrimaryLeagueMaster(league.LeagueInfo.LeagueMasterPrimaryId))
+                            {
+                                <button class="btn btn-danger" @onclick="()=>ShowRemoveModal(league.LeagueInfoId)">Usuń ligę</button>
+                            }
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+}
 
-@* <button class="btn btn-primary" @onclick="() => ShowRemoveModal(league.Id)">
-    <i class="fas fa-trash"></i> Usuń
-</button> *@
+
 
 @code {
     private List<LeagueSeasonDTO>? leagues;

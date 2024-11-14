@@ -37,8 +37,16 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
         public async Task<int> GetTotalPlayersCount()
         {
             int playersCount = await _context.Footballers.CountAsync();
-            Console.WriteLine("coos");
             return playersCount;
+        }
+
+        public async Task<List<Footballer>> GetFootballersFromSpecificTeam(int teamId)
+        {
+            var footballers = await _context.Footballers.
+                Where(x => x.TeamId == teamId).
+                ToListAsync();
+
+            return footballers;
         }
     }
 }

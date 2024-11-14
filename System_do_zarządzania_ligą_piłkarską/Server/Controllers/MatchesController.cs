@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System_do_zarządzania_ligą_piłkarską.Server.Services;
 using System_do_zarządzania_ligą_piłkarską.Server.Services.Interfaces;
+using System_do_zarządzania_ligą_piłkarską.Shared.DTOs;
 using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Matches;
 using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Teams;
 
@@ -27,6 +28,13 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Controllers
             return Ok();
         }
 
+        [HttpPost("league-master/match-event")]
+        public async Task<IActionResult> AddNewMatchEventToTheSeason(MatchEventDTO newMatchEvent)
+        {
+            await _matchService.AddNewMatchEventToTheSeason(newMatchEvent);
+            return Ok();
+        }
+
         [HttpGet("league-master/{leagueSeasonId}")]
         public async Task<IActionResult> GetMatchesFromSpecificSeasonForLeagueMaster([FromRoute] int leagueSeasonId)
         {
@@ -39,6 +47,18 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Controllers
         {
             var match = await _matchService.GetExtensiveMatchInfoFromSpecificSeasonForLeagueMaster(leagueSeasonId, matchId);
             return Ok(match);
+        }
+
+        [HttpPatch("league-master")]
+        public async Task<IActionResult> UpdateMatchInfo([FromBody] EditMatchDTO editMatch)
+        {
+            if (editMatch == null)
+            {
+                return BadRequest("Dane meczu są niepoprawne.");
+            }
+
+            await _matchService.UpdateMatchInfo(editMatch);
+            return Ok();
         }
     }
 }

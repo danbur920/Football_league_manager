@@ -4,10 +4,14 @@
 @using System_do_zarządzania_ligą_piłkarską.Shared.DTOs
 @using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Matches
 @using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Referees
+@using System_do_zarządzania_ligą_piłkarską.Shared.Enums
+@using System_do_zarządzania_ligą_piłkarską.Client.Extensions
+@using System_do_zarządzania_ligą_piłkarską.Client.Components
 
 @layout LeagueMasterLayout
 @inject NavigationManager Navigation
 @inject HttpClient Http
+@inject AlertManager AlertManager
 
 <PageTitle>Zarządzaj meczem</PageTitle>
 
@@ -17,84 +21,243 @@
     <button class="btn btn-secondary" @onclick="BackToTheMatchManagement">Wróć</button>
 </div>
 
-@if(editMatch != null)
-{
-    <span>@editMatch.HomeTeam.Name</span>
-    <span>@editMatch.AwayTeam.Name</span>
-}
-else
-{
-    <span>Loading...</span>
-}
+<Alert Message="@AlertManager.Message" Type="@AlertManager.Type" IsVisible="@AlertManager.IsVisible" />
 
 @if (editMatch != null)
 {
-    <EditForm Model="editMatch" OnValidSubmit="HandleValidSubmit">
-        <DataAnnotationsValidator />
-        <ValidationSummary />
-
-        <div class="mb-3">
-            <label for="home" class="form-label">Gospodarz</label>
-            <select id="home" class="form-select" @bind="editMatch.HomeTeamId">
-                <option value="">-- Zmień gospodarza --</option>
-                @foreach (var home in teams)
-                {
-                    <option value="@home.TeamId">@home.TeamName</option>
-                }
-            </select>
+    <div class="match-info-container">
+        <h5>Aktualny wynik:</h5>
+        <div class="current-score">
+            <span class="team-name">@editMatch.HomeTeam.Name</span>
+            <span class="score">@($"{editMatch.GoalsHome}:{editMatch.GoalsAway}")</span>
+            <span class="team-name">@editMatch.AwayTeam.Name</span>
         </div>
-
-        <div class="mb-3">
-            <label for="away" class="form-label">Gość</label>
-            <select id="away" class="form-select" @bind="editMatch.AwayTeamId">
-                <option value="">-- Zmień gościa --</option>
-                @foreach (var away in teams)
-                {
-                    <option value="@away.TeamId">@away.TeamName</option>
-                }
-            </select>
-        </div>
-
-        <div class="mb-3">
-            <label for="referee" class="form-label">Sędzia</label>
-            <select id="referee" class="form-select" @bind="editMatch.RefereeId">
-                <option value="">-- Zmień sędziego --</option>
-                @foreach (var referee in referees)
-                {
-                    <option value="@referee.Id">@referee.FirstName @referee.LastName</option>
-                }
-            </select>
-        </div>
-
-        <div class="mb-3">
-            <label for="round" class="form-label">Kolejka</label>
-            <select id="round" class="form-select" @bind="editMatch.Round">
-                <option value="">-- Zmień kolejkę --</option>
-                @for (int i = 1; i <= 50; i++)
-                {
-                    <option value="@editMatch.Round">@i</option>
-                }
-            </select>
-        </div>
-
-        <div class="mb-3">
-            <label for="matchDate" class="form-label">Data meczu</label>
-            <InputDate id="matchDate" class="form-control" @bind-Value="editMatch.MatchDate" />
-        </div>
-
-        <div class="mb-3">
-            <label for="matchTime" class="form-label">Godzina meczu</label>
-            <InputDate Type="InputDateType.Time" id="matchTime" class="form-control" @bind-Value="editMatch.MatchTime" />
-        </div>
-
-        <div class="mb-3">
-            <label for="stadium" class="form-label">Stadion</label>
-            <InputText id="stadium" class="form-control" @bind-Value="editMatch.FootballStadium" />
-        </div>
-
-        <button type="submit" class="btn btn-primary">Zatwierdź edycję mecz</button>
-    </EditForm>
+    </div>
 }
+
+<div class="edit-forms-container">
+    <div class="form-card">
+        <h4>Edytuj mecz</h4>
+        @if (editMatch != null)
+        {
+            <EditForm Model="editMatch" OnValidSubmit="ConfirmEditMatchInfo">
+                <DataAnnotationsValidator />
+                <ValidationSummary />
+
+                <div class="mb-3">
+                    <label for="home" class="form-label">Gospodarz</label>
+                    <select id="home" class="form-select" @bind="editMatch.HomeTeamId">
+                        <option value="">-- Zmień gospodarza --</option>
+                        @foreach (var home in teams)
+                        {
+                            <option value="@home.TeamId">@home.TeamName</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="away" class="form-label">Gość</label>
+                    <select id="away" class="form-select" @bind="editMatch.AwayTeamId">
+                        <option value="">-- Zmień gościa --</option>
+                        @foreach (var away in teams)
+                        {
+                            <option value="@away.TeamId">@away.TeamName</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="referee" class="form-label">Sędzia</label>
+                    <select id="referee" class="form-select" @bind="editMatch.RefereeId">
+                        <option value="">-- Zmień sędziego --</option>
+                        @foreach (var referee in referees)
+                        {
+                            <option value="@referee.Id">@referee.FirstName @referee.LastName</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="round" class="form-label">Kolejka</label>
+                    <select id="round" class="form-select" @bind="editMatch.Round">
+                        <option value="">-- Zmień kolejkę --</option>
+                        @for (int i = 1; i <= 50; i++)
+                        {
+                            <option value="@i">@i</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="matchDate" class="form-label">Data meczu</label>
+                    <InputDate id="matchDate" class="form-control" @bind-Value="editMatch.MatchDate" />
+                </div>
+
+                <div class="mb-3">
+                    <label for="matchTime" class="form-label">Godzina meczu</label>
+                    <InputDate Type="InputDateType.Time" id="matchTime" class="form-control" @bind-Value="editMatch.MatchTime" />
+                </div>
+
+                <div class="mb-3">
+                    <label for="stadium" class="form-label">Stadion</label>
+                    <InputText id="stadium" class="form-control" @bind-Value="editMatch.FootballStadium" />
+                </div>
+
+                <button type="submit" class="btn btn-primary">Zatwierdź edycję meczu</button>
+            </EditForm>
+        }
+    </div>
+
+    <div class="form-card">
+        <h4>Dodaj zdarzenie meczowe</h4>
+        @if (newMatchEvent != null && teams != null && homeFootballers != null && awayFootballers != null)
+        {
+            <EditForm Model="newMatchEvent" OnValidSubmit="ConfirmNewMatchEvent">
+                <DataAnnotationsValidator />
+                <ValidationSummary />
+
+                <div class="mb-3">
+                    <label for="eventType" class="form-label">Typ zdarzenia</label>
+                    <select id="eventType" class="form-select" @bind="newMatchEvent.EventType">
+                        <option value="">-- Wybierz zdarzenie --</option>
+                        @foreach (var eventType in EventTypeHelper.GetAllEventTypes())
+                        {
+                            <option value="@eventType">@EventTypeHelper.GetDisplayName(eventType)</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="minute" class="form-label">Minuta</label>
+                    <select id="minute" class="form-select" @bind="newMatchEvent.Minute">
+                        <option value="">-- Wybierz minutę zdarzenia --</option>
+                        @for (int i = 1; i <= 120; i++)
+                        {
+                            <option value="@i">@i</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="team" class="form-label">Drużyna</label>
+                    <select id="team" class="form-select" @bind="newMatchEvent.TeamId">
+                        <option value="">-- Wybierz drużynę --</option>
+                        @foreach (var team in teams)
+                        {
+                            <option value="@team.Id">@team.TeamName</option>
+                        }
+                    </select>
+                </div>
+
+                @* // ----------------------------------------------------------------------------------------------------- *@
+
+                @if (newMatchEvent.TeamId != null && newMatchEvent.TeamId == homeFootballers.FirstOrDefault().TeamId)
+                {
+                    <div class="mb-3">
+                        <label for="primaryFootballer" class="form-label">Zawodnik główny gospodarz (zdobył gola, nietrafił rzutu karnego, otrzymał kartkę, wchodzi na boisko) - Wymagane</label>
+                        <select id="primaryFootballer" class="form-select" @bind="newMatchEvent.PrimaryFootballerId">
+                            <option value="">-- Wybierz zawodnika głównego --</option>
+                            @foreach (var footballer in homeFootballers)
+                            {
+                                <option value="@footballer.Id">@footballer.FirstName @footballer.LastName</option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="primaryFootballer" class="form-label">Zawodnik drugorzędny gospodarz (zaliczył asystę, schodzi z boiska) - Opcjonalne</label>
+                        <select id="primaryFootballer" class="form-select" @bind="newMatchEvent.SecondaryFootballerId">
+                            <option value="">-- Wybierz zawodnika drugorzędnego --</option>
+                            @foreach (var footballer in homeFootballers)
+                            {
+                                <option value="@footballer.Id">@footballer.FirstName @footballer.LastName</option>
+                            }
+                        </select>
+                    </div>
+                }
+                else if (newMatchEvent.TeamId != null)
+                {
+                    <div class="mb-3">
+                        <label for="primaryFootballer" class="form-label">Zawodnik główny gość (zdobył gola, nietrafił rzutu karnego, otrzymał kartkę, wchodzi na boisko) - Wymagane</label>
+                        <select id="primaryFootballer" class="form-select" @bind="newMatchEvent.PrimaryFootballerId">
+                            <option value="">-- Wybierz zawodnika głównego --</option>
+                            @foreach (var footballer in awayFootballers)
+                            {
+                                <option value="@footballer.Id">@footballer.FirstName @footballer.LastName</option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="primaryFootballer" class="form-label">Zawodnik drugorzędny gość (zaliczył asystę, schodzi z boiska) - Opcjonalne</label>
+                        <select id="primaryFootballer" class="form-select" @bind="newMatchEvent.SecondaryFootballerId">
+                            <option value="">-- Wybierz zawodnika drugorzędnego --</option>
+                            @foreach (var footballer in awayFootballers)
+                            {
+                                <option value="@footballer.Id">@footballer.FirstName @footballer.LastName</option>
+                            }
+                        </select>
+                    </div>
+                }
+
+                <div class="mb-3">
+                    <label for="description" class="form-label">Opis</label>
+                    <InputText id="description" class="form-control" @bind-Value="newMatchEvent.Description" />
+                </div>
+
+
+                <button type="submit" class="btn btn-primary">Dodaj zdarzenie</button>
+            </EditForm>
+        }
+    </div>
+
+    <div class="form-card events-column">
+        <h4>Zdarzenia meczowe</h4>
+        @if (editMatch != null && editMatch.MatchEvents != null)
+        {
+            <div class="events-container">
+                <div class="team-events">
+                    <h5>Gospodarz</h5>
+                    @foreach (var eventt in homeMatchEvents)
+                    {
+                        <div class="event-item">
+                            <span>Minuta: @eventt.Minute</span> - <span>@eventt.EventType</span>
+                        </div>
+                    }
+                </div>
+
+                <div class="team-events">
+                    <h5>Gość</h5>
+                    @foreach (var eventt in awayMatchEvents)
+                    {
+                        <div class="event-item">
+                            <span>Minuta: @eventt.Minute</span> - <span>@eventt.EventType</span>
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <div>
+                <h4>Zdarzenia meczowe</h4>
+                <div>
+                    <div>
+                        <i class="fas fa-futbol"></i> Gol
+                    </div>
+                    <div>
+                        <i class="fas fa-exclamation-triangle" style="color: yellow;"></i> Żółta kartka
+                    </div>
+                    <div>
+                        <i class="fas fa-ban" style="color: red;"></i> Czerwona kartka
+                    </div>
+                    <div>
+                        <i class="fas fa-exchange-alt"></i> Zmiana
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
 
 
 @code {
@@ -103,41 +266,92 @@ else
     [Parameter] public int matchId { get; set; }
 
     private EditMatchDTO? editMatch;
+    private MatchEventDTO? newMatchEvent;
 
     private List<TeamStatDTO>? teams;
     private List<ShortRefereeInfoDTO>? referees;
 
+    private List<MatchEventDTO>? homeMatchEvents;
+    private List<MatchEventDTO>? awayMatchEvents;
+
+    private List<ShortFootballerInfoDTO>? homeFootballers;
+    private List<ShortFootballerInfoDTO>? awayFootballers;
 
     protected override async Task OnInitializedAsync()
     {
-        editMatch = await Http.GetFromJsonAsync<EditMatchDTO>($"api/matches/league-master/match/{leagueSeasonId}/{matchId}");
+        newMatchEvent = new MatchEventDTO();
+        await LoadMatch();
+
         teams = await Http.GetFromJsonAsync<List<TeamStatDTO>>($"api/leagues/{leagueInfoId}/table");
+        teams = teams.Where(x => x.TeamId == editMatch.HomeTeamId || x.TeamId == editMatch.AwayTeamId).ToList();
+
         referees = await Http.GetFromJsonAsync<List<ShortRefereeInfoDTO>>($"api/referees/league-master/specific-season/{leagueSeasonId}");
+
+        if (editMatch != null)
+        {
+            homeFootballers = await Http.GetFromJsonAsync<List<ShortFootballerInfoDTO>>($"api/footballers/team/{editMatch.HomeTeamId}");// potencjalnie do rozbudowy bo bierze wszystkich piłkarz z drużyny
+            awayFootballers = await Http.GetFromJsonAsync<List<ShortFootballerInfoDTO>>($"api/footballers/team/{editMatch.AwayTeamId}");
+
+            await LoadMatchEvents();
+        }
+
     }
 
-    private async Task HandleValidSubmit()
+    private async Task LoadMatch()
     {
-        // try
-        // {
-        //     newMatch.LeagueId = leagueSeasonId;
-        //     var response = await Http.PostAsJsonAsync("api/matches/league-master", newMatch);
+        editMatch = await Http.GetFromJsonAsync<EditMatchDTO>($"api/matches/league-master/match/{leagueSeasonId}/{matchId}");
+    }
 
-        //     if (response.IsSuccessStatusCode)
-        //     {
-        //         AlertManager.DisplayAlert($"Dodano mecz {MatchInfo()} do wybranego sezonu!", "success");
-        //         Clear();
-        //     }
-        //     else
-        //     {
-        //         AlertManager.DisplayAlert($"Nie udało się dodać meczu {MatchInfo()} do wybranego sezonu.", "danger");
-        //         Clear();
-        //     }
-        // }
-        // catch (Exception ex)
-        // {
-        //     AlertManager.DisplayAlert($"Nie udało się dodać meczu {MatchInfo()} do wybranego sezonu.", "danger");
-        //     Clear();
-        // }
+    private async Task LoadMatchEvents()
+    {
+        homeMatchEvents = editMatch.MatchEvents.Where(x => x.TeamId == editMatch.HomeTeamId).ToList();
+        awayMatchEvents = editMatch.MatchEvents.Where(x => x.TeamId == editMatch.AwayTeamId).ToList();
+    }
+
+    private async Task ConfirmEditMatchInfo()
+    {
+        try
+        {
+            var response = await Http.PatchAsJsonAsync("api/matches/league-master", editMatch);
+
+            if (response.IsSuccessStatusCode)
+            {
+                AlertManager.DisplayAlert($"Zaktualizowano mecz {editMatch.HomeTeam.Name}-{editMatch.AwayTeam.Name}!", "success");
+                await LoadMatch();
+            }
+            else
+            {
+                AlertManager.DisplayAlert($"Nie udało się zaktualizować meczu {editMatch.HomeTeam.Name}-{editMatch.AwayTeam.Name}.", "danger");
+            }
+        }
+        catch (Exception ex)
+        {
+            AlertManager.DisplayAlert($"Nie udało się zaktualizować meczu {editMatch.HomeTeam.Name}-{editMatch.AwayTeam.Name}.", "danger");
+        }
+    }
+
+    private async Task ConfirmNewMatchEvent()
+    {
+        try
+        {
+            var response = await Http.PostAsJsonAsync("api/matches/league-master/match-event", newMatchEvent);
+
+            if (response.IsSuccessStatusCode)
+            {
+                AlertManager.DisplayAlert($"Dodano zdarzenie meczowe!", "success");
+                newMatchEvent = new MatchEventDTO();
+
+                await LoadMatchEvents();
+            }
+            else
+            {
+                AlertManager.DisplayAlert($"Nie udało się dodać zdarzenia meczowego.", "danger");
+            }
+        }
+        catch (Exception ex)
+        {
+            AlertManager.DisplayAlert($"Nie udało się dodać zdarzenia meczowego.", "danger");
+        }
     }
 
     private void BackToTheMatchManagement()
@@ -145,3 +359,67 @@ else
         Navigation.NavigateTo($"/league-master/leagues/{leagueInfoId}/{leagueSeasonId}/manage-matches");
     }
 }
+
+
+<style>
+    .match-info-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .team-name {
+        margin: 0 10px;
+    }
+
+    .score {
+        font-weight: bold;
+        font-size: 1.5rem;
+        margin: 0 10px;
+    }
+
+    .current-score {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.4rem;
+        font-weight: bold;
+        margin-top: 10px;
+    }
+
+    .edit-forms-container {
+        display: flex;
+        gap: 20px;
+    }
+
+    .form-card {
+        flex: 1;
+        background-color: #dcdcdc;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .events-column {
+        flex: 1.5;
+    }
+
+    .events-container {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .team-events {
+        flex: 1;
+        margin: 10px;
+    }
+
+    .event-item {
+        background-color: #e9ecef;
+        border-radius: 5px;
+        padding: 5px;
+        margin-bottom: 5px;
+        font-size: 0.9rem;
+    }
+</style>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Text.Json.Serialization;
@@ -18,19 +19,31 @@ namespace System_do_zarządzania_ligą_piłkarską.Shared.DTOs
                                                       // zawodnik schodzący
         public int? SecondaryFootballerId { get; set; } // asystent gola,
                                                         // zawodnik wchodzący
+        public int? TeamId { get; set; }
+        public int? RefereeId { get; set; }
+        public int? LeagueSeasonId { get; set; }
         public int? Minute { get; set; }
+        public string? Description { get; set; }
         public EventType EventType { get; set; }
         [JsonIgnore]
-        public MatchDTO? Match { get; set; }
+        public virtual MatchDTO? Match { get; set; }
     }
 
     public enum EventType
     {
+        [Display(Name ="Gol")]
         Goal,
+        [Display(Name = "Gol samobójczy")]
         OwnGoal,
+        [Display(Name = "Żółta kartka")]
         YellowCard,
+        [Display(Name = "Czerwona kartka")]
         RedCard,
+        [Display(Name = "Rzut karny - gol")]
         Penalty,
+        [Display(Name = "Rzut karny - nietrafiony")]
+        MissedPenalty,
+        [Display(Name = "Zmiana")]
         Substitution
     }
 }

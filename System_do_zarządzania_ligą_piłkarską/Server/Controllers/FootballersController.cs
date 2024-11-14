@@ -27,12 +27,12 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Controllers
             return Ok(players);
         }
 
-        //[HttpGet("count")]
-        //public async Task<IActionResult> GetTotalPlayersCount()
-        //{
-        //    int playersCount = await _footballerService.GetTotalPlayersCount();
-        //    return Ok(playersCount);
-        //}
+        [HttpGet("team/{teamId}")]
+        public async Task<IActionResult> GetFootballersFromSpecificTeam([FromRoute] int teamId)
+        {
+            var players = await _footballerService.GetFootballersFromSpecificTeam(teamId);
+            return Ok(players);
+        }
 
         [HttpGet("count")]
         public async Task<IActionResult> GetTotalPlayersCount()

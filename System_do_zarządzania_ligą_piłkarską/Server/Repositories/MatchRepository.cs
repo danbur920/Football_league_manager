@@ -20,6 +20,12 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
             await _context.SaveChangesAsync();
         }
 
+        public async Task<Match> GetMatch(int matchId)
+        {
+            var match = await _context.Matches.FindAsync(matchId);
+            return match;
+        }
+
         public async Task<List<Match>> GetMatchesFromSpecificSeasonForLeagueMaster(int leagueSeasonId)
         {
             var matches = await _context.Matches.
@@ -42,6 +48,16 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
             return match;
         }
 
+        public async Task UpdateMatchInfo(Match editMatch)
+        {
+            _context.Matches.Update(editMatch);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task AddNewMatchEventToTheSeason(MatchEvent newMatchEvent)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 
