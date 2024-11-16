@@ -9,6 +9,6 @@ namespace System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Teams
     public class NewTeamStatDTO
     {
         public int TeamId { get; set; }
-        public int LeagueId { get; set; }
+        public int LeagueSeasonId { get; set; }
     }
 }

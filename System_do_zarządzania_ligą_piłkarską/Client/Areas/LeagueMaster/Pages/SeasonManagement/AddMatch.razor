@@ -118,7 +118,7 @@ else
     {
         try
         {
-            newMatch.LeagueId = leagueSeasonId;
+            newMatch.LeagueSeasonId = leagueSeasonId;
             var response = await Http.PostAsJsonAsync("api/matches/league-master", newMatch);
 
             if (response.IsSuccessStatusCode)
@@ -164,7 +164,7 @@ else
     private void Clear()
     {
         newMatch.RefereeId = default;
-        newMatch.LeagueId = default;
+        newMatch.LeagueSeasonId = default;
         newMatch.Round = default;
         newMatch.HomeTeamId = default;
         newMatch.AwayTeamId = default;

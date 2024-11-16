@@ -35,7 +35,7 @@
             </select>
         </div>
 
-        <button type="submit" class="btn btn-primary">Dodaj mecz</button>
+        <button type="submit" class="btn btn-primary">Dodaj drużynę</button>
     </EditForm>
 }
 else
@@ -63,7 +63,7 @@ else
     {
         try
         {
-            newTeamStat.LeagueId = leagueSeasonId;
+            newTeamStat.LeagueSeasonId = leagueSeasonId;
             var response = await Http.PostAsJsonAsync("api/teams/league-master", newTeamStat);
 
             if (response.IsSuccessStatusCode)

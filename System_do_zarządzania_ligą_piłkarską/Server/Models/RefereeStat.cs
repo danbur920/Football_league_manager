@@ -10,13 +10,13 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Models
     {
         public int Id { get; set; }
         public int RefereeId { get; set; }
-        public int LeagueId { get; set; }
+        public int LeagueSeasonId { get; set; }
         public int RefereedMatches { get; set; }
         public int YellowCardsGiven {  get; set; }
         public int RedCardsGiven {  get; set; }
         public int PenaltiesAwarded { get; set; }
         public int FoulsCalled { get; set; }
         public virtual Referee? Referee { get; set; }
-        public virtual LeagueSeason? League { get; set; }
+        public virtual LeagueSeason? LeagueSeason { get; set; }
     }
 }

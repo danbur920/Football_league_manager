@@ -35,7 +35,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
         public async Task<List<FootballerStat>> GetLeagueScorers(int leagueId)
         {
             var scorers = await _context.FootballerStats
-                .Where(x => x.LeagueId == leagueId
+                .Where(x => x.LeagueSeasonId == leagueId
                  && (x.Goals + x.Assists) > 0)
                 .Include(x => x.Footballer)
                 .ThenInclude(x => x.Team)
@@ -50,7 +50,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
         public async Task<List<TeamStat>> GetLeagueTable(int leagueId)
         {
             var teamsStats = await _context.TeamStats
-                .Where(x => x.LeagueId == leagueId)
+                .Where(x => x.LeagueSeasonId == leagueId)
                 .Include(x => x.Team)
                 .OrderByDescending(x => x.Points)
                 .ThenByDescending(x => x.GoalBalance)

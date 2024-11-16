@@ -19,7 +19,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Shared.DTOs
                                                       // zawodnik schodzący
         public int? SecondaryFootballerId { get; set; } // asystent gola,
                                                         // zawodnik wchodzący
-        public int? TeamId { get; set; }
+        public int? TeamId { get; set; } 
         public int? RefereeId { get; set; }
         public int? LeagueSeasonId { get; set; }
         public int? Minute { get; set; }

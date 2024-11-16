@@ -11,7 +11,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Shared.DTOs
     {
         public int Id { get; set; }
         public int RefereeId { get; set; }
-        public int LeagueId { get; set; }
+        public int LeagueSeasonId { get; set; }
         public int RefereedMatches { get; set; }
         public int YellowCardsGiven { get; set; }
         public int RedCardsGiven { get; set; }
@@ -19,6 +19,6 @@ namespace System_do_zarządzania_ligą_piłkarską.Shared.DTOs
         public int FoulsCalled { get; set; }
         [JsonIgnore]
         public virtual RefereeDTO? Referee { get; set; }
-        public virtual LeagueSeasonDTO? League { get; set; }
+        public virtual LeagueSeasonDTO? LeagueSeason { get; set; }
     }
 }

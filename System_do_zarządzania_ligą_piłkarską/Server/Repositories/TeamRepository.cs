@@ -45,7 +45,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
         {
             var leagueId = await _context.TeamStats.
                 Where(x => x.TeamId == teamId && x.CurrentLeague == true).
-                Select(x => x.LeagueId).
+                Select(x => x.LeagueSeasonId).
                 FirstOrDefaultAsync();
 
             return leagueId;

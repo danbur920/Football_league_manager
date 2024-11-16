@@ -62,7 +62,7 @@ else
     {
         try
         {
-            newReferee.LeagueId = leagueSeasonId;
+            newReferee.LeagueSeasonId = leagueSeasonId;
             var response = await Http.PostAsJsonAsync("api/referees/league-master", newReferee);
 
             if (response.IsSuccessStatusCode)

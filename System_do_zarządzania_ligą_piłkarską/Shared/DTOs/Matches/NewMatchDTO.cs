@@ -14,7 +14,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Matches
         public int? HomeTeamId { get; set; }
         [Required(ErrorMessage ="Gość jest obowiązkowy.")]
         public int? AwayTeamId { get; set; }
-        public int LeagueId { get; set; }
+        public int LeagueSeasonId { get; set; }
         [Required(ErrorMessage = "Sędzia jest obowiązkowy.")]
         public int? RefereeId { get; set; }
         [Required(ErrorMessage = "Kolejka jest obowiązkowa.")]

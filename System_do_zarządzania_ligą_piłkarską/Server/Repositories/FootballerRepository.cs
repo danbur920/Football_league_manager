@@ -19,7 +19,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
             var footballer = await _context.FootballerStats.
                 Where(x => x.Id == footballerId).
                 Include(x => x.Footballer).
-                FirstOrDefaultAsync();
+                FirstOrDefaultAsync(); // zmienić lub usunąć - na ten moment nie ma to większego sensu
 
             return footballer;
         }

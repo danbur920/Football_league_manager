@@ -47,8 +47,8 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
         public async Task<List<Referee>> GetAllRefereesFromSpecificSeason(int leagueSeasonId)
         {
             var referees = await _context.Referees
-                 .Include(r => r.RefereeStats.Where(rs => rs.LeagueId == leagueSeasonId)) 
-                 .Where(r => r.RefereeStats.Any(rs => rs.LeagueId == leagueSeasonId)) 
+                 .Include(r => r.RefereeStats.Where(rs => rs.LeagueSeasonId == leagueSeasonId)) 
+                 .Where(r => r.RefereeStats.Any(rs => rs.LeagueSeasonId == leagueSeasonId)) 
                  .ToListAsync();
 
             return referees;

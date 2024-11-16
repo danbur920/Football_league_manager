@@ -14,7 +14,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Models
         public int HomeTeamId { get; set; }
         [ForeignKey("AwayTeam")]
         public int AwayTeamId { get; set; }
-        public int LeagueId { get; set; }
+        public int LeagueSeasonId { get; set; }
         public int RefereeId { get; set; }
         public int Round {  get; set; }
         public string FootballStadium { get; set; } // nazwa stadionu gospodarza
@@ -25,7 +25,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Models
         public int? Result { get; set; }
         public DateOnly? MatchDate { get; set; }
         public TimeOnly? MatchTime { get; set; }
-        public virtual LeagueSeason League { get; set; }
+        public virtual LeagueSeason LeagueSeason { get; set; }
         public virtual Referee Referee { get; set; }
         public virtual Team HomeTeam { get; set; }
         public virtual Team AwayTeam { get; set; }

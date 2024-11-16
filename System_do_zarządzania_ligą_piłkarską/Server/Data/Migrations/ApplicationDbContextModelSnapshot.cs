@@ -470,7 +470,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Data.Migrations
                     b.Property<int>("Goals")
                         .HasColumnType("int");
 
-                    b.Property<int>("LeagueId")
+                    b.Property<int>("LeagueSeasonId")
                         .HasColumnType("int");
 
                     b.Property<int>("MatchesPlayed")
@@ -492,7 +492,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Data.Migrations
 
                     b.HasIndex("FootballerId");
 
-                    b.HasIndex("LeagueId");
+                    b.HasIndex("LeagueSeasonId");
 
                     b.HasIndex("TeamStatId");
 
@@ -593,7 +593,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Data.Migrations
                     b.Property<bool>("IsFinished")
                         .HasColumnType("bit");
 
-                    b.Property<int>("LeagueId")
+                    b.Property<int>("LeagueSeasonId")
                         .HasColumnType("int");
 
                     b.Property<DateOnly?>("MatchDate")
@@ -617,7 +617,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Data.Migrations
 
                     b.HasIndex("HomeTeamId");
 
-                    b.HasIndex("LeagueId");
+                    b.HasIndex("LeagueSeasonId");
 
                     b.HasIndex("RefereeId");
 
@@ -709,7 +709,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Data.Migrations
                     b.Property<int>("FoulsCalled")
                         .HasColumnType("int");
 
-                    b.Property<int>("LeagueId")
+                    b.Property<int>("LeagueSeasonId")
                         .HasColumnType("int");
 
                     b.Property<int>("PenaltiesAwarded")
@@ -729,7 +729,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("LeagueId");
+                    b.HasIndex("LeagueSeasonId");
 
                     b.HasIndex("RefereeId");
 
@@ -796,7 +796,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Data.Migrations
                     b.Property<int>("GoalsScored")
                         .HasColumnType("int");
 
-                    b.Property<int>("LeagueId")
+                    b.Property<int>("LeagueSeasonId")
                         .HasColumnType("int");
 
                     b.Property<int>("Losses")
@@ -816,7 +816,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("LeagueId");
+                    b.HasIndex("LeagueSeasonId");
 
                     b.HasIndex("TeamId");
 
@@ -936,9 +936,9 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("System_do_zarządzania_ligą_piłkarską.Server.Models.LeagueSeason", "League")
+                    b.HasOne("System_do_zarządzania_ligą_piłkarską.Server.Models.LeagueSeason", "LeagueSeason")
                         .WithMany("FootballersStats")
-                        .HasForeignKey("LeagueId")
+                        .HasForeignKey("LeagueSeasonId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -950,7 +950,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Data.Migrations
 
                     b.Navigation("Footballer");
 
-                    b.Navigation("League");
+                    b.Navigation("LeagueSeason");
 
                     b.Navigation("TeamStat");
                 });
@@ -995,9 +995,9 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Data.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("System_do_zarządzania_ligą_piłkarską.Server.Models.LeagueSeason", "League")
+                    b.HasOne("System_do_zarządzania_ligą_piłkarską.Server.Models.LeagueSeason", "LeagueSeason")
                         .WithMany("Matches")
-                        .HasForeignKey("LeagueId")
+                        .HasForeignKey("LeagueSeasonId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1011,7 +1011,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Data.Migrations
 
                     b.Navigation("HomeTeam");
 
-                    b.Navigation("League");
+                    b.Navigation("LeagueSeason");
 
                     b.Navigation("Referee");
                 });
@@ -1029,9 +1029,9 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Data.Migrations
 
             modelBuilder.Entity("System_do_zarządzania_ligą_piłkarską.Server.Models.RefereeStat", b =>
                 {
-                    b.HasOne("System_do_zarządzania_ligą_piłkarską.Server.Models.LeagueSeason", "League")
+                    b.HasOne("System_do_zarządzania_ligą_piłkarską.Server.Models.LeagueSeason", "LeagueSeason")
                         .WithMany("RefereeStats")
-                        .HasForeignKey("LeagueId")
+                        .HasForeignKey("LeagueSeasonId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1041,7 +1041,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("League");
+                    b.Navigation("LeagueSeason");
 
                     b.Navigation("Referee");
                 });
@@ -1057,9 +1057,9 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Data.Migrations
 
             modelBuilder.Entity("System_do_zarządzania_ligą_piłkarską.Server.Models.TeamStat", b =>
                 {
-                    b.HasOne("System_do_zarządzania_ligą_piłkarską.Server.Models.LeagueSeason", "League")
+                    b.HasOne("System_do_zarządzania_ligą_piłkarską.Server.Models.LeagueSeason", "LeagueSeason")
                         .WithMany("TeamsStats")
-                        .HasForeignKey("LeagueId")
+                        .HasForeignKey("LeagueSeasonId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1069,7 +1069,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("League");
+                    b.Navigation("LeagueSeason");
 
                     b.Navigation("Team");
                 });

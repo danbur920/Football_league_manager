@@ -144,7 +144,7 @@
                         <option value="">-- Wybierz drużynę --</option>
                         @foreach (var team in teams)
                         {
-                            <option value="@team.Id">@team.TeamName</option>
+                            <option value="@team.TeamId">@team.TeamName</option>
                         }
                     </select>
                 </div>
@@ -334,6 +334,10 @@
     {
         try
         {
+            newMatchEvent.LeagueSeasonId = leagueSeasonId;
+            newMatchEvent.MatchId = matchId;
+            newMatchEvent.RefereeId = editMatch.RefereeId;
+
             var response = await Http.PostAsJsonAsync("api/matches/league-master/match-event", newMatchEvent);
 
             if (response.IsSuccessStatusCode)
