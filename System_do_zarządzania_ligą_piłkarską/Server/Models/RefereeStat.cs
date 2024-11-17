@@ -15,7 +15,6 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Models
         public int YellowCardsGiven {  get; set; }
         public int RedCardsGiven {  get; set; }
         public int PenaltiesAwarded { get; set; }
-        public int FoulsCalled { get; set; }
         public virtual Referee? Referee { get; set; }
         public virtual LeagueSeason? LeagueSeason { get; set; }
     }

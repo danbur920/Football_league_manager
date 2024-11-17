@@ -13,6 +13,8 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Models
         public int LeagueSeasonId { get; set; }
         public int TeamStatId { get; set; }
         public int MatchesPlayed { get; set; }
+        public int StartingAppearances {  get; set; }
+        public int SubstituteAppearances {  get; set; }
         public int Goals {  get; set; }
         public int OwnGoals {  get; set; }
         public int Assists { get; set; }

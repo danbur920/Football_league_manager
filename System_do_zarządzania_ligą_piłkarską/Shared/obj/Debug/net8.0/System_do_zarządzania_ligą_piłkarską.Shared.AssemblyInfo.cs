@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("System_do_zarządzania_ligą_piłkarską.Shared")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ed91cf4b3e92b2d95239ed2d68185bddcaf05806")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+35fa19f741a5b506b3667e83dc360fa7c10975a9")]
 [assembly: System.Reflection.AssemblyProductAttribute("System_do_zarządzania_ligą_piłkarską.Shared")]
 [assembly: System.Reflection.AssemblyTitleAttribute("System_do_zarządzania_ligą_piłkarską.Shared")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -15,12 +15,12 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories.Interface
         // Metody służące do zmian różnych statystyk po wystąpieniu zdarzenia meczowego:
         Task<MatchEventStatsUpdate> GetDataToUpdateAfterNewMatchEvent(MatchEvent newMatchEvent);
 
-        Task UpdateStatsAfterGoal(MatchEvent newMatchEvent);
-        Task UpdateStatsAfterOwnGoal(MatchEvent newMatchEvent);
-        Task UpdateStatsAfterYellowCard(MatchEvent newMatchEvent);
-        Task UpdateStatsAfterRedCard(MatchEvent newMatchEvent);
-        Task UpdateStatsAfterPenalty(MatchEvent newMatchEvent);
-        Task UpdateStatsAfterSubstitution(MatchEvent newMatchEvent);
+        Task UpdateStatsAfterGoal(MatchEventStatsUpdate statsUpdate);
+        Task UpdateStatsAfterOwnGoal(MatchEventStatsUpdate statsUpdate);
+        Task UpdateStatsAfterCard(MatchEventStatsUpdate statsUpdate);
+        Task UpdateStatsAfterPenalty(MatchEventStatsUpdate statsUpdate);
+        Task UpdateStatsAfterSubstitution(MatchEventStatsUpdate statsUpdate);
+        Task UpdateStatsAfterMissedPenalty(MatchEventStatsUpdate statsUpdate);
 
     }
 }

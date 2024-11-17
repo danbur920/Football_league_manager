@@ -63,6 +63,8 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
 
         public async Task<MatchEventStatsUpdate> GetDataToUpdateAfterNewMatchEvent(MatchEvent newMatchEvent)
         {
+            var match = await _context.Matches.FindAsync(newMatchEvent.MatchId);
+
             var primaryFootballerStat = await _context.FootballerStats.
                 Where(x => x.FootballerId == newMatchEvent.PrimaryFootballerId && x.LeagueSeasonId == newMatchEvent.LeagueSeasonId).
                 FirstOrDefaultAsync();
@@ -71,10 +73,8 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
                 Where(x => x.FootballerId == newMatchEvent.SecondaryFootballerId && x.LeagueSeasonId == newMatchEvent.LeagueSeasonId).
                 FirstOrDefaultAsync();
 
-            var match = await _context.Matches.FindAsync(newMatchEvent.MatchId);
-
             var homeTeamStat = await _context.TeamStats.
-                Where(x => x.TeamId == newMatchEvent.TeamId && x.LeagueSeasonId == newMatchEvent.LeagueSeasonId).
+                Where(x => x.TeamId == match.HomeTeamId && x.LeagueSeasonId == newMatchEvent.LeagueSeasonId).
                 FirstOrDefaultAsync();
 
             var awayTeamStat = await _context.TeamStats.
@@ -87,6 +87,8 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
                 Where(x => x.RefereeId == newMatchEvent.RefereeId && x.LeagueSeasonId == newMatchEvent.LeagueSeasonId).
                 FirstOrDefaultAsync();
 
+            var referee = await _context.Referees.FindAsync(newMatchEvent.RefereeId);
+
             var statsToUpdate = new MatchEventStatsUpdate()
             {
                 PrimaryFootballerStat = primaryFootballerStat,
@@ -95,41 +97,77 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
                 AwayTeamStat = awayTeamStat,
                 LeagueSeason = leagueSeason,
                 Match = match,
+                Referee = referee,
                 RefereeStat = refereeStat
             };
 
             return statsToUpdate;
         }
 
-        public async Task UpdateStatsAfterGoal(MatchEvent newMatchEvent)
+        public async Task UpdateStatsAfterGoal(MatchEventStatsUpdate statsUpdate)
         {
+            _context.FootballerStats.Update(statsUpdate.PrimaryFootballerStat);
 
+            if (statsUpdate.SecondaryFootballerStat != null)
+                _context.FootballerStats.Update(statsUpdate.SecondaryFootballerStat);
+
+            _context.TeamStats.Update(statsUpdate.HomeTeamStat);
+            _context.TeamStats.Update(statsUpdate.AwayTeamStat);
+            _context.Matches.Update(statsUpdate.Match);
+
+            await _context.SaveChangesAsync();
         }
 
-        public async Task UpdateStatsAfterOwnGoal(MatchEvent newMatchEvent)
+        public async Task UpdateStatsAfterOwnGoal(MatchEventStatsUpdate statsUpdate)
         {
+            _context.FootballerStats.Update(statsUpdate.PrimaryFootballerStat);
 
+            _context.TeamStats.Update(statsUpdate.HomeTeamStat);
+            _context.TeamStats.Update(statsUpdate.AwayTeamStat);
+            _context.Matches.Update(statsUpdate.Match);
+
+            await _context.SaveChangesAsync();
         }
 
-        public async Task UpdateStatsAfterYellowCard(MatchEvent newMatchEvent)
+        public async Task UpdateStatsAfterCard(MatchEventStatsUpdate statsUpdate)
         {
+            _context.FootballerStats.Update(statsUpdate.PrimaryFootballerStat);
+            _context.Referees.Update(statsUpdate.Referee);
+            _context.RefereeStats.Update(statsUpdate.RefereeStat);
+            _context.Matches.Update(statsUpdate.Match);
 
+            await _context.SaveChangesAsync();
         }
 
-        public async Task UpdateStatsAfterRedCard(MatchEvent newMatchEvent)
+        public async Task UpdateStatsAfterPenalty(MatchEventStatsUpdate statsUpdate)
         {
+            _context.FootballerStats.Update(statsUpdate.PrimaryFootballerStat);
+            _context.Referees.Update(statsUpdate.Referee);
+            _context.RefereeStats.Update(statsUpdate.RefereeStat);
+            _context.TeamStats.Update(statsUpdate.HomeTeamStat);
+            _context.TeamStats.Update(statsUpdate.AwayTeamStat);
+            _context.Matches.Update(statsUpdate.Match);
 
+            await _context.SaveChangesAsync();
         }
 
-        public async Task UpdateStatsAfterPenalty(MatchEvent newMatchEvent)
+        public async Task UpdateStatsAfterMissedPenalty(MatchEventStatsUpdate statsUpdate)
         {
+            _context.Referees.Update(statsUpdate.Referee);
+            _context.RefereeStats.Update(statsUpdate.RefereeStat);
 
+            await _context.SaveChangesAsync();
         }
 
-        public async Task UpdateStatsAfterSubstitution(MatchEvent newMatchEvent)
+        public async Task UpdateStatsAfterSubstitution(MatchEventStatsUpdate statsUpdate)
         {
+            _context.FootballerStats.Update(statsUpdate.PrimaryFootballerStat);
+            _context.Matches.Update(statsUpdate.Match);
 
+            await _context.SaveChangesAsync();
         }
+
+
     }
 }
 

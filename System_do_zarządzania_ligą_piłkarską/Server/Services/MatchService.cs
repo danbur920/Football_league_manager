@@ -99,37 +99,131 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Services
                             statsToUpdate.Match.GoalsAway++;
                             statsToUpdate.Match.GoalsCount++;
                         }
-                        await _matchRepository.UpdateStatsAfterGoal(mappedEvent);
+
+                        statsToUpdate.HomeTeamStat.GoalBalance = statsToUpdate.HomeTeamStat.GoalsScored - statsToUpdate.HomeTeamStat.GoalsConceded;
+                        statsToUpdate.AwayTeamStat.GoalBalance = statsToUpdate.AwayTeamStat.GoalsScored - statsToUpdate.AwayTeamStat.GoalsConceded;
+
+                        await _matchRepository.UpdateStatsAfterGoal(statsToUpdate);
                         break;
                     }
 
                 case EventType.OwnGoal:
                     {
-                        await _matchRepository.UpdateStatsAfterOwnGoal(mappedEvent);
+                        statsToUpdate.PrimaryFootballerStat.OwnGoals++;
+
+                        if (refersToHomeTeam)
+                        {
+                            statsToUpdate.HomeTeamStat.GoalsConceded++;
+                            statsToUpdate.AwayTeamStat.GoalsScored++;
+                            statsToUpdate.Match.GoalsAway++;
+                            statsToUpdate.Match.GoalsCount++;
+                        }
+                        else
+                        {
+                            statsToUpdate.HomeTeamStat.GoalsScored++;
+                            statsToUpdate.AwayTeamStat.GoalsConceded++;
+                            statsToUpdate.Match.GoalsHome++;
+                            statsToUpdate.Match.GoalsCount++;
+                        }
+
+                        statsToUpdate.HomeTeamStat.GoalBalance = statsToUpdate.HomeTeamStat.GoalsScored - statsToUpdate.HomeTeamStat.GoalsConceded;
+                        statsToUpdate.AwayTeamStat.GoalBalance = statsToUpdate.AwayTeamStat.GoalsScored - statsToUpdate.AwayTeamStat.GoalsConceded;
+
+                        await _matchRepository.UpdateStatsAfterOwnGoal(statsToUpdate);
                         break;
                     }
 
                 case EventType.YellowCard:
                     {
-                        await _matchRepository.UpdateStatsAfterYellowCard(mappedEvent);
+                        statsToUpdate.PrimaryFootballerStat.YellowCards++;
+                        statsToUpdate.RefereeStat.YellowCardsGiven++;
+                        statsToUpdate.Referee.TotalYellowCardsGiven++;
+
+                        if (refersToHomeTeam)
+                        {
+                            statsToUpdate.Match.HomeTeamYellowCards++;
+                        }
+                        else
+                        {
+                            statsToUpdate.Match.AwayTeamYellowCards++;
+                        }
+
+                        await _matchRepository.UpdateStatsAfterCard(statsToUpdate);
                         break;
                     }
 
                 case EventType.RedCard:
                     {
-                        await _matchRepository.UpdateStatsAfterRedCard(mappedEvent);
+                        statsToUpdate.PrimaryFootballerStat.RedCards++;
+                        statsToUpdate.RefereeStat.RedCardsGiven++;
+                        statsToUpdate.Referee.TotalRedCardsGiven++;
+
+                        if (refersToHomeTeam)
+                        {
+                            statsToUpdate.Match.HomeTeamRedCards++;
+                        }
+                        else
+
+                        {
+                            statsToUpdate.Match.AwayTeamRedCards++;
+                        }
+
+                        await _matchRepository.UpdateStatsAfterCard(statsToUpdate);
                         break;
                     }
 
                 case EventType.Penalty:
                     {
-                        await _matchRepository.UpdateStatsAfterPenalty(mappedEvent);
+                        statsToUpdate.PrimaryFootballerStat.Goals++;
+                        statsToUpdate.RefereeStat.PenaltiesAwarded++;
+                        statsToUpdate.Referee.TotalPenaltiesAwarded++;
+
+                        if (refersToHomeTeam)
+                        {
+                            statsToUpdate.HomeTeamStat.GoalsScored++;
+                            statsToUpdate.AwayTeamStat.GoalsConceded++;
+                            statsToUpdate.Match.GoalsHome++;
+                            statsToUpdate.Match.GoalsCount++;
+                        }
+                        else
+                        {
+                            statsToUpdate.HomeTeamStat.GoalsConceded++;
+                            statsToUpdate.AwayTeamStat.GoalsScored++;
+                            statsToUpdate.Match.GoalsAway++;
+                            statsToUpdate.Match.GoalsCount++;
+                        }
+
+                        statsToUpdate.HomeTeamStat.GoalBalance = statsToUpdate.HomeTeamStat.GoalsScored - statsToUpdate.HomeTeamStat.GoalsConceded;
+                        statsToUpdate.AwayTeamStat.GoalBalance = statsToUpdate.AwayTeamStat.GoalsScored - statsToUpdate.AwayTeamStat.GoalsConceded;
+
+                        await _matchRepository.UpdateStatsAfterPenalty(statsToUpdate);
+                        break;
+                    }
+
+                case EventType.MissedPenalty:
+                    {
+                        statsToUpdate.RefereeStat.PenaltiesAwarded++;
+                        statsToUpdate.Referee.TotalPenaltiesAwarded++;
+
+                        await _matchRepository.UpdateStatsAfterSubstitution(statsToUpdate);
                         break;
                     }
 
                 case EventType.Substitution:
                     {
-                        await _matchRepository.UpdateStatsAfterSubstitution(mappedEvent);
+                        statsToUpdate.PrimaryFootballerStat.SubstituteAppearances++;
+                        statsToUpdate.PrimaryFootballerStat.MatchesPlayed++;
+
+                        if (refersToHomeTeam)
+                        {
+                            statsToUpdate.Match.HomeTeamSubstitutions++;
+                        }
+                        else
+                        {
+                            statsToUpdate.Match.AwayTeamSubstitutions++;
+                        }
+
+                        await _matchRepository.UpdateStatsAfterSubstitution(statsToUpdate);
                         break;
                     }
 

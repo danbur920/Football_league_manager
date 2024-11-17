@@ -16,13 +16,11 @@ namespace System_do_zarządzania_ligą_piłkarską.Shared.DTOs
         public DateOnly DateOfBirth { get; set; }
         public string Nationality { get; set; }
         public string? Level { get; set; }
-        public virtual ICollection<RefereeStatDTO> RefereeStats { get; set; } = new List<RefereeStatDTO>();
-        public virtual ICollection<MatchDTO> Matches { get; set; } = new List<MatchDTO>();
-
-        public int TotalYellowCards { get; set; }
-        public int TotalRedCards { get; set; }
+        public int TotalYellowCardsGiven { get; set; }
+        public int TotalRedCardsGiven { get; set; }
         public int TotalRefereedMatches { get; set; }
         public int TotalPenaltiesAwarded { get; set; }
-        public int TotalFoulsCalled {  get; set; }
+        public virtual ICollection<RefereeStatDTO> RefereeStats { get; set; } = new List<RefereeStatDTO>();
+        public virtual ICollection<MatchDTO> Matches { get; set; } = new List<MatchDTO>();
     }
 }

@@ -10,6 +10,7 @@
 
         public LeagueSeason? LeagueSeason { get; set; }
         public Match? Match { get; set; }
+        public Referee? Referee { get; set; }
         public RefereeStat? RefereeStat { get; set; }
     }
 }

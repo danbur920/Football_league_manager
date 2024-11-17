@@ -482,6 +482,12 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Data.Migrations
                     b.Property<int>("RedCards")
                         .HasColumnType("int");
 
+                    b.Property<int>("StartingAppearances")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SubstituteAppearances")
+                        .HasColumnType("int");
+
                     b.Property<int>("TeamStatId")
                         .HasColumnType("int");
 
@@ -574,6 +580,15 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Data.Migrations
                     b.Property<int>("AwayTeamId")
                         .HasColumnType("int");
 
+                    b.Property<int>("AwayTeamRedCards")
+                        .HasColumnType("int");
+
+                    b.Property<int>("AwayTeamSubstitutions")
+                        .HasColumnType("int");
+
+                    b.Property<int>("AwayTeamYellowCards")
+                        .HasColumnType("int");
+
                     b.Property<string>("FootballStadium")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -588,6 +603,15 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("HomeTeamId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("HomeTeamRedCards")
+                        .HasColumnType("int");
+
+                    b.Property<int>("HomeTeamSubstitutions")
+                        .HasColumnType("int");
+
+                    b.Property<int>("HomeTeamYellowCards")
                         .HasColumnType("int");
 
                     b.Property<bool>("IsFinished")
@@ -693,6 +717,18 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("TotalPenaltiesAwarded")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TotalRedCardsGiven")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TotalRefereedMatches")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TotalYellowCardsGiven")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.ToTable("Referees");
@@ -705,9 +741,6 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Data.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("FoulsCalled")
-                        .HasColumnType("int");
 
                     b.Property<int>("LeagueSeasonId")
                         .HasColumnType("int");

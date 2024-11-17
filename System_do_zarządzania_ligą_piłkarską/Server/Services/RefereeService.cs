@@ -27,11 +27,10 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Services
 
             foreach (var stat in totalRefereeStats)
             {
-                mappedReferee.TotalYellowCards += stat.YellowCardsGiven;
-                mappedReferee.TotalRedCards += stat.RedCardsGiven;
+                mappedReferee.TotalYellowCardsGiven += stat.YellowCardsGiven;
+                mappedReferee.TotalRedCardsGiven += stat.RedCardsGiven;
                 mappedReferee.TotalRefereedMatches += stat.RefereedMatches;
                 mappedReferee.TotalPenaltiesAwarded += stat.PenaltiesAwarded;
-                mappedReferee.TotalFoulsCalled += stat.FoulsCalled;
             }
 
             return mappedReferee;
@@ -59,7 +58,6 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Services
             refereeToAdd.YellowCardsGiven = 0;
             refereeToAdd.RedCardsGiven = 0;
             refereeToAdd.PenaltiesAwarded = 0;
-            refereeToAdd.FoulsCalled = 0;
 
             await _refereeRepository.AddRefereeToTheSeason(refereeToAdd);
         }
