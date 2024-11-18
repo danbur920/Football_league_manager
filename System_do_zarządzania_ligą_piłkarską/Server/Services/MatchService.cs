@@ -234,5 +234,22 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Services
             }
 
         }
+
+        public async Task DeleteMatchEvent(int matchEventId)
+        {
+            var eventToDelete = await _matchRepository.GetMatchEvent(matchEventId);
+
+            //var mappedEvent = _mapper.Map<MatchEvent>(newMatchEvent);
+
+            await _matchRepository.DeleteMatchEvent(mappedEvent);
+
+            var statsToUpdate = await _matchRepository.GetDataToUpdateAfterNewMatchEvent(mappedEvent);
+
+            bool refersToHomeTeam = default; // sprawdza czy zdarzenie dotyczy gospodarza (jeśli false to dotyczy gościa)
+            if (statsToUpdate != null)
+            {
+                refersToHomeTeam = statsToUpdate.PrimaryFootballerStat.TeamStatId == statsToUpdate.HomeTeamStat.Id ? true : false;
+            }
+        }
     }
 }

@@ -35,6 +35,13 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Controllers
             return Ok();
         }
 
+        [HttpDelete("league-master/match-event/{matchEventId}")]
+        public async Task<IActionResult> DeleteMatchEvent([FromRoute] int matchEventId)
+        {
+            await _matchService.DeleteMatchEvent(matchEventId);
+            return Ok();
+        }
+
         [HttpGet("league-master/{leagueSeasonId}")]
         public async Task<IActionResult> GetMatchesFromSpecificSeasonForLeagueMaster([FromRoute] int leagueSeasonId)
         {

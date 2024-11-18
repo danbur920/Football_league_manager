@@ -55,6 +55,12 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
             await _context.SaveChangesAsync();
         }
 
+        public async Task<MatchEvent> GetMatchEvent(int matchEventId)
+        {
+            var matchEvent = await _context.MatchEvents.FindAsync(matchEventId);
+            return matchEvent;
+        }
+
         public async Task AddNewMatchEventToTheSeason(MatchEvent newMatchEvent)
         {
             await _context.MatchEvents.AddAsync(newMatchEvent);
@@ -167,7 +173,13 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
             await _context.SaveChangesAsync();
         }
 
+        public async Task DeleteMatchEvent(int matchEventId)
+        {
+            var matchEventToDelete = await _context.MatchEvents.FindAsync(matchEventId);
+            _context.MatchEvents.Remove(matchEventToDelete);
 
+            await _context.SaveChangesAsync();
+        }
     }
 }
 

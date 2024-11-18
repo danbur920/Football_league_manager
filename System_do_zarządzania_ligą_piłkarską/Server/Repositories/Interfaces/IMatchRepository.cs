@@ -22,5 +22,8 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories.Interface
         Task UpdateStatsAfterSubstitution(MatchEventStatsUpdate statsUpdate);
         Task UpdateStatsAfterMissedPenalty(MatchEventStatsUpdate statsUpdate);
 
+
+        Task<MatchEvent> GetMatchEvent(int matchEventId);
+        Task DeleteMatchEvent(int matchEventId);
     }
 }

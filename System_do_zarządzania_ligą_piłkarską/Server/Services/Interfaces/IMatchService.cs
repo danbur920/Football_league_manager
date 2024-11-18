@@ -10,5 +10,6 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Services.Interfaces
         Task<EditMatchDTO> GetExtensiveMatchInfoFromSpecificSeasonForLeagueMaster(int leagueSeasonId, int matchId);
         Task UpdateMatchInfo(EditMatchDTO editMatch);
         Task AddNewMatchEventToTheSeason(MatchEventDTO newMatchEvent);
+        Task DeleteMatchEvent(int matchEventId);
     }
 }

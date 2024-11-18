@@ -222,6 +222,7 @@
                     {
                         <div class="event-item">
                             <span>Minuta: @eventt.Minute</span> - <span>@eventt.EventType</span>
+                            <button @onclick="() => DeleteEvent(eventt.Id)" class="btn btn-primary">Usuń</button>
                         </div>
                     }
                 </div>
@@ -232,6 +233,7 @@
                     {
                         <div class="event-item">
                             <span>Minuta: @eventt.Minute</span> - <span>@eventt.EventType</span>
+                            <button @onclick="() => DeleteEvent(eventt.Id)" class="btn btn-primary">Usuń</button>
                         </div>
                     }
                 </div>
@@ -356,6 +358,30 @@
         catch (Exception ex)
         {
             AlertManager.DisplayAlert($"Nie udało się dodać zdarzenia meczowego.", "danger");
+        }
+    }
+
+    public async Task DeleteEvent(int matchEventId)
+    {
+        try
+        {
+            var response = await Http.DeleteAsync($"api/matches/league-master/match-event/{matchEventId}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                AlertManager.DisplayAlert($"Usunięto zdarzenie meczowe!", "success");
+
+                await LoadMatchEvents();
+                await LoadMatch();
+            }
+            else
+            {
+                AlertManager.DisplayAlert($"Nie udało się usunąć zdarzenia meczowego.", "danger");
+            }
+        }
+        catch (Exception ex)
+        {
+            AlertManager.DisplayAlert($"Nie udało się usunąć zdarzenia meczowego.", "danger");
         }
     }
 
