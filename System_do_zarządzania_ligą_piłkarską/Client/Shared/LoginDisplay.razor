@@ -6,22 +6,23 @@
 
 <AuthorizeView>
     <Authorized>
-        <a href="authentication/profile">Hello, @context.User.Identity?.Name!</a>
-        <button class="nav-link btn btn-link" @onclick="BeginLogOut">Log out</button>
-        <a href="/">Strona główna</a>
+        <a href="/" class="btn btn-info m-1">Strona główna</a>
+        <a href="authentication/profile" class="btn btn-dark m-1">Zarządzaj kontem</a>
 
         @if (checkUserRole == "Admin")
         {
-            <a href="admin/start">Admin Panel</a>
+            <a href="admin/start" class="btn btn-dark m-1">Admin Panel</a>
         }
-        else if(checkUserRole == "LeagueMaster")
+        else if (checkUserRole == "LeagueMaster")
         {
-            <a href="league-master/start">League Master Panel</a>
+            <a href="league-master/start" class="btn btn-dark m-1">League Master Panel</a>
         }
+
+        <button class="btn btn-dark m-1" @onclick="BeginLogOut">Wyloguj się</button>
     </Authorized>
     <NotAuthorized>
-        <a href="authentication/register">Register</a>
-        <a href="authentication/login">Log in</a>
+        <a href="authentication/register" class="btn btn-secondary m-1">Register</a>
+        <a href="authentication/login" class="btn btn-primary m-1">Log in</a>
     </NotAuthorized>
 </AuthorizeView>
 
@@ -29,8 +30,19 @@
     string checkUserRole;
     protected override async Task OnInitializedAsync()
     {
+        AuthenticationStateProvider.AuthenticationStateChanged += OnAuthenticationStateChanged;
         checkUserRole = await CheckUserRole();
     }
+
+    private async void OnAuthenticationStateChanged(Task<AuthenticationState> task)
+    {
+        var authState = await task;
+        var user = authState.User;
+
+        checkUserRole = await CheckUserRole();
+        StateHasChanged();
+    }
+
     private void BeginLogOut()
     {
 
@@ -41,8 +53,12 @@
     {
         var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
         var user = authState.User;
-        string role;
 
         return user.IsInRole("Admin") ? "Admin" : (user.IsInRole("LeagueMaster") ? "LeagueMaster" : "-");
+    }
+
+    public void Dispose()
+    {
+        AuthenticationStateProvider.AuthenticationStateChanged -= OnAuthenticationStateChanged;
     }
 }

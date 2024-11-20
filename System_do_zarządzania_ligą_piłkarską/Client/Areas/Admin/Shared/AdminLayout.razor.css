@@ -19,15 +19,19 @@ main {
     height: 3.5rem;
     display: flex;
     align-items: center;
+    padding: 0 1rem;
 }
 
-    .top-row ::deep a, .top-row ::deep .btn-link {
+    .top-row ::deep a,
+    .top-row ::deep .btn-link {
         white-space: nowrap;
-        margin-left: 1.5rem;
         text-decoration: none;
+        padding: 0.5rem 1rem;
+        margin: 0;
     }
 
-        .top-row ::deep a:hover, .top-row ::deep .btn-link:hover {
+        .top-row ::deep a:hover,
+        .top-row ::deep .btn-link:hover {
             text-decoration: underline;
         }
 
@@ -42,11 +46,11 @@ main {
     }
 
     .top-row.auth {
-        justify-content: space-between;
+        justify-content: center;
+        gap: 1rem;
     }
 
     .top-row ::deep a, .top-row ::deep .btn-link {
-        margin-left: 0;
     }
 }
 
@@ -69,9 +73,10 @@ main {
     }
 
         .top-row.auth ::deep a:first-child {
-            flex: 1;
-            text-align: right;
-            width: 0;
+            flex: initial;
+            text-align: left;
+            overflow: visible;
+            width: auto;
         }
 
     .top-row, article {

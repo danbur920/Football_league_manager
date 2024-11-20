@@ -68,18 +68,21 @@ else
                         {
                             <button class="btn btn-primary" @onclick="() => RemoveFromFavourites(footballer.Id)">
                                 <i class="fas fa-star"></i>
+                                Usuń z ulubionych
                             </button>
                         }
                         else
                         {
                             <button class="btn btn-secondary" @onclick="() => AddToFavourites(footballer.Id)">
                                 <i class="fas fa-star"></i>
+                                Dodaj do ulubionych
                             </button>
                         }
                     </td>
                     <td>
                         <NavLink href="@($"/footballers/{footballer.Id}")" class="nav-link">
                             <i class="fas fa-trophy"></i>
+                            Przejdź
                         </NavLink>
                     </td>
                 </tr>
@@ -201,7 +204,7 @@ else
      (string.IsNullOrWhiteSpace(SearchQueryManager.Position) || footballer.Position.Contains(SearchQueryManager.Position, StringComparison.OrdinalIgnoreCase)));
 }
 
-<style>
+@* <style>
     .pagination {
         display: flex;
         padding-left: 0;
@@ -248,4 +251,4 @@ else
             border-color: #dee2e6;
         }
 </style>
-
+ *@

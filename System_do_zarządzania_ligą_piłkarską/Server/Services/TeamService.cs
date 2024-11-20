@@ -12,11 +12,13 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Services
     public class TeamService : ITeamService
     {
         private readonly ITeamRepository _teamRepository;
+        private readonly IUserService _userService;
         private readonly IMapper _mapper;
 
-        public TeamService(ITeamRepository teamRepository, IMapper mapper)
+        public TeamService(ITeamRepository teamRepository, IUserService userService, IMapper mapper)
         {
             _teamRepository = teamRepository;
+            _userService = userService;
             _mapper = mapper;
         }
         public async Task<List<TeamDTO>> GetAllTeams()
@@ -32,6 +34,37 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Services
 
             mappedTeam.LeagueId = await _teamRepository.GetCurrentLeagueIdByTeam(teamId);
             return mappedTeam;
+        }
+
+        public async Task AddNewTeam(NewTeamDTO newTeam)
+        {
+            string teamCoachId = string.Empty;
+            if(newTeam.CoachEmail != null)
+            {
+                teamCoachId = await _userService.GetUserIdByEmailAddress(newTeam.CoachEmail);
+            }
+
+            var mappedNewTeam = _mapper.Map<Team>(newTeam);
+
+            if(teamCoachId != string.Empty)
+            {
+                mappedNewTeam.CoachId = teamCoachId;
+            }
+
+            await _teamRepository.AddNewTeam(mappedNewTeam);
+        }
+        public async Task DeleteTeam(int teamId)
+        {
+            var teamToDelete = await _teamRepository.GetTeamById(teamId);
+            await _teamRepository.DeleteTeam(teamToDelete);
+        }
+
+        public async Task DeleteCoachFromTeam(int teamId)
+        {
+            var team = await _teamRepository.GetTeamById(teamId);
+
+            team.CoachId = null;
+            await _teamRepository.UpdateTeam(team);
         }
 
         public async Task<List<FootballerStatDTO>> GetCurrentFootballersStats(int teamId)
@@ -52,6 +85,24 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Services
         {
             var teams = await _teamRepository.GetAllTeams();
             return _mapper.Map<List<ShortTeamInfoDTO>>(teams);
+        }
+
+        public async Task<List<TeamInfoDTO>> GetCreatedTeamsByLeagueMaster(string userId)
+        {
+            var teams = await _teamRepository.GetCreatedTeamsByLeagueMaster(userId);
+            var mappedTeams = _mapper.Map<List<TeamInfoDTO>>(teams);
+
+            foreach (var team in mappedTeams)
+            {
+                var coach = teams.FirstOrDefault(x => x.Id == team.Id)?.Coach;
+                if (coach != null)
+                {
+                    team.HasCoach = true;
+                    team.Coach = _mapper.Map<ShortCoachInfoDTO>(coach);
+                }
+            }
+
+            return mappedTeams;
         }
 
         public async Task AddTeamToTheSeason(NewTeamStatDTO newTemStat)

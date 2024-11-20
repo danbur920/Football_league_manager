@@ -13,7 +13,7 @@ builder.Services.AddHttpClient("System_do_zarządzania_ligą_piłkarską.ServerA
 
 builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient("System_do_zarządzania_ligą_piłkarską.ServerAPI"));
 
-builder.Services.AddScoped<SearchQueryManager>();
+builder.Services.AddTransient<SearchQueryManager>();
 builder.Services.AddTransient<AlertManager>(); // transient aby każdy komponent miał własną instancję 
 builder.Services.AddTransient<PaginationManager>();
 

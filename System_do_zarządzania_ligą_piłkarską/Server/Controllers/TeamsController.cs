@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 using System_do_zarządzania_ligą_piłkarską.Server.Services;
 using System_do_zarządzania_ligą_piłkarską.Server.Services.Interfaces;
 using System_do_zarządzania_ligą_piłkarską.Shared.DTOs;
@@ -33,6 +34,27 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Controllers
             return Ok(team);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> AddNewTeam(NewTeamDTO newTeam)
+        {
+            await _teamService.AddNewTeam(newTeam);
+            return Ok();
+        }
+
+        [HttpDelete("{teamId}/remove-team")]
+        public async Task<IActionResult> DeleteTeam([FromRoute] int teamId)
+        {
+            await _teamService.DeleteTeam(teamId);
+            return Ok();
+        }
+
+        [HttpDelete("{teamId}/remove-coach")]
+        public async Task<IActionResult> DeleteCoachFromTeam([FromRoute] int teamId)
+        {
+            await _teamService.DeleteCoachFromTeam(teamId);
+            return Ok();
+        }
+
         [HttpGet("{teamId}/footballers/stats/current")]
         public async Task<ActionResult<List<FootballerStatDTO>>> GetCurrentFootballersStats(int teamId)
         {
@@ -53,6 +75,14 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Controllers
         public async Task<IActionResult> GetAllTeamsForLeagueMaster()
         {
             var teams = await _teamService.GetAllTeamsForLeagueMaster();
+            return Ok(teams);
+        }
+
+        [HttpGet("league-master/created-teams")]
+        public async Task<IActionResult> GetCreatedTeamsByLeagueMaster()
+        {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var teams = await _teamService.GetCreatedTeamsByLeagueMaster(userId);
             return Ok(teams);
         }
 

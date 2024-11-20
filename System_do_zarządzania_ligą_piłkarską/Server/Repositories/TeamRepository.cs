@@ -20,6 +20,18 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
             return teams;
         }
 
+        public async Task AddNewTeam(Team newTeam)
+        {
+            await _context.Teams.AddAsync(newTeam);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task UpdateTeam(Team teamToUpdate)
+        {
+            _context.Teams.Update(teamToUpdate);
+            await _context.SaveChangesAsync();
+        }
+
         public async Task<List<FootballerStat>> GetCurrentFootballersStats(int teamId)
         {
             var currentTeamStatsId = _context.TeamStats.
@@ -50,7 +62,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
 
             return leagueId;
         }
-        
+
         public async Task<List<Match>> GetMatchesByTeam(int teamId, bool isFinished)
         {
             var matches = await _context.Matches.
@@ -67,6 +79,22 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
         public async Task AddTeamToTheSeason(TeamStat newTeamStat)
         {
             await _context.TeamStats.AddAsync(newTeamStat);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<List<Team>> GetCreatedTeamsByLeagueMaster(string userId)
+        {
+            var teams = await _context.Teams.
+                Where(x => x.CreatorId == userId).
+                Include(x=>x.Coach).
+                ToListAsync();
+
+            return teams;
+        }
+
+        public async Task DeleteTeam(Team teamToDelete)
+        {
+            _context.Teams.Remove(teamToDelete);
             await _context.SaveChangesAsync();
         }
     }

@@ -173,11 +173,9 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task DeleteMatchEvent(int matchEventId)
+        public async Task DeleteMatchEvent(MatchEvent matchEventToDelete)
         {
-            var matchEventToDelete = await _context.MatchEvents.FindAsync(matchEventId);
             _context.MatchEvents.Remove(matchEventToDelete);
-
             await _context.SaveChangesAsync();
         }
     }

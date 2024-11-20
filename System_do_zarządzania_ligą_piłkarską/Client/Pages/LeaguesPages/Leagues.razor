@@ -65,13 +65,15 @@ else
                             @if (IsFavourite(league.Id))
                             {
                                 <button class="btn btn-primary" @onclick="() => RemoveFromFavourites(league.Id)">
-                                    <i class="fas fa-star"></i> Usuń z ulubionych
+                                    <i class="fas fa-star"></i> 
+                                    Usuń z ulubionych
                                 </button>
                             }
                             else
                             {
                                 <button class="btn btn-secondary" @onclick="() => AddToFavourites(league.Id)">
-                                    <i class="fas fa-star"></i> Dodaj do ulubionych
+                                    <i class="fas fa-star"></i> 
+                                    Dodaj do ulubionych
                                 </button>
                             }
                         }
@@ -81,9 +83,10 @@ else
                         }
                     </td>
                     <td>
-                        <button class="btn btn-link" @onclick="() => NavigateToLeagueDetails(league.Id)">
-                            <i class="fas fa-arrow-right"></i> Szczegóły
-                        </button>
+                        <NavLink href="@($"/leagues/{league.Id}")" class="nav-link">
+                            <i class="fas fa-trophy"></i>
+                            Przejdź
+                        </NavLink>
                     </td>
                 </tr>
             }
@@ -194,8 +197,8 @@ else
         }
     }
 
-    private void NavigateToLeagueDetails(int leagueId)
-    {
-        Navigation.NavigateTo($"/leagues/{leagueId}");
-    }
+    // private void NavigateToLeagueDetails(int leagueId)
+    // {
+    //     Navigation.NavigateTo($"/leagues/{leagueId}");
+    // }
 }

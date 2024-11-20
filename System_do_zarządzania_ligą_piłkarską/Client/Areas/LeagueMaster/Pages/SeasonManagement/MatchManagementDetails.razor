@@ -345,10 +345,12 @@
             if (response.IsSuccessStatusCode)
             {
                 AlertManager.DisplayAlert($"Dodano zdarzenie meczowe!", "success");
+
+                await LoadMatch();
+                await LoadMatchEvents();
                 newMatchEvent = new MatchEventDTO();
 
-                await LoadMatchEvents();
-                await LoadMatch();
+                StateHasChanged();
             }
             else
             {
@@ -371,8 +373,10 @@
             {
                 AlertManager.DisplayAlert($"Usunięto zdarzenie meczowe!", "success");
 
-                await LoadMatchEvents();
                 await LoadMatch();
+                await LoadMatchEvents();
+
+                StateHasChanged();
             }
             else
             {

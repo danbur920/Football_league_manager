@@ -54,18 +54,21 @@ else
                         {
                             <button class="btn btn-primary" @onclick="() => RemoveFromFavourites(team.Id)">
                                 <i class="fas fa-star"></i>
+                                Usuń z ulubionych
                             </button>
                         }
                         else
                         {
                             <button class="btn btn-secondary" @onclick="() => AddToFavourites(team.Id)">
                                 <i class="fas fa-star"></i>
+                                Dodaj do ulubionych
                             </button>
                         }
                     </td>
                     <td>
                         <NavLink href="@($"/teams/{team.Id}")" class="nav-link">
                             <i class="fas fa-trophy"></i>
+                            Przejdź
                         </NavLink>
                     </td>
                 </tr>

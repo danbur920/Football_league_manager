@@ -8,5 +8,6 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Services.Interfaces
         Task<bool> DeleteUser(string userId);
         Task<bool> BlockUser(string userId);
         Task<bool> UnlockUser(string userId);
+        Task<string> GetUserIdByEmailAddress(string emailAddress);
     }
 }

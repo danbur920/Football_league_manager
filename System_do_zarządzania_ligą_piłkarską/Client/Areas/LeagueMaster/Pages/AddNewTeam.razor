@@ -1,0 +1,111 @@
+﻿@using System_do_zarządzania_ligą_piłkarską.Shared.DTOs
+@using System_do_zarządzania_ligą_piłkarską.Client.Areas.LeagueMaster.Shared
+@using System_do_zarządzania_ligą_piłkarską.Client.Components
+@using System_do_zarządzania_ligą_piłkarską.Client.Extensions
+@using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Teams
+
+@page "/league-master/add-new-team"
+
+@layout LeagueMasterLayout
+@inject HttpClient Http
+@inject NavigationManager Navigation
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject AlertManager AlertManager
+
+<PageTitle>Stwórz drużynę</PageTitle>
+
+<h3>Stwórz drużynę</h3>
+
+<EditForm Model="newTeam" OnValidSubmit="AddTeam">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <div class="mb-3">
+        <label for="name" class="form-label">Nazwa drużyny</label>
+        <InputText id="name" class="form-control" @bind-Value="newTeam.Name" />
+        <ValidationMessage For="@(()=>newTeam.Name)" class="text-danger" />
+    </div>
+
+    <div class="mb-3">
+        <label for="city" class="form-label">Miasto</label>
+        <InputText id="city" class="form-control" @bind-Value="newTeam.City" />
+        <ValidationMessage For="@(()=>newTeam.City)" class="text-danger" />
+    </div>
+
+    <div class="mb-3">
+        <label for="country" class="form-label">Kraj</label>
+        <InputText id="country" class="form-control" @bind-Value="newTeam.Country" />
+        <ValidationMessage For="@(()=>newTeam.Country)" class="text-danger" />
+    </div>
+
+    <div class="mb-3">
+        <label for="stadium" class="form-label">Nazwa stadionu</label>
+        <InputText id="stadium" class="form-control" @bind-Value="newTeam.Stadium" />
+        <ValidationMessage For="@(()=>newTeam.Stadium)" class="text-danger" />
+    </div>
+
+    <div class="mb-3">
+        <label for="year" class="form-label">Rok założenia</label>
+        <InputNumber id="year" class="form-control" @bind-Value="newTeam.YearOfFoundation" />
+        <ValidationMessage For="@(()=>newTeam.YearOfFoundation)" class="text-danger" />
+    </div>
+
+    <div class="mb-3">
+        <label for="coachEmail" class="form-label">Adres email trenera zespołu (opcjonalne)</label>
+        <InputText id="coachEmail" class="form-control" @bind-Value="newTeam.CoachEmail" />
+        <ValidationMessage For="@(()=>newTeam.CoachEmail)" class="text-danger" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Dodaj drużynę</button>
+</EditForm>
+
+<Alert Message="@AlertManager.Message" Type="@AlertManager.Type" IsVisible="@AlertManager.IsVisible" />
+
+@code {
+    NewTeamDTO newTeam = new NewTeamDTO();
+
+    protected override async Task OnInitializedAsync()
+    {
+        newTeam.CreatorId = await GetUserId();
+    }
+
+    private async Task AddTeam()
+    {
+        try
+        {
+            var response = await Http.PostAsJsonAsync("api/teams", newTeam);
+
+            if (response.IsSuccessStatusCode)
+            {
+                AlertManager.DisplayAlert($"Dodano drużynę {newTeam.Name}!", "success");
+                Clear();
+            }
+            else
+            {
+                AlertManager.DisplayAlert($"Nie udało się dodać drużyny {newTeam.Name}.", "danger");
+            }
+        }
+        catch (Exception ex)
+        {
+            AlertManager.DisplayAlert($"Nie udało się dodać drużyny {newTeam.Name}.", "danger");
+        }
+    }
+
+    private void Clear()
+    {
+        newTeam.Name = string.Empty;
+        newTeam.City = string.Empty;
+        newTeam.Country = string.Empty;
+        newTeam.CoachEmail = string.Empty;
+        newTeam.Stadium = string.Empty;
+        newTeam.CoachId = string.Empty;
+        newTeam.YearOfFoundation = default;
+    }
+
+    private async Task<string> GetUserId()
+    {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+        return user.FindFirst(c => c.Type == "sub")?.Value;
+    }
+
+}

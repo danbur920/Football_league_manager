@@ -38,7 +38,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Controllers
         [HttpDelete("league-master/match-event/{matchEventId}")]
         public async Task<IActionResult> DeleteMatchEvent([FromRoute] int matchEventId)
         {
-            await _matchService.DeleteMatchEvent(matchEventId);
+            await _matchService.DeleteMatchEventFromSeason(matchEventId);
             return Ok();
         }
 

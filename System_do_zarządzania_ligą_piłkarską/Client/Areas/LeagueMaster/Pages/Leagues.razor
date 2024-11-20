@@ -87,7 +87,7 @@
     private bool IsPrimaryLeagueMaster(string leagueMasterPrimaryId)
     {
         var userId = GetUserId().Result;
-        return leagueMasterPrimaryId == userId ? true : false;
+        return leagueMasterPrimaryId == userId;
     }
 
     private async Task<string> GetUserId()

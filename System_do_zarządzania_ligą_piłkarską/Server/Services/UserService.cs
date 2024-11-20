@@ -59,5 +59,14 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Services
 
             return userDtos;
         }
+        public async Task<string> GetUserIdByEmailAddress(string emailAddress)
+        {
+            var user = await _userManager.FindByEmailAsync(emailAddress);
+            if (user != null)
+            {
+                return user.Id;
+            }
+            return string.Empty;
+        }
     }
 }

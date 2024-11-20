@@ -11,6 +11,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Models
     {
         public int Id { get; set; }
         public string? CoachId { get; set; } // odnosi się do trenera - na potrzeby lepszego nazewnictwa użyłem CoachId zamiast UserId
+        public string? CreatorId { get; set; } // odnosi się do osoby, która stworzyła drużynę (ta osoba będzie mogła nadawać uprawnienia trenerskie)
         public string Name { get; set; }
         public string City { get; set; }
         public string Country { get; set; }

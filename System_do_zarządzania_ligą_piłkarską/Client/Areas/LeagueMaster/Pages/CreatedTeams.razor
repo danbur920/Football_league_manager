@@ -1,0 +1,146 @@
+﻿@using System_do_zarządzania_ligą_piłkarską.Shared.DTOs
+@using System_do_zarządzania_ligą_piłkarską.Client.Areas.LeagueMaster.Shared
+@using System_do_zarządzania_ligą_piłkarską.Client.Components
+@using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Teams
+
+@page "/league-master/created-teams"
+@layout LeagueMasterLayout
+@inject HttpClient Http
+@inject NavigationManager Navigation
+@inject AuthenticationStateProvider AuthenticationStateProvider
+
+<PageTitle>Stworzone drużyny</PageTitle>
+
+<h3>Stworzone drużyny</h3>
+
+@if (teams != null)
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Nazwa</th>
+                <th>Miasto</th>
+                <th>Kraj</th>
+                <th>Stadion</th>
+                <th>Rok założenia</th>
+                <th>Trener</th>
+                <th>Działania</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (teams.Count == 0)
+            {
+                <tr>
+                    <td colspan="5">Brak danych do wyświetlenia</td>
+                </tr>
+            }
+            else
+            {
+                @foreach (var team in teams)
+                {
+                    <tr>
+                        <td>@team.Name</td>
+                        <td>@team.City</td>
+                        <td>@team.Country</td>
+                        <td>@team.Stadium</td>
+                        <td>@team.YearOfFoundation</td>
+                        @if (team.HasCoach)
+                        {
+                            <td>
+                                <span>@team.Coach.FirstName @team.Coach.LastName</span>
+                                <button class="btn btn-danger" @onclick="() => DeleteCoachFromTeam(team.Id)">
+                                    Usuń trenera
+                                </button>
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                <InputText @bind-Value="coachEmailToAssign" Placeholder="Wpisz e-mail trenera" />
+                                <button class="btn btn-primary" @onclick="() => AssignCoachToTeam(team.Id, coachEmailToAssign)">
+                                    Przypisz trenera
+                                </button>
+                            </td>
+                        }
+                        <td>
+                            <button class="btn btn-danger" @onclick="() => DeleteTeam(team.Id)">
+                                Usuń drużynę
+                            </button>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+}
+
+
+
+@code {
+    private List<TeamInfoDTO>? teams;
+    private string coachEmailToAssign = string.Empty;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadTeams();
+    }
+
+    private async Task LoadTeams()
+    {
+        teams = await Http.GetFromJsonAsync<List<TeamInfoDTO>>("api/teams/league-master/created-teams");
+    }
+
+    private async Task<string> GetUserId()
+    {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+        return user.FindFirst(c => c.Type == "sub")?.Value;
+    }
+
+    private async Task DeleteCoachFromTeam(int teamId)
+    {
+        var result = await Http.DeleteAsync($"api/teams/{teamId}/remove-coach");
+
+        if (result.IsSuccessStatusCode)
+        {
+            // alert
+            await LoadTeams();
+        }
+        else
+        {
+            // alert
+        }
+    }
+
+    private async Task AssignCoachToTeam(int teamId, string coachEmail)
+    {
+        var result = await Http.PostAsync($"api/teams/{teamId}/assign-coach/{coachEmail}", null);
+
+        if (result.IsSuccessStatusCode)
+        {
+            // alert
+            coachEmailToAssign = string.Empty;
+            await LoadTeams();
+        }
+        else
+        {
+            coachEmailToAssign = string.Empty;
+        // alert
+        }
+    }
+
+    private async Task DeleteTeam(int teamId)
+    {
+        var result = await Http.DeleteAsync($"api/teams/{teamId}/remove-team");
+
+        if (result.IsSuccessStatusCode)
+        {
+            // alert
+            await LoadTeams();
+        }
+        else
+        {
+            // alert
+        }
+    }
+}
