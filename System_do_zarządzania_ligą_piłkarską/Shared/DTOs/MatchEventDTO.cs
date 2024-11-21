@@ -6,6 +6,7 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System_do_zarządzania_ligą_piłkarską.Shared.Enums;
 
 namespace System_do_zarządzania_ligą_piłkarską.Shared.DTOs
 {
@@ -27,24 +28,6 @@ namespace System_do_zarządzania_ligą_piłkarską.Shared.DTOs
         public EventType EventType { get; set; }
         [JsonIgnore]
         public virtual MatchDTO? Match { get; set; }
-    }
-
-    public enum EventType
-    {
-        [Display(Name ="Gol")]
-        Goal,
-        [Display(Name = "Gol samobójczy")]
-        OwnGoal,
-        [Display(Name = "Żółta kartka")]
-        YellowCard,
-        [Display(Name = "Czerwona kartka")]
-        RedCard,
-        [Display(Name = "Rzut karny - gol")]
-        Penalty,
-        [Display(Name = "Rzut karny - nietrafiony")]
-        MissedPenalty,
-        [Display(Name = "Zmiana")]
-        Substitution
     }
 }
 

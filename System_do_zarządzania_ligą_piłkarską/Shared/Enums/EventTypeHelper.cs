@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,12 +10,19 @@ namespace System_do_zarządzania_ligą_piłkarską.Shared.Enums
 {
     public enum EventType
     {
+        [Display(Name = "Gol")]
         Goal,
+        [Display(Name = "Gol samobójczy")]
         OwnGoal,
+        [Display(Name = "Żółta kartka")]
         YellowCard,
+        [Display(Name = "Czerwona kartka")]
         RedCard,
+        [Display(Name = "Rzut karny - gol")]
         Penalty,
+        [Display(Name = "Rzut karny - nietrafiony")]
         MissedPenalty,
+        [Display(Name = "Zmiana")]
         Substitution
     }
     public static class EventTypeHelper

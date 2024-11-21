@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using System_do_zarządzania_ligą_piłkarską.Shared.Enums;
 
 namespace System_do_zarządzania_ligą_piłkarską.Shared.DTOs
 {
@@ -17,7 +18,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Shared.DTOs
         public int? ShirtNumber { get; set; }
         public DateOnly DateOfBirth { get; set; }
         public string Nationality { get; set; }
-        public string? Position { get; set; }
+        public Position Position { get; set; }
         public int? Height { get; set; } // [cm]
         public int? Weight { get; set; } // [kg]
         public virtual TeamDTO? Team { get; set; }

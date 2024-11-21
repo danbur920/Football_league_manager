@@ -24,6 +24,8 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories.Interface
 
 
         Task<MatchEvent> GetMatchEvent(int matchEventId);
+        Task<List<MatchFootballer>> GetLineup(int matchId, int teamId);
         Task DeleteMatchEvent(MatchEvent matchEventToDelete);
+        Task AddNewMatchFootballer(MatchFootballer newMatchFootballer);
     }
 }

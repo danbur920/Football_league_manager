@@ -3,6 +3,7 @@
 @using System.Net.Http
 @using System_do_zarządzania_ligą_piłkarską.Shared.DTOs
 @using System_do_zarządzania_ligą_piłkarską.Client.Components
+@using System_do_zarządzania_ligą_piłkarską.Shared.Enums
 
 @inject HttpClient Http
 @inject NavigationManager Navigation
@@ -54,9 +55,9 @@ else
 
     private void SortPlayers()
     {
-        goalkeepers = teamLineup.Where(x => x.Footballer.Position == "Goalkeeper").ToList();
-        defenders = teamLineup.Where(x => x.Footballer.Position == "Defender").ToList();
-        midfielders = teamLineup.Where(x => x.Footballer.Position == "Midfielder").ToList();
-        forwards = teamLineup.Where(x => x.Footballer.Position == "Forward").ToList();
+        goalkeepers = teamLineup.Where(x => PositionHelper.GetDisplayName(x.Footballer.Position) == "Goalkeeper").ToList();
+        defenders = teamLineup.Where(x => PositionHelper.GetDisplayName(x.Footballer.Position) == "Defender").ToList();
+        midfielders = teamLineup.Where(x => PositionHelper.GetDisplayName(x.Footballer.Position) == "Midfielder").ToList();
+        forwards = teamLineup.Where(x => PositionHelper.GetDisplayName(x.Footballer.Position) == "Forward").ToList();
     }
 }

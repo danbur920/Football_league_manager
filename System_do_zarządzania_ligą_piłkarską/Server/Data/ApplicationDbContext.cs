@@ -23,6 +23,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Data
         public DbSet<Trophy> Trophies { get; set; }
         public DbSet<Favourite> Favourites { get; set; }
         public DbSet<MatchEvent> MatchEvents { get; set; }
+        public DbSet<MatchFootballer> MatchFootballers { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options,
             IOptions<OperationalStoreOptions> operationalStoreOptions,
@@ -56,6 +57,10 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Data
 
             modelBuilder.Entity<LeagueInfo>()
                 .Property(x => x.Level)
+                .HasConversion<string>();
+
+            modelBuilder.Entity<Footballer>()
+                .Property(x => x.Position)
                 .HasConversion<string>();
 
             // -----------------------------------

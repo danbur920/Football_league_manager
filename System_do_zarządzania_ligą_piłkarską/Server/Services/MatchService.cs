@@ -43,6 +43,12 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Services
             return _mapper.Map<EditMatchDTO>(match);
         }
 
+        public async Task<List<MatchFootballerDTO>> GetLineup(int matchId, int teamId)
+        {
+            var matchFootballers = await _matchRepository.GetLineup(matchId, teamId);
+            return _mapper.Map<List<MatchFootballerDTO>>(matchFootballers);
+        }
+
         public async Task UpdateMatchInfo(EditMatchDTO editMatch)
         {
             var matchToEdit = await _matchRepository.GetMatch(editMatch.Id);
@@ -233,6 +239,12 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Services
                     }
             }
 
+        }
+
+        public async Task AddNewMatchFootballer(NewMatchFootballerDTO newMatchFootballer)
+        {
+            var mappedNewMatchFootballer = _mapper.Map<MatchFootballer>(newMatchFootballer);
+            await _matchRepository.AddNewMatchFootballer(mappedNewMatchFootballer);
         }
 
         public async Task DeleteMatchEventFromSeason(int matchEventId)

@@ -207,8 +207,7 @@ else
      allFootballers?.Where(footballer => (string.IsNullOrWhiteSpace(SearchQueryManager.FirstName) || footballer.FirstName.Contains(SearchQueryManager.FirstName, StringComparison.OrdinalIgnoreCase)) &&
      (string.IsNullOrWhiteSpace(SearchQueryManager.LastName) || footballer.LastName.Contains(SearchQueryManager.LastName, StringComparison.OrdinalIgnoreCase)) &&
      (string.IsNullOrWhiteSpace(SearchQueryManager.Country) || footballer.Nationality.Contains(SearchQueryManager.Country, StringComparison.OrdinalIgnoreCase)) &&
-     (string.IsNullOrWhiteSpace(SearchQueryManager.Team) || footballer.Team.Name.Contains(SearchQueryManager.Team, StringComparison.OrdinalIgnoreCase)) &&
-     (string.IsNullOrWhiteSpace(SearchQueryManager.Position) || footballer.Position.Contains(SearchQueryManager.Position, StringComparison.OrdinalIgnoreCase)));
+     (string.IsNullOrWhiteSpace(SearchQueryManager.Team) || footballer.Team.Name.Contains(SearchQueryManager.Team, StringComparison.OrdinalIgnoreCase)));
 
 
     // Było to przypisywane do filteredFootballer jednakże zmienił się zamysł:

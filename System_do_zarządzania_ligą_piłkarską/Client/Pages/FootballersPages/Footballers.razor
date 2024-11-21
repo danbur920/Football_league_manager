@@ -7,6 +7,7 @@
 @using System_do_zarządzania_ligą_piłkarską.Client.Components
 @using System.Text.Json
 @using Newtonsoft.Json
+@using System_do_zarządzania_ligą_piłkarską.Shared.Enums
 
 @inject HttpClient Http
 @inject AuthenticationStateProvider AuthenticationStateProvider
@@ -61,7 +62,7 @@ else
                     <td>@footballer.LastName</td>
                     <td>@footballer.NickName</td>
                     <td>@footballer.Nationality</td>
-                    <td>@footballer.Position</td>
+                    <td>@PositionHelper.GetDisplayName(footballer.Position)</td>
                     <td>@footballer.Team.Name</td>
                     <td>
                         @if (IsFavourite(footballer.Id))
@@ -201,7 +202,7 @@ else
      (string.IsNullOrWhiteSpace(SearchQueryManager.LastName) || footballer.LastName.Contains(SearchQueryManager.LastName, StringComparison.OrdinalIgnoreCase)) &&
      (string.IsNullOrWhiteSpace(SearchQueryManager.Country) || footballer.Nationality.Contains(SearchQueryManager.Country, StringComparison.OrdinalIgnoreCase)) &&
      (string.IsNullOrWhiteSpace(SearchQueryManager.Team) || footballer.Team.Name.Contains(SearchQueryManager.Team, StringComparison.OrdinalIgnoreCase)) &&
-     (string.IsNullOrWhiteSpace(SearchQueryManager.Position) || footballer.Position.Contains(SearchQueryManager.Position, StringComparison.OrdinalIgnoreCase)));
+     (string.IsNullOrWhiteSpace(SearchQueryManager.Position) || PositionHelper.GetDisplayName(footballer.Position).Contains(SearchQueryManager.Position, StringComparison.OrdinalIgnoreCase)));
 }
 
 @* <style>

@@ -61,6 +61,16 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
             return matchEvent;
         }
 
+        public async Task<List<MatchFootballer>> GetLineup(int matchId, int teamId)
+        {
+            var lineup = await _context.MatchFootballers.
+                Where(x => x.MatchId == matchId && x.TeamId == teamId).
+                Include(x => x.Footballer).
+                ToListAsync();
+
+            return lineup;
+        }
+
         public async Task AddNewMatchEventToTheSeason(MatchEvent newMatchEvent)
         {
             await _context.MatchEvents.AddAsync(newMatchEvent);
@@ -176,6 +186,12 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
         public async Task DeleteMatchEvent(MatchEvent matchEventToDelete)
         {
             _context.MatchEvents.Remove(matchEventToDelete);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task AddNewMatchFootballer(MatchFootballer newMatchFootballer)
+        {
+            await _context.MatchFootballers.AddAsync(newMatchFootballer);
             await _context.SaveChangesAsync();
         }
     }
