@@ -1,0 +1,173 @@
+﻿@using System_do_zarządzania_ligą_piłkarską.Shared.DTOs
+@using System_do_zarządzania_ligą_piłkarską.Client.Areas.LeagueMaster.Shared
+@using System_do_zarządzania_ligą_piłkarską.Client.Components
+@using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Teams
+@using System_do_zarządzania_ligą_piłkarską.Client.Extensions
+@using System_do_zarządzania_ligą_piłkarską.Shared.Enums
+@using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Matches
+
+@page "/league-master/created-teams/{TeamId:int}"
+@layout LeagueMasterLayout
+@inject HttpClient Http
+@inject AlertManager AlertManager
+
+<PageTitle>Zarządzaj drużyną</PageTitle>
+
+<Alert Message="@AlertManager.Message" Type="@AlertManager.Type" IsVisible="@AlertManager.IsVisible" />
+
+<div class="container mt-4">
+    <h3>Zarządzaj drużyną</h3>
+
+    @if (team != null)
+    {
+        <EditForm Model="team" OnValidSubmit="UpdateTeam">
+            <div class="row g-3 mb-4">
+                <div class="col-md-4">
+                    <label for="name" class="form-label">Nazwa drużyny</label>
+                    <InputText id="name" class="form-control" @bind-Value="team.Name" />
+                </div>
+                <div class="col-md-4">
+                    <label for="city" class="form-label">Miasto</label>
+                    <InputText id="city" class="form-control" @bind-Value="team.City" />
+                </div>
+                <div class="col-md-4">
+                    <label for="country" class="form-label">Kraj</label>
+                    <InputText id="country" class="form-control" @bind-Value="team.Country" />
+                </div>
+                <div class="col-md-6">
+                    <label for="stadium" class="form-label">Stadion</label>
+                    <InputText id="stadium" class="form-control" @bind-Value="team.Stadium" />
+                </div>
+                <div class="col-md-6">
+                    <label for="year" class="form-label">Rok założenia</label>
+                    <InputNumber id="year" class="form-control" @bind-Value="team.YearOfFoundation" />
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Zapisz zmiany</button>
+        </EditForm>
+
+        <hr class="my-4" />
+
+        <h4>Piłkarze drużyny</h4>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Imię</th>
+                    <th>Nazwisko</th>
+                    <th>Numer</th>
+                    <th>Pozycja</th>
+                    <th>Wzrost</th>
+                    <th>Waga</th>
+                    <th>Akcje</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var player in team.Footballers)
+                {
+                    <tr>
+                        <td>@player.Id</td>
+                        <td>@player.FirstName</td>
+                        <td>@player.LastName</td>
+                        <td>@player.ShirtNumber</td>
+                        <td>@PositionHelper.GetDisplayName(player.Position)</td>
+                        <td>@player.Height cm</td>
+                        <td>@player.Weight kg</td>
+                        <td>
+                            <button class="btn btn-sm btn-warning" @onclick="() => EditPlayer(player.Id)">Edytuj</button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <h4>Dodaj nowego piłkarza</h4>
+        <EditForm Model="newPlayer" OnValidSubmit="AddPlayer">
+            <div class="row g-3 mb-3">
+                <div class="col-md-3">
+                    <label for="firstName" class="form-label">Imię</label>
+                    <InputText id="firstName" class="form-control" @bind-Value="newPlayer.FirstName" />
+                </div>
+                <div class="col-md-3">
+                    <label for="lastName" class="form-label">Nazwisko</label>
+                    <InputText id="lastName" class="form-control" @bind-Value="newPlayer.LastName" />
+                </div>
+                <div class="col-md-2">
+                    <label for="shirtNumber" class="form-label">Numer</label>
+                    <InputNumber id="shirtNumber" class="form-control" @bind-Value="newPlayer.ShirtNumber" />
+                </div>
+                <div class="col-md-2">
+                    <label for="position" class="form-label">Pozycja</label>
+                    <InputSelect id="position" class="form-control" @bind-Value="newPlayer.Position">
+                        @foreach (var position in Enum.GetValues(typeof(Position)).Cast<Position>())
+                        {
+                            <option value="@position">@position</option>
+                        }
+                    </InputSelect>
+                </div>
+                <div class="col-md-1">
+                    <label for="height" class="form-label">Wzrost (cm)</label>
+                    <InputNumber id="height" class="form-control" @bind-Value="newPlayer.Height" />
+                </div>
+                <div class="col-md-1">
+                    <label for="weight" class="form-label">Waga (kg)</label>
+                    <InputNumber id="weight" class="form-control" @bind-Value="newPlayer.Weight" />
+                </div>
+            </div>
+            <button type="submit" class="btn btn-success">Dodaj piłkarza</button>
+        </EditForm>
+    }
+    else
+    {
+        <div class="alert alert-warning">Ładowanie danych drużyny...</div>
+    }
+</div>
+
+@code {
+    [Parameter] public int TeamId { get; set; }
+    private TeamManageDTO? team;
+    private ShortFootballerInfoDTO newPlayer = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadTeam();
+    }
+
+    private async Task LoadTeam()
+    {
+        team = await Http.GetFromJsonAsync<TeamManageDTO>($"api/teams/league-master/manage-team/{TeamId}");
+    }
+
+    private async Task UpdateTeam()
+    {
+        var response = await Http.PutAsJsonAsync($"api/teams/league-master/manage-team/{team.Id}", team);
+        if (response.IsSuccessStatusCode)
+        {
+            AlertManager.DisplayAlert("Dane drużyny zostały zaktualizowane.", "success");
+        }
+        else
+        {
+            AlertManager.DisplayAlert("Aktualizacja danych drużyny nie powiodła się.", "danger");
+        }
+    }
+
+    private async Task AddPlayer()
+    {
+        var response = await Http.PostAsJsonAsync($"api/teams/league-master/{TeamId}/add-player", newPlayer);
+        if (response.IsSuccessStatusCode)
+        {
+            AlertManager.DisplayAlert("Piłkarz został dodany.", "success");
+            newPlayer = new ShortFootballerInfoDTO();
+            await LoadTeam();
+        }
+        else
+        {
+            AlertManager.DisplayAlert("Dodanie piłkarza nie powiodło się.", "danger");
+        }
+    }
+
+    private void EditPlayer(int playerId)
+    {
+        // Logika otwierania formularza edycji danego piłkarza (można dodać modal)
+    }
+}

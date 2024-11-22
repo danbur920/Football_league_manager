@@ -150,7 +150,7 @@
                     </select>
                 </div>
 
-                @* // ----------------------------------------------------------------------------------------------------- *@
+                
 
                 @if (newMatchEvent.TeamId != null && newMatchEvent.TeamId == homeFootballers.FirstOrDefault().TeamId)
                 {
@@ -212,7 +212,7 @@
         }
     </div>
 
-    @if (newMatchFootballerHome != null && newMatchFootballerAway != null && awayFootballers != null && homeFootballers != null && homeLineup != null)
+    @if (newMatchFootballerHome != null && newMatchFootballerAway != null && awayFootballers != null && homeFootballers != null && homeLineup != null && awayLineup != null)
     {
         <div class="form-card">
             <h4>Skład gospodarza</h4>
@@ -224,10 +224,9 @@
                     <label for="homeFootballer" class="form-label">Zawodnik gospodarza</label>
                     <select id="homeFootballer" class="form-select" @bind="newMatchFootballerHome.FootballerId">
                         <option value="">-- Dodaj zawodnika --</option>
-                        @foreach (var footballer in homeFootballers)
+                        @foreach (var footballer in homeFootballers.Where(f => !homeLineup.Any(l => l.FootballerId == f.Id)))
                         {
-                            <option value="@footballer.Id">@footballer.FirstName @footballer.LastName</option>
-                            // tutaj trzeba jeszcze wyświetlić pozycję piłkarza
+                            <option value="@footballer.Id">@footballer.FirstName @footballer.LastName | @PositionHelper.GetDisplayName(footballer.Position)</option>
                         }
                     </select>
                 </div>
@@ -240,13 +239,7 @@
                 <button type="submit" class="btn btn-primary">Dodaj zawodnika</button>
             </EditForm>
 
-            <h5>Aktualny skład:</h5>
-            <span>Bramkarz:</span>
-            <span>@homeLineup.FirstOrDefault().LastName</span>
-            <span>Obrońcy:</span>
-            <span>Pomocnicy:</span>
-            <span>Napastnicy:</span>
-            <h2>Rezerwowi:</h2>
+            <MatchLineup players="homeLineup" LoadLineupsCallback="LoadLineups"></MatchLineup>
         </div>
 
         <div class="form-card">
@@ -259,10 +252,9 @@
                     <label for="awayFootballer" class="form-label">Zawodnik gościa</label>
                     <select id="awayFootballer" class="form-select" @bind="newMatchFootballerAway.FootballerId">
                         <option value="">-- Dodaj zawodnika --</option>
-                        @foreach (var footballer in awayFootballers)
+                        @foreach (var footballer in awayFootballers.Where(f => !awayLineup.Any(l => l.FootballerId == f.Id)))
                         {
-                            <option value="@footballer.Id">@footballer.FirstName @footballer.LastName</option>
-                            // tutaj trzeba jeszcze wyświetlić pozycję piłkarza
+                            <option value="@footballer.Id">@footballer.FirstName @footballer.LastName | @PositionHelper.GetDisplayName(footballer.Position)</option>
                         }
                     </select>
                 </div>
@@ -275,8 +267,7 @@
                 <button type="submit" class="btn btn-primary">Dodaj zawodnika</button>
             </EditForm>
 
-            <h2>Aktualny skład:</h2>
-            <h2>Rezerwowi:</h2>
+            <MatchLineup players="awayLineup" LoadLineupsCallback="LoadLineups"></MatchLineup>
         </div>
     }
 
@@ -393,24 +384,12 @@
     private List<MatchFootballerDTO>? awayLineup;
 
 
-
-
     protected override async Task OnInitializedAsync()
     {
         newMatchEvent = new MatchEventDTO();
-        newMatchFootballerHome = new NewMatchFootballerDTO
-            {
-                IsStartingPlayer = true
-            };
-        newMatchFootballerAway = new NewMatchFootballerDTO
-            {
-                IsStartingPlayer = true
-            };
 
         await LoadMatch();
-
-        teams = await Http.GetFromJsonAsync<List<TeamStatDTO>>($"api/leagues/{leagueInfoId}/table");
-        teams = teams.Where(x => x.TeamId == editMatch.HomeTeamId || x.TeamId == editMatch.AwayTeamId).ToList();
+        await GetTeams();
 
         referees = await Http.GetFromJsonAsync<List<ShortRefereeInfoDTO>>($"api/referees/league-master/specific-season/{leagueSeasonId}");
 
@@ -422,9 +401,8 @@
             await LoadMatchEvents();
         }
 
-        // TO POPRAWIĆ JUTRO !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        homeLineup = await Http.GetFromJsonAsync<List<MatchFootballerDTO>>($"api/matches/lineup/{matchId}/{editMatch.HomeTeamId}");
-        awayLineup = await Http.GetFromJsonAsync<List<MatchFootballerDTO>>($"api/matches/lineup/{matchId}/{editMatch.AwayTeamId}");
+        await LoadLineups();
+        ResetPlayer();
     }
 
     private async Task LoadMatch()
@@ -432,10 +410,30 @@
         editMatch = await Http.GetFromJsonAsync<EditMatchDTO>($"api/matches/league-master/match/{leagueSeasonId}/{matchId}");
     }
 
+    private async Task LoadLineups()
+    {
+        homeLineup = await Http.GetFromJsonAsync<List<MatchFootballerDTO>>($"api/matches/lineup/{matchId}/{editMatch.HomeTeamId}");
+        awayLineup = await Http.GetFromJsonAsync<List<MatchFootballerDTO>>($"api/matches/lineup/{matchId}/{editMatch.AwayTeamId}");
+
+        StateHasChanged();
+    }
+
     private async Task LoadMatchEvents()
     {
         homeMatchEvents = editMatch.MatchEvents.Where(x => x.TeamId == editMatch.HomeTeamId).ToList();
         awayMatchEvents = editMatch.MatchEvents.Where(x => x.TeamId == editMatch.AwayTeamId).ToList();
+    }
+
+    private void ResetPlayer()
+    {
+        newMatchFootballerHome = new NewMatchFootballerDTO();
+        newMatchFootballerAway = new NewMatchFootballerDTO();
+    }
+
+    private async Task GetTeams()
+    {
+        teams = await Http.GetFromJsonAsync<List<TeamStatDTO>>($"api/leagues/{leagueInfoId}/table");
+        teams = teams.Where(x => x.TeamId == editMatch.HomeTeamId || x.TeamId == editMatch.AwayTeamId).ToList();        
     }
 
     private async Task ConfirmEditMatchInfo()
@@ -512,16 +510,7 @@
             if (response.IsSuccessStatusCode)
             {
                 AlertManager.DisplayAlert($"Dodano piłkarza do składu meczowego!", "success");
-
-                newMatchFootballerHome = new NewMatchFootballerDTO
-                    {
-                        IsStartingPlayer = true
-                    };
-                newMatchFootballerAway = new NewMatchFootballerDTO
-                    {
-                        IsStartingPlayer = true
-                    };
-
+                await LoadLineups();
                 StateHasChanged();
             }
             else
@@ -547,7 +536,6 @@
 
                 await LoadMatch();
                 await LoadMatchEvents();
-
                 StateHasChanged();
             }
             else

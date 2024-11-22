@@ -64,7 +64,7 @@ else
         try
         {
             newTeamStat.LeagueSeasonId = leagueSeasonId;
-            var response = await Http.PostAsJsonAsync("api/teams/league-master", newTeamStat);
+            var response = await Http.PostAsJsonAsync("api/teams/league-master/add-team-to-season", newTeamStat);
 
             if (response.IsSuccessStatusCode)
             {

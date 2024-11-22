@@ -22,8 +22,8 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Controllers
         [HttpGet("lineup/{matchId}/{teamId}")]
         public async Task<IActionResult> GetLineup(int matchId, int teamId)
         {
-            await _matchService.GetLineup(matchId, teamId);
-            return Ok();
+            var lineup = await _matchService.GetLineup(matchId, teamId);
+            return Ok(lineup);
         }
 
         // League Master Panel:
@@ -46,6 +46,13 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Controllers
         public async Task<IActionResult> AddNewMatchFootballer(NewMatchFootballerDTO newMatchFootballer)
         {
             await _matchService.AddNewMatchFootballer(newMatchFootballer);
+            return Ok();
+        }
+
+        [HttpDelete("league-master/match-footballer/{matchFootballerId}")]
+        public async Task<IActionResult> DeleteMatchFootballer([FromRoute] int matchFootballerId)
+        {
+            await _matchService.DeleteMatchFootballer(matchFootballerId);
             return Ok();
         }
 

@@ -5,6 +5,7 @@ using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Leagues;
 using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Matches;
 using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Referees;
 using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Teams;
+using System_do_zarządzania_ligą_piłkarską.Shared.Enums;
 
 namespace System_do_zarządzania_ligą_piłkarską.Server.Mapping
 {
@@ -42,7 +43,13 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Mapping
             CreateMap<NewTeamDTO, Team>();
             CreateMap<ApplicationUser, ShortCoachInfoDTO>();
             CreateMap<NewMatchFootballerDTO, MatchFootballer>();
-            CreateMap<MatchFootballer, MatchFootballerDTO>();
+            CreateMap<MatchFootballer, MatchFootballerDTO>()
+                .ForMember(dest => dest.FirstName, opt => opt.MapFrom(src => src.Footballer.FirstName))
+                .ForMember(dest => dest.LastName, opt => opt.MapFrom(src => src.Footballer.LastName))
+                .ForMember(dest => dest.Position, opt => opt.MapFrom(src => src.Footballer.Position))
+                .ForMember(dest => dest.ShirtNumber, opt => opt.MapFrom(src => src.Footballer.ShirtNumber));
+
+            CreateMap<Team, TeamManageDTO>();
 
             CreateMap<ApplicationUser, ApplicationUserDTO>()
                       .ForMember(dest => dest.LockoutEndDateUtc, opt => opt.MapFrom(src => src.LockoutEnd != null ? (DateTime?)src.LockoutEnd.Value.DateTime : null))

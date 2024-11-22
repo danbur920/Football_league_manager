@@ -2,14 +2,18 @@
 @using System_do_zarządzania_ligą_piłkarską.Client.Areas.LeagueMaster.Shared
 @using System_do_zarządzania_ligą_piłkarską.Client.Components
 @using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Teams
+@using System_do_zarządzania_ligą_piłkarską.Client.Extensions
 
 @page "/league-master/created-teams"
 @layout LeagueMasterLayout
 @inject HttpClient Http
 @inject NavigationManager Navigation
 @inject AuthenticationStateProvider AuthenticationStateProvider
+@inject AlertManager AlertManager
 
 <PageTitle>Stworzone drużyny</PageTitle>
+
+<Alert Message="@AlertManager.Message" Type="@AlertManager.Type" IsVisible="@AlertManager.IsVisible" />
 
 <h3>Stworzone drużyny</h3>
 
@@ -63,9 +67,15 @@
                             </td>
                         }
                         <td>
-                            <button class="btn btn-danger" @onclick="() => DeleteTeam(team.Id)">
-                                Usuń drużynę
-                            </button>
+                            <div class="btn-group">
+                                <button class="btn btn-danger" @onclick="() => DeleteTeam(team.Id)">
+                                    Usuń drużynę
+                                </button>
+                                <button class="btn btn-info" @onclick="() => GoToTeamManagement(team.Id)">
+                                    Zarządzaj
+                                </button>
+                            </div>
+
                         </td>
                     </tr>
                 }
@@ -99,48 +109,54 @@
 
     private async Task DeleteCoachFromTeam(int teamId)
     {
-        var result = await Http.DeleteAsync($"api/teams/{teamId}/remove-coach");
+        var result = await Http.DeleteAsync($"api/teams/league-master/{teamId}/remove-coach");
 
         if (result.IsSuccessStatusCode)
         {
-            // alert
+            AlertManager.DisplayAlert($"Usunięto trenera z wybranego zespołu!", "success");
             await LoadTeams();
         }
         else
         {
-            // alert
+            AlertManager.DisplayAlert($"Nie udało się usunąć trenera z wybranego zespołu.", "danger");
         }
     }
 
     private async Task AssignCoachToTeam(int teamId, string coachEmail)
     {
-        var result = await Http.PostAsync($"api/teams/{teamId}/assign-coach/{coachEmail}", null);
+        var response = await Http.PostAsync($"api/teams/league-master/{teamId}/assign-coach/{coachEmail}", null);
 
-        if (result.IsSuccessStatusCode)
+        if (response.IsSuccessStatusCode)
         {
-            // alert
-            coachEmailToAssign = string.Empty;
+            AlertManager.DisplayAlert($"Dodano trenera do wybranego zespołu!", "success");
             await LoadTeams();
         }
         else
         {
-            coachEmailToAssign = string.Empty;
-        // alert
+            AlertManager.DisplayAlert($"Nie udało się dodać trenera do wybranego zespołu.", "danger");
         }
+        coachEmailToAssign = string.Empty;
     }
+
+
 
     private async Task DeleteTeam(int teamId)
     {
-        var result = await Http.DeleteAsync($"api/teams/{teamId}/remove-team");
+        var result = await Http.DeleteAsync($"api/teams/league-master/{teamId}/remove-team");
 
         if (result.IsSuccessStatusCode)
         {
-            // alert
+            AlertManager.DisplayAlert($"Usunięto drużynę!", "success");
             await LoadTeams();
         }
         else
         {
-            // alert
+            AlertManager.DisplayAlert($"Nie udało się usunąć drużyny.", "danger");
         }
+    }
+
+    private void GoToTeamManagement(int teamId)
+    {
+        Navigation.NavigateTo($"/league-master/created-teams/{teamId}");
     }
 }

@@ -13,5 +13,6 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Services.Interfaces
         Task AddNewMatchEventToTheSeason(MatchEventDTO newMatchEvent);
         Task AddNewMatchFootballer(NewMatchFootballerDTO newMatchFootballer);
         Task DeleteMatchEventFromSeason(int matchEventId);
+        Task DeleteMatchFootballer(int matchFootballerId);
     }
 }

@@ -36,37 +36,6 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Services
             return mappedTeam;
         }
 
-        public async Task AddNewTeam(NewTeamDTO newTeam)
-        {
-            string teamCoachId = string.Empty;
-            if(newTeam.CoachEmail != null)
-            {
-                teamCoachId = await _userService.GetUserIdByEmailAddress(newTeam.CoachEmail);
-            }
-
-            var mappedNewTeam = _mapper.Map<Team>(newTeam);
-
-            if(teamCoachId != string.Empty)
-            {
-                mappedNewTeam.CoachId = teamCoachId;
-            }
-
-            await _teamRepository.AddNewTeam(mappedNewTeam);
-        }
-        public async Task DeleteTeam(int teamId)
-        {
-            var teamToDelete = await _teamRepository.GetTeamById(teamId);
-            await _teamRepository.DeleteTeam(teamToDelete);
-        }
-
-        public async Task DeleteCoachFromTeam(int teamId)
-        {
-            var team = await _teamRepository.GetTeamById(teamId);
-
-            team.CoachId = null;
-            await _teamRepository.UpdateTeam(team);
-        }
-
         public async Task<List<FootballerStatDTO>> GetCurrentFootballersStats(int teamId)
         {
             var currentFootballersStats = await _teamRepository.GetCurrentFootballersStats(teamId);
@@ -123,6 +92,59 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Services
             //teamToAdd.Points = 0;
 
             await _teamRepository.AddTeamToTheSeason(teamToAdd);
+        }
+
+        public async Task<TeamManageDTO> GetTeamToManage(int teamId)
+        {
+            var team = await _teamRepository.GetTeamToManage(teamId);
+            var mappedTeam = _mapper.Map<TeamManageDTO>(team);
+            return mappedTeam;
+        }
+
+        public async Task AddNewTeam(NewTeamDTO newTeam)
+        {
+            string teamCoachId = string.Empty;
+            if (newTeam.CoachEmail != null)
+            {
+                teamCoachId = await _userService.GetUserIdByEmailAddress(newTeam.CoachEmail);
+            }
+
+            var mappedNewTeam = _mapper.Map<Team>(newTeam);
+
+            if (teamCoachId != string.Empty && teamCoachId != null)
+            {
+                mappedNewTeam.CoachId = teamCoachId;
+            }
+
+            await _teamRepository.AddNewTeam(mappedNewTeam);
+        }
+        public async Task DeleteTeam(int teamId)
+        {
+            var teamToDelete = await _teamRepository.GetTeamById(teamId);
+            await _teamRepository.DeleteTeam(teamToDelete);
+        }
+
+        public async Task DeleteCoachFromTeam(int teamId)
+        {
+            var team = await _teamRepository.GetTeamById(teamId);
+
+            team.CoachId = null;
+            await _teamRepository.UpdateTeam(team);
+        }
+
+        public async Task<bool> AssignCoachToTeam(int teamId, string coachEmail)
+        {
+            var userId = await _userService.GetUserIdByEmailAddress(coachEmail);
+
+            if (userId != null)
+            {
+                var team = await _teamRepository.GetTeamById(teamId);
+                team.CoachId = userId;
+
+                await _teamRepository.UpdateTeam(team);
+                return true;
+            }
+            return false;
         }
     }
 }

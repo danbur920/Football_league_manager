@@ -21,11 +21,12 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories.Interface
         Task UpdateStatsAfterPenalty(MatchEventStatsUpdate statsUpdate);
         Task UpdateStatsAfterSubstitution(MatchEventStatsUpdate statsUpdate);
         Task UpdateStatsAfterMissedPenalty(MatchEventStatsUpdate statsUpdate);
-
+        // ----------------------------------------------------------------
 
         Task<MatchEvent> GetMatchEvent(int matchEventId);
         Task<List<MatchFootballer>> GetLineup(int matchId, int teamId);
         Task DeleteMatchEvent(MatchEvent matchEventToDelete);
         Task AddNewMatchFootballer(MatchFootballer newMatchFootballer);
+        Task DeleteMatchFootballer(int matchFootballerId);
     }
 }

@@ -15,6 +15,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories.Interface
 
         // League Master Panel:
 
+        Task<Team> GetTeamToManage(int teamId);
         Task AddTeamToTheSeason(TeamStat newTeamStat);
         Task<List<Team>> GetCreatedTeamsByLeagueMaster(string userId);
         Task DeleteTeam(Team teamToDelete);

@@ -24,7 +24,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Models
         public virtual ICollection<Match> AwayMatches { get; set; } = new List<Match>();
         public virtual ICollection<TeamStat> TeamStats { get; set; } = new List<TeamStat>();
         public virtual ICollection<Trophy> Trophies { get; set; } = new List<Trophy>();
-        //[JsonIgnore]
-        //public virtual ICollection<Footballer> Footballers { get; set; } = new List<Footballer>(); // to było zakomentowane
+        [JsonIgnore]
+        public virtual ICollection<Footballer> Footballers { get; set; } = new List<Footballer>(); // to było zakomentowane
     }
 }

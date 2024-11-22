@@ -49,6 +49,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Update="Components\MatchLineup.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
     <Content Update="Components\Lineup.razor">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
     </Content>

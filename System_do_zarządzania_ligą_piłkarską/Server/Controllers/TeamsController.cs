@@ -34,25 +34,40 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Controllers
             return Ok(team);
         }
 
-        [HttpPost]
+        [HttpPost("league-master")]
         public async Task<IActionResult> AddNewTeam(NewTeamDTO newTeam)
         {
             await _teamService.AddNewTeam(newTeam);
             return Ok();
         }
 
-        [HttpDelete("{teamId}/remove-team")]
+        [HttpDelete("league-master/{teamId}/remove-team")]
         public async Task<IActionResult> DeleteTeam([FromRoute] int teamId)
         {
             await _teamService.DeleteTeam(teamId);
             return Ok();
         }
 
-        [HttpDelete("{teamId}/remove-coach")]
+        [HttpDelete("league-master/{teamId}/remove-coach")]
         public async Task<IActionResult> DeleteCoachFromTeam([FromRoute] int teamId)
         {
             await _teamService.DeleteCoachFromTeam(teamId);
             return Ok();
+        }
+
+        [HttpPost("league-master/{teamId}/assign-coach/{coachEmail}")]
+        public async Task<IActionResult> AssignCoachToTeam(int teamId, string coachEmail)
+        {
+            var result = await _teamService.AssignCoachToTeam(teamId, coachEmail);
+
+            if (result)
+            {
+                return Ok("Trener został przypisany.");
+            }
+            else
+            {
+                return BadRequest("Nie udało się przypisać trenera do zespołu.");
+            }
         }
 
         [HttpGet("{teamId}/footballers/stats/current")]
@@ -86,11 +101,18 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Controllers
             return Ok(teams);
         }
 
-        [HttpPost("league-master")]
+        [HttpPost("league-master/add-team-to-season")]
         public async Task<IActionResult> AddTeamToTheSeason(NewTeamStatDTO newTeamStatDTO)
         {
             await _teamService.AddTeamToTheSeason(newTeamStatDTO);
             return Ok();
+        }
+
+        [HttpGet("league-master/manage-team/{teamId}")]
+        public async Task<IActionResult> GetTeamToManage(int teamId)
+        {
+            var team = await _teamService.GetTeamToManage(teamId);
+            return Ok(team);
         }
     }
 }

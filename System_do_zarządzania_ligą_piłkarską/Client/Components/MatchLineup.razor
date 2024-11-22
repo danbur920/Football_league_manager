@@ -1,0 +1,179 @@
+﻿@using System_do_zarządzania_ligą_piłkarską.Shared.DTOs
+@using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Matches
+@using System_do_zarządzania_ligą_piłkarską.Shared.Enums
+@inject HttpClient Http
+
+<h5 class="mt-4">Aktualny skład:</h5>
+
+@if (players != null && players.Any())
+{
+    <div class="container">
+        <div class="row mb-3">
+            <div class="col-12">
+                <h6>Bramkarz:</h6>
+                @if (goalkeepers != null && goalkeepers.Any())
+                {
+                    @foreach (var player in goalkeepers)
+                    {
+                        <span class="badge bg-primary me-2">
+                            @player.FirstName @player.LastName @player.ShirtNumber
+                            <button class="btn btn-sm btn-outline-danger ms-1" @onclick="() => RemovePlayer(player.Id)">
+                                &times;
+                            </button>
+                        </span>
+                    }
+                }
+                else
+                {
+                    <span class="text-muted">Brak bramkarzy w składzie</span>
+                }
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-12">
+                <h6>Obrońcy:</h6>
+                @if (defenders != null && defenders.Any())
+                {
+                    @foreach (var player in defenders)
+                    {
+                        <span class="badge bg-success me-2">
+                            @player.FirstName @player.LastName @player.ShirtNumber
+                            <button class="btn btn-sm btn-outline-danger ms-1" @onclick="() => RemovePlayer(player.Id)">
+                                &times;
+                            </button>
+                        </span>
+                    }
+                }
+                else
+                {
+                    <span class="text-muted">Brak obrońców w składzie</span>
+                }
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-12">
+                <h6>Pomocnicy:</h6>
+                @if (midfielders != null && midfielders.Any())
+                {
+                    @foreach (var player in midfielders)
+                    {
+                        <span class="badge bg-warning text-dark me-2">
+                            @player.FirstName @player.LastName @player.ShirtNumber
+                            <button class="btn btn-sm btn-outline-danger ms-1" @onclick="() => RemovePlayer(player.Id)">
+                                &times;
+                            </button>
+                        </span>
+                    }
+                }
+                else
+                {
+                    <span class="text-muted">Brak pomocników w składzie</span>
+                }
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-12">
+                <h6>Napastnicy:</h6>
+                @if (forwards != null && forwards.Any())
+                {
+                    @foreach (var player in forwards)
+                    {
+                        <span class="badge bg-danger me-2">
+                            @player.FirstName @player.LastName @player.ShirtNumber
+                            <button class="btn btn-sm btn-outline-danger ms-1" @onclick="() => RemovePlayer(player.Id)">
+                                &times;
+                            </button>
+                        </span>
+                    }
+                }
+                else
+                {
+                    <span class="text-muted">Brak napastników w składzie</span>
+                }
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-12">
+                <h6>Rezerwowi:</h6>
+                @if (substitutions != null && substitutions.Any())
+                {
+                    @foreach (var player in substitutions)
+                    {
+                        <span class="badge bg-secondary me-2">
+                            @player.FirstName @player.LastName @player.ShirtNumber
+                            <button class="btn btn-sm btn-outline-danger ms-1" @onclick="() => RemovePlayer(player.Id)">
+                                &times;
+                            </button>
+                        </span>
+                    }
+                }
+                else
+                {
+                    <span class="text-muted">Brak rezerwowych</span>
+                }
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <p class="text-muted">Brak danych o składzie drużyny.</p>
+}
+
+
+@code {
+    [Parameter] public List<MatchFootballerDTO>? players { get; set; }
+    [Parameter] public EventCallback LoadLineupsCallback { get; set; }
+
+    private List<MatchFootballerDTO>? goalkeepers { get; set; }
+    private List<MatchFootballerDTO>? defenders { get; set; }
+    private List<MatchFootballerDTO>? midfielders { get; set; }
+    private List<MatchFootballerDTO>? forwards { get; set; }
+    private List<MatchFootballerDTO>? substitutions { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await AssignPlayersToPositions();
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        await AssignPlayersToPositions();
+    }
+
+    private async Task AssignPlayersToPositions()
+    {
+        if (players != null)
+        {
+            goalkeepers = players.Where(x => PositionHelper.GetDisplayName(x.Position) == PositionHelper.GetDisplayName(Position.Goalkeeper) && x.IsStartingPlayer == true).
+            ToList();
+            defenders = players.Where(x => PositionHelper.GetDisplayName(x.Position) == PositionHelper.GetDisplayName(Position.Defender) && x.IsStartingPlayer == true).
+            ToList();
+            midfielders = players.Where(x => PositionHelper.GetDisplayName(x.Position) == PositionHelper.GetDisplayName(Position.Midfielder) && x.IsStartingPlayer == true).
+            ToList();
+            forwards = players.Where(x => PositionHelper.GetDisplayName(x.Position) == PositionHelper.GetDisplayName(Position.Forward) && x.IsStartingPlayer == true).
+            ToList();
+            substitutions = players.Where(x => x.IsStartingPlayer == false).
+            ToList();
+        }
+        StateHasChanged();
+    }
+
+    private async Task RemovePlayer(int matchFootballerId)
+    {
+        var response = await Http.DeleteAsync($"api/matches/league-master/match-footballer/{matchFootballerId}");
+
+        if (response.IsSuccessStatusCode)
+        {
+            await LoadLineupsCallback.InvokeAsync();
+            StateHasChanged();
+        }
+    }
+}
+
+
+

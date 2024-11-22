@@ -72,7 +72,7 @@
     {
         try
         {
-            var response = await Http.PostAsJsonAsync("api/teams", newTeam);
+            var response = await Http.PostAsJsonAsync("api/teams/league-master", newTeam);
 
             if (response.IsSuccessStatusCode)
             {

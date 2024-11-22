@@ -34,20 +34,12 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cUGFnZXNcVXNlcnMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Daniel/Desktop/Praca_inżynierska/Football_league_manager/System_do_zarządzania_ligą_piłkarską/Client/Areas/LeagueMaster/Pages/AddNewTeam.razor]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTGVhZ3VlTWFzdGVyXFBhZ2VzXEFkZE5ld1RlYW0ucmF6b3I=
+[C:/Users/Daniel/Desktop/Praca_inżynierska/Football_league_manager/System_do_zarządzania_ligą_piłkarską/Client/Areas/LeagueMaster/Pages/LeaguesManagement/LeagueManagement.razor]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTGVhZ3VlTWFzdGVyXFBhZ2VzXExlYWd1ZXNNYW5hZ2VtZW50XExlYWd1ZU1hbmFnZW1lbnQucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Daniel/Desktop/Praca_inżynierska/Football_league_manager/System_do_zarządzania_ligą_piłkarską/Client/Areas/LeagueMaster/Pages/CreatedTeams.razor]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTGVhZ3VlTWFzdGVyXFBhZ2VzXENyZWF0ZWRUZWFtcy5yYXpvcg==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/Daniel/Desktop/Praca_inżynierska/Football_league_manager/System_do_zarządzania_ligą_piłkarską/Client/Areas/LeagueMaster/Pages/LeagueManagement.razor]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTGVhZ3VlTWFzdGVyXFBhZ2VzXExlYWd1ZU1hbmFnZW1lbnQucmF6b3I=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/Daniel/Desktop/Praca_inżynierska/Football_league_manager/System_do_zarządzania_ligą_piłkarską/Client/Areas/LeagueMaster/Pages/Leagues.razor]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTGVhZ3VlTWFzdGVyXFBhZ2VzXExlYWd1ZXMucmF6b3I=
+[C:/Users/Daniel/Desktop/Praca_inżynierska/Football_league_manager/System_do_zarządzania_ligą_piłkarską/Client/Areas/LeagueMaster/Pages/LeaguesManagement/Leagues.razor]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTGVhZ3VlTWFzdGVyXFBhZ2VzXExlYWd1ZXNNYW5hZ2VtZW50XExlYWd1ZXMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Daniel/Desktop/Praca_inżynierska/Football_league_manager/System_do_zarządzania_ligą_piłkarską/Client/Areas/LeagueMaster/Pages/SeasonManagement/AddMatch.razor]
@@ -78,6 +70,18 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTGVhZ3VlTWFzdGVyXFBhZ2VzXFN0YXJ0LnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Daniel/Desktop/Praca_inżynierska/Football_league_manager/System_do_zarządzania_ligą_piłkarską/Client/Areas/LeagueMaster/Pages/TeamsManagement/AddNewTeam.razor]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTGVhZ3VlTWFzdGVyXFBhZ2VzXFRlYW1zTWFuYWdlbWVudFxBZGROZXdUZWFtLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Daniel/Desktop/Praca_inżynierska/Football_league_manager/System_do_zarządzania_ligą_piłkarską/Client/Areas/LeagueMaster/Pages/TeamsManagement/CreatedTeams.razor]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTGVhZ3VlTWFzdGVyXFBhZ2VzXFRlYW1zTWFuYWdlbWVudFxDcmVhdGVkVGVhbXMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Daniel/Desktop/Praca_inżynierska/Football_league_manager/System_do_zarządzania_ligą_piłkarską/Client/Areas/LeagueMaster/Pages/TeamsManagement/TeamManagement.razor]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTGVhZ3VlTWFzdGVyXFBhZ2VzXFRlYW1zTWFuYWdlbWVudFxUZWFtTWFuYWdlbWVudC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Daniel/Desktop/Praca_inżynierska/Football_league_manager/System_do_zarządzania_ligą_piłkarską/Client/Components/Alert.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xBbGVydC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
@@ -92,6 +96,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/Daniel/Desktop/Praca_inżynierska/Football_league_manager/System_do_zarządzania_ligą_piłkarską/Client/Components/MatchesTableForLeagueMaster.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xNYXRjaGVzVGFibGVGb3JMZWFndWVNYXN0ZXIucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Daniel/Desktop/Praca_inżynierska/Football_league_manager/System_do_zarządzania_ligą_piłkarską/Client/Components/MatchLineup.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xNYXRjaExpbmV1cC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Daniel/Desktop/Praca_inżynierska/Football_league_manager/System_do_zarządzania_ligą_piłkarską/Client/Components/Modal.razor]

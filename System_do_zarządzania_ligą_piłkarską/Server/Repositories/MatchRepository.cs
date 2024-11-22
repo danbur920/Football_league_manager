@@ -194,6 +194,16 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
             await _context.MatchFootballers.AddAsync(newMatchFootballer);
             await _context.SaveChangesAsync();
         }
+
+        public async Task DeleteMatchFootballer(int matchFootballerId)
+        {
+            var matchFootballerToDelete = await _context.MatchFootballers.FindAsync(matchFootballerId);
+            if (matchFootballerToDelete != null)
+            {
+                _context.MatchFootballers.Remove(matchFootballerToDelete);
+                await _context.SaveChangesAsync();
+            }
+        }
     }
 }
 

@@ -418,5 +418,10 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Services
                     }
             }
         }
+
+        public async Task DeleteMatchFootballer(int matchFootballerId)
+        {
+            await _matchRepository.DeleteMatchFootballer(matchFootballerId);
+        }
     }
 }

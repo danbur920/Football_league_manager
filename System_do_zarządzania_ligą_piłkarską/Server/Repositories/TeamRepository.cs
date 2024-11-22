@@ -76,6 +76,15 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
 
         // League Master Panel
 
+        public async Task<Team> GetTeamToManage(int teamId)
+        {
+            var team = await _context.Teams.
+                Include(x => x.Footballers).
+                FirstOrDefaultAsync(x => x.Id == teamId);
+
+            return team;
+        }
+
         public async Task AddTeamToTheSeason(TeamStat newTeamStat)
         {
             await _context.TeamStats.AddAsync(newTeamStat);
