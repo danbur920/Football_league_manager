@@ -16,92 +16,125 @@
 
 <PageTitle>Ligi</PageTitle>
 
+<div class="container py-5">
+    <div class="text-center mb-5">
+        <h1 class="display-4 fw-bold text-primary">Zarządzanie Ligami</h1>
+        <p class="lead text-muted">Przeglądaj, wyszukuj i zarządzaj swoimi ulubionymi ligami piłkarskimi!</p>
+    </div>
 
-<Alert Message="@AlertManager.Message" Type="@AlertManager.Type" IsVisible="@AlertManager.IsVisible" />
+    <div class="alert-placeholder mb-4">
+        <Alert Message="@AlertManager.Message" Type="@AlertManager.Type" IsVisible="@AlertManager.IsVisible" />
+    </div>
 
-<input type="text" @bind="SearchQueryManager.Name" placeholder="Szukaj ligę po nazwie..." class="form-control mb-3" />
-<input type="text" @bind="SearchQueryManager.Country" placeholder="Szukaj ligę po kraju..." class="form-control mb-3" />
+    <div class="card border-0 shadow-sm mb-5">
+        <div class="card-body">
+            <h5 class="card-title text-secondary fw-bold mb-4">Wyszukaj ligę</h5>
+            <div class="row g-4">
+                <div class="col-lg-6">
+                    <input type="text" @bind="SearchQueryManager.Name" class="form-control form-control-lg" placeholder="🔍 Szukaj ligę po nazwie..." />
+                </div>
+                <div class="col-lg-6">
+                    <input type="text" @bind="SearchQueryManager.Country" class="form-control form-control-lg" placeholder="🌍 Szukaj ligę po kraju..." />
+                </div>
+            </div>
+        </div>
+    </div>
 
-@if (allLeagues == null)
-{
-    <p><em>Loading...</em></p>
-}
-else
-{
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Nazwa</th>
-                <th>Kraj</th>
-                <th>Poziom</th>
-                <th>Sezon</th>
-                <th>Rozegrane mecze</th>
-                <th>Start ligi</th>
-                <th>Koniec ligi</th>
-                <th>Dodaj do ulubionych</th>
-                <th>Przejdź do ligi</th>
-            </tr>
-        </thead>
-        <tbody>
-            @if (filteredLeagues.Count() == 0)
-            {
-                <tr>
-                    <td colspan="9" style="text-align: center">Brak lig lub żadna liga nie spełnia określonych kryteriów wyszukiwania.</td>
-                </tr>
-            }
-            @foreach (var league in filteredLeagues)
-            {
-                <tr>
-                    <td>@league.LeagueInfo.Name</td>
-                    <td>@league.LeagueInfo.Country</td>
-                    <td>@league.LeagueInfo.Level</td>
-                    <td>@(league.Season.ToString().Substring(1))</td>
-                    <td>@league.MatchesPlayed</td>
-                    <td>@league.LeagueStartDate</td>
-                    <td>@league.LeagueEndDate</td>
-                    <td>
-                        @if (_userId != null)
-                        {
-                            @if (IsFavourite(league.Id))
+    @if (allLeagues == null)
+    {
+        <div class="d-flex justify-content-center align-items-center" style="min-height: 200px;">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Ładowanie...</span>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="card border-0 shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title text-secondary fw-bold mb-4">Lista Lig</h5>
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover align-middle">
+                        <thead class="table-primary text-center">
+                            <tr>
+                                <th>Nazwa</th>
+                                <th>Kraj</th>
+                                <th>Poziom</th>
+                                <th>Sezon</th>
+                                <th>Rozegrane mecze</th>
+                                <th>Start ligi</th>
+                                <th>Koniec ligi</th>
+                                <th>Ulubione</th>
+                                <th>Szczegóły</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (filteredLeagues.Count() == 0)
                             {
-                                <button class="btn btn-primary" @onclick="() => RemoveFromFavourites(league.Id)">
-                                    <i class="fas fa-star"></i> 
-                                    Usuń z ulubionych
-                                </button>
+                                <tr>
+                                    <td colspan="9" class="text-center text-muted">
+                                        Brak lig lub żadna liga nie spełnia określonych kryteriów wyszukiwania.
+                                    </td>
+                                </tr>
                             }
-                            else
+                            @foreach (var league in filteredLeagues)
                             {
-                                <button class="btn btn-secondary" @onclick="() => AddToFavourites(league.Id)">
-                                    <i class="fas fa-star"></i> 
-                                    Dodaj do ulubionych
-                                </button>
+                                <tr class="text-center">
+                                    <td>@league.LeagueInfo.Name</td>
+                                    <td>@league.LeagueInfo.Country</td>
+                                    <td>@league.LeagueInfo.Level</td>
+                                    <td>@(league.Season.ToString().Substring(1))</td>
+                                    <td>@league.MatchesPlayed</td>
+                                    <td>@league.LeagueStartDate</td>
+                                    <td>@league.LeagueEndDate</td>
+                                    <td>
+                                        @if (_userId != null)
+                                        {
+                                            @if (IsFavourite(league.Id))
+                                            {
+                                                <button class="btn btn-primary btn-sm" @onclick="() => RemoveFromFavourites(league.Id)">
+                                                    <i class="fas fa-star"></i> Usuń
+                                                </button>
+                                            }
+                                            else
+                                            {
+                                                <button class="btn btn-outline-secondary btn-sm" @onclick="() => AddToFavourites(league.Id)">
+                                                    <i class="far fa-star"></i> Dodaj
+                                                </button>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <i class="fas fa-lock text-muted"></i>
+                                        }
+                                    </td>
+                                    <td>
+                                        <NavLink href="@($"/leagues/{league.Id}")" class="btn btn-success btn-sm">
+                                            <i class="fas fa-info-circle"></i> Przejdź
+                                        </NavLink>
+                                    </td>
+                                </tr>
                             }
-                        }
-                        else
-                        {
-                            <i class="fas fa-lock"></i>
-                        }
-                    </td>
-                    <td>
-                        <NavLink href="@($"/leagues/{league.Id}")" class="nav-link">
-                            <i class="fas fa-trophy"></i>
-                            Przejdź
-                        </NavLink>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
 
-    <PaginationBar PageNumber="PaginationManager.PageNumber"
-                   PageIndex="PaginationManager.PageIndex"
-                   PageMax="PaginationManager.PageMax"
-                   CollectionCount="PaginationManager.CollectionCount"
-                   OnNextPage="() => PaginationManager.NextPage(LoadLeagues)"
-                   OnPreviousPage="() => PaginationManager.PreviousPage(LoadLeagues)"
-                   OnGoToPage="(pageNumber) => PaginationManager.GoToPage(pageNumber, LoadLeagues)">
-    </PaginationBar>
-}
+        <div class="d-flex justify-content-between align-items-center mt-4">
+            <small class="text-muted">Strona @PaginationManager.PageNumber z @PaginationManager.PageMax</small>
+            <PaginationBar PageNumber="PaginationManager.PageNumber"
+                           PageIndex="PaginationManager.PageIndex"
+                           PageMax="PaginationManager.PageMax"
+                           CollectionCount="PaginationManager.CollectionCount"
+                           OnNextPage="() => PaginationManager.NextPage(LoadLeagues)"
+                           OnPreviousPage="() => PaginationManager.PreviousPage(LoadLeagues)"
+                           OnGoToPage="(pageNumber) => PaginationManager.GoToPage(pageNumber, LoadLeagues)">
+            </PaginationBar>
+        </div>
+    }
+</div>
+
 
 @code {
     private List<LeagueSeasonDTO>? allLeagues;
@@ -196,9 +229,4 @@ else
             }
         }
     }
-
-    // private void NavigateToLeagueDetails(int leagueId)
-    // {
-    //     Navigation.NavigateTo($"/leagues/{leagueId}");
-    // }
 }

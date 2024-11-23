@@ -5,7 +5,6 @@
 @using System_do_zarządzania_ligą_piłkarską.Shared.DTOs
 @using System_do_zarządzania_ligą_piłkarską.Client.Extensions
 @using System_do_zarządzania_ligą_piłkarską.Client.Components
-@using System.Text.Json
 @using Newtonsoft.Json
 @using System_do_zarządzania_ligą_piłkarską.Shared.Enums
 
@@ -17,92 +16,117 @@
 
 <PageTitle>Piłkarze</PageTitle>
 
-<Alert Message="@AlertManager.Message" Type="@AlertManager.Type" IsVisible="@AlertManager.IsVisible" />
+<div class="container py-5">
+    <div class="text-center mb-5">
+        <h1 class="display-4 fw-bold text-primary">Zarządzanie Piłkarzami</h1>
+        <p class="lead text-muted">Przeglądaj, wyszukuj i zarządzaj ulubionymi piłkarzami!</p>
+    </div>
 
-<input type="text" @bind="SearchQueryManager.FirstName" placeholder="Szukaj piłkarza po imieniu..." class="form-control mb-3" />
-<input type="text" @bind="SearchQueryManager.LastName" placeholder="Szukaj piłkarza po nazwisku..." class="form-control mb-3" />
-<input type="text" @bind="SearchQueryManager.Country" placeholder="Szukaj piłkarza po kraju..." class="form-control mb-3" />
-<input type="text" @bind="SearchQueryManager.Team" placeholder="Szukaj piłkarza po drużynie..." class="form-control mb-3" />
-<input type="text" @bind="SearchQueryManager.Position" placeholder="Szukaj piłkarza po pozycji..." class="form-control mb-3" />
+    <div class="alert-placeholder mb-4">
+        <Alert Message="@AlertManager.Message" Type="@AlertManager.Type" IsVisible="@AlertManager.IsVisible" />
+    </div>
 
-<button class="btn btn-primary" @onclick="SearchFootballersByFilters">
-    <i class="fas fa-search"></i> Szukaj
-</button>
+    <div class="card border-0 shadow-sm mb-5">
+        <div class="card-body">
+            <h5 class="card-title text-secondary fw-bold mb-4">Wyszukaj piłkarza</h5>
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <input type="text" @bind="SearchQueryManager.FirstName" class="form-control form-control-lg" placeholder="🔍 Szukaj po imieniu..." />
+                </div>
+                <div class="col-lg-4">
+                    <input type="text" @bind="SearchQueryManager.LastName" class="form-control form-control-lg" placeholder="🔍 Szukaj po nazwisku..." />
+                </div>
+                <div class="col-lg-4">
+                    <input type="text" @bind="SearchQueryManager.Country" class="form-control form-control-lg" placeholder="🌍 Szukaj po kraju..." />
+                </div>
+                <div class="col-lg-6">
+                    <input type="text" @bind="SearchQueryManager.Team" class="form-control form-control-lg" placeholder="🏟️ Szukaj po drużynie..." />
+                </div>
+                <div class="col-lg-6">
+                    <input type="text" @bind="SearchQueryManager.Position" class="form-control form-control-lg" placeholder="📍 Szukaj po pozycji..." />
+                </div>
+            </div>
+        </div>
+    </div>
 
-@if (allFootballers == null)
-{
-    <p><em>Loading...</em></p>
-}
-else
-{
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Imię</th>
-                <th>Nazwisko</th>
-                <th>Ksywa</th>
-                <th>Narodowość</th>
-                <th>Pozycja</th>
-                <th>Klub</th>
-                <th>Dodaj do ulubionych</th>
-                <th>Profil piłkarza</th>
-            </tr>
-        </thead>
-        <tbody>
-            @if (allFootballers.Count() == 0)
-            {
-                <tr>
-                    <td colspan="9" style="text-align: center">Brak piłkarzy lub żaden piłkarz nie spełnia określonych kryteriów wyszukiwania.</td>
-                </tr>
-            }
-            @foreach (var footballer in filteredFootballer)
-            {
-                <tr>
-                    <td>@footballer.FirstName</td>
-                    <td>@footballer.LastName</td>
-                    <td>@footballer.NickName</td>
-                    <td>@footballer.Nationality</td>
-                    <td>@PositionHelper.GetDisplayName(footballer.Position)</td>
-                    <td>@footballer.Team.Name</td>
-                    <td>
-                        @if (IsFavourite(footballer.Id))
-                        {
-                            <button class="btn btn-primary" @onclick="() => RemoveFromFavourites(footballer.Id)">
-                                <i class="fas fa-star"></i>
-                                Usuń z ulubionych
-                            </button>
-                        }
-                        else
-                        {
-                            <button class="btn btn-secondary" @onclick="() => AddToFavourites(footballer.Id)">
-                                <i class="fas fa-star"></i>
-                                Dodaj do ulubionych
-                            </button>
-                        }
-                    </td>
-                    <td>
-                        <NavLink href="@($"/footballers/{footballer.Id}")" class="nav-link">
-                            <i class="fas fa-trophy"></i>
-                            Przejdź
-                        </NavLink>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+    @if (allFootballers == null)
+    {
+        <div class="d-flex justify-content-center align-items-center" style="min-height: 200px;">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Ładowanie...</span>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="card border-0 shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title text-secondary fw-bold mb-4">Lista Piłkarzy</h5>
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover align-middle">
+                        <thead class="table-primary text-center">
+                            <tr>
+                                <th>Imię</th>
+                                <th>Nazwisko</th>
+                                <th>Ksywa</th>
+                                <th>Narodowość</th>
+                                <th>Pozycja</th>
+                                <th>Klub</th>
+                                <th>Ulubione</th>
+                                <th>Profil</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (filteredFootballer.Count() == 0)
+                            {
+                                <tr>
+                                    <td colspan="8" class="text-center text-muted">
+                                        Brak piłkarzy lub żaden piłkarz nie spełnia określonych kryteriów wyszukiwania.
+                                    </td>
+                                </tr>
+                            }
+                            @foreach (var footballer in filteredFootballer)
+                            {
+                                <tr class="text-center">
+                                    <td>@footballer.FirstName</td>
+                                    <td>@footballer.LastName</td>
+                                    <td>@footballer.NickName</td>
+                                    <td>@footballer.Nationality</td>
+                                    <td>@PositionHelper.GetDisplayName(footballer.Position)</td>
+                                    <td>@footballer.Team?.Name ?? "Brak drużyny"</td>
+                                    <td>
+                                        @if (IsFavourite(footballer.Id))
+                                        {
+                                            <button class="btn btn-primary btn-sm" @onclick="() => RemoveFromFavourites(footballer.Id)">
+                                                <i class="fas fa-star"></i> Usuń
+                                            </button>
+                                        }
+                                        else
+                                        {
+                                            <button class="btn btn-outline-secondary btn-sm" @onclick="() => AddToFavourites(footballer.Id)">
+                                                <i class="far fa-star"></i> Dodaj
+                                            </button>
+                                        }
+                                    </td>
+                                    <td>
+                                        <NavLink href="@($"/footballers/{footballer.Id}")" class="btn btn-success btn-sm">
+                                            <i class="fas fa-info-circle"></i> Przejdź
+                                        </NavLink>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    }
+</div>
 
-    <PaginationBar PageNumber="PaginationManager.PageNumber"
-                   PageIndex="PaginationManager.PageIndex"
-                   PageMax="PaginationManager.PageMax"
-                   CollectionCount="PaginationManager.CollectionCount"
-                   OnNextPage="() => PaginationManager.NextPage(LoadPlayers)"
-                   OnPreviousPage="() => PaginationManager.PreviousPage(LoadPlayers)"
-                   OnGoToPage="(pageNumber) => PaginationManager.GoToPage(pageNumber, LoadPlayers)">
-    </PaginationBar>
-}
+
 
 @code {
-    private List<FootballerDTO>? allFootballers = new List<FootballerDTO>();
+    private List<FootballerDTO>? allFootballers;
     private List<FavouriteDTO>? allFavourites;
 
     private string _userId = string.Empty;
@@ -204,52 +228,3 @@ else
      (string.IsNullOrWhiteSpace(SearchQueryManager.Team) || footballer.Team.Name.Contains(SearchQueryManager.Team, StringComparison.OrdinalIgnoreCase)) &&
      (string.IsNullOrWhiteSpace(SearchQueryManager.Position) || PositionHelper.GetDisplayName(footballer.Position).Contains(SearchQueryManager.Position, StringComparison.OrdinalIgnoreCase)));
 }
-
-@* <style>
-    .pagination {
-        display: flex;
-        padding-left: 0;
-        list-style: none;
-        border-radius: 0.25rem;
-    }
-
-    .page-item {
-        margin: 0 0.25rem;
-    }
-
-        .page-item .page-link {
-            position: relative;
-            display: block;
-            padding: 0.5rem 0.75rem;
-            margin-left: -1px;
-            line-height: 1.25;
-            color: #007bff;
-            background-color: #fff;
-            border: 1px solid #dee2e6;
-            border-radius: 0.25rem;
-            transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
-        }
-
-            .page-item .page-link:hover {
-                color: #0056b3;
-                text-decoration: none;
-                background-color: #e9ecef;
-                border-color: #dee2e6;
-                cursor: pointer;
-            }
-
-        .page-item.active .page-link {
-            z-index: 1;
-            color: #fff;
-            background-color: #0056b3;
-            border-color: #0056b3;
-        }
-
-        .page-item.disabled .page-link {
-            color: #6c757d;
-            pointer-events: none;
-            background-color: #fff;
-            border-color: #dee2e6;
-        }
-</style>
- *@

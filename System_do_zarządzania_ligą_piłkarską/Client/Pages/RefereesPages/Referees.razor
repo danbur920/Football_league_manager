@@ -16,78 +16,126 @@
 
 <PageTitle>Sędziowie</PageTitle>
 
-<Alert Message="@AlertManager.Message" Type="@AlertManager.Type" IsVisible="@AlertManager.IsVisible" />
+<div class="container py-5">
+    <div class="text-center mb-5">
+        <h1 class="display-4 fw-bold text-primary">Zarządzanie Sędziami</h1>
+        <p class="lead text-muted">Przeglądaj, wyszukuj i zarządzaj swoimi ulubionymi sędziami!</p>
+    </div>
 
-<input type="text" @bind="SearchQueryManager.FirstName" placeholder="Szukaj sędziego po imieniu..." class="form-control mb-3" />
-<input type="text" @bind="SearchQueryManager.LastName" placeholder="Szukaj sędziego po nazwisku..." class="form-control mb-3" />
+    <div class="alert-placeholder mb-4">
+        <Alert Message="@AlertManager.Message" Type="@AlertManager.Type" IsVisible="@AlertManager.IsVisible" />
+    </div>
 
-@if (allReferees == null)
-{
-    <p><em>Loading...</em></p>
-}
-else
-{
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Imię</th>
-                <th>Nazwisko</th>
-                <th>Narodowość</th>
-                <th>Poziom</th>
-                <th>Dodaj do ulubionych</th>
-                <th>Przejdź do szczegółów</th>
-            </tr>
-        </thead>
-        <tbody>
-            @if (filteredReferees.Count() == 0)
-            {
-                <tr>
-                    <td colspan="9" style="text-align: center">Brak sędziów lub żaden sędzia nie spełnia określonych kryteriów wyszukiwania.</td>
-                </tr>
-            }
-            @foreach (var referee in filteredReferees)
-            {
-                <tr>
-                    <td>@referee.FirstName</td>
-                    <td>@referee.LastName</td>
-                    <td>@referee.Nationality</td>
-                    <td>@referee.Level</td>
-                    <td>
-                        @if (IsFavourite(referee.Id))
-                        {
-                            <button class="btn btn-primary" @onclick="() => RemoveFromFavourites(referee.Id)">
-                                <i class="fas fa-star"></i>
-                                Usuń z ulubionych
-                            </button>
-                        }
-                        else
-                        {
-                            <button class="btn btn-secondary" @onclick="() => AddToFavourites(referee.Id)">
-                                <i class="fas fa-star"></i>
-                                Dodaj do ulubionych
-                            </button>
-                        }
-                    </td>
-                    <td>
-                        <NavLink href="@($"/referees/{referee.Id}")" class="nav-link">
-                            <i class="fas fa-trophy"></i>
-                            Przejdź
-                        </NavLink>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+    <div class="card border-0 shadow-sm mb-5">
+        <div class="card-body">
+            <h5 class="card-title text-secondary fw-bold mb-4">Wyszukaj sędziego</h5>
+            <div class="row g-4">
+                <div class="col-lg-6">
+                    <input type="text" @bind="SearchQueryManager.FirstName" class="form-control form-control-lg" placeholder="🔍 Szukaj sędziego po imieniu..." />
+                </div>
+                <div class="col-lg-6">
+                    <input type="text" @bind="SearchQueryManager.LastName" class="form-control form-control-lg" placeholder="🌍 Szukaj sędziego po nazwisku..." />
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <PaginationBar PageNumber="PaginationManager.PageNumber"
-                   PageIndex="PaginationManager.PageIndex"
-                   PageMax="PaginationManager.PageMax"
-                   CollectionCount="PaginationManager.CollectionCount"
-                   OnNextPage="() => PaginationManager.NextPage(LoadReferees)"
-                   OnPreviousPage="() => PaginationManager.PreviousPage(LoadReferees)"
-                   OnGoToPage="(pageNumber) => PaginationManager.GoToPage(pageNumber, LoadReferees)">
-    </PaginationBar>
-}
+    @if (allReferees == null)
+    {
+        <div class="d-flex justify-content-center align-items-center" style="min-height: 200px;">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Ładowanie...</span>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="card border-0 shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title text-secondary fw-bold mb-4">Lista Sędziów</h5>
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover align-middle">
+                        <thead class="table-primary text-center">
+                            <tr>
+                                <th>Imię</th>
+                                <th>Nazwisko</th>
+                                <th>Narodowość</th>
+                                <th>Poziom</th>
+                                <th>Ulubione</th>
+                                <th>Szczegóły</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (filteredReferees.Count() == 0)
+                            {
+                                <tr>
+                                    <td colspan="6" class="text-center text-muted">
+                                        Brak sędziów lub żaden sędzia nie spełnia określonych kryteriów wyszukiwania.
+                                    </td>
+                                </tr>
+                            }
+                            @foreach (var referee in filteredReferees)
+                            {
+                                <tr class="text-center">
+                                    <td>@referee.FirstName</td>
+                                    <td>@referee.LastName</td>
+                                    <td>@referee.Nationality</td>
+                                    <td>@referee.Level</td>
+                                    <td>
+                                        @if (IsFavourite(referee.Id))
+                                        {
+                                            <button class="btn btn-primary btn-sm" @onclick="() => RemoveFromFavourites(referee.Id)">
+                                                <i class="fas fa-star"></i> Usuń
+                                            </button>
+                                        }
+                                        else
+                                        {
+                                            <button class="btn btn-outline-secondary btn-sm" @onclick="() => AddToFavourites(referee.Id)">
+                                                <i class="far fa-star"></i> Dodaj
+                                            </button>
+                                        }
+                                    </td>
+                                    <td>
+                                        <NavLink href="@($"/referees/{referee.Id}")" class="btn btn-success btn-sm">
+                                            <i class="fas fa-info-circle"></i> Przejdź
+                                        </NavLink>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <nav aria-label="Referees Pagination" class="mt-4">
+            <ul class="pagination justify-content-center">
+                <li class="page-item @(PaginationManager.PageNumber == 1 ? "disabled" : "")">
+                    <button class="page-link" @onclick="() => PaginationManager.PreviousPage(LoadReferees)">
+                        Poprzednia
+                    </button>
+                </li>
+
+                @for (int i = 1; i <= PaginationManager.PageMax; i++)
+                {
+                    <li class="page-item @(PaginationManager.PageNumber == i ? "active" : "")">
+                        <button class="page-link" @onclick="() => PaginationManager.GoToPage(i, LoadReferees)">
+                            @i
+                        </button>
+                    </li>
+                }
+
+                <li class="page-item @(PaginationManager.PageNumber == PaginationManager.PageMax ? "disabled" : "")">
+                    <button class="page-link" @onclick="() => PaginationManager.NextPage(LoadReferees)">
+                        Następna
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    }
+    }
+</div>
+
 
 @code {
     private List<RefereeDTO>? allReferees;

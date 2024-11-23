@@ -13,69 +13,100 @@
 
 <PageTitle>Drużyny</PageTitle>
 
-<Alert Message="@AlertManager.Message" Type="@AlertManager.Type" IsVisible="@AlertManager.IsVisible" />
+<div class="container py-5">
+    <div class="text-center mb-5">
+        <h1 class="display-4 fw-bold text-primary">Zarządzanie Drużynami</h1>
+        <p class="lead text-muted">Przeglądaj, wyszukuj i zarządzaj swoimi ulubionymi drużynami piłkarskimi!</p>
+    </div>
 
-<input type="text" @bind="searchQueryName" placeholder="Szukaj drużynę po nazwie..." class="form-control mb-3" />
-<input type="text" @bind="searchQueryNationality" placeholder="Szukaj drużynę po kraju..." class="form-control mb-3" />
+    <div class="alert-placeholder mb-4">
+        <Alert Message="@AlertManager.Message" Type="@AlertManager.Type" IsVisible="@AlertManager.IsVisible" />
+    </div>
 
-@if (_allTeams == null)
-{
-    <p><em>Loading...</em></p>
-}
-else
-{
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Nazwa</th>
-                <th>Kraj</th>
-                <th>Miasto</th>
-                <th>Stadion</th>
-                <th>Dodaj do ulubionych</th>
-                <th>Przejdź do drużyny</th>
-            </tr>
-        </thead>
-        <tbody>
-            @if (filteredTeams.Count() == 0)
-            {
-                <tr>
-                    <td colspan="9" style="text-align: center">Brak drużyn lub żadna drużyna nie spełnia określonych kryteriów wyszukiwania.</td>
-                </tr>
-            }
-            @foreach (var team in filteredTeams)
-            {
-                <tr>
-                    <td>@team.Name</td>
-                    <td>@team.Country</td>
-                    <td>@team.City</td>
-                    <td>@team.Stadium</td>
-                    <td>
-                        @if (IsFavourite(team.Id))
-                        {
-                            <button class="btn btn-primary" @onclick="() => RemoveFromFavourites(team.Id)">
-                                <i class="fas fa-star"></i>
-                                Usuń z ulubionych
-                            </button>
-                        }
-                        else
-                        {
-                            <button class="btn btn-secondary" @onclick="() => AddToFavourites(team.Id)">
-                                <i class="fas fa-star"></i>
-                                Dodaj do ulubionych
-                            </button>
-                        }
-                    </td>
-                    <td>
-                        <NavLink href="@($"/teams/{team.Id}")" class="nav-link">
-                            <i class="fas fa-trophy"></i>
-                            Przejdź
-                        </NavLink>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-}
+    <div class="card border-0 shadow-sm mb-5">
+        <div class="card-body">
+            <h5 class="card-title text-secondary fw-bold mb-4">Wyszukaj drużynę</h5>
+            <div class="row g-4">
+                <div class="col-lg-6">
+                    <input type="text" @bind="searchQueryName" class="form-control form-control-lg" placeholder="🔍 Szukaj drużynę po nazwie..." />
+                </div>
+                <div class="col-lg-6">
+                    <input type="text" @bind="searchQueryNationality" class="form-control form-control-lg" placeholder="🌍 Szukaj drużynę po kraju..." />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @if (_allTeams == null)
+    {
+        <div class="d-flex justify-content-center align-items-center" style="min-height: 200px;">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Ładowanie...</span>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="card border-0 shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title text-secondary fw-bold mb-4">Lista Drużyn</h5>
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover align-middle">
+                        <thead class="table-primary text-center">
+                            <tr>
+                                <th>Nazwa</th>
+                                <th>Kraj</th>
+                                <th>Miasto</th>
+                                <th>Stadion</th>
+                                <th>Ulubione</th>
+                                <th>Szczegóły</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (filteredTeams.Count() == 0)
+                            {
+                                <tr>
+                                    <td colspan="6" class="text-center text-muted">
+                                        Brak drużyn lub żadna drużyna nie spełnia określonych kryteriów wyszukiwania.
+                                    </td>
+                                </tr>
+                            }
+                            @foreach (var team in filteredTeams)
+                            {
+                                <tr class="text-center">
+                                    <td>@team.Name</td>
+                                    <td>@team.Country</td>
+                                    <td>@team.City</td>
+                                    <td>@team.Stadium</td>
+                                    <td>
+                                        @if (IsFavourite(team.Id))
+                                        {
+                                            <button class="btn btn-primary btn-sm" @onclick="() => RemoveFromFavourites(team.Id)">
+                                                <i class="fas fa-star"></i> Usuń
+                                            </button>
+                                        }
+                                        else
+                                        {
+                                            <button class="btn btn-outline-secondary btn-sm" @onclick="() => AddToFavourites(team.Id)">
+                                                <i class="far fa-star"></i> Dodaj
+                                            </button>
+                                        }
+                                    </td>
+                                    <td>
+                                        <NavLink href="@($"/teams/{team.Id}")" class="btn btn-success btn-sm">
+                                            <i class="fas fa-info-circle"></i> Przejdź
+                                        </NavLink>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
 
 @code {
     private TeamDTO[]? _allTeams;
