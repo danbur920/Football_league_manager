@@ -423,5 +423,101 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Services
         {
             await _matchRepository.DeleteMatchFootballer(matchFootballerId);
         }
+
+        public async Task ChangeMatchState(int matchId) // zatwierdzenie/cofnięcie meczu
+        {
+            var match = await _matchRepository.GetMatch(matchId);
+            var statsToUpdate = await _matchRepository.GetDataToUpdateAfterChangeMatchState(match);
+
+            if (match != null && statsToUpdate != null)
+            {
+                if (match.IsFinished == false) // zatwierdzanie meczu
+                {
+                    foreach (var footballerStat in statsToUpdate.StartingFootballerStats)
+                    {
+                        footballerStat.StartingAppearances++;
+                        footballerStat.MatchesPlayed++;
+                    }
+                    statsToUpdate.LeagueSeason.MatchesPlayed++;
+
+                    statsToUpdate.Match.IsFinished = true;
+                    statsToUpdate.Match.Result = match.GoalsHome > match.GoalsAway ? 1 :
+                    match.GoalsHome == match.GoalsAway ? 0 : 2;
+
+                    statsToUpdate.Referee.TotalRefereedMatches++;
+                    statsToUpdate.RefereeStat.RefereedMatches++;
+
+                    statsToUpdate.HomeTeamStat.MatchesPlayed++;
+                    statsToUpdate.AwayTeamStat.MatchesPlayed++;
+
+                    if (statsToUpdate.Match.Result == 1)
+                    {
+                        statsToUpdate.HomeTeamStat.Wins++;
+                        statsToUpdate.HomeTeamStat.Points += 3;
+
+                        statsToUpdate.AwayTeamStat.Losses++;
+                    }
+                    else if (statsToUpdate.Match.Result == 0)
+                    {
+                        statsToUpdate.HomeTeamStat.Draws++;
+                        statsToUpdate.HomeTeamStat.Points += 1;
+
+                        statsToUpdate.AwayTeamStat.Draws++;
+                        statsToUpdate.AwayTeamStat.Points += 1;
+                    }
+                    else
+                    {
+                        statsToUpdate.HomeTeamStat.Losses++;
+
+                        statsToUpdate.AwayTeamStat.Wins++;
+                        statsToUpdate.AwayTeamStat.Points += 3;
+                    }
+                }
+                else // cofnięcie zatwierdzenia meczu
+                {
+                    foreach (var footballerStat in statsToUpdate.StartingFootballerStats)
+                    {
+                        footballerStat.StartingAppearances--;
+                        footballerStat.MatchesPlayed--;
+                    }
+                    statsToUpdate.LeagueSeason.MatchesPlayed--;
+
+                    statsToUpdate.Match.IsFinished = false;
+
+                    statsToUpdate.Referee.TotalRefereedMatches--;
+                    statsToUpdate.RefereeStat.RefereedMatches--;
+
+                    statsToUpdate.HomeTeamStat.MatchesPlayed--;
+                    statsToUpdate.AwayTeamStat.MatchesPlayed--;
+
+                    if (statsToUpdate.Match.Result == 1)
+                    {
+                        statsToUpdate.HomeTeamStat.Wins--;
+                        statsToUpdate.HomeTeamStat.Points -= 3;
+
+                        statsToUpdate.AwayTeamStat.Losses--;
+                    }
+                    else if (statsToUpdate.Match.Result == 0)
+                    {
+                        statsToUpdate.HomeTeamStat.Draws--;
+                        statsToUpdate.HomeTeamStat.Points -= 1;
+
+                        statsToUpdate.AwayTeamStat.Draws--;
+                        statsToUpdate.AwayTeamStat.Points -= 1;
+                    }
+                    else
+                    {
+                        statsToUpdate.HomeTeamStat.Losses--;
+
+                        statsToUpdate.AwayTeamStat.Wins--;
+                        statsToUpdate.AwayTeamStat.Points -= 3;
+                    }
+                    statsToUpdate.Match.Result = null;
+
+                }
+
+                await _matchRepository.UpdateAfterChangeMatchState(statsToUpdate);
+            }
+        }
     }
 }

@@ -5,6 +5,7 @@
 @using System_do_zarządzania_ligą_piłkarską.Client.Extensions
 @using System_do_zarządzania_ligą_piłkarską.Shared.Enums
 @using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Matches
+@using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Footballers
 
 @page "/league-master/created-teams/{TeamId:int}"
 @layout LeagueMasterLayout
@@ -20,27 +21,27 @@
 
     @if (team != null)
     {
-        <EditForm Model="team" OnValidSubmit="UpdateTeam">
+        <EditForm Model="editTeam" OnValidSubmit="UpdateTeam">
             <div class="row g-3 mb-4">
                 <div class="col-md-4">
                     <label for="name" class="form-label">Nazwa drużyny</label>
-                    <InputText id="name" class="form-control" @bind-Value="team.Name" />
+                    <InputText id="name" class="form-control" @bind-Value="editTeam.Name" />
                 </div>
                 <div class="col-md-4">
                     <label for="city" class="form-label">Miasto</label>
-                    <InputText id="city" class="form-control" @bind-Value="team.City" />
+                    <InputText id="city" class="form-control" @bind-Value="editTeam.City" />
                 </div>
                 <div class="col-md-4">
                     <label for="country" class="form-label">Kraj</label>
-                    <InputText id="country" class="form-control" @bind-Value="team.Country" />
+                    <InputText id="country" class="form-control" @bind-Value="editTeam.Country" />
                 </div>
                 <div class="col-md-6">
                     <label for="stadium" class="form-label">Stadion</label>
-                    <InputText id="stadium" class="form-control" @bind-Value="team.Stadium" />
+                    <InputText id="stadium" class="form-control" @bind-Value="editTeam.Stadium" />
                 </div>
                 <div class="col-md-6">
                     <label for="year" class="form-label">Rok założenia</label>
-                    <InputNumber id="year" class="form-control" @bind-Value="team.YearOfFoundation" />
+                    <InputNumber id="year" class="form-control" @bind-Value="editTeam.YearOfFoundation" />
                 </div>
             </div>
             <button type="submit" class="btn btn-primary">Zapisz zmiany</button>
@@ -57,8 +58,6 @@
                     <th>Nazwisko</th>
                     <th>Numer</th>
                     <th>Pozycja</th>
-                    <th>Wzrost</th>
-                    <th>Waga</th>
                     <th>Akcje</th>
                 </tr>
             </thead>
@@ -71,10 +70,8 @@
                         <td>@player.LastName</td>
                         <td>@player.ShirtNumber</td>
                         <td>@PositionHelper.GetDisplayName(player.Position)</td>
-                        <td>@player.Height cm</td>
-                        <td>@player.Weight kg</td>
                         <td>
-                            <button class="btn btn-sm btn-warning" @onclick="() => EditPlayer(player.Id)">Edytuj</button>
+                            @* <button class="btn btn-sm btn-warning" @onclick="() => EditPlayer(player.Id)">Edytuj</button> *@
                         </td>
                     </tr>
                 }
@@ -91,6 +88,10 @@
                 <div class="col-md-3">
                     <label for="lastName" class="form-label">Nazwisko</label>
                     <InputText id="lastName" class="form-control" @bind-Value="newPlayer.LastName" />
+                </div>
+                <div class="col-md-3">
+                    <label for="nationality" class="form-label">Narodowość</label>
+                    <InputText id="nationality" class="form-control" @bind-Value="newPlayer.Nationality" />
                 </div>
                 <div class="col-md-2">
                     <label for="shirtNumber" class="form-label">Numer</label>
@@ -113,6 +114,11 @@
                     <label for="weight" class="form-label">Waga (kg)</label>
                     <InputNumber id="weight" class="form-control" @bind-Value="newPlayer.Weight" />
                 </div>
+
+                <div class="col-md-1">
+                    <label for="birthday" class="form-label">Data urodzenia</label>
+                    <InputDate id="birthday" class="form-control" @bind-Value="@newPlayer.DateOfBirth" />
+                </div>
             </div>
             <button type="submit" class="btn btn-success">Dodaj piłkarza</button>
         </EditForm>
@@ -126,11 +132,13 @@
 @code {
     [Parameter] public int TeamId { get; set; }
     private TeamManageDTO? team;
-    private ShortFootballerInfoDTO newPlayer = new();
+    private NewFootballerDTO newPlayer = new();
+    private EditTeamDTO editTeam = new();
 
     protected override async Task OnInitializedAsync()
     {
         await LoadTeam();
+        await LoadEditTeam();
     }
 
     private async Task LoadTeam()
@@ -138,26 +146,40 @@
         team = await Http.GetFromJsonAsync<TeamManageDTO>($"api/teams/league-master/manage-team/{TeamId}");
     }
 
+    private async Task LoadEditTeam()
+    {
+        editTeam = new EditTeamDTO
+        {
+            Name = team.Name,
+            City = team.City,
+            Country = team.Country,
+            Stadium = team.Stadium,
+            YearOfFoundation = team.YearOfFoundation
+        };
+    }
+
     private async Task UpdateTeam()
     {
-        var response = await Http.PutAsJsonAsync($"api/teams/league-master/manage-team/{team.Id}", team);
+        var response = await Http.PatchAsJsonAsync($"api/teams/league-master/manage-team", editTeam);
         if (response.IsSuccessStatusCode)
         {
             AlertManager.DisplayAlert("Dane drużyny zostały zaktualizowane.", "success");
         }
         else
         {
+            await LoadEditTeam();
             AlertManager.DisplayAlert("Aktualizacja danych drużyny nie powiodła się.", "danger");
         }
     }
 
     private async Task AddPlayer()
     {
-        var response = await Http.PostAsJsonAsync($"api/teams/league-master/{TeamId}/add-player", newPlayer);
+        newPlayer.TeamId = TeamId;
+        var response = await Http.PostAsJsonAsync($"api/footballers/league-master/add-new-footballer-to-team", newPlayer);
         if (response.IsSuccessStatusCode)
         {
             AlertManager.DisplayAlert("Piłkarz został dodany.", "success");
-            newPlayer = new ShortFootballerInfoDTO();
+            newPlayer = new NewFootballerDTO();
             await LoadTeam();
         }
         else
@@ -166,8 +188,19 @@
         }
     }
 
-    private void EditPlayer(int playerId)
-    {
-        // Logika otwierania formularza edycji danego piłkarza (można dodać modal)
-    }
+    // private async Task EditPlayer(int playerId)
+    // {
+    //     newPlayer.TeamId = TeamId;
+    //     var response = await Http.PostAsJsonAsync($"api/footballers/league-master/edit-footballer", editFootballer);
+    //     if (response.IsSuccessStatusCode)
+    //     {
+    //         AlertManager.DisplayAlert("Edycja piłkarza zakończona powodzeniem.", "success");
+    //         newPlayer = new NewFootballerDTO();
+    //         await LoadTeam();
+    //     }
+    //     else
+    //     {
+    //         AlertManager.DisplayAlert("Edycja piłkarza zakończona niepowodzeniem.", "danger");
+    //     }
+    // }
 }

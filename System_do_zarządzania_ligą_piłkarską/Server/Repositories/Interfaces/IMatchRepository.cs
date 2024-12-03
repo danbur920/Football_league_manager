@@ -7,6 +7,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories.Interface
     {
         Task AddNewMatchToTheSeason(Match newMatch);
         Task<Match> GetMatch(int matchId);
+        Task UpdateMatch(Match match);
         Task<List<Match>> GetMatchesFromSpecificSeasonForLeagueMaster(int leagueSeasonId);
         Task<Match> GetExtensiveMatchInfoFromSpecificSeasonForLeagueMaster(int leagueSeasonId, int matchId);
         Task UpdateMatchInfo(Match editMatch);
@@ -22,6 +23,11 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories.Interface
         Task UpdateStatsAfterSubstitution(MatchEventStatsUpdate statsUpdate);
         Task UpdateStatsAfterMissedPenalty(MatchEventStatsUpdate statsUpdate);
         // ----------------------------------------------------------------
+
+        // metody do zmian statystyk po zatwierdzeniu/anulowaniu meczu:
+        Task<MatchStateUpdate> GetDataToUpdateAfterChangeMatchState(Match match);
+        Task UpdateAfterChangeMatchState(MatchStateUpdate matchStateUpdate);
+        // -----------------------------------------------------------------
 
         Task<MatchEvent> GetMatchEvent(int matchEventId);
         Task<List<MatchFootballer>> GetLineup(int matchId, int teamId);

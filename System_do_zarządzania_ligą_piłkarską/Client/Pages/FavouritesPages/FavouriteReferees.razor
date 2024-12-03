@@ -15,59 +15,80 @@
 
 <PageTitle>Ulubieni sędziowie</PageTitle>
 
-@if (_showModal)
-{
-    <Modal Title="Usuń" Body="Czy na pewno chcesz usunąć wybranego sędziego z ulubionch?" OnConfirm="HandleConfirm" OnCancel="HandleCancel" />
-}
+<div class="container py-5">
+    <div class="text-center mb-5">
+        <h1 class="display-4 fw-bold text-primary">Ulubieni Sędziowie</h1>
+    </div>
 
-<Alert Message="@AlertManager.Message" Type="@AlertManager.Type" IsVisible="@AlertManager.IsVisible" />
+    @if (_showModal)
+    {
+        <Modal Title="Usuń" Body="Czy na pewno chcesz usunąć wybranego sędziego z ulubionych?" OnConfirm="HandleConfirm" OnCancel="HandleCancel" />
+    }
 
-@if (favouriteReferees == null)
-{
-    <p><em>Loading...</em></p>
-}
-else
-{
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Imię</th>
-                <th>Nazwisko</th>
-                <th>Narodowość</th>
-                <th>Poziom</th>
-                <th>Usuń z ulubionych</th>
-                <th>Przejdź do sędziego</th>
-            </tr>
-        </thead>
-        <tbody>
-            @if (favouriteReferees.Count() == 0)
-            {
-                <tr>
-                    <td colspan="9" style="text-align: center">Brak ulubionych sędziów</td>
-                </tr>
-            }
-            @foreach (var referee in favouriteReferees)
-            {
-                <tr>
-                    <td>@referee.FirstName</td>
-                    <td>@referee.LastName</td>
-                    <td>@referee.Nationality</td>
-                    <td>@referee.Level</td>
-                    <td>
-                        <button class="btn btn-primary" @onclick="() => ShowRemoveModal(referee.Id)">
-                            <i class="fas fa-trash"></i> Usuń
-                        </button>
-                    </td>
-                    <td>
-                        <button class="btn btn-link" @onclick="() => NavigateToTeamDetails(referee.Id)">
-                            <i class="fas fa-arrow-right"></i> Szczegóły
-                        </button>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-}
+    <div class="alert-placeholder mb-4">
+        <Alert Message="@AlertManager.Message" Type="@AlertManager.Type" IsVisible="@AlertManager.IsVisible" />
+    </div>
+
+    @if (favouriteReferees == null)
+    {
+        <div class="d-flex justify-content-center align-items-center" style="min-height: 200px;">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Ładowanie...</span>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="card border-0 shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title text-secondary fw-bold mb-4">Lista Ulubionych Sędziów</h5>
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover align-middle">
+                        <thead class="table-primary text-center">
+                            <tr>
+                                <th>Imię</th>
+                                <th>Nazwisko</th>
+                                <th>Narodowość</th>
+                                <th>Poziom</th>
+                                <th>Usuń</th>
+                                <th>Szczegóły</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (favouriteReferees.Count() == 0)
+                            {
+                                <tr>
+                                    <td colspan="6" class="text-center text-muted">
+                                        Brak ulubionych sędziów.
+                                    </td>
+                                </tr>
+                            }
+                            @foreach (var referee in favouriteReferees)
+                            {
+                                <tr class="text-center">
+                                    <td>@referee.FirstName</td>
+                                    <td>@referee.LastName</td>
+                                    <td>@referee.Nationality</td>
+                                    <td>@referee.Level</td>
+                                    <td>
+                                        <button class="btn btn-danger btn-sm" @onclick="() => ShowRemoveModal(referee.Id)">
+                                            <i class="fas fa-trash"></i> Usuń
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-success btn-sm" @onclick="() => NavigateToRefereeDetails(referee.Id)">
+                                            <i class="fas fa-info-circle"></i> Szczegóły
+                                        </button>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    }
+</div>
 
 @code {
     private List<RefereeDTO>? favouriteReferees;
@@ -142,7 +163,7 @@ else
         }
     }
 
-    private void NavigateToTeamDetails(int refereeId)
+    private void NavigateToRefereeDetails(int refereeId)
     {
         Navigation.NavigateTo($"/referees/{refereeId}");
     }

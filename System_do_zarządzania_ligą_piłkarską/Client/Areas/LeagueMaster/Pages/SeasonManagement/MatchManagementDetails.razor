@@ -17,9 +17,17 @@
 
 <h3>Zarządzaj meczem </h3>
 
+
 <div class="button-container">
     <button class="btn btn-secondary" @onclick="BackToTheMatchManagement">Wróć</button>
-    <button class="btn btn-success" @onclick="() => ConfirmMatch(matchId)">Zatwierdź mecz</button>
+    @if(editMatch != null && editMatch.IsFinished == false)
+    {
+        <button class="btn btn-success" @onclick="() => ConfirmMatch(matchId)">Zatwierdź mecz</button>
+    }
+    else if(editMatch != null)
+    {
+        <button class="btn btn-warning" @onclick="()=> UncommitMatch(matchId)">Cofnij zatwierdzenie meczu</button>
+    }
 </div>
 
 <Alert Message="@AlertManager.Message" Type="@AlertManager.Type" IsVisible="@AlertManager.IsVisible" />
@@ -36,241 +44,347 @@
     </div>
 }
 
-<div class="edit-forms-container">
-    <div class="form-card">
-        <h4>Edytuj mecz</h4>
-        @if (editMatch != null)
-        {
-            <EditForm Model="editMatch" OnValidSubmit="ConfirmEditMatchInfo">
-                <DataAnnotationsValidator />
-                <ValidationSummary />
-
-                <div class="mb-3">
-                    <label for="home" class="form-label">Gospodarz</label>
-                    <select id="home" class="form-select" @bind="editMatch.HomeTeamId">
-                        <option value="">-- Zmień gospodarza --</option>
-                        @foreach (var home in teams)
-                        {
-                            <option value="@home.TeamId">@home.TeamName</option>
-                        }
-                    </select>
-                </div>
-
-                <div class="mb-3">
-                    <label for="away" class="form-label">Gość</label>
-                    <select id="away" class="form-select" @bind="editMatch.AwayTeamId">
-                        <option value="">-- Zmień gościa --</option>
-                        @foreach (var away in teams)
-                        {
-                            <option value="@away.TeamId">@away.TeamName</option>
-                        }
-                    </select>
-                </div>
-
-                <div class="mb-3">
-                    <label for="referee" class="form-label">Sędzia</label>
-                    <select id="referee" class="form-select" @bind="editMatch.RefereeId">
-                        <option value="">-- Zmień sędziego --</option>
-                        @foreach (var referee in referees)
-                        {
-                            <option value="@referee.Id">@referee.FirstName @referee.LastName</option>
-                        }
-                    </select>
-                </div>
-
-                <div class="mb-3">
-                    <label for="round" class="form-label">Kolejka</label>
-                    <select id="round" class="form-select" @bind="editMatch.Round">
-                        <option value="">-- Zmień kolejkę --</option>
-                        @for (int i = 1; i <= 50; i++)
-                        {
-                            <option value="@i">@i</option>
-                        }
-                    </select>
-                </div>
-
-                <div class="mb-3">
-                    <label for="matchDate" class="form-label">Data meczu</label>
-                    <InputDate id="matchDate" class="form-control" @bind-Value="editMatch.MatchDate" />
-                </div>
-
-                <div class="mb-3">
-                    <label for="matchTime" class="form-label">Godzina meczu</label>
-                    <InputDate Type="InputDateType.Time" id="matchTime" class="form-control" @bind-Value="editMatch.MatchTime" />
-                </div>
-
-                <div class="mb-3">
-                    <label for="stadium" class="form-label">Stadion</label>
-                    <InputText id="stadium" class="form-control" @bind-Value="editMatch.FootballStadium" />
-                </div>
-
-                <button type="submit" class="btn btn-primary">Zatwierdź edycję meczu</button>
-            </EditForm>
-        }
-    </div>
-
-    <div class="form-card">
-        <h4>Dodaj zdarzenie meczowe</h4>
-        @if (newMatchEvent != null && teams != null && homeFootballers != null && awayFootballers != null)
-        {
-            <EditForm Model="newMatchEvent" OnValidSubmit="ConfirmNewMatchEvent">
-                <DataAnnotationsValidator />
-                <ValidationSummary />
-
-                <div class="mb-3">
-                    <label for="eventType" class="form-label">Typ zdarzenia</label>
-                    <select id="eventType" class="form-select" @bind="newMatchEvent.EventType">
-                        <option value="">-- Wybierz zdarzenie --</option>
-                        @foreach (var eventType in EventTypeHelper.GetAllEventTypes())
-                        {
-                            <option value="@eventType">@EventTypeHelper.GetDisplayName(eventType)</option>
-                        }
-                    </select>
-                </div>
-
-                <div class="mb-3">
-                    <label for="minute" class="form-label">Minuta</label>
-                    <select id="minute" class="form-select" @bind="newMatchEvent.Minute">
-                        <option value="">-- Wybierz minutę zdarzenia --</option>
-                        @for (int i = 1; i <= 120; i++)
-                        {
-                            <option value="@i">@i</option>
-                        }
-                    </select>
-                </div>
-
-                <div class="mb-3">
-                    <label for="team" class="form-label">Drużyna</label>
-                    <select id="team" class="form-select" @bind="newMatchEvent.TeamId">
-                        <option value="">-- Wybierz drużynę --</option>
-                        @foreach (var team in teams)
-                        {
-                            <option value="@team.TeamId">@team.TeamName</option>
-                        }
-                    </select>
-                </div>
-
-                
-
-                @if (newMatchEvent.TeamId != null && newMatchEvent.TeamId == homeFootballers.FirstOrDefault().TeamId)
-                {
-                    <div class="mb-3">
-                        <label for="primaryFootballer" class="form-label">Zawodnik główny gospodarz (zdobył gola, nietrafił rzutu karnego, otrzymał kartkę, wchodzi na boisko) - Wymagane</label>
-                        <select id="primaryFootballer" class="form-select" @bind="newMatchEvent.PrimaryFootballerId">
-                            <option value="">-- Wybierz zawodnika głównego --</option>
-                            @foreach (var footballer in homeFootballers)
-                            {
-                                <option value="@footballer.Id">@footballer.FirstName @footballer.LastName</option>
-                            }
-                        </select>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="primaryFootballer" class="form-label">Zawodnik drugorzędny gospodarz (zaliczył asystę, schodzi z boiska) - Opcjonalne</label>
-                        <select id="primaryFootballer" class="form-select" @bind="newMatchEvent.SecondaryFootballerId">
-                            <option value="">-- Wybierz zawodnika drugorzędnego --</option>
-                            @foreach (var footballer in homeFootballers)
-                            {
-                                <option value="@footballer.Id">@footballer.FirstName @footballer.LastName</option>
-                            }
-                        </select>
-                    </div>
-                }
-                else if (newMatchEvent.TeamId != null)
-                {
-                    <div class="mb-3">
-                        <label for="primaryFootballer" class="form-label">Zawodnik główny gość (zdobył gola, nietrafił rzutu karnego, otrzymał kartkę, wchodzi na boisko) - Wymagane</label>
-                        <select id="primaryFootballer" class="form-select" @bind="newMatchEvent.PrimaryFootballerId">
-                            <option value="">-- Wybierz zawodnika głównego --</option>
-                            @foreach (var footballer in awayFootballers)
-                            {
-                                <option value="@footballer.Id">@footballer.FirstName @footballer.LastName</option>
-                            }
-                        </select>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="primaryFootballer" class="form-label">Zawodnik drugorzędny gość (zaliczył asystę, schodzi z boiska) - Opcjonalne</label>
-                        <select id="primaryFootballer" class="form-select" @bind="newMatchEvent.SecondaryFootballerId">
-                            <option value="">-- Wybierz zawodnika drugorzędnego --</option>
-                            @foreach (var footballer in awayFootballers)
-                            {
-                                <option value="@footballer.Id">@footballer.FirstName @footballer.LastName</option>
-                            }
-                        </select>
-                    </div>
-                }
-
-                <div class="mb-3">
-                    <label for="description" class="form-label">Opis</label>
-                    <InputText id="description" class="form-control" @bind-Value="newMatchEvent.Description" />
-                </div>
-
-
-                <button type="submit" class="btn btn-primary">Dodaj zdarzenie</button>
-            </EditForm>
-        }
-    </div>
-
-    @if (newMatchFootballerHome != null && newMatchFootballerAway != null && awayFootballers != null && homeFootballers != null && homeLineup != null && awayLineup != null)
-    {
+@if(editMatch != null && editMatch.IsFinished == false)
+{
+    <div class="edit-forms-container">
         <div class="form-card">
-            <h4>Skład gospodarza</h4>
-            <EditForm Model="newMatchFootballerHome" OnValidSubmit="()=>ConfirmNewMatchFootballer(true)">
-                <DataAnnotationsValidator />
-                <ValidationSummary />
+            <h4>Edytuj mecz</h4>
+            @if (editMatch != null)
+            {
+                <EditForm Model="editMatch" OnValidSubmit="ConfirmEditMatchInfo">
+                    <DataAnnotationsValidator />
+                    <ValidationSummary />
 
-                <div class="mb-3">
-                    <label for="homeFootballer" class="form-label">Zawodnik gospodarza</label>
-                    <select id="homeFootballer" class="form-select" @bind="newMatchFootballerHome.FootballerId">
-                        <option value="">-- Dodaj zawodnika --</option>
-                        @foreach (var footballer in homeFootballers.Where(f => !homeLineup.Any(l => l.FootballerId == f.Id)))
-                        {
-                            <option value="@footballer.Id">@footballer.FirstName @footballer.LastName | @PositionHelper.GetDisplayName(footballer.Position)</option>
-                        }
-                    </select>
-                </div>
+                    <div class="mb-3">
+                        <label for="home" class="form-label">Gospodarz</label>
+                        <select id="home" class="form-select" @bind="editMatch.HomeTeamId">
+                            <option value="">-- Zmień gospodarza --</option>
+                            @foreach (var home in teams)
+                            {
+                                <option value="@home.TeamId">@home.TeamName</option>
+                            }
+                        </select>
+                    </div>
 
-                <div class="mb-3">
-                    <label for="isStarting" class="form-label">Wyjściowa 11</label>
-                    <InputCheckbox id="isStarting" class="form-check-inline" @bind-Value="newMatchFootballerHome.IsStartingPlayer" />
-                </div>
+                    <div class="mb-3">
+                        <label for="away" class="form-label">Gość</label>
+                        <select id="away" class="form-select" @bind="editMatch.AwayTeamId">
+                            <option value="">-- Zmień gościa --</option>
+                            @foreach (var away in teams)
+                            {
+                                <option value="@away.TeamId">@away.TeamName</option>
+                            }
+                        </select>
+                    </div>
 
-                <button type="submit" class="btn btn-primary">Dodaj zawodnika</button>
-            </EditForm>
+                    <div class="mb-3">
+                        <label for="referee" class="form-label">Sędzia</label>
+                        <select id="referee" class="form-select" @bind="editMatch.RefereeId">
+                            <option value="">-- Zmień sędziego --</option>
+                            @foreach (var referee in referees)
+                            {
+                                <option value="@referee.Id">@referee.FirstName @referee.LastName</option>
+                            }
+                        </select>
+                    </div>
 
-            <MatchLineup players="homeLineup" LoadLineupsCallback="LoadLineups"></MatchLineup>
+                    <div class="mb-3">
+                        <label for="round" class="form-label">Kolejka</label>
+                        <select id="round" class="form-select" @bind="editMatch.Round">
+                            <option value="">-- Zmień kolejkę --</option>
+                            @for (int i = 1; i <= 50; i++)
+                            {
+                                <option value="@i">@i</option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="matchDate" class="form-label">Data meczu</label>
+                        <InputDate id="matchDate" class="form-control" @bind-Value="editMatch.MatchDate" />
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="matchTime" class="form-label">Godzina meczu</label>
+                        <InputDate Type="InputDateType.Time" id="matchTime" class="form-control" @bind-Value="editMatch.MatchTime" />
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="stadium" class="form-label">Stadion</label>
+                        <InputText id="stadium" class="form-control" @bind-Value="editMatch.FootballStadium" />
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Zatwierdź edycję meczu</button>
+                </EditForm>
+            }
         </div>
 
         <div class="form-card">
-            <h4>Skład gości</h4>
-            <EditForm Model="newMatchFootballerAway" OnValidSubmit="()=>ConfirmNewMatchFootballer(false)">
-                <DataAnnotationsValidator />
-                <ValidationSummary />
+            <h4>Dodaj zdarzenie meczowe</h4>
+            @if (newMatchEvent != null && teams != null && homeFootballers != null && awayFootballers != null)
+            {
+                <EditForm Model="newMatchEvent" OnValidSubmit="ConfirmNewMatchEvent">
+                    <DataAnnotationsValidator />
+                    <ValidationSummary />
 
-                <div class="mb-3">
-                    <label for="awayFootballer" class="form-label">Zawodnik gościa</label>
-                    <select id="awayFootballer" class="form-select" @bind="newMatchFootballerAway.FootballerId">
-                        <option value="">-- Dodaj zawodnika --</option>
-                        @foreach (var footballer in awayFootballers.Where(f => !awayLineup.Any(l => l.FootballerId == f.Id)))
-                        {
-                            <option value="@footballer.Id">@footballer.FirstName @footballer.LastName | @PositionHelper.GetDisplayName(footballer.Position)</option>
-                        }
-                    </select>
-                </div>
+                    <div class="mb-3">
+                        <label for="eventType" class="form-label">Typ zdarzenia</label>
+                        <select id="eventType" class="form-select" @bind="newMatchEvent.EventType">
+                            <option value="">-- Wybierz zdarzenie --</option>
+                            @foreach (var eventType in EventTypeHelper.GetAllEventTypes())
+                            {
+                                <option value="@eventType">@EventTypeHelper.GetDisplayName(eventType)</option>
+                            }
+                        </select>
+                    </div>
 
-                <div class="mb-3">
-                    <label for="isStarting" class="form-label">Wyjściowa 11</label>
-                    <InputCheckbox id="isStarting" class="form-check-inline" @bind-Value="newMatchFootballerAway.IsStartingPlayer" />
-                </div>
+                    <div class="mb-3">
+                        <label for="minute" class="form-label">Minuta</label>
+                        <select id="minute" class="form-select" @bind="newMatchEvent.Minute">
+                            <option value="">-- Wybierz minutę zdarzenia --</option>
+                            @for (int i = 1; i <= 120; i++)
+                            {
+                                <option value="@i">@i</option>
+                            }
+                        </select>
+                    </div>
 
-                <button type="submit" class="btn btn-primary">Dodaj zawodnika</button>
-            </EditForm>
+                    <div class="mb-3">
+                        <label for="team" class="form-label">Drużyna</label>
+                        <select id="team" class="form-select" @bind="newMatchEvent.TeamId">
+                            <option value="">-- Wybierz drużynę --</option>
+                            @foreach (var team in teams)
+                            {
+                                <option value="@team.TeamId">@team.TeamName</option>
+                            }
+                        </select>
+                    </div>
 
-            <MatchLineup players="awayLineup" LoadLineupsCallback="LoadLineups"></MatchLineup>
+
+
+                    @if (newMatchEvent.TeamId != null && newMatchEvent.TeamId == homeFootballers.FirstOrDefault().TeamId)
+                    {
+                        <div class="mb-3">
+                            <label for="primaryFootballer" class="form-label">Zawodnik główny gospodarz (zdobył gola, nietrafił rzutu karnego, otrzymał kartkę, wchodzi na boisko) - Wymagane</label>
+                            <select id="primaryFootballer" class="form-select" @bind="newMatchEvent.PrimaryFootballerId">
+                                <option value="">-- Wybierz zawodnika głównego --</option>
+                                @foreach (var footballer in homeFootballers)
+                                {
+                                    <option value="@footballer.Id">@footballer.FirstName @footballer.LastName</option>
+                                }
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="primaryFootballer" class="form-label">Zawodnik drugorzędny gospodarz (zaliczył asystę, schodzi z boiska) - Opcjonalne</label>
+                            <select id="primaryFootballer" class="form-select" @bind="newMatchEvent.SecondaryFootballerId">
+                                <option value="">-- Wybierz zawodnika drugorzędnego --</option>
+                                @foreach (var footballer in homeFootballers)
+                                {
+                                    <option value="@footballer.Id">@footballer.FirstName @footballer.LastName</option>
+                                }
+                            </select>
+                        </div>
+                    }
+                    else if (newMatchEvent.TeamId != null)
+                    {
+                        <div class="mb-3">
+                            <label for="primaryFootballer" class="form-label">Zawodnik główny gość (zdobył gola, nietrafił rzutu karnego, otrzymał kartkę, wchodzi na boisko) - Wymagane</label>
+                            <select id="primaryFootballer" class="form-select" @bind="newMatchEvent.PrimaryFootballerId">
+                                <option value="">-- Wybierz zawodnika głównego --</option>
+                                @foreach (var footballer in awayFootballers)
+                                {
+                                    <option value="@footballer.Id">@footballer.FirstName @footballer.LastName</option>
+                                }
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="primaryFootballer" class="form-label">Zawodnik drugorzędny gość (zaliczył asystę, schodzi z boiska) - Opcjonalne</label>
+                            <select id="primaryFootballer" class="form-select" @bind="newMatchEvent.SecondaryFootballerId">
+                                <option value="">-- Wybierz zawodnika drugorzędnego --</option>
+                                @foreach (var footballer in awayFootballers)
+                                {
+                                    <option value="@footballer.Id">@footballer.FirstName @footballer.LastName</option>
+                                }
+                            </select>
+                        </div>
+                    }
+
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Opis</label>
+                        <InputText id="description" class="form-control" @bind-Value="newMatchEvent.Description" />
+                    </div>
+
+
+                    <button type="submit" class="btn btn-primary">Dodaj zdarzenie</button>
+                </EditForm>
+            }
         </div>
-    }
 
+        @if (newMatchFootballerHome != null && newMatchFootballerAway != null && awayFootballers != null && homeFootballers != null && homeLineup != null && awayLineup != null)
+        {
+            <div class="form-card">
+                <h4>Skład gospodarza</h4>
+                <EditForm Model="newMatchFootballerHome" OnValidSubmit="()=>ConfirmNewMatchFootballer(true)">
+                    <DataAnnotationsValidator />
+                    <ValidationSummary />
+
+                    <div class="mb-3">
+                        <label for="homeFootballer" class="form-label">Zawodnik gospodarza</label>
+                        <select id="homeFootballer" class="form-select" @bind="newMatchFootballerHome.FootballerId">
+                            <option value="">-- Dodaj zawodnika --</option>
+                            @foreach (var footballer in homeFootballers.Where(f => !homeLineup.Any(l => l.FootballerId == f.Id)))
+                            {
+                                <option value="@footballer.Id">@footballer.FirstName @footballer.LastName | @PositionHelper.GetDisplayName(footballer.Position)</option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="isStarting" class="form-label">Wyjściowa 11</label>
+                        <InputCheckbox id="isStarting" class="form-check-inline" @bind-Value="newMatchFootballerHome.IsStartingPlayer" />
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Dodaj zawodnika</button>
+                </EditForm>
+
+                <MatchLineup players="homeLineup" LoadLineupsCallback="LoadLineups"></MatchLineup>
+            </div>
+
+            <div class="form-card">
+                <h4>Skład gości</h4>
+                <EditForm Model="newMatchFootballerAway" OnValidSubmit="()=>ConfirmNewMatchFootballer(false)">
+                    <DataAnnotationsValidator />
+                    <ValidationSummary />
+
+                    <div class="mb-3">
+                        <label for="awayFootballer" class="form-label">Zawodnik gościa</label>
+                        <select id="awayFootballer" class="form-select" @bind="newMatchFootballerAway.FootballerId">
+                            <option value="">-- Dodaj zawodnika --</option>
+                            @foreach (var footballer in awayFootballers.Where(f => !awayLineup.Any(l => l.FootballerId == f.Id)))
+                            {
+                                <option value="@footballer.Id">@footballer.FirstName @footballer.LastName | @PositionHelper.GetDisplayName(footballer.Position)</option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="isStarting" class="form-label">Wyjściowa 11</label>
+                        <InputCheckbox id="isStarting" class="form-check-inline" @bind-Value="newMatchFootballerAway.IsStartingPlayer" />
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Dodaj zawodnika</button>
+                </EditForm>
+
+                <MatchLineup players="awayLineup" LoadLineupsCallback="LoadLineups"></MatchLineup>
+            </div>
+        }
+
+        <div class="form-card events-column">
+            <h4>Zdarzenia meczowe</h4>
+            @if (editMatch != null && editMatch.MatchEvents != null)
+            {
+                <div class="events-container">
+                    <div class="team-events">
+                        <h5>Gospodarz</h5>
+                        @foreach (var eventt in homeMatchEvents)
+                        {
+                            <div class="event-item">
+                                <span>@eventt.Minute'</span> -
+                                @switch (eventt.EventType)
+                                {
+                                    case EventType.Goal:
+                                        <i class="fas fa-futbol"></i>
+                                        <span>@GetFootballersInfo(eventt.TeamId, eventt.PrimaryFootballerId, eventt.SecondaryFootballerId)</span>
+                                        break;
+                                    case EventType.YellowCard:
+                                        <i class="fas fa-exclamation-triangle text-warning"></i>
+                                        <span>@GetFootballersInfo(eventt.TeamId, eventt.PrimaryFootballerId, eventt.SecondaryFootballerId)</span>
+                                        break;
+                                    case EventType.RedCard:
+                                        <i class="fas fa-ban text-danger"></i>
+                                        <span>@GetFootballersInfo(eventt.TeamId, eventt.PrimaryFootballerId, eventt.SecondaryFootballerId)</span>
+                                        break;
+                                    case EventType.Substitution:
+                                        <i class="fas fa-exchange-alt"></i>
+                                        <span>@GetFootballersInfo(eventt.TeamId, eventt.PrimaryFootballerId, eventt.SecondaryFootballerId)</span>
+                                        break;
+                                    default:
+                                        <span>@eventt.EventType</span>
+                                        <span>@GetFootballersInfo(eventt.TeamId, eventt.PrimaryFootballerId, eventt.SecondaryFootballerId)</span>
+                                        break;
+                                }
+                                <button @onclick="() => DeleteEvent(eventt.Id)" class="btn btn-primary">Usuń</button>
+                            </div>
+                        }
+                    </div>
+
+                    <div class="team-events">
+                        <h5>Gość</h5>
+                        @foreach (var eventt in awayMatchEvents)
+                        {
+                            <div class="event-item">
+                                <span>@eventt.Minute'</span> -
+                                @switch (eventt.EventType)
+                                {
+                                    case EventType.Goal:
+                                        <i class="fas fa-futbol"></i>
+                                        <span>@GetFootballersInfo(eventt.TeamId, eventt.PrimaryFootballerId, eventt.SecondaryFootballerId)</span>
+                                        break;
+                                    case EventType.OwnGoal:
+                                        <i class="fas fa-futbol text-danger"></i>
+                                        <span>@GetFootballersInfo(eventt.TeamId, eventt.PrimaryFootballerId, eventt.SecondaryFootballerId)</span>
+                                        break;
+                                    case EventType.Penalty:
+                                        <i class="fas fa-futbol text-info"></i>
+                                        <span>@GetFootballersInfo(eventt.TeamId, eventt.PrimaryFootballerId, eventt.SecondaryFootballerId)</span>
+                                        break;
+                                    case EventType.MissedPenalty:
+                                        <i class="fas fa-futbol text-info"></i>
+                                        <span>@GetFootballersInfo(eventt.TeamId, eventt.PrimaryFootballerId, eventt.SecondaryFootballerId)</span>
+                                        break;
+                                    case EventType.YellowCard:
+                                        <i class="fas fa-exclamation-triangle text-warning"></i>
+                                        <span>@GetFootballersInfo(eventt.TeamId, eventt.PrimaryFootballerId, eventt.SecondaryFootballerId)</span>
+                                        break;
+                                    case EventType.RedCard:
+                                        <i class="fas fa-ban text-danger"></i>
+                                        <span>@GetFootballersInfo(eventt.TeamId, eventt.PrimaryFootballerId, eventt.SecondaryFootballerId)</span>
+                                        break;
+                                    case EventType.Substitution:
+                                        <i class="fas fa-exchange-alt"></i>
+                                        <span>@GetFootballersInfo(eventt.TeamId, eventt.PrimaryFootballerId, eventt.SecondaryFootballerId)</span>
+                                        break;
+                                    default:
+                                        <span>@eventt.EventType</span>
+                                        <span>@GetFootballersInfo(eventt.TeamId, eventt.PrimaryFootballerId, eventt.SecondaryFootballerId)</span>
+                                        break;
+                                }
+                                <button @onclick="() => DeleteEvent(eventt.Id)" class="btn btn-primary">Usuń</button>
+                            </div>
+                        }
+                    </div>
+                </div>
+
+                <div class="legend">
+                    <h5>Legenda:</h5>
+                    <ul>
+                        <li><i class="fas fa-futbol"></i> Gol</li>
+                        <li><i class="fas fa-futbol text-info"></i> Gol (rzut karny)</li>
+                        <li><i class="fas fa-futbol text-warning"></i> Rzut karny nietrafiony</li>
+                        <li><i class="fas fa-futbol text-danger"></i> Gol samobójczy</li>
+                        <li><i class="fas fa-exclamation-triangle text-warning"></i> Żółta kartka</li>
+                        <li><i class="fas fa-ban text-danger"></i> Czerwona kartka</li>
+                        <li><i class="fas fa-exchange-alt"></i> Zmiana</li>
+                    </ul>
+                </div>
+            }
+        </div>
+    </div>
+}
+else
+{
     <div class="form-card events-column">
         <h4>Zdarzenia meczowe</h4>
         @if (editMatch != null && editMatch.MatchEvents != null)
@@ -322,6 +436,18 @@
                                     <i class="fas fa-futbol"></i>
                                     <span>@GetFootballersInfo(eventt.TeamId, eventt.PrimaryFootballerId, eventt.SecondaryFootballerId)</span>
                                     break;
+                                case EventType.OwnGoal:
+                                    <i class="fas fa-futbol text-danger"></i>
+                                    <span>@GetFootballersInfo(eventt.TeamId, eventt.PrimaryFootballerId, eventt.SecondaryFootballerId)</span>
+                                    break;
+                                case EventType.Penalty:
+                                    <i class="fas fa-futbol text-info"></i>
+                                    <span>@GetFootballersInfo(eventt.TeamId, eventt.PrimaryFootballerId, eventt.SecondaryFootballerId)</span>
+                                    break;
+                                case EventType.MissedPenalty:
+                                    <i class="fas fa-futbol text-info"></i>
+                                    <span>@GetFootballersInfo(eventt.TeamId, eventt.PrimaryFootballerId, eventt.SecondaryFootballerId)</span>
+                                    break;
                                 case EventType.YellowCard:
                                     <i class="fas fa-exclamation-triangle text-warning"></i>
                                     <span>@GetFootballersInfo(eventt.TeamId, eventt.PrimaryFootballerId, eventt.SecondaryFootballerId)</span>
@@ -349,6 +475,9 @@
                 <h5>Legenda:</h5>
                 <ul>
                     <li><i class="fas fa-futbol"></i> Gol</li>
+                    <li><i class="fas fa-futbol text-info"></i> Gol (rzut karny)</li>
+                    <li><i class="fas fa-futbol text-warning"></i> Rzut karny nietrafiony</li>
+                    <li><i class="fas fa-futbol text-danger"></i> Gol samobójczy</li>
                     <li><i class="fas fa-exclamation-triangle text-warning"></i> Żółta kartka</li>
                     <li><i class="fas fa-ban text-danger"></i> Czerwona kartka</li>
                     <li><i class="fas fa-exchange-alt"></i> Zmiana</li>
@@ -356,7 +485,7 @@
             </div>
         }
     </div>
-</div>
+}
 
 
 
@@ -509,6 +638,7 @@
 
             if (response.IsSuccessStatusCode)
             {
+                AlertManager.IsVisible = true;
                 AlertManager.DisplayAlert($"Dodano piłkarza do składu meczowego!", "success");
                 await LoadLineups();
                 StateHasChanged();
@@ -551,7 +681,51 @@
 
     public async Task ConfirmMatch(int matchId)
     {
+        try
+        {
+            var response = await Http.PatchAsync($"api/matches/league-master/change-match-state/{matchId}", null);
 
+            if (response.IsSuccessStatusCode)
+            {
+                AlertManager.DisplayAlert($"Zatwierdzono mecz!", "success");
+                StateHasChanged();
+            }
+            else
+            {
+                AlertManager.DisplayAlert($"Nie udało się zatwierdzić meczu.", "danger");
+            }
+        }
+        catch (Exception ex)
+        {
+            AlertManager.DisplayAlert($"Nie udało się zatwierdzić meczu.", "danger");
+        }
+    }
+
+    public async Task UncommitMatch(int matchId)
+    {
+        try
+        {
+            var response = await Http.PatchAsync($"api/matches/league-master/change-match-state/{matchId}", null);
+
+            if (response.IsSuccessStatusCode)
+            {
+                AlertManager.DisplayAlert($"Anulowano zatwierdzenie meczu!", "success");
+
+                await LoadMatch();
+                await LoadMatchEvents();
+                newMatchEvent = new MatchEventDTO();
+
+                StateHasChanged();
+            }
+            else
+            {
+                AlertManager.DisplayAlert($"Nie udało się anulować zatwierdzenia meczu.", "danger");
+            }
+        }
+        catch (Exception ex)
+        {
+            AlertManager.DisplayAlert($"Nie udało się anulować zatwierdzenia meczu.", "danger");
+        }
     }
 
     private string GetFootballersInfo(int? teamId, int? primaryFootballerId, int? secondaryFootballerId)

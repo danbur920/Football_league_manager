@@ -10,58 +10,64 @@
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject AlertManager AlertManager
 
-<PageTitle>Stwórz ligę</PageTitle>
+<PageTitle>Stwórz Ligę</PageTitle>
 
-<h2>Stwórz własną ligę</h2>
-
-<EditForm Model="newLeague" OnValidSubmit="HandleValidSubmit">
-    <DataAnnotationsValidator />
-    <ValidationSummary />
-
-    <div class="mb-3">
-        <label for="name" class="form-label">Nazwa ligi</label>
-        <InputText id="name" class="form-control" @bind-Value="newLeague.LeagueInfo.Name" />
+<div class="container py-5">
+    <div class="text-center mb-5">
+        <h1 class="display-4 fw-bold text-primary">Stwórz Ligę</h1>
     </div>
 
-    <div class="mb-3">
-        <label for="country" class="form-label">Kraj</label>
-        <InputText id="country" class="form-control" @bind-Value="newLeague.LeagueInfo.Country" />
+    <EditForm Model="newLeague" OnValidSubmit="HandleValidSubmit" class="needs-validation">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <div class="mb-3">
+            <label for="name" class="form-label">Nazwa ligi</label>
+            <InputText id="name" class="form-control" @bind-Value="newLeague.LeagueInfo.Name" />
+        </div>
+
+        <div class="mb-3">
+            <label for="country" class="form-label">Kraj</label>
+            <InputText id="country" class="form-control" @bind-Value="newLeague.LeagueInfo.Country" />
+        </div>
+
+        <div class="mb-3">
+            <label for="level" class="form-label">Poziom (opcjonalnie)</label>
+            <select id="level" class="form-select" @bind="newLeague.LeagueInfo.Level">
+                @foreach (var level in Enum.GetValues(typeof(Level)).Cast<Level>())
+                {
+                    <option value="@level">@level</option>
+                }
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="season" class="form-label">Sezon (opcjonalnie)</label>
+            <select id="season" class="form-select" @bind="newLeague.LeagueSeason.Season">
+                @foreach (var season in Enum.GetValues(typeof(Season)).Cast<Season>())
+                {
+                    <option value="@season">@(season.ToString().Substring(1))</option>
+                }
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="startDate" class="form-label">Data rozpoczęcia ligi (opcjonalnie)</label>
+            <InputDate id="startDate" class="form-control" @bind-Value="newLeague.LeagueSeason.LeagueStartDate" />
+        </div>
+
+        <div class="mb-3">
+            <label for="endDate" class="form-label">Data zakończenia ligi (opcjonalnie)</label>
+            <InputDate id="endDate" class="form-control" @bind-Value="newLeague.LeagueSeason.LeagueEndDate" />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Dodaj ligę</button>
+    </EditForm>
+
+    <div class="mt-4">
+        <Alert Message="@AlertManager.Message" Type="@AlertManager.Type" IsVisible="@AlertManager.IsVisible" />
     </div>
-
-    <div class="mb-3">
-        <label for="level" class="form-label">Poziom (opcjonalnie)</label>
-        <select id="level" class="form-select" @bind="newLeague.LeagueInfo.Level">
-            @foreach (var level in Enum.GetValues(typeof(Level)).Cast<Level>())
-            {
-                <option value="@level">@level</option>
-            }
-        </select>
-    </div>
-
-    <div class="mb-3">
-        <label for="season" class="form-label">Sezon (opcjonalnie)</label>
-        <select id="season" class="form-select" @bind="newLeague.LeagueSeason.Season">
-            @foreach (var season in Enum.GetValues(typeof(Season)).Cast<Season>())
-            {
-                <option value="@season">@(season.ToString().Substring(1))</option>
-            }
-        </select>
-    </div>
-
-    <div class="mb-3">
-        <label for="startDate" class="form-label">Data rozpoczęcia ligi (opcjonalnie)</label>
-        <InputDate id="startDate" class="form-control" @bind-Value="newLeague.LeagueSeason.LeagueStartDate" />
-    </div>
-
-    <div class="mb-3">
-        <label for="endDate" class="form-label">Data zakończenia ligi (opcjonalnie)</label>
-        <InputDate id="endDate" class="form-control" @bind-Value="newLeague.LeagueSeason.LeagueEndDate" />
-    </div>
-
-    <button type="submit" class="btn btn-primary">Dodaj ligę</button>
-</EditForm>
-
-<Alert Message="@AlertManager.Message" Type="@AlertManager.Type" IsVisible="@AlertManager.IsVisible" />
+</div>
 
 @code {
     private string _userId = string.Empty;

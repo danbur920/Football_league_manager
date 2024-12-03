@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
+using System_do_zarządzania_ligą_piłkarską.Server.Models;
 using System_do_zarządzania_ligą_piłkarską.Server.Repositories.Interfaces;
 using System_do_zarządzania_ligą_piłkarską.Server.Services.Interfaces;
 using System_do_zarządzania_ligą_piłkarską.Shared.DTOs;
+using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Footballers;
 using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Matches;
 
 namespace System_do_zarządzania_ligą_piłkarską.Server.Services
@@ -38,6 +40,12 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Services
         {
             var footballers = await _footballerRepository.GetFootballersFromSpecificTeam(teamId);
             return _mapper.Map<List<ShortFootballerInfoDTO>>(footballers);
+        }
+
+        public async Task AddNewFootballerToTeam(NewFootballerDTO newFootballer) // Dodać logikę do dodawania footballers stats!
+        {
+            var mappedFootballer = _mapper.Map<Footballer>(newFootballer);
+            await _footballerRepository.AddFootballer(mappedFootballer);
         }
     }
 }

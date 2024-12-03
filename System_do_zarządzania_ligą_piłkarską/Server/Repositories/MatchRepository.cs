@@ -1,8 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Identity.Client;
 using System_do_zarządzania_ligą_piłkarską.Server.Data;
 using System_do_zarządzania_ligą_piłkarską.Server.Models;
 using System_do_zarządzania_ligą_piłkarską.Server.Models.AuxiliaryModels;
 using System_do_zarządzania_ligą_piłkarską.Server.Repositories.Interfaces;
+using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Updates;
 
 namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
 {
@@ -25,6 +27,12 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
         {
             var match = await _context.Matches.FindAsync(matchId);
             return match;
+        }
+
+        public async Task UpdateMatch(Match match)
+        {
+            _context.Matches.Update(match);
+            await _context.SaveChangesAsync();
         }
 
         public async Task<List<Match>> GetMatchesFromSpecificSeasonForLeagueMaster(int leagueSeasonId)
@@ -203,6 +211,223 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
                 _context.MatchFootballers.Remove(matchFootballerToDelete);
                 await _context.SaveChangesAsync();
             }
+        }
+
+        public async Task<MatchStateUpdate> GetDataToUpdateAfterChangeMatchState(Match match)
+        {
+            var matchUpdate = new MatchUpdateMatchState
+            {
+                Id = match.Id,
+                IsFinished = match.IsFinished,
+                Result = match.Result
+            };
+
+            var startingLineup = await _context.MatchFootballers
+                .Where(x => x.MatchId == match.Id && x.IsStartingPlayer == true)
+                .ToListAsync(); // pobieramy wyjściowy skład
+
+            var footballerIds = startingLineup.Select(x => x.FootballerId).ToList();
+
+            var startingFootballers = await _context.FootballerStats
+                .Where(stat => footballerIds.Contains(stat.FootballerId))
+                .Select(x => new FootballerStatUpdateMatchState
+                {
+                    Id = x.Id,
+                    MatchesPlayed = x.MatchesPlayed,
+                    StartingAppearances = x.StartingAppearances
+                })
+                .ToListAsync();
+
+            var leagueSeason = await _context.LeagueSeasons
+                .Where(x => x.Id == match.LeagueSeasonId)
+                .Select(x => new LeagueSeasonUpdateMatchState
+                {
+                    Id = x.Id,
+                    MatchesPlayed = x.MatchesPlayed
+                })
+                .FirstOrDefaultAsync();
+
+            var referee = await _context.Referees
+                .Where(x => x.Id == match.RefereeId)
+                .Select(x => new RefereeUpdateMatchState
+                {
+                    Id = x.Id,
+                    TotalRefereedMatches = x.TotalRefereedMatches
+                })
+                .FirstOrDefaultAsync();
+
+            var refereeStat = await _context.RefereeStats
+                .Where(x => x.RefereeId == match.RefereeId && x.LeagueSeasonId == match.LeagueSeasonId)
+                .Select(x => new RefereeStatUpdateMatchState
+                {
+                    Id = x.Id,
+                    RefereedMatches = x.RefereedMatches
+                })
+                .FirstOrDefaultAsync();
+
+            var homeTeamStat = await _context.TeamStats
+                .Where(x => x.TeamId == match.HomeTeamId && x.LeagueSeasonId == match.LeagueSeasonId)
+                .Select(x => new TeamStatUpdateMatchState
+                {
+                    Id = x.Id,
+                    MatchesPlayed = x.MatchesPlayed,
+                    Wins = x.Wins,
+                    Draws = x.Draws,
+                    Losses = x.Losses,
+                    Points = x.Points
+                })
+                .FirstOrDefaultAsync();
+
+            var awayTeamStat = await _context.TeamStats
+                .Where(x => x.TeamId == match.AwayTeamId && x.LeagueSeasonId == match.LeagueSeasonId)
+                .Select(x => new TeamStatUpdateMatchState
+                {
+                    Id = x.Id,
+                    MatchesPlayed = x.MatchesPlayed,
+                    Wins = x.Wins,
+                    Draws = x.Draws,
+                    Losses = x.Losses,
+                    Points = x.Points
+                })
+                .FirstOrDefaultAsync();
+
+            MatchStateUpdate statsToUpdate = new MatchStateUpdate
+            {
+                StartingFootballerStats = startingFootballers,
+                LeagueSeason = leagueSeason,
+                Match = matchUpdate,
+                Referee = referee,
+                RefereeStat = refereeStat,
+                HomeTeamStat = homeTeamStat,
+                AwayTeamStat = awayTeamStat
+            };
+
+            return statsToUpdate;
+        }
+
+        public async Task UpdateAfterChangeMatchState(MatchStateUpdate matchStateUpdate)
+        {
+            foreach (var footballerStat in matchStateUpdate.StartingFootballerStats)
+            {
+                var footballerStatEntity = new FootballerStat
+                {
+                    Id = footballerStat.Id,
+                    MatchesPlayed = footballerStat.MatchesPlayed,
+                    StartingAppearances = footballerStat.StartingAppearances
+                };
+                _context.FootballerStats.Attach(footballerStatEntity);
+                _context.Entry(footballerStatEntity).Property(e => e.MatchesPlayed).IsModified = true;
+                _context.Entry(footballerStatEntity).Property(e => e.StartingAppearances).IsModified = true;
+            }
+
+            var leagueSeasonEntity = new LeagueSeason
+            {
+                Id = matchStateUpdate.LeagueSeason.Id,
+                MatchesPlayed = matchStateUpdate.LeagueSeason.MatchesPlayed
+            };
+            _context.LeagueSeasons.Attach(leagueSeasonEntity);
+            _context.Entry(leagueSeasonEntity).Property(x => x.MatchesPlayed).IsModified = true;
+
+
+            var matchToUpdate = await _context.Matches.FindAsync(matchStateUpdate.Match.Id);
+            matchToUpdate.IsFinished = matchStateUpdate.Match.IsFinished;
+            matchToUpdate.Result = matchStateUpdate.Match.Result;
+                
+            //var matchEntity = new Match
+            //{
+            //    Id = matchStateUpdate.Match.Id,
+            //    IsFinished = matchStateUpdate.Match.IsFinished,
+            //    Result = matchStateUpdate.Match.Result
+            //};
+            //_context.Matches.Attach(matchEntity); // tu wywala błąd
+            //_context.Entry(matchEntity).Property(x => x.IsFinished).IsModified = true;
+            //_context.Entry(matchEntity).Property(x => x.Result).IsModified = true;
+
+            // altenatywa:
+            //var trackedEntity = _context.ChangeTracker.Entries<Match>()
+            //    .FirstOrDefault(e => e.Entity.Id == matchEntity.Id);
+
+            //if (trackedEntity == null)
+            //{
+            //    _context.Matches.Attach(matchEntity);
+            //}
+            //else
+            //{
+            //    trackedEntity.CurrentValues.SetValues(matchEntity);
+            //    trackedEntity.State = EntityState.Modified;
+            //}
+            // -------------------------------
+
+
+            var refereeEntity = new Referee
+            {
+                Id = matchStateUpdate.Referee.Id,
+                TotalRefereedMatches = matchStateUpdate.Referee.TotalRefereedMatches
+            };
+            _context.Referees.Attach(refereeEntity);
+            _context.Entry(refereeEntity).Property(x => x.TotalRefereedMatches).IsModified = true;
+
+            var refereeStatEntity = new RefereeStat
+            {
+                Id = matchStateUpdate.RefereeStat.Id,
+                RefereedMatches = matchStateUpdate.RefereeStat.RefereedMatches
+            };
+            _context.RefereeStats.Attach(refereeStatEntity);
+            _context.Entry(refereeStatEntity).Property(x => x.RefereedMatches).IsModified = true;
+
+            var teamStatHome = new TeamStat
+            {
+                Id = matchStateUpdate.HomeTeamStat.Id,
+                MatchesPlayed = matchStateUpdate.HomeTeamStat.MatchesPlayed,
+                Wins = matchStateUpdate.HomeTeamStat.Wins,
+                Draws = matchStateUpdate.HomeTeamStat.Draws,
+                Losses = matchStateUpdate.HomeTeamStat.Losses,
+                Points = matchStateUpdate.HomeTeamStat.Points
+            };
+
+            _context.TeamStats.Attach(teamStatHome);
+            _context.Entry(teamStatHome).Property(x => x.MatchesPlayed).IsModified = true;
+            _context.Entry(teamStatHome).Property(x => x.Wins).IsModified = true;
+            _context.Entry(teamStatHome).Property(x => x.Draws).IsModified = true;
+            _context.Entry(teamStatHome).Property(x => x.Losses).IsModified = true;
+            _context.Entry(teamStatHome).Property(x => x.Points).IsModified = true;
+
+            var teamStatAway = new TeamStat
+            {
+                Id = matchStateUpdate.AwayTeamStat.Id,
+                MatchesPlayed = matchStateUpdate.AwayTeamStat.MatchesPlayed,
+                Wins = matchStateUpdate.AwayTeamStat.Wins,
+                Draws = matchStateUpdate.AwayTeamStat.Draws,
+                Losses = matchStateUpdate.AwayTeamStat.Losses,
+                Points = matchStateUpdate.AwayTeamStat.Points
+            };
+
+            _context.TeamStats.Attach(teamStatAway);
+            _context.Entry(teamStatAway).Property(x => x.MatchesPlayed).IsModified = true;
+            _context.Entry(teamStatAway).Property(x => x.Wins).IsModified = true;
+            _context.Entry(teamStatAway).Property(x => x.Draws).IsModified = true;
+            _context.Entry(teamStatAway).Property(x => x.Losses).IsModified = true;
+            _context.Entry(teamStatAway).Property(x => x.Points).IsModified = true;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException ex)
+            {
+                Console.WriteLine($"DbUpdateException: {ex.Message}");
+                foreach (var entry in ex.Entries)
+                {
+                    Console.WriteLine($"Entity: {entry.Entity.GetType().Name}, State: {entry.State}");
+                }
+                throw; 
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Exception: {ex.Message}");
+                throw;
+            }
+
         }
     }
 }

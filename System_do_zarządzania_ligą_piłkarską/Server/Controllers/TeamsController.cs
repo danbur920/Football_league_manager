@@ -114,5 +114,13 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Controllers
             var team = await _teamService.GetTeamToManage(teamId);
             return Ok(team);
         }
+
+        //$"api/teams/league-master/manage-team"
+        [HttpPatch("league-master/edit-team")]
+        public async Task<IActionResult> EditTeam([FromBody] EditTeamDTO editTeam)
+        {
+            await _teamService.EditTeam(editTeam);
+            return Ok();
+        }
     }
 }

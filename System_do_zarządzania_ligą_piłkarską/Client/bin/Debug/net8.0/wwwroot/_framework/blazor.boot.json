@@ -1,15 +1,15 @@
 {
   "mainAssemblyName": "System_do_zarządzania_ligą_piłkarską.Client",
   "resources": {
-    "hash": "sha256-vEzYVatR72ACtUpL+MZtyNZfGBSrVwz5+70O6UwGR/s=",
+    "hash": "sha256-1a7xaeQrXXm3xNprxAHW7Rk6rULNuVPv7bsyFVAfYMw=",
     "jsModuleNative": {
-      "dotnet.native.8.0.1.8d2y8cn870.js": "sha256-SGOlISx+3G4kkvpC9Uq3qoPGsnjxGmW61QBev0lyI5U="
+      "dotnet.native.8.0.11.dxqh1vt9jt.js": "sha256-VdKq87/z5NIxZKmuM+fv38XF+RcEb/bg3jVBwQSfwP4="
     },
     "jsModuleRuntime": {
-      "dotnet.runtime.8.0.1.czg3lltz01.js": "sha256-HZOoaGpz9ekMa/oSmeApSKp3DXNdVUq2UBqsTIIiN8A="
+      "dotnet.runtime.8.0.11.0obudc6c4h.js": "sha256-nam8JTYKjhMKOTg6+FlihYP6JpWPGe3jjM9fiUFWzhY="
     },
     "wasmNative": {
-      "dotnet.native.wasm": "sha256-dqpunZywlYy86b4O6ZjONasmG+4FH0P17FZ0OIf/lIg="
+      "dotnet.native.wasm": "sha256-1NJsNYy4gznvjVwzcG5w3Cl50enK1KB/7cKBMY+6jz4="
     },
     "icu": {
       "icudt_CJK.dat": "sha256-SZLtQnRc0JkwqHab0VUVP7T3uBPSeYzxzDnpxPpUnHk=",
@@ -92,7 +92,6 @@
       "System.Runtime.Caching.wasm": "sha256-kUsGJ8z0EZBNyez+M+cx/8etwLM4To14595QBe450TQ=",
       "System.Security.Cryptography.ProtectedData.wasm": "sha256-W5tMSDmYEB2xQ9h2R6YF/fHX/B7hkusJMm/i/cqRTV4=",
       "System.Security.Permissions.wasm": "sha256-Kq3ZZSKQkbZ2H5kMG7Mqq4KycqKa35CdKT9M9DM6w4U=",
-      "System.Text.Json.wasm": "sha256-I0gGrc4FK1TejsG9HMJu9063doHIToSzQyZBl1IkxYA=",
       "System.Windows.Extensions.wasm": "sha256-Eh4ZyIvqo34A19igrKJBmrt1iW+vrM/Cjy/zUQHTPe8=",
       "Microsoft.CSharp.wasm": "sha256-MFKAVM13VEKdW9npIPysmWBPDcIGLeyZkbjYeRyw79c=",
       "Microsoft.VisualBasic.Core.wasm": "sha256-mewpZaCRJIDcBfdhm/sIQ+/qJtudrsQw+GL7m+U9cs4=",
@@ -230,6 +229,7 @@
       "System.Text.Encoding.Extensions.wasm": "sha256-DkfHtLBEn7jYvY8DkydubyOj6jvEoIcQ7ALW2A6tT54=",
       "System.Text.Encoding.wasm": "sha256-eL+2I8kwmYhjtOipneOFlQiGHF+4uCkLuJ6BHp0hgQ0=",
       "System.Text.Encodings.Web.wasm": "sha256-EjDCRyXvGXvA8osLFzCsR30HXNt+gv2XgAXt5/Ce+Ws=",
+      "System.Text.Json.wasm": "sha256-I0gGrc4FK1TejsG9HMJu9063doHIToSzQyZBl1IkxYA=",
       "System.Text.RegularExpressions.wasm": "sha256-xC6r2TTK4q1kys1Lg8diWYTGFz2oXgIse1PvTT4PKJ8=",
       "System.Threading.Channels.wasm": "sha256-IZvmO1ClMeTdPzooAYoS7IBG4vZhUmLWWN7PNt1HC48=",
       "System.Threading.Overlapped.wasm": "sha256-7+okmJjJCCH/1UF2qevhy6rS7QcuAtNeLu6po3YpPwo=",
@@ -261,12 +261,12 @@
       "mscorlib.wasm": "sha256-EpWTfh4m/hEcXRFYMCR9YeYHwdUJgcm1laBaxWfq2S4=",
       "netstandard.wasm": "sha256-2kH24/YfHmU3B4eYRyRmiwebYROM4+B9eDWKvMnUdP8=",
       "System.Private.CoreLib.wasm": "sha256-CsySKiP7HYY1pS8LTDE60EkqiX5oHb3WoEZHDNd1yK0=",
-      "System_do_zarządzania_ligą_piłkarską.Shared.wasm": "sha256-2jK4Qw/+Z0LDwKqcRUmG0skfwQC/5aSCPBRMvWPteYg=",
-      "System_do_zarządzania_ligą_piłkarską.Client.wasm": "sha256-S5RPikT1TnBY/A8BdRCFIbyKu0jWO+Dxe/VBWzE+t84="
+      "System_do_zarządzania_ligą_piłkarską.Shared.wasm": "sha256-RjTPgMuvtDyfA2QbqSYghzMI3wGPmFmwHIUkivBRuZE=",
+      "System_do_zarządzania_ligą_piłkarską.Client.wasm": "sha256-9HakCQsbUR6W8JtBT18mXfihKlbBcNqqc8ezmEo4wJ8="
     },
     "pdb": {
-      "System_do_zarządzania_ligą_piłkarską.Shared.pdb": "sha256-O4tqTn8TEtwVXQQMmXfIUU3JQAWWqhtjG1ah2KVchS0=",
-      "System_do_zarządzania_ligą_piłkarską.Client.pdb": "sha256-7qI+RrOZx0Ax1CUcJeDSKDe5rq3sL9F3jqv1IVgLoXM="
+      "System_do_zarządzania_ligą_piłkarską.Shared.pdb": "sha256-UI5B2ze+yshEHSPiH4ipQ3zhdZm5NvX51euBUkoIWdk=",
+      "System_do_zarządzania_ligą_piłkarską.Client.pdb": "sha256-gbMZAu8zwXPSFUxyS3Cr2iVKMn2qqqgul9P7DYbRM0Q="
     },
     "satelliteResources": {
       "cs": {

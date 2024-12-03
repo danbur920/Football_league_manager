@@ -17,7 +17,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Models
         public int LeagueSeasonId { get; set; }
         public int RefereeId { get; set; }
         public int Round {  get; set; }
-        public string FootballStadium { get; set; } // nazwa stadionu gospodarza
+        public string? FootballStadium { get; set; } // nazwa stadionu gospodarza
         public int? GoalsHome { get; set; }
         public int? GoalsAway { get; set; }
         public int? GoalsCount { get; set; }

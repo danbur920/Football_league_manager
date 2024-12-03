@@ -8,9 +8,9 @@
 
         public void DisplayAlert(string message, string type)
         {
+            IsVisible = true;
             Message = message;
             Type = type;
-            IsVisible = true;
         }
     }
 }

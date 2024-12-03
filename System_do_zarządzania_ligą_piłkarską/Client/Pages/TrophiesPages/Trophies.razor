@@ -17,49 +17,82 @@
 
 <PageTitle>Trofea</PageTitle>
 
+<div class="container py-5">
+    <div class="text-center mb-5">
+        <h1 class="display-4 fw-bold text-primary">Trofea</h1>
+    </div>
 
-@if (trophies == null)
-{
-    <p><em>Loading...</em></p>
-}
-else
-{
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Nazwa</th>
-                <th>Typ</th>
-                <th>Posiadacz</th>
-                <th>Rok wygrania</th>
-            </tr>
-        </thead>
-        <tbody>
-            @if (trophies.Count() == 0)
-            {
-                <tr>
-                    <td colspan="9" style="text-align: center">Brak trofeów.</td>
-                </tr>
-            }
-            @foreach (var trophy in trophies)
-            {
-                <tr>
-                    <td>@trophy.TrophyName</td>
-                    <td>@ShowTrophyType(trophy)</td>
-                    <td>@ShowOwner(trophy)</td>
-                    <td>@trophy.YearWon</td>
- @*                    <td>
-                        <button class="btn btn-link" @onclick="() => GoToTrophyDetails(referee.Id)">
-                            <i class="fas fa-arrow-right"></i> Szczegóły
-                        </button>
-                    </td> *@
-                </tr>
-            }
-        </tbody>
-    </table>
-}
+    <div class="alert-placeholder mb-4">
+        <Alert Message="@AlertManager.Message" Type="@AlertManager.Type" IsVisible="@AlertManager.IsVisible" />
+    </div>
+
+    <div class="card border-0 shadow-sm mb-5">
+        <div class="card-body">
+            <h5 class="card-title text-secondary fw-bold mb-4">Wyszukaj trofeum</h5>
+            <div class="row g-4">
+                <div class="col-lg-6">
+                    <input type="text" @bind="searchQueryName" class="form-control form-control-lg" placeholder="🔍 Szukaj trofeum po nazwie..." />
+                </div>
+                <div class="col-lg-6">
+                    <input type="text" @bind="searchQueryType" class="form-control form-control-lg" placeholder="🏆 Szukaj po typie (Indywidualne/Drużynowe)..." />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @if (filteredTrophies == null)
+    {
+        <div class="d-flex justify-content-center align-items-center" style="min-height: 200px;">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Ładowanie...</span>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="card border-0 shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title text-secondary fw-bold mb-4">Lista Trofeów</h5>
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover align-middle">
+                        <thead class="table-primary text-center">
+                            <tr>
+                                <th>Nazwa</th>
+                                <th>Typ</th>
+                                <th>Posiadacz</th>
+                                <th>Rok wygrania</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (filteredTrophies.Count() == 0)
+                            {
+                                <tr>
+                                    <td colspan="4" class="text-center text-muted">
+                                        Brak trofeów lub żadne trofeum nie spełnia określonych kryteriów wyszukiwania.
+                                    </td>
+                                </tr>
+                            }
+                            @foreach (var trophy in filteredTrophies)
+                            {
+                                <tr class="text-center">
+                                    <td>@trophy.TrophyName</td>
+                                    <td>@ShowTrophyType(trophy)</td>
+                                    <td>@ShowOwner(trophy)</td>
+                                    <td>@trophy.YearWon</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    }
+</div>
 
 @code {
     private List<TrophyDTO>? trophies;
+    private string searchQueryName = string.Empty;
+    private string searchQueryType = string.Empty;
 
     protected override async Task OnInitializedAsync()
     {
@@ -73,18 +106,21 @@ else
         }
     }
 
-    private void GoToTrophyDetails(int trophyId)
-    {
-        Navigation.NavigateTo($"/trophies/{trophyId}");
-    }
-
     private string ShowOwner(TrophyDTO trophy)
     {
-        return trophy.TrophyOwner == 0 ? $"{trophy.Footballer.FirstName} {trophy.Footballer.LastName}" : $"{trophy.Team.Name}";
-    } 
-    
+        return trophy.TrophyOwner == 0
+            ? $"{trophy.Footballer.FirstName} {trophy.Footballer.LastName}"
+            : $"{trophy.Team.Name}";
+    }
+
     private string ShowTrophyType(TrophyDTO trophy)
     {
         return trophy.TrophyOwner == 0 ? "Indywidualne" : "Drużynowe";
     }
+
+    private IEnumerable<TrophyDTO>? filteredTrophies =>
+        trophies?.Where(trophy =>
+            (string.IsNullOrWhiteSpace(searchQueryName) || trophy.TrophyName.Contains(searchQueryName, StringComparison.OrdinalIgnoreCase)) &&
+            (string.IsNullOrWhiteSpace(searchQueryType) || ShowTrophyType(trophy).Contains(searchQueryType, StringComparison.OrdinalIgnoreCase))
+        );
 }

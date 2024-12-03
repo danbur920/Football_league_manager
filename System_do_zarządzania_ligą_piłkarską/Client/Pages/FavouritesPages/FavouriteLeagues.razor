@@ -14,65 +14,86 @@
 
 <PageTitle>Ulubione ligi</PageTitle>
 
-@if (_showModal)
-{
-    <Modal Title="Usuń" Body="Czy na pewno chcesz usunąć wybraną ligę z ulubionch?" OnConfirm="HandleConfirm" OnCancel="HandleCancel" />
-}
+<div class="container py-5">
+    <div class="text-center mb-5">
+        <h1 class="display-4 fw-bold text-primary">Ulubione Ligi</h1>
+    </div>
 
-<Alert Message="@AlertManager.Message" Type="@AlertManager.Type" IsVisible="@AlertManager.IsVisible" />
+    @if (_showModal)
+    {
+        <Modal Title="Usuń" Body="Czy na pewno chcesz usunąć wybraną ligę z ulubionych?" OnConfirm="HandleConfirm" OnCancel="HandleCancel" />
+    }
 
-@if (favouriteLeagues == null)
-{
-    <p><em>Loading...</em></p>
-}
-else
-{
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Nazwa</th>
-                <th>Kraj</th>
-                <th>Poziom</th>
-                <th>Sezon</th>
-                <th>Rozegrane mecze</th>
-                <th>Start ligi</th>
-                <th>Koniec ligi</th>
-                <th>Usuń z ulubionych</th>
-                <th>Przejdź do ligi</th>
-            </tr>
-        </thead>
-        <tbody>
-            @if (favouriteLeagues.Count() == 0)
-            {
-                <tr>
-                    <td colspan="9" style="text-align: center">Brak ulubionych lig.</td>
-                </tr>
-            }
-            @foreach (var league in favouriteLeagues)
-            {
-                <tr>
-                    <td>@league.LeagueInfo.Name</td>
-                    <td>@league.LeagueInfo.Country</td>
-                    <td>@league.LeagueInfo.Level</td>
-                    <td>@league.Season.ToString().Substring(1)</td>
-                    <td>@league.MatchesPlayed</td>
-                    <td>@league.LeagueStartDate</td>
-                    <td>@league.LeagueEndDate</td>
-                    <td>
-                        <button class="btn btn-primary" @onclick="() => ShowRemoveModal(league.Id)">
-                            <i class="fas fa-trash"></i> Usuń
-                        </button>
-                    </td>
-                    <td>
-                        <button class="btn btn-link" @onclick="() => NavigateToLeagueDetails(league.Id)">
-                            <i class="fas fa-arrow-right"></i> Szczegóły
-                        </button>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-}
+    <div class="alert-placeholder mb-4">
+        <Alert Message="@AlertManager.Message" Type="@AlertManager.Type" IsVisible="@AlertManager.IsVisible" />
+    </div>
+
+    @if (favouriteLeagues == null)
+    {
+        <div class="d-flex justify-content-center align-items-center" style="min-height: 200px;">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Ładowanie...</span>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="card border-0 shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title text-secondary fw-bold mb-4">Lista Ulubionych Lig</h5>
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover align-middle">
+                        <thead class="table-primary text-center">
+                            <tr>
+                                <th>Nazwa</th>
+                                <th>Kraj</th>
+                                <th>Poziom</th>
+                                <th>Sezon</th>
+                                <th>Rozegrane mecze</th>
+                                <th>Start ligi</th>
+                                <th>Koniec ligi</th>
+                                <th>Usuń</th>
+                                <th>Szczegóły</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (favouriteLeagues.Count() == 0)
+                            {
+                                <tr>
+                                    <td colspan="9" class="text-center text-muted">
+                                        Brak ulubionych lig.
+                                    </td>
+                                </tr>
+                            }
+                            @foreach (var league in favouriteLeagues)
+                            {
+                                <tr class="text-center">
+                                    <td>@league.LeagueInfo.Name</td>
+                                    <td>@league.LeagueInfo.Country</td>
+                                    <td>@league.LeagueInfo.Level</td>
+                                    <td>@league.Season</td>
+                                    <td>@league.MatchesPlayed</td>
+                                    <td>@league.LeagueStartDate</td>
+                                    <td>@league.LeagueEndDate</td>
+                                    <td>
+                                        <button class="btn btn-danger btn-sm" @onclick="() => ShowRemoveModal(league.Id)">
+                                            <i class="fas fa-trash"></i> Usuń
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-success btn-sm" @onclick="() => NavigateToLeagueDetails(league.Id)">
+                                            <i class="fas fa-info-circle"></i> Szczegóły
+                                        </button>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    }
+</div>
 
 @code {
     private List<LeagueSeasonDTO>? favouriteLeagues;

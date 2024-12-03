@@ -5,6 +5,7 @@ using System.Text.Json;
 using System_do_zarządzania_ligą_piłkarską.Server.Services;
 using System_do_zarządzania_ligą_piłkarską.Server.Services.Interfaces;
 using System_do_zarządzania_ligą_piłkarską.Shared.DTOs;
+using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Footballers;
 using static System.Net.WebRequestMethods;
 
 namespace System_do_zarządzania_ligą_piłkarską.Server.Controllers
@@ -46,6 +47,13 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Controllers
         {
             var footballer = await _footballerService.GetFootballerInfoById(footballerId);
             return Ok(footballer);
+        }
+        
+        [HttpPost("league-master/add-new-footballer-to-team")]
+        public async Task<IActionResult> AddNewFootballerToTeam([FromBody] NewFootballerDTO newFootballer)
+        {
+            await _footballerService.AddNewFootballerToTeam(newFootballer);
+            return Ok();
         }
     }
 }

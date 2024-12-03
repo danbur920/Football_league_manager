@@ -18,8 +18,7 @@
 
 <div class="container py-5">
     <div class="text-center mb-5">
-        <h1 class="display-4 fw-bold text-primary">Zarządzanie Piłkarzami</h1>
-        <p class="lead text-muted">Przeglądaj, wyszukuj i zarządzaj ulubionymi piłkarzami!</p>
+        <h1 class="display-4 fw-bold text-primary">Piłkarze</h1>
     </div>
 
     <div class="alert-placeholder mb-4">
@@ -93,7 +92,7 @@
                                     <td>@footballer.NickName</td>
                                     <td>@footballer.Nationality</td>
                                     <td>@PositionHelper.GetDisplayName(footballer.Position)</td>
-                                    <td>@footballer.Team?.Name ?? "Brak drużyny"</td>
+                                    <td>@(footballer.Team?.Name ?? "Brak drużyny")</td>
                                     <td>
                                         @if (IsFavourite(footballer.Id))
                                         {

@@ -117,29 +117,32 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Daniel\\.nuget\\packages\\": {},
-    "D:\\Visual Udostępnione\\NuGetPackages": {}
+    "C:\\Users\\danbu\\.nuget\\packages\\": {},
+    "C:\\Program Files\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Daniel\\Desktop\\Praca_inżynierska\\Football_league_manager\\System_do_zarządzania_ligą_piłkarską\\Shared\\System_do_zarządzania_ligą_piłkarską.Shared.csproj",
+      "projectUniqueName": "C:\\Users\\danbu\\Desktop\\Prca Inż\\Football_league_manager\\System_do_zarządzania_ligą_piłkarską\\Shared\\System_do_zarządzania_ligą_piłkarską.Shared.csproj",
       "projectName": "System_do_zarządzania_ligą_piłkarską.Shared",
-      "projectPath": "C:\\Users\\Daniel\\Desktop\\Praca_inżynierska\\Football_league_manager\\System_do_zarządzania_ligą_piłkarską\\Shared\\System_do_zarządzania_ligą_piłkarską.Shared.csproj",
-      "packagesPath": "C:\\Users\\Daniel\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Daniel\\Desktop\\Praca_inżynierska\\Football_league_manager\\System_do_zarządzania_ligą_piłkarską\\Shared\\obj\\",
+      "projectPath": "C:\\Users\\danbu\\Desktop\\Prca Inż\\Football_league_manager\\System_do_zarządzania_ligą_piłkarską\\Shared\\System_do_zarządzania_ligą_piłkarską.Shared.csproj",
+      "packagesPath": "C:\\Users\\danbu\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\danbu\\Desktop\\Prca Inż\\Football_league_manager\\System_do_zarządzania_ligą_piłkarską\\Shared\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "D:\\Visual Udostępnione\\NuGetPackages"
+        "C:\\Program Files\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\Daniel\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "D:\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config"
+        "C:\\Users\\danbu\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -152,6 +155,11 @@
         "warnAsError": [
           "NU1605"
         ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -179,7 +187,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300/PortableRuntimeIdentifierGraph.json"
       }
     }
   },
@@ -188,7 +196,7 @@
       "code": "NU1701",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Package 'EntityFramework 6.1.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net8.0'. This package may not be fully compatible with your project.",
+      "message": "Pakiet „EntityFramework 6.1.0” został przywrócony przy użyciu elementu „.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1” zamiast platformy docelowej projektu „net8.0”. Ten pakiet może nie być w pełni kompatybilny z Twoim projektem.",
       "libraryId": "EntityFramework",
       "targetGraphs": [
         "net8.0"
@@ -198,7 +206,7 @@
       "code": "NU1701",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Package 'Microsoft.AspNet.Identity.Core 2.2.4' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net8.0'. This package may not be fully compatible with your project.",
+      "message": "Pakiet „Microsoft.AspNet.Identity.Core 2.2.4” został przywrócony przy użyciu elementu „.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1” zamiast platformy docelowej projektu „net8.0”. Ten pakiet może nie być w pełni kompatybilny z Twoim projektem.",
       "libraryId": "Microsoft.AspNet.Identity.Core",
       "targetGraphs": [
         "net8.0"
@@ -208,7 +216,7 @@
       "code": "NU1701",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Package 'Microsoft.AspNet.Identity.EntityFramework 2.2.4' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net8.0'. This package may not be fully compatible with your project.",
+      "message": "Pakiet „Microsoft.AspNet.Identity.EntityFramework 2.2.4” został przywrócony przy użyciu elementu „.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1” zamiast platformy docelowej projektu „net8.0”. Ten pakiet może nie być w pełni kompatybilny z Twoim projektem.",
       "libraryId": "Microsoft.AspNet.Identity.EntityFramework",
       "targetGraphs": [
         "net8.0"

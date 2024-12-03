@@ -146,5 +146,11 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Services
             }
             return false;
         }
+
+        public async Task EditTeam(EditTeamDTO editTeam)
+        {
+            //var mappedEditTeam = _mapper.Map<Team>(editTeam);
+            //await _teamRepository.
+        }
     }
 }

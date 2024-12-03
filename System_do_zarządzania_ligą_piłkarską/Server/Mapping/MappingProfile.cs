@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using System_do_zarządzania_ligą_piłkarską.Server.Models;
 using System_do_zarządzania_ligą_piłkarską.Shared.DTOs;
+using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Footballers;
 using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Leagues;
 using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Matches;
 using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Referees;
@@ -50,6 +51,8 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Mapping
                 .ForMember(dest => dest.ShirtNumber, opt => opt.MapFrom(src => src.Footballer.ShirtNumber));
 
             CreateMap<Team, TeamManageDTO>();
+            CreateMap<NewFootballerDTO, Footballer>();
+            CreateMap<EditTeamDTO, Team>();
 
             CreateMap<ApplicationUser, ApplicationUserDTO>()
                       .ForMember(dest => dest.LockoutEndDateUtc, opt => opt.MapFrom(src => src.LockoutEnd != null ? (DateTime?)src.LockoutEnd.Value.DateTime : null))

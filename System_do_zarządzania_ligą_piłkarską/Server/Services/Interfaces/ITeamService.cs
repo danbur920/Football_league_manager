@@ -21,6 +21,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Services.Interfaces
         Task AddNewTeam(NewTeamDTO newTeam);
         Task<TeamManageDTO> GetTeamToManage(int teamId);
         Task DeleteTeam(int teamId);
+        Task EditTeam(EditTeamDTO editTeam);
         Task DeleteCoachFromTeam(int teamId);
         Task<bool> AssignCoachToTeam(int teamId, string coachEmail);
     }

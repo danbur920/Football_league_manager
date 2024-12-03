@@ -48,5 +48,11 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
 
             return footballers;
         }
+
+        public async Task AddFootballer(Footballer footballer)
+        {
+            await _context.Footballers.AddAsync(footballer);
+            await _context.SaveChangesAsync();
+        }
     }
 }

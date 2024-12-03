@@ -15,7 +15,5 @@ namespace System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Matches
         public string LastName { get; set; }
         public int? ShirtNumber { get; set; }
         public Position Position { get; set; }
-        public int? Height { get; set; } 
-        public int? Weight { get; set; } 
     }
 }

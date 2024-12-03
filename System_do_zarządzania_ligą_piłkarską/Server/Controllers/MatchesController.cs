@@ -88,5 +88,12 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Controllers
             await _matchService.UpdateMatchInfo(editMatch);
             return Ok();
         }
+
+        [HttpPatch("league-master/change-match-state/{matchId}")]
+        public async Task<IActionResult> ChangeMatchState([FromRoute] int matchId)
+        {
+            await _matchService.ChangeMatchState(matchId);
+            return Ok();
+        }
     }
 }
