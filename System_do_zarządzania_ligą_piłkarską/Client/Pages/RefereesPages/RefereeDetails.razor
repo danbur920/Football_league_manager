@@ -2,8 +2,9 @@
 
 @using Microsoft.AspNetCore.Components
 @using System_do_zarządzania_ligą_piłkarską.Shared.DTOs
+@using System_do_zarządzania_ligą_piłkarską.Client.Extensions
 
-@inject HttpClient Http
+@inject PublicClient PublicClient
 @inject NavigationManager Navigation
 
 <PageTitle>Szczegóły sędziego</PageTitle>
@@ -59,7 +60,7 @@
     {
         try
         {
-            referee = await Http.GetFromJsonAsync<RefereeDTO>($"api/referees/{refereeId}");
+            referee = await PublicClient.Client.GetFromJsonAsync<RefereeDTO>($"api/referees/{refereeId}");
         }
         catch (Exception ex)
         {

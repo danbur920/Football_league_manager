@@ -7,7 +7,8 @@
 @using System_do_zarządzania_ligą_piłkarską.Client.Extensions
 @using System_do_zarządzania_ligą_piłkarską.Client.Components
 
-@inject HttpClient Http
+@inject PublicClient PublicHttpClient
+@inject HttpClient PrivateHttpClient
 @inject NavigationManager Navigation
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject AlertManager AlertManager
@@ -139,26 +140,23 @@
     private List<LeagueSeasonDTO>? allLeagues;
     private List<FavouriteDTO>? userFavouriteLeagues;
 
-    string _userId = string.Empty;
+    private string? _userId = string.Empty;
 
     protected override async Task OnInitializedAsync()
     {
-        try
+        PaginationManager.PageMax = (int)Math.Ceiling((double)PaginationManager.CollectionCount / PaginationManager.PageSize);
+        await GetUserId();
+        await LoadLeagues();
+        if(_userId != null)
         {
-            PaginationManager.PageMax = (int)Math.Ceiling((double)PaginationManager.CollectionCount / PaginationManager.PageSize);
-            await GetUserId();
-            await LoadLeagues();
             await RefreshFavourites();
-        }
-        catch (AccessTokenNotAvailableException exception)
-        {
-            exception.Redirect();
         }
     }
 
     private async Task<bool> LoadLeagues()
     {
-        var response = await Http.GetFromJsonAsync<List<LeagueSeasonDTO>>($"api/leagues?pageNumber={PaginationManager.PageNumber}&pageSize={PaginationManager.PageSize}");
+        //var response = await Http.GetFromJsonAsync<List<LeagueSeasonDTO>>($"api/leagues?pageNumber={PaginationManager.PageNumber}&pageSize={PaginationManager.PageSize}");
+        var response = await PublicHttpClient.Client.GetFromJsonAsync<List<LeagueSeasonDTO>>($"api/leagues?pageNumber={PaginationManager.PageNumber}&pageSize={PaginationManager.PageSize}");
         allLeagues = response;
 
         return (allLeagues != null && allLeagues.Any());
@@ -168,7 +166,8 @@
     {
         var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
         var user = authState.User;
-        _userId = user.FindFirst(c => c.Type == "sub")?.Value;
+        if (user != null)
+            _userId = user.FindFirst(c => c.Type == "sub")?.Value;
     }
 
     private IEnumerable<LeagueSeasonDTO>? filteredLeagues =>
@@ -187,7 +186,7 @@
     {
         if (_userId != null)
         {
-            userFavouriteLeagues = await Http.GetFromJsonAsync<List<FavouriteDTO>>($"api/favourites/league");
+            userFavouriteLeagues = await PrivateHttpClient.GetFromJsonAsync<List<FavouriteDTO>>($"api/favourites/league");
         }
     }
 
@@ -195,7 +194,7 @@
     {
         if (_userId != null)
         {
-            var response = await Http.PostAsync($"api/favourites/league/{leagueId}", null);
+            var response = await PrivateHttpClient.PostAsync($"api/favourites/league/{leagueId}", null);
             var league = allLeagues.FirstOrDefault(l => l.Id == leagueId);
 
             if (response.IsSuccessStatusCode)
@@ -214,7 +213,7 @@
     {
         if (_userId != null)
         {
-            var response = await Http.DeleteAsync($"api/favourites/league/{leagueId}/{_userId}");
+            var response = await PrivateHttpClient.DeleteAsync($"api/favourites/league/{leagueId}/{_userId}");
             var league = allLeagues.FirstOrDefault(l => l.Id == leagueId);
 
             if (response.IsSuccessStatusCode)

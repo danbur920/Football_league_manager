@@ -8,7 +8,7 @@
 @using System_do_zarządzania_ligą_piłkarską.Client.Extensions
 @using System_do_zarządzania_ligą_piłkarską.Client.Components
 
-@inject HttpClient Http
+@inject PublicClient PublicClient
 @inject NavigationManager Navigation
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject SearchQueryManager SearchQueryManager
@@ -98,7 +98,7 @@
     {
         try
         {
-            trophies = await Http.GetFromJsonAsync<List<TrophyDTO>>("api/trophies");
+            trophies = await PublicClient.Client.GetFromJsonAsync<List<TrophyDTO>>("api/trophies");
         }
         catch (AccessTokenNotAvailableException exception)
         {

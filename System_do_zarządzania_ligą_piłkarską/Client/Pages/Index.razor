@@ -5,7 +5,3 @@
 <h1 class="text-center fw-bold">System do zarządzania ligą piłkarską</h1>
 
 <img src="images/index.jpg" alt="Obraz główny" style="max-width:100%; height:auto;" />
-
-<AuthorizeView>
-    <p>Role: @context.User.FindFirst(c => c.Type == "role")?.Value</p>
-</AuthorizeView>

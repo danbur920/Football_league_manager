@@ -2,8 +2,9 @@
 
 @using System.Net.Http
 @using System_do_zarządzania_ligą_piłkarską.Shared.DTOs
+@using System_do_zarządzania_ligą_piłkarską.Client.Extensions
 
-@inject HttpClient Http
+@inject PublicClient PublicClient
 @inject NavigationManager Navigation
 
 <h3 class="page-title">Szczegóły drużyny</h3>
@@ -39,11 +40,11 @@ else
 @code {
     [Parameter]
     public int teamId { get; set; }
-    private TeamDTO team;
+    private TeamDTO? team;
 
     protected override async Task OnInitializedAsync()
     {
-        team = await Http.GetFromJsonAsync<TeamDTO>($"api/teams/{teamId}");
+        team = await PublicClient.Client.GetFromJsonAsync<TeamDTO>($"api/teams/{teamId}");
     }
 
     private void ShowPastMatches()

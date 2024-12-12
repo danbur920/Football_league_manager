@@ -8,7 +8,8 @@
 @using Newtonsoft.Json
 @using System_do_zarządzania_ligą_piłkarską.Shared.Enums
 
-@inject HttpClient Http
+@inject PublicClient PublicHttpClient
+@inject HttpClient PrivateHttpClient
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject SearchQueryManager SearchQueryManager
 @inject AlertManager AlertManager
@@ -94,17 +95,24 @@
                                     <td>@PositionHelper.GetDisplayName(footballer.Position)</td>
                                     <td>@(footballer.Team?.Name ?? "Brak drużyny")</td>
                                     <td>
-                                        @if (IsFavourite(footballer.Id))
+                                        @if (_userId != null)
                                         {
-                                            <button class="btn btn-primary btn-sm" @onclick="() => RemoveFromFavourites(footballer.Id)">
-                                                <i class="fas fa-star"></i> Usuń
-                                            </button>
+                                            @if (IsFavourite(footballer.Id))
+                                            {
+                                                <button class="btn btn-primary btn-sm" @onclick="() => RemoveFromFavourites(footballer.Id)">
+                                                    <i class="fas fa-star"></i> Usuń
+                                                </button>
+                                            }
+                                            else
+                                            {
+                                                <button class="btn btn-outline-secondary btn-sm" @onclick="() => AddToFavourites(footballer.Id)">
+                                                    <i class="far fa-star"></i> Dodaj
+                                                </button>
+                                            }
                                         }
                                         else
                                         {
-                                            <button class="btn btn-outline-secondary btn-sm" @onclick="() => AddToFavourites(footballer.Id)">
-                                                <i class="far fa-star"></i> Dodaj
-                                            </button>
+                                            <i class="fas fa-lock text-muted"></i>
                                         }
                                     </td>
                                     <td>
@@ -128,33 +136,29 @@
     private List<FootballerDTO>? allFootballers;
     private List<FavouriteDTO>? allFavourites;
 
-    private string _userId = string.Empty;
+    private string? _userId = string.Empty;
 
     protected override async Task OnInitializedAsync()
     {
-        try
-        {
-            PaginationManager.CollectionCount = await Http.GetFromJsonAsync<int>("api/footballers/count"); // nie wiadomo dlaczego nie działa (postman zwraca prawidłowo)
-            PaginationManager.PageMax = (int)Math.Ceiling((double)PaginationManager.CollectionCount / PaginationManager.PageSize);
+        PaginationManager.CollectionCount = await PublicHttpClient.Client.GetFromJsonAsync<int>("api/footballers/count"); // nie wiadomo dlaczego nie działa (postman zwraca prawidłowo)
+        PaginationManager.PageMax = (int)Math.Ceiling((double)PaginationManager.CollectionCount / PaginationManager.PageSize);
 
-            await GetUserId();
-            await LoadPlayers();
-            await RefreshFavourites();
-        }
-        catch (AccessTokenNotAvailableException exception)
+        await GetUserId();
+        await LoadPlayers();
+        if (_userId != null)
         {
-            exception.Redirect();
+            await RefreshFavourites();
         }
     }
 
     private async Task SearchFootballersByFilters()
     {
-        allFootballers = await Http.GetFromJsonAsync<List<FootballerDTO>>($"api/footballers?firstName={SearchQueryManager.FirstName}&lastName={SearchQueryManager.LastName}&country={SearchQueryManager.Country}&team={SearchQueryManager.Team}&position={SearchQueryManager.Position}");
+        allFootballers = await PublicHttpClient.Client.GetFromJsonAsync<List<FootballerDTO>>($"api/footballers?firstName={SearchQueryManager.FirstName}&lastName={SearchQueryManager.LastName}&country={SearchQueryManager.Country}&team={SearchQueryManager.Team}&position={SearchQueryManager.Position}");
     }
 
     private async Task<bool> LoadPlayers()
     {
-        var response = await Http.GetFromJsonAsync<List<FootballerDTO>>($"api/footballers?pageNumber={PaginationManager.PageNumber}&pageSize={PaginationManager.PageSize}");
+        var response = await PublicHttpClient.Client.GetFromJsonAsync<List<FootballerDTO>>($"api/footballers?pageNumber={PaginationManager.PageNumber}&pageSize={PaginationManager.PageSize}");
         if (response != null && response.Any())
         {
             allFootballers = response;
@@ -166,7 +170,7 @@
 
     private async Task RefreshFavourites()
     {
-        allFavourites = await Http.GetFromJsonAsync<List<FavouriteDTO>>($"api/favourites/footballer");
+        allFavourites = await PrivateHttpClient.GetFromJsonAsync<List<FavouriteDTO>>($"api/favourites/footballer");
     }
 
     private async Task GetUserId()
@@ -186,7 +190,7 @@
     {
         if (_userId != null)
         {
-            var response = await Http.PostAsync($"api/favourites/footballer/{footballerId}", null);
+            var response = await PrivateHttpClient.PostAsync($"api/favourites/footballer/{footballerId}", null);
             var footballer = allFootballers.FirstOrDefault(t => t.Id == footballerId);
 
             if (response.IsSuccessStatusCode)
@@ -205,7 +209,7 @@
     {
         if (_userId != null)
         {
-            var response = await Http.DeleteAsync($"api/favourites/footballer/{footballerId}/{_userId}");
+            var response = await PrivateHttpClient.DeleteAsync($"api/favourites/footballer/{footballerId}/{_userId}");
             var footballer = allFootballers.FirstOrDefault(t => t.Id == footballerId);
 
             if (response.IsSuccessStatusCode)

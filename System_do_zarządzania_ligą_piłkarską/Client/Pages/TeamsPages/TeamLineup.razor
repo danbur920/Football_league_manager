@@ -4,8 +4,9 @@
 @using System_do_zarządzania_ligą_piłkarską.Shared.DTOs
 @using System_do_zarządzania_ligą_piłkarską.Client.Components
 @using System_do_zarządzania_ligą_piłkarską.Shared.Enums
+@using System_do_zarządzania_ligą_piłkarską.Client.Extensions
 
-@inject HttpClient Http
+@inject PublicClient PublicClient
 @inject NavigationManager Navigation
 
 <h3>Kadra zespołu</h3>
@@ -45,7 +46,7 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        teamLineup = await Http.GetFromJsonAsync<List<FootballerStatDTO>>($"api/teams/{teamId}/footballers/stats/current");
+        teamLineup = await PublicClient.Client.GetFromJsonAsync<List<FootballerStatDTO>>($"api/teams/{teamId}/footballers/stats/current");
         SortPlayers();
     }
     private void GoBack()

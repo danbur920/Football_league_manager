@@ -3,8 +3,9 @@
 @using System.Net.Http
 @using System_do_zarządzania_ligą_piłkarską.Shared.DTOs
 @using System_do_zarządzania_ligą_piłkarską.Client.Components
+@using System_do_zarządzania_ligą_piłkarską.Client.Extensions
 
-@inject HttpClient Http
+@inject PublicClient PublicClient
 @inject NavigationManager Navigation
 
 <div class="button-container">
@@ -27,13 +28,13 @@ else
     public int teamId { get; set; }
     public int leagueId { get; set; }
 
-    private TeamDTO team;
-    private List<MatchDTO> matches;
+    private TeamDTO? team;
+    private List<MatchDTO>? matches;
 
     protected override async Task OnInitializedAsync()
     {
-        team = await Http.GetFromJsonAsync<TeamDTO>($"api/teams/{teamId}");
-        matches = await Http.GetFromJsonAsync<List<MatchDTO>>($"api/teams/{teamId}/matches?isFinished=false");
+        team = await PublicClient.Client.GetFromJsonAsync<TeamDTO>($"api/teams/{teamId}");
+        matches = await PublicClient.Client.GetFromJsonAsync<List<MatchDTO>>($"api/teams/{teamId}/matches?isFinished=false");
     }
 
     private void GoBack()

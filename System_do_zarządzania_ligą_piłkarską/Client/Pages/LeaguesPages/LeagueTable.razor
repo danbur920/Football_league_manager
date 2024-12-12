@@ -3,8 +3,9 @@
 
 @using System.Net.Http
 @using System_do_zarządzania_ligą_piłkarską.Shared.DTOs
+@using System_do_zarządzania_ligą_piłkarską.Client.Extensions
 
-@inject HttpClient Http
+@inject PublicClient PublicClient
 @inject NavigationManager Navigation
 
 <div class="container py-5">
@@ -70,11 +71,11 @@
     [Parameter]
     public int leagueId { get; set; }
 
-    private TeamStatDTO[] teamStats;
+    private TeamStatDTO[]? teamStats;
 
     protected override async Task OnInitializedAsync() 
     {
-        teamStats = await Http.GetFromJsonAsync<TeamStatDTO[]>($"api/leagues/{leagueId}/table");
+        teamStats = await PublicClient.Client.GetFromJsonAsync<TeamStatDTO[]>($"api/leagues/{leagueId}/table");
     }
 
     private void GoBack()

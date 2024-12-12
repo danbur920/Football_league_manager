@@ -25,7 +25,8 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<LeagueSeasonDTO>>> GetLeaguesByPage(int pageNumber, int pageSize)
+        [AllowAnonymous]
+        public async Task<ActionResult<List<LeagueSeasonDTO>>> GetLeaguesByPage([FromQuery] int pageNumber, [FromQuery] int pageSize)
         {
             var leagues = await _leagueService.GetLeaguesByPage(pageNumber, pageSize);
             return Ok(leagues);
