@@ -6,7 +6,8 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories.Interface
     public interface ILeagueRepository
     {
         Task<List<LeagueSeason>> GetLeaguesByPage(int pageNumber, int pageSize);
-        Task<LeagueSeason> GetLeagueById(int id);
+        Task<LeagueSeason> GetLeagueById(int id); // zwraca leagueInfo oraz leagueSeason
+        Task<LeagueSeason> GetLeagueSeasonById(int id); // zwraca tylko leagueSeason
         Task<List<TeamStat>> GetLeagueTable(int leagueId);
         Task<List<FootballerStat>> GetLeagueScorers(int leagueId);
         
@@ -19,5 +20,6 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories.Interface
         Task<List<LeagueSeason>> GetLeagueByLeagueMaster(string leagueMasterId, int leagueInfoId);
         Task<LeagueSeason> GetSeasonByLeagueMaster(string leagueMasterId, int leagueInfoId, int leagueSeasonId);
         Task DeleteLeague(int leagueId);
+        Task UpdateLeagueSeason(LeagueSeason leagueSeason);
     }
 }

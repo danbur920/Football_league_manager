@@ -32,6 +32,12 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
             return league;
         }
 
+        public async Task<LeagueSeason> GetLeagueSeasonById(int id)
+        {
+            var league = await _context.LeagueSeasons.FindAsync(id);
+            return league;
+        }
+
         public async Task<List<FootballerStat>> GetLeagueScorers(int leagueId)
         {
             var scorers = await _context.FootballerStats
@@ -78,6 +84,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
             var leagues = await _context.LeagueSeasons.
                 Where(x => x.LeagueMasterSecondaryId == leagueMasterId || x.LeagueInfo.LeagueMasterPrimaryId == leagueMasterId).
                 Include(x => x.LeagueInfo).
+                Include(x => x.LeagueMasterSecondary).
                 ToListAsync();
 
             return leagues;
@@ -107,6 +114,12 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
         {
             var leagueToDelete = await _context.LeagueInfos.FindAsync(leagueId);
             _context.LeagueInfos.Remove(leagueToDelete);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task UpdateLeagueSeason(LeagueSeason leagueSeason)
+        {
+            _context.LeagueSeasons.Update(leagueSeason);
             await _context.SaveChangesAsync();
         }
     }

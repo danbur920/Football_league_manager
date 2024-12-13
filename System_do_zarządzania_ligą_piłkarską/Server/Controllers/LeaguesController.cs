@@ -67,7 +67,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Controllers
         // Zwraca wszystkie ligi danego zarządcy 
 
         [HttpGet("league-master")]
-        [Authorize(Roles = "LeagueMaster")]
+        //[Authorize(Roles = "LeagueMaster")]
         public async Task<IActionResult> GetAllLeaguesByLeagueMaster()
         {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
@@ -102,6 +102,22 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Controllers
         public async Task<IActionResult> DeleteLeague(int leagueId)
         {
             await _leagueService.DeleteLeague(leagueId);
+            return Ok();
+        }
+
+        [HttpPatch("league-master/{leagueSeasonId}/remove-secondary-league-master")]
+        [Authorize(Roles = "LeagueMaster")]
+        public async Task<IActionResult> DeleteUserFromManagement([FromRoute] int leagueSeasonId, [FromBody] string leagueMasterPrimaryId)
+        {
+            await _leagueService.DeleteUserFromManagement(leagueSeasonId, leagueMasterPrimaryId);
+            return Ok();
+        }
+
+        [HttpPatch("league-master/{leagueSeasonId}/assign-secondary-league-master")]
+        [Authorize(Roles = "LeagueMaster")]
+        public async Task<IActionResult> AssignUserToManagement([FromRoute] int leagueSeasonId, [FromBody] string leagueMasterSecondaryEmail)
+        {
+            await _leagueService.AssignUserToManagement(leagueSeasonId, leagueMasterSecondaryEmail);
             return Ok();
         }
     }

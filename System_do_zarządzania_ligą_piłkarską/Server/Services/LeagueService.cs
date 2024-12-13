@@ -88,5 +88,24 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Services
         {
             await _leagueRepository.DeleteLeague(leagueId);
         }
+
+        public async Task DeleteUserFromManagement(int leagueSeasonId, string leagueMasterPrimaryId)
+        {
+            var leagueSeasonToUpdate = await _leagueRepository.GetLeagueSeasonById(leagueSeasonId);
+            leagueSeasonToUpdate.LeagueMasterSecondaryId = leagueMasterPrimaryId;
+            await _leagueRepository.UpdateLeagueSeason(leagueSeasonToUpdate);
+        }
+
+        public async Task AssignUserToManagement(int leagueSeasonId, string leagueMasterSecondaryEmail)
+        {
+            var userToAssign = await _userManager.FindByEmailAsync(leagueMasterSecondaryEmail);
+
+            if(userToAssign != null)
+            {
+                var leagueSeasonToUpdate = await _leagueRepository.GetLeagueSeasonById(leagueSeasonId);
+                leagueSeasonToUpdate.LeagueMasterSecondaryId = userToAssign.Id;
+                await _leagueRepository.UpdateLeagueSeason(leagueSeasonToUpdate);
+            }
+        }
     }
 }
