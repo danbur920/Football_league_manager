@@ -54,30 +54,14 @@
                             </button>
                         </td>
                         <td>
-                            @if (IsPrimaryLeagueMaster(league.LeagueInfo.LeagueMasterPrimaryId) && IsSecondaryLeagueMaster(league.LeagueMasterSecondaryId))
-                            {
-                                // jeśli jest pierwszorzędnym i drugorzędnym to można przypisać drugorzędnego
-                                <button class="btn btn-danger" @onclick="()=>ShowRemoveModal(league.LeagueInfoId)">Usuń ligę</button>
-
-                                <InputText @bind-Value="userEmailToAssign" Placeholder="Wpisz e-mail zarządcy sezonu" />
-                                <button class="btn btn-primary" @onclick="() => AssignUserToManagement(league.Id, userEmailToAssign)">
-                                    Zatwierdź zarządce
-                                </button>
-                            }
-                            else if (IsPrimaryLeagueMaster(league.LeagueInfo.LeagueMasterPrimaryId) && !IsSecondaryLeagueMaster(league.LeagueMasterSecondaryId))
+                            @if (IsPrimaryLeagueMaster(league.LeagueInfo.LeagueMasterPrimaryId))
                             {
                                 <button class="btn btn-danger" @onclick="()=>ShowRemoveModal(league.LeagueInfoId)">Usuń ligę</button>
-
-                                <span>@league.LeagueMasterSecondary.FirstName @league.LeagueMasterSecondary.LastName</span>
-                                <button class="btn btn-danger" @onclick="() => DeleteUserFromManagement(league.Id, league.LeagueInfo.LeagueMasterPrimaryId)">
-                                    Usuń zarządce
-                                </button> 
                             }
-                            else if (!IsPrimaryLeagueMaster(league.LeagueInfo.LeagueMasterPrimaryId) && IsSecondaryLeagueMaster(league.LeagueMasterSecondaryId))
+                            else
                             {
-                                <span>Hej, jestem drugorzędnym zarządcą!</span>
-                                // jeśli jest drugorzędnym ale nie pierwszorzędnym to może zrezygnować z prowadzenia sezonu i przypisać pierwszorzędnego
-                            } 
+                                <i class="fas fa-lock text-muted"></i>
+                            }
                         </td>
                     </tr>
                 }
@@ -90,7 +74,6 @@
 
 @code {
     private List<LeagueSeasonDTO>? leagues;
-    private string userEmailToAssign = string.Empty;
     private bool showModal = false;
     private int leagueIdToDelete;
 
@@ -153,36 +136,4 @@
     {
         showModal = false;
     }
-
-    private async Task AssignUserToManagement(int leagueSeasonId, string leagueMasterSecondaryEmail)
-    {
-        var response = await Http.PatchAsJsonAsync($"api/leagues/league-master/{leagueSeasonId}/assign-secondary-league-master", leagueMasterSecondaryEmail);
-
-        if (response.IsSuccessStatusCode)
-        {
-            AlertManager.DisplayAlert($"Przypisano zarządce do wybranego sezonu!", "success");
-            await LoadLeagues();
-        }
-        else
-        {
-            AlertManager.DisplayAlert($"Nie udało się przypisać zarządcy do wybranego sezonu.", "danger");
-        }
-        userEmailToAssign = string.Empty;
-    }
-
-    private async Task DeleteUserFromManagement(int leagueSeasonId, string leagueMasterPrimaryId)
-    {
-        var response = await Http.PatchAsJsonAsync($"api/leagues/league-master/{leagueSeasonId}/remove-secondary-league-master", leagueMasterPrimaryId);
-
-        if (response.IsSuccessStatusCode)
-        {
-            AlertManager.DisplayAlert($"Usunięto zarządce z wybranego sezonu!", "success");
-            await LoadLeagues();
-        }
-        else
-        {
-            AlertManager.DisplayAlert($"Nie udało się usunąć zarządcy z wybranego sezonu.", "danger");
-        }
-    }
-
 }

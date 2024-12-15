@@ -94,6 +94,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
         {
             var leagues = await _context.LeagueSeasons.
                 Where(x => (x.LeagueMasterSecondaryId == leagueMasterId || x.LeagueInfo.LeagueMasterPrimaryId == leagueMasterId) && x.LeagueInfoId == leagueInfoId).
+                Include(x=>x.LeagueMasterSecondary).
                 Include(x => x.LeagueInfo).
                 ToListAsync();
 
@@ -121,6 +122,14 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
         {
             _context.LeagueSeasons.Update(leagueSeason);
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<List<LeagueInfo>> GetLeaguesWithSeasons()
+        {
+            var leagues = await _context.LeagueInfos.
+                Include(x=>x.LeagueSeasons).
+                ToListAsync();
+            return leagues;
         }
     }
 }

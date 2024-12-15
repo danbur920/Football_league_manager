@@ -101,6 +101,8 @@
             if (response.IsSuccessStatusCode)
             {
                 AlertManager.DisplayAlert($"Dodano ligę {newLeague.LeagueInfo.Name}!", "success");
+                await Task.Delay(1000);
+                Navigation.NavigateTo("/");
                 Clear();
             }
             else

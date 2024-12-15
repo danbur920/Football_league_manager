@@ -89,22 +89,57 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Services
             await _leagueRepository.DeleteLeague(leagueId);
         }
 
+        public async Task<bool> HasLeagueManagementRights(string userId)
+        {
+            var leagues = await _leagueRepository.GetLeaguesWithSeasons();
+
+            if (leagues.Any(x => x.LeagueMasterPrimaryId == userId))
+                return true;
+
+            return leagues.Any(league => league.LeagueSeasons.Any(season => season.LeagueMasterSecondaryId == userId));
+        }
+
+
         public async Task DeleteUserFromManagement(int leagueSeasonId, string leagueMasterPrimaryId)
         {
             var leagueSeasonToUpdate = await _leagueRepository.GetLeagueSeasonById(leagueSeasonId);
+            var currentLeagueMasterSecondaryId = leagueSeasonToUpdate.LeagueMasterSecondaryId;
             leagueSeasonToUpdate.LeagueMasterSecondaryId = leagueMasterPrimaryId;
             await _leagueRepository.UpdateLeagueSeason(leagueSeasonToUpdate);
+
+            var hasOtherLeagueRights = await HasLeagueManagementRights(currentLeagueMasterSecondaryId);
+
+            if (!hasOtherLeagueRights)
+            {
+                var user = await _userManager.FindByIdAsync(currentLeagueMasterSecondaryId);
+                bool isAdmin = await _userManager.IsInRoleAsync(user, "Admin");
+
+                if (!isAdmin)
+                {
+                    await _userManager.RemoveFromRoleAsync(user, "LeagueMaster");
+                    await _userManager.AddToRoleAsync(user, "User");
+                }
+            }
         }
 
         public async Task AssignUserToManagement(int leagueSeasonId, string leagueMasterSecondaryEmail)
         {
             var userToAssign = await _userManager.FindByEmailAsync(leagueMasterSecondaryEmail);
 
-            if(userToAssign != null)
+            if (userToAssign != null)
             {
                 var leagueSeasonToUpdate = await _leagueRepository.GetLeagueSeasonById(leagueSeasonId);
                 leagueSeasonToUpdate.LeagueMasterSecondaryId = userToAssign.Id;
                 await _leagueRepository.UpdateLeagueSeason(leagueSeasonToUpdate);
+
+                bool isLeagueMaster = await _userManager.IsInRoleAsync(userToAssign, "LeagueMaster");
+                bool isAdmin = await _userManager.IsInRoleAsync(userToAssign, "Admin");
+
+                if (!isLeagueMaster && !isAdmin)
+                {
+                    await _userManager.RemoveFromRoleAsync(userToAssign, "User");
+                    await _userManager.AddToRoleAsync(userToAssign, "LeagueMaster");
+                }
             }
         }
     }

@@ -21,5 +21,6 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Services.Interfaces
         Task DeleteLeague(int leagueId);
         Task DeleteUserFromManagement(int leagueSeasonId, string leagueMasterPrimaryId);
         Task AssignUserToManagement(int leagueSeasonId, string leagueMasterSecondaryEmail);
+        Task<bool> HasLeagueManagementRights(string userId);
     }
 }
