@@ -79,12 +79,18 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
 
         // League Master Panel:
 
-        public async Task<List<LeagueSeason>> GetAllLeaguesByLeagueMaster(string leagueMasterId)
+        public async Task<List<LeagueInfo>> GetAllLeaguesByLeagueMaster(string leagueMasterId)
         {
-            var leagues = await _context.LeagueSeasons.
-                Where(x => x.LeagueMasterSecondaryId == leagueMasterId || x.LeagueInfo.LeagueMasterPrimaryId == leagueMasterId).
-                Include(x => x.LeagueInfo).
-                Include(x => x.LeagueMasterSecondary).
+            //var leagues = await _context.LeagueSeasons.
+            //    Where(x => x.LeagueMasterSecondaryId == leagueMasterId || x.LeagueInfo.LeagueMasterPrimaryId == leagueMasterId).
+            //    Include(x => x.LeagueInfo).
+            //    Include(x => x.LeagueMasterSecondary).
+            //    ToListAsync();
+
+            //return leagues;
+
+            var leagues = await _context.LeagueInfos.
+                Where(x => x.LeagueMasterPrimaryId == leagueMasterId || x.LeagueSeasons.Any(y => y.LeagueMasterSecondaryId == leagueMasterId)).
                 ToListAsync();
 
             return leagues;
@@ -130,6 +136,11 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
                 Include(x=>x.LeagueSeasons).
                 ToListAsync();
             return leagues;
+        }
+
+        public async Task<LeagueInfo?> GetLeagueInfoById(int leagueInfoId)
+        {
+            return await _context.LeagueInfos.FindAsync(leagueInfoId);
         }
     }
 }

@@ -1,0 +1,91 @@
+﻿@using System_do_zarządzania_ligą_piłkarską.Shared.DTOs
+@using System_do_zarządzania_ligą_piłkarską.Client.Areas.LeagueMaster.Shared
+@using System_do_zarządzania_ligą_piłkarską.Client.Extensions
+@using System_do_zarządzania_ligą_piłkarską.Client.Components
+@using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Leagues
+@using Microsoft.AspNetCore.Authorization
+
+@page "/league-master/leagues/{leagueInfoId:int}/add-new-season"
+@layout LeagueMasterLayout
+@inject HttpClient Http
+@inject NavigationManager Navigation
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject AlertManager AlertManager
+@attribute [Authorize(Roles = "LeagueMaster")]
+
+<PageTitle>Dodaj nowy sezon</PageTitle>
+
+<div class="button-container">
+    <button class="btn btn-secondary" @onclick="GoBackToTheSeasons">Wróć</button>
+</div>
+
+<h3>Dodaj nowy sezon</h3>
+
+@if (newLeagueSeason != null)
+{
+    <EditForm Model="newLeagueSeason" OnValidSubmit="AddNewSeason">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <div class="mb-3">
+            <label for="season" class="form-label">Sezon</label>
+            <select id="season" class="form-select" @bind="newLeagueSeason.Season">
+                @foreach (var season in Enum.GetValues(typeof(Season)).Cast<Season>())
+                {
+                    <option value="@season">@(season.ToString().Substring(1))</option>
+                }
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="startDate" class="form-label">Data rozpoczęcia sezonu (opcjonalnie)</label>
+            <InputDate id="startDate" class="form-control" @bind-Value="newLeagueSeason.LeagueStartDate" />
+        </div>
+
+        <div class="mb-3">
+            <label for="endDate" class="form-label">Data zakończenia sezonu (opcjonalnie)</label>
+            <InputDate id="endDate" class="form-control" @bind-Value="newLeagueSeason.LeagueEndDate" />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Dodaj sezon</button>
+    </EditForm>
+}
+else
+{
+    <p>Ładowanie...</p>
+}
+
+
+<Alert Message="@AlertManager.Message" Type="@AlertManager.Type" IsVisible="@AlertManager.IsVisible" />
+
+
+@code {
+    [Parameter] public int leagueInfoId { get; set; }
+    private NewLeagueSeasonDTO newLeagueSeason;
+
+    protected override async Task OnInitializedAsync()
+    {
+        newLeagueSeason = new NewLeagueSeasonDTO();
+    }
+
+    private void GoBackToTheSeasons()
+    {
+        Navigation.NavigateTo($"/league-master/leagues/{leagueInfoId}");
+    }
+
+    private async Task AddNewSeason()
+    {
+        newLeagueSeason.LeagueInfoId = leagueInfoId;
+        var response = await Http.PostAsJsonAsync($"api/leagues/league-master/{leagueInfoId}/add-new-season", newLeagueSeason);
+
+        if (response.IsSuccessStatusCode)
+        {
+            AlertManager.DisplayAlert($"Dodano nowy sezon!", "success");
+            newLeagueSeason = new NewLeagueSeasonDTO();
+        }
+        else
+        {
+            AlertManager.DisplayAlert($"Nie udało się dodać nowego sezonu.", "danger");
+        }
+    }
+}

@@ -1,0 +1,321 @@
+﻿@page "/teams/{teamId:int}/past-matches/{matchId:int}"
+
+@using System.Net.Http
+@using System_do_zarządzania_ligą_piłkarską.Shared.DTOs
+@using System_do_zarządzania_ligą_piłkarską.Client.Components
+@using System_do_zarządzania_ligą_piłkarską.Client.Extensions
+@using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Matches
+@using System_do_zarządzania_ligą_piłkarską.Shared.Enums
+
+@inject PublicClient PublicClient
+@inject NavigationManager Navigation
+
+<div class="button-container">
+    <button class="btn btn-secondary" @onclick="GoBack">Wróć</button>
+</div>
+
+@if (match != null)
+{
+    <div class="match-info-container">
+        <h5>Aktualny wynik:</h5>
+        <div class="current-score">
+            <span class="team-name">@match.HomeTeam.Name</span>
+            <span class="score">@($"{match.GoalsHome}:{match.GoalsAway}")</span>
+            <span class="team-name">@match.AwayTeam.Name</span>
+        </div>
+    </div>
+}
+
+@if (match != null)
+{
+    <div class="edit-forms-container">
+        @if (awayFootballers != null && homeFootballers != null && homeLineup != null && awayLineup != null)
+        {
+            <div class="form-card">
+                <h4>Skład gospodarza</h4>
+                <MatchLineup players="homeLineup" LoadLineupsCallback="LoadLineups"></MatchLineup>
+            </div>
+
+            <div class="form-card">
+                <h4>Skład gości</h4>
+                
+                <MatchLineup players="awayLineup" LoadLineupsCallback="LoadLineups"></MatchLineup>
+            </div>
+        }
+
+        <div class="form-card events-column">
+            <h4>Zdarzenia meczowe</h4>
+            @if (match != null && match.MatchEvents != null)
+            {
+                <div class="events-container">
+                    <div class="team-events">
+                        <h5>Gospodarz</h5>
+                        @foreach (var eventt in homeMatchEvents)
+                        {
+                            <div class="event-item">
+                                <span>@eventt.Minute'</span> -
+                                @switch (eventt.EventType)
+                                {
+                                    case EventType.Goal:
+                                        <i class="fas fa-futbol"></i>
+                                        <span>@GetFootballersInfo(eventt.TeamId, eventt.PrimaryFootballerId, eventt.SecondaryFootballerId)</span>
+                                        break;
+                                    case EventType.YellowCard:
+                                        <i class="fas fa-exclamation-triangle text-warning"></i>
+                                        <span>@GetFootballersInfo(eventt.TeamId, eventt.PrimaryFootballerId, eventt.SecondaryFootballerId)</span>
+                                        break;
+                                    case EventType.RedCard:
+                                        <i class="fas fa-ban text-danger"></i>
+                                        <span>@GetFootballersInfo(eventt.TeamId, eventt.PrimaryFootballerId, eventt.SecondaryFootballerId)</span>
+                                        break;
+                                    case EventType.Substitution:
+                                        <i class="fas fa-exchange-alt"></i>
+                                        <span>@GetFootballersInfo(eventt.TeamId, eventt.PrimaryFootballerId, eventt.SecondaryFootballerId)</span>
+                                        break;
+                                    default:
+                                        <span>@eventt.EventType</span>
+                                        <span>@GetFootballersInfo(eventt.TeamId, eventt.PrimaryFootballerId, eventt.SecondaryFootballerId)</span>
+                                        break;
+                                }
+                            </div>
+                        }
+                    </div>
+
+                    <div class="team-events">
+                        <h5>Gość</h5>
+                        @foreach (var eventt in awayMatchEvents)
+                        {
+                            <div class="event-item">
+                                <span>@eventt.Minute'</span> -
+                                @switch (eventt.EventType)
+                                {
+                                    case EventType.Goal:
+                                        <i class="fas fa-futbol"></i>
+                                        <span>@GetFootballersInfo(eventt.TeamId, eventt.PrimaryFootballerId, eventt.SecondaryFootballerId)</span>
+                                        break;
+                                    case EventType.OwnGoal:
+                                        <i class="fas fa-futbol text-danger"></i>
+                                        <span>@GetFootballersInfo(eventt.TeamId, eventt.PrimaryFootballerId, eventt.SecondaryFootballerId)</span>
+                                        break;
+                                    case EventType.Penalty:
+                                        <i class="fas fa-futbol text-info"></i>
+                                        <span>@GetFootballersInfo(eventt.TeamId, eventt.PrimaryFootballerId, eventt.SecondaryFootballerId)</span>
+                                        break;
+                                    case EventType.MissedPenalty:
+                                        <i class="fas fa-futbol text-info"></i>
+                                        <span>@GetFootballersInfo(eventt.TeamId, eventt.PrimaryFootballerId, eventt.SecondaryFootballerId)</span>
+                                        break;
+                                    case EventType.YellowCard:
+                                        <i class="fas fa-exclamation-triangle text-warning"></i>
+                                        <span>@GetFootballersInfo(eventt.TeamId, eventt.PrimaryFootballerId, eventt.SecondaryFootballerId)</span>
+                                        break;
+                                    case EventType.RedCard:
+                                        <i class="fas fa-ban text-danger"></i>
+                                        <span>@GetFootballersInfo(eventt.TeamId, eventt.PrimaryFootballerId, eventt.SecondaryFootballerId)</span>
+                                        break;
+                                    case EventType.Substitution:
+                                        <i class="fas fa-exchange-alt"></i>
+                                        <span>@GetFootballersInfo(eventt.TeamId, eventt.PrimaryFootballerId, eventt.SecondaryFootballerId)</span>
+                                        break;
+                                    default:
+                                        <span>@eventt.EventType</span>
+                                        <span>@GetFootballersInfo(eventt.TeamId, eventt.PrimaryFootballerId, eventt.SecondaryFootballerId)</span>
+                                        break;
+                                }
+                            </div>
+                        }
+                    </div>
+                </div>
+
+                <div class="legend">
+                    <h5>Legenda:</h5>
+                    <ul>
+                        <li><i class="fas fa-futbol"></i> Gol</li>
+                        <li><i class="fas fa-futbol text-info"></i> Gol (rzut karny)</li>
+                        <li><i class="fas fa-futbol text-warning"></i> Rzut karny nietrafiony</li>
+                        <li><i class="fas fa-futbol text-danger"></i> Gol samobójczy</li>
+                        <li><i class="fas fa-exclamation-triangle text-warning"></i> Żółta kartka</li>
+                        <li><i class="fas fa-ban text-danger"></i> Czerwona kartka</li>
+                        <li><i class="fas fa-exchange-alt"></i> Zmiana</li>
+                    </ul>
+                </div>
+            }
+        </div>
+    </div>
+}
+else
+{
+    <div class="form-card events-column">
+        <h4>Zdarzenia meczowe</h4>
+        @if (match != null && match.MatchEvents != null)
+        {
+            <div class="events-container">
+                <div class="team-events">
+                    <h5>Gospodarz</h5>
+                    @foreach (var eventt in homeMatchEvents)
+                    {
+                        <div class="event-item">
+                            <span>@eventt.Minute'</span> -
+                            @switch (eventt.EventType)
+                            {
+                                case EventType.Goal:
+                                    <i class="fas fa-futbol"></i>
+                                    <span>@GetFootballersInfo(eventt.TeamId, eventt.PrimaryFootballerId, eventt.SecondaryFootballerId)</span>
+                                    break;
+                                case EventType.YellowCard:
+                                    <i class="fas fa-exclamation-triangle text-warning"></i>
+                                    <span>@GetFootballersInfo(eventt.TeamId, eventt.PrimaryFootballerId, eventt.SecondaryFootballerId)</span>
+                                    break;
+                                case EventType.RedCard:
+                                    <i class="fas fa-ban text-danger"></i>
+                                    <span>@GetFootballersInfo(eventt.TeamId, eventt.PrimaryFootballerId, eventt.SecondaryFootballerId)</span>
+                                    break;
+                                case EventType.Substitution:
+                                    <i class="fas fa-exchange-alt"></i>
+                                    <span>@GetFootballersInfo(eventt.TeamId, eventt.PrimaryFootballerId, eventt.SecondaryFootballerId)</span>
+                                    break;
+                                default:
+                                    <span>@eventt.EventType</span>
+                                    <span>@GetFootballersInfo(eventt.TeamId, eventt.PrimaryFootballerId, eventt.SecondaryFootballerId)</span>
+                                    break;
+                            }
+                        </div>
+                    }
+                </div>
+
+                <div class="team-events">
+                    <h5>Gość</h5>
+                    @foreach (var eventt in awayMatchEvents)
+                    {
+                        <div class="event-item">
+                            <span>@eventt.Minute'</span> -
+                            @switch (eventt.EventType)
+                            {
+                                case EventType.Goal:
+                                    <i class="fas fa-futbol"></i>
+                                    <span>@GetFootballersInfo(eventt.TeamId, eventt.PrimaryFootballerId, eventt.SecondaryFootballerId)</span>
+                                    break;
+                                case EventType.OwnGoal:
+                                    <i class="fas fa-futbol text-danger"></i>
+                                    <span>@GetFootballersInfo(eventt.TeamId, eventt.PrimaryFootballerId, eventt.SecondaryFootballerId)</span>
+                                    break;
+                                case EventType.Penalty:
+                                    <i class="fas fa-futbol text-info"></i>
+                                    <span>@GetFootballersInfo(eventt.TeamId, eventt.PrimaryFootballerId, eventt.SecondaryFootballerId)</span>
+                                    break;
+                                case EventType.MissedPenalty:
+                                    <i class="fas fa-futbol text-info"></i>
+                                    <span>@GetFootballersInfo(eventt.TeamId, eventt.PrimaryFootballerId, eventt.SecondaryFootballerId)</span>
+                                    break;
+                                case EventType.YellowCard:
+                                    <i class="fas fa-exclamation-triangle text-warning"></i>
+                                    <span>@GetFootballersInfo(eventt.TeamId, eventt.PrimaryFootballerId, eventt.SecondaryFootballerId)</span>
+                                    break;
+                                case EventType.RedCard:
+                                    <i class="fas fa-ban text-danger"></i>
+                                    <span>@GetFootballersInfo(eventt.TeamId, eventt.PrimaryFootballerId, eventt.SecondaryFootballerId)</span>
+                                    break;
+                                case EventType.Substitution:
+                                    <i class="fas fa-exchange-alt"></i>
+                                    <span>@GetFootballersInfo(eventt.TeamId, eventt.PrimaryFootballerId, eventt.SecondaryFootballerId)</span>
+                                    break;
+                                default:
+                                    <span>@eventt.EventType</span>
+                                    <span>@GetFootballersInfo(eventt.TeamId, eventt.PrimaryFootballerId, eventt.SecondaryFootballerId)</span>
+                                    break;
+                            }
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <div class="legend">
+                <h5>Legenda:</h5>
+                <ul>
+                    <li><i class="fas fa-futbol"></i> Gol</li>
+                    <li><i class="fas fa-futbol text-info"></i> Gol (rzut karny)</li>
+                    <li><i class="fas fa-futbol text-warning"></i> Rzut karny nietrafiony</li>
+                    <li><i class="fas fa-futbol text-danger"></i> Gol samobójczy</li>
+                    <li><i class="fas fa-exclamation-triangle text-warning"></i> Żółta kartka</li>
+                    <li><i class="fas fa-ban text-danger"></i> Czerwona kartka</li>
+                    <li><i class="fas fa-exchange-alt"></i> Zmiana</li>
+                </ul>
+            </div>
+        }
+    </div>
+}
+
+@code {
+    [Parameter] public int teamId { get; set; }
+    [Parameter] public int matchId { get; set; }
+
+    private TeamDTO? team;
+    private MatchDTO? match;
+
+    private List<ShortFootballerInfoDTO>? homeFootballers;
+    private List<ShortFootballerInfoDTO>? awayFootballers;
+
+    private List<MatchEventDTO>? homeMatchEvents;
+    private List<MatchEventDTO>? awayMatchEvents;
+
+    private List<MatchFootballerDTO>? homeLineup;
+    private List<MatchFootballerDTO>? awayLineup;
+
+    protected override async Task OnInitializedAsync()
+    {
+        team = await PublicClient.Client.GetFromJsonAsync<TeamDTO>($"api/teams/{teamId}");
+        match = await PublicClient.Client.GetFromJsonAsync<MatchDTO>($"api/teams/{teamId}/matches?isFinished=true");
+
+        if(match != null)
+        {
+            homeFootballers = await PublicClient.Client.GetFromJsonAsync<List<ShortFootballerInfoDTO>>($"api/footballers/team/{match.HomeTeamId}");// potencjalnie do rozbudowy bo bierze wszystkich piłkarz z drużyny
+            awayFootballers = await PublicClient.Client.GetFromJsonAsync<List<ShortFootballerInfoDTO>>($"api/footballers/team/{match.AwayTeamId}");
+
+            await LoadMatchEvents();
+        }
+        await LoadLineups();
+    }
+
+    private async Task LoadLineups()
+    {
+        homeLineup = await PublicClient.Client.GetFromJsonAsync<List<MatchFootballerDTO>>($"api/matches/lineup/{matchId}/{match.HomeTeamId}");
+        awayLineup = await PublicClient.Client.GetFromJsonAsync<List<MatchFootballerDTO>>($"api/matches/lineup/{matchId}/{match.AwayTeamId}");
+
+        StateHasChanged();
+    }
+
+    private async Task LoadMatchEvents()
+    {
+        homeMatchEvents = match.MatchEvents.Where(x => x.TeamId == match.HomeTeamId).ToList();
+        awayMatchEvents = match.MatchEvents.Where(x => x.TeamId == match.AwayTeamId).ToList();
+    }
+
+    private string GetFootballersInfo(int? teamId, int? primaryFootballerId, int? secondaryFootballerId)
+    {
+        if (teamId == homeFootballers.FirstOrDefault().TeamId)
+        {
+            var primaryFootballer = homeFootballers.FirstOrDefault(x => x.Id == primaryFootballerId);
+            var secondaryFootballer = homeFootballers.FirstOrDefault(x => x.Id == secondaryFootballerId);
+            if (secondaryFootballer != null)
+            {
+                return $"{primaryFootballer?.FirstName.FirstOrDefault()}. {primaryFootballer?.LastName} ({secondaryFootballer?.FirstName.FirstOrDefault()}. {secondaryFootballer?.LastName})";
+            }
+
+            return $"{primaryFootballer?.FirstName.FirstOrDefault()}. {primaryFootballer?.LastName}";
+        }
+
+        var primaryFootballerAway = awayFootballers.FirstOrDefault(x => x.Id == primaryFootballerId);
+        var secondaryFootballerAway = awayFootballers.FirstOrDefault(x => x.Id == secondaryFootballerId);
+        if (secondaryFootballerAway != null)
+        {
+            return $"{primaryFootballerAway?.FirstName.FirstOrDefault()}. {primaryFootballerAway?.LastName} ({secondaryFootballerAway?.FirstName.FirstOrDefault()}. {secondaryFootballerAway?.LastName})";
+        }
+
+        return $"{primaryFootballerAway?.FirstName.FirstOrDefault()}. {primaryFootballerAway?.LastName}";
+    }
+
+    private void GoBack()
+    {
+        Navigation.NavigateTo($"/teams/{teamId}/past-matches/{matchId:int}");
+    }
+}

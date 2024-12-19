@@ -6,11 +6,13 @@
 @using System_do_zarządzania_ligą_piłkarską.Shared.Enums
 @using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Matches
 @using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Footballers
+@using Microsoft.AspNetCore.Authorization
 
 @page "/league-master/created-teams/{TeamId:int}"
 @layout LeagueMasterLayout
 @inject HttpClient Http
 @inject AlertManager AlertManager
+@attribute [Authorize(Roles = "LeagueMaster")]
 
 <PageTitle>Zarządzaj drużyną</PageTitle>
 

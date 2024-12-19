@@ -7,11 +7,13 @@
 @using System_do_zarządzania_ligą_piłkarską.Shared.Enums
 @using System_do_zarządzania_ligą_piłkarską.Client.Extensions
 @using System_do_zarządzania_ligą_piłkarską.Client.Components
+@using Microsoft.AspNetCore.Authorization
 
 @layout LeagueMasterLayout
 @inject NavigationManager Navigation
 @inject HttpClient Http
 @inject AlertManager AlertManager
+@attribute [Authorize(Roles = "LeagueMaster")]
 
 <PageTitle>Zarządzaj meczem</PageTitle>
 

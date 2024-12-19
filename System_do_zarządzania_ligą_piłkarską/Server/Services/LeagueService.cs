@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
 using System_do_zarządzania_ligą_piłkarską.Client.Areas.Admin.Pages;
 using System_do_zarządzania_ligą_piłkarską.Server.Models;
 using System_do_zarządzania_ligą_piłkarską.Server.Repositories.Interfaces;
@@ -13,13 +14,15 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Services
     {
         private readonly ILeagueRepository _leagueRepository;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IMapper _mapper;
 
-        public LeagueService(ILeagueRepository leagueRepository, IMapper mapper, UserManager<ApplicationUser> userManager)
+        public LeagueService(ILeagueRepository leagueRepository, IMapper mapper, UserManager<ApplicationUser> userManager, IHttpContextAccessor httpContextAccessor)
         {
             _leagueRepository = leagueRepository;
             _mapper = mapper;
             _userManager = userManager;
+            _httpContextAccessor = httpContextAccessor;
         }
         public async Task<List<LeagueSeasonDTO>> GetLeaguesByPage(int pageNumber, int pageSize)
         {
@@ -66,10 +69,10 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Services
 
         // League Master Panel:
 
-        public async Task<List<LeagueSeasonDTO>> GetAllLeaguesByLeagueMaster(string userId)
+        public async Task<List<LeagueInfoDTO>> GetAllLeaguesByLeagueMaster(string userId)
         {
             var leagues = await _leagueRepository.GetAllLeaguesByLeagueMaster(userId);
-            return _mapper.Map<List<LeagueSeasonDTO>>(leagues);
+            return _mapper.Map<List<LeagueInfoDTO>>(leagues);
         }
 
         public async Task<List<LeagueSeasonDTO>> GetLeagueByLeagueMaster(string userId, int leagueInfoId)
@@ -99,6 +102,11 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Services
             return leagues.Any(league => league.LeagueSeasons.Any(season => season.LeagueMasterSecondaryId == userId));
         }
 
+        public async Task<bool> IsUserPrimaryLeagueMasterForLeague(string userId, int leagueInfoId)
+        {
+            var league = await _leagueRepository.GetLeagueInfoById(leagueInfoId);
+            return league != null && league.LeagueMasterPrimaryId == userId;
+        }
 
         public async Task DeleteUserFromManagement(int leagueSeasonId, string leagueMasterPrimaryId)
         {
@@ -141,6 +149,27 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Services
                     await _userManager.AddToRoleAsync(userToAssign, "LeagueMaster");
                 }
             }
+        }
+
+        public async Task CreateNewLeagueSeason(NewLeagueSeasonDTO newLeagueSeason)
+        {
+            var userId = _httpContextAccessor.HttpContext?.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            if (userId == null)
+            {
+                throw new UnauthorizedAccessException("Nieautoryzowany dostęp.");
+            }
+
+            var hasPermissions = await IsUserPrimaryLeagueMasterForLeague(userId, (int)newLeagueSeason.LeagueInfoId);
+
+            if(!hasPermissions)
+            {
+                throw new UnauthorizedAccessException("Nie masz odpowiednich praw aby dodać sezon do tej ligi.");
+            }
+
+            var mappedLeagueSeason = _mapper.Map<LeagueSeason>(newLeagueSeason);
+            mappedLeagueSeason.LeagueMasterSecondaryId = userId;
+            await _leagueRepository.AddNewLeagueSeason(mappedLeagueSeason);
         }
     }
 }

@@ -120,6 +120,15 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Controllers
             await _leagueService.AssignUserToManagement(leagueSeasonId, leagueMasterSecondaryEmail);
             return Ok();
         }
+
+        // var response = await Http.PostAsJsonAsync($"api/leagues/league-master/{leagueInfoId}/add-new-season", newLeagueSeason);
+
+        [HttpPost("league-master/{leagueInfoId}/add-new-season")]
+        public async Task<IActionResult> CreateNewLeagueSeason([FromRoute] int leagueInfoId, [FromBody] NewLeagueSeasonDTO newLeagueSeason)
+        {
+            await _leagueService.CreateNewLeagueSeason(newLeagueSeason);
+            return Ok();
+        }
     }
 }
 

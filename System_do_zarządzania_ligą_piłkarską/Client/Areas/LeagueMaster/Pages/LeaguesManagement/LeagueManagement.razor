@@ -2,6 +2,7 @@
 @using System_do_zarządzania_ligą_piłkarską.Client.Areas.LeagueMaster.Shared
 @using System_do_zarządzania_ligą_piłkarską.Client.Extensions
 @using System_do_zarządzania_ligą_piłkarską.Client.Components
+@using Microsoft.AspNetCore.Authorization
 
 @page "/league-master/leagues/{leagueInfoId:int}"
 @layout LeagueMasterLayout
@@ -9,11 +10,13 @@
 @inject NavigationManager Navigation
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject AlertManager AlertManager
+@attribute [Authorize(Roles = "LeagueMaster")]
 
 <PageTitle>Sezony</PageTitle>
 
 <div class="button-container">
     <button class="btn btn-secondary" @onclick="GoBackToTheLeagues">Wróć</button>
+    <button class="btn btn-primary" @onclick="GoToAddNewSeason">Dodaj sezon</button>
 </div>
 
 
@@ -92,8 +95,8 @@ else
         </tbody>
     </table>
 }
-
 @* <button class="btn btn-danger" @onclick="()=>ShowRemoveModal(league.LeagueInfoId)">Usuń ligę</button> *@
+
 @* <button class="btn btn-danger" @onclick="()=>ShowRemoveModal(league.LeagueInfoId)">Usuń ligę</button> *@
 
 @code {
@@ -128,6 +131,11 @@ else
     private void GoBackToTheLeagues()
     {
         Navigation.NavigateTo($"/league-master/leagues");
+    }
+
+    private void GoToAddNewSeason()
+    {
+        Navigation.NavigateTo($"/league-master/leagues/{leagueInfoId}/add-new-season");
     }
 
     private async Task<string> GetUserId()

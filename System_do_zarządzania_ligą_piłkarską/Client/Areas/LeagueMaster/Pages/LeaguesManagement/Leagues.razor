@@ -2,6 +2,7 @@
 @using System_do_zarządzania_ligą_piłkarską.Client.Areas.LeagueMaster.Shared
 @using System_do_zarządzania_ligą_piłkarską.Client.Components
 @using System_do_zarządzania_ligą_piłkarską.Client.Extensions
+@using Microsoft.AspNetCore.Authorization
 
 @page "/league-master/leagues"
 @layout LeagueMasterLayout
@@ -9,6 +10,7 @@
 @inject NavigationManager Navigation
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject AlertManager AlertManager
+@attribute [Authorize(Roles = "LeagueMaster")]
 
 <PageTitle>Twoje ligi</PageTitle>
 
@@ -45,18 +47,18 @@
                 @foreach (var league in leagues)
                 {
                     <tr>
-                        <td>@league.LeagueInfo.Name</td>
-                        <td>@league.LeagueInfo.Country</td>
-                        <td>@league.LeagueInfo.Level</td>
+                        <td>@league.Name</td>
+                        <td>@league.Country</td>
+                        <td>@league.Level</td>
                         <td>
-                            <button class="btn btn-link" @onclick="() => GoToTheLeague(league.LeagueInfoId)">
+                            <button class="btn btn-link" @onclick="() => GoToTheLeague(league.Id)">
                                 <i class="fas fa-arrow-right"></i> Zarządzaj ligą
                             </button>
                         </td>
                         <td>
-                            @if (IsPrimaryLeagueMaster(league.LeagueInfo.LeagueMasterPrimaryId))
+                            @if (IsPrimaryLeagueMaster(league.LeagueMasterPrimaryId))
                             {
-                                <button class="btn btn-danger" @onclick="()=>ShowRemoveModal(league.LeagueInfoId)">Usuń ligę</button>
+                                <button class="btn btn-danger" @onclick="()=>ShowRemoveModal(league.Id)">Usuń ligę</button>
                             }
                             else
                             {
@@ -73,7 +75,7 @@
 
 
 @code {
-    private List<LeagueSeasonDTO>? leagues;
+    private List<LeagueInfoDTO>? leagues;
     private bool showModal = false;
     private int leagueIdToDelete;
 
@@ -89,7 +91,7 @@
 
     private async Task LoadLeagues()
     {
-        leagues = await Http.GetFromJsonAsync<List<LeagueSeasonDTO>>("api/leagues/league-master");
+        leagues = await Http.GetFromJsonAsync<List<LeagueInfoDTO>>("api/leagues/league-master");
     }
 
     private bool IsPrimaryLeagueMaster(string leagueMasterPrimaryId)

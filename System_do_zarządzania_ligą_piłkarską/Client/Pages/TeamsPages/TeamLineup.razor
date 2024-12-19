@@ -56,9 +56,15 @@ else
 
     private void SortPlayers()
     {
-        goalkeepers = teamLineup.Where(x => PositionHelper.GetDisplayName(x.Footballer.Position) == "Goalkeeper").ToList();
-        defenders = teamLineup.Where(x => PositionHelper.GetDisplayName(x.Footballer.Position) == "Defender").ToList();
-        midfielders = teamLineup.Where(x => PositionHelper.GetDisplayName(x.Footballer.Position) == "Midfielder").ToList();
-        forwards = teamLineup.Where(x => PositionHelper.GetDisplayName(x.Footballer.Position) == "Forward").ToList();
+        foreach (var player in teamLineup)
+        {
+            var positionName = PositionHelper.GetDisplayName(player.Footballer.Position);
+            Console.WriteLine($"Player Position: {positionName}"); 
+        }
+
+        goalkeepers = teamLineup.Where(x => PositionHelper.GetDisplayName(x.Footballer.Position) == "Bramkarz").ToList();
+        defenders = teamLineup.Where(x => PositionHelper.GetDisplayName(x.Footballer.Position) == "Obrońca").ToList();
+        midfielders = teamLineup.Where(x => PositionHelper.GetDisplayName(x.Footballer.Position) == "Pomocnik").ToList();
+        forwards = teamLineup.Where(x => PositionHelper.GetDisplayName(x.Footballer.Position) == "Napastnik").ToList();
     }
 }

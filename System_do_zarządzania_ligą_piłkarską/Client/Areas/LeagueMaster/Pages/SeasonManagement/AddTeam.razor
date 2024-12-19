@@ -4,12 +4,14 @@
 @using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Teams
 @using System_do_zarządzania_ligą_piłkarską.Client.Extensions
 @using System_do_zarządzania_ligą_piłkarską.Client.Components
+@using Microsoft.AspNetCore.Authorization
 
 @page "/league-master/leagues/{leagueInfoId:int}/{leagueSeasonId:int}/add-team"
 @layout LeagueMasterLayout
 @inject HttpClient Http
 @inject NavigationManager Navigation
 @inject AlertManager AlertManager
+@attribute [Authorize(Roles = "LeagueMaster")]
 
 <PageTitle>Dodawanie drużyny</PageTitle>
 

@@ -13,15 +13,4 @@ namespace System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Leagues
         public string Country { get; set; }
         public Level? Level { get; set; }
     }
-
-    public enum Level
-    {
-        Brak,
-        Lokalna,
-        Okręgowa,
-        Regionalna,
-        Krajowa,
-        Kontynentalna,
-        Międzykontynentalna
-    }
 }

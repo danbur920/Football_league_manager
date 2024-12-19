@@ -34,6 +34,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cUGFnZXNcVXNlcnMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/danbu/Desktop/Prca Inż/Football_league_manager/System_do_zarządzania_ligą_piłkarską/Client/Areas/LeagueMaster/Pages/LeaguesManagement/AddLeagueSeason.razor]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTGVhZ3VlTWFzdGVyXFBhZ2VzXExlYWd1ZXNNYW5hZ2VtZW50XEFkZExlYWd1ZVNlYXNvbi5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/danbu/Desktop/Prca Inż/Football_league_manager/System_do_zarządzania_ligą_piłkarską/Client/Areas/LeagueMaster/Pages/LeaguesManagement/LeagueManagement.razor]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTGVhZ3VlTWFzdGVyXFBhZ2VzXExlYWd1ZXNNYW5hZ2VtZW50XExlYWd1ZU1hbmFnZW1lbnQucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
@@ -184,6 +188,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/danbu/Desktop/Prca Inż/Football_league_manager/System_do_zarządzania_ligą_piłkarską/Client/Pages/TeamsPages/TeamLineup.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVGVhbXNQYWdlc1xUZWFtTGluZXVwLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/danbu/Desktop/Prca Inż/Football_league_manager/System_do_zarządzania_ligą_piłkarską/Client/Pages/TeamsPages/TeamMatchDetails.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVGVhbXNQYWdlc1xUZWFtTWF0Y2hEZXRhaWxzLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/danbu/Desktop/Prca Inż/Football_league_manager/System_do_zarządzania_ligą_piłkarską/Client/Pages/TeamsPages/TeamPastMatches.razor]

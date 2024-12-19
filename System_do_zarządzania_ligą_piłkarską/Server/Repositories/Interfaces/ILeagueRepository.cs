@@ -17,10 +17,11 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories.Interface
 
         // League Master Panel:
 
-        Task<List<LeagueSeason>> GetAllLeaguesByLeagueMaster(string leagueMasterId);
+        Task<List<LeagueInfo>> GetAllLeaguesByLeagueMaster(string leagueMasterId);
         Task<List<LeagueSeason>> GetLeagueByLeagueMaster(string leagueMasterId, int leagueInfoId);
         Task<LeagueSeason> GetSeasonByLeagueMaster(string leagueMasterId, int leagueInfoId, int leagueSeasonId);
         Task DeleteLeague(int leagueId);
         Task UpdateLeagueSeason(LeagueSeason leagueSeason);
+        Task<LeagueInfo?> GetLeagueInfoById(int leagueInfoId);
     }
 }

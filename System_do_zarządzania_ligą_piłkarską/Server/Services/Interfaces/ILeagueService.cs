@@ -15,12 +15,13 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Services.Interfaces
 
         // League Master Panel:
 
-        Task<List<LeagueSeasonDTO>> GetAllLeaguesByLeagueMaster(string userId);
+        Task<List<LeagueInfoDTO>> GetAllLeaguesByLeagueMaster(string userId);
         Task<List<LeagueSeasonDTO>> GetLeagueByLeagueMaster(string userId, int leagueInfoId);
         Task<LeagueSeasonDTO> GetSeasonByLeagueMaster(string userId, int leagueInfoId, int leagueSeasonId);
         Task DeleteLeague(int leagueId);
         Task DeleteUserFromManagement(int leagueSeasonId, string leagueMasterPrimaryId);
         Task AssignUserToManagement(int leagueSeasonId, string leagueMasterSecondaryEmail);
         Task<bool> HasLeagueManagementRights(string userId);
+        Task CreateNewLeagueSeason(NewLeagueSeasonDTO newLeagueSeason);
     }
 }

@@ -1,10 +1,12 @@
 ﻿@using System_do_zarządzania_ligą_piłkarską.Shared.DTOs
 @using System_do_zarządzania_ligą_piłkarską.Client.Areas.LeagueMaster.Shared
+@using Microsoft.AspNetCore.Authorization
 
 @page "/league-master/leagues/{leagueInfoId:int}/{leagueSeasonId:int}"
 @layout LeagueMasterLayout
 @inject HttpClient Http
 @inject NavigationManager Navigation
+@attribute [Authorize(Roles = "LeagueMaster")]
 
 <PageTitle>Zarządzaj sezonem</PageTitle>
 
