@@ -18,6 +18,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Models
         public int TotalRedCardsGiven { get; set; }
         public int TotalRefereedMatches { get; set; }
         public int TotalPenaltiesAwarded { get; set; }
+        public virtual Image? Image { get; set; }
         public virtual ICollection<RefereeStat>  RefereeStats { get; set; } = new List<RefereeStat>();
         public virtual ICollection<Match> Matches { get; set; } = new List<Match>();
     }

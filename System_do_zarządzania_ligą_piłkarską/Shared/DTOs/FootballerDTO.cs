@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Images;
 using System_do_zarządzania_ligą_piłkarską.Shared.Enums;
 
 namespace System_do_zarządzania_ligą_piłkarską.Shared.DTOs
@@ -22,6 +23,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Shared.DTOs
         public int? Height { get; set; } // [cm]
         public int? Weight { get; set; } // [kg]
         public virtual TeamDTO? Team { get; set; }
+        public virtual ImageDTO Image { get; set; }
         //public virtual ICollection<FootballerStatDTO> FootballlerStats { get; set; } = new List<FootballerStatDTO>(); // to było zakomentowane
         //public virtual ICollection<TrophyDTO> Trophies { get; set; } = new List<TrophyDTO>();
     }

@@ -1,71 +1,46 @@
 ﻿@using System_do_zarządzania_ligą_piłkarską.Shared.DTOs
 
-<table class="table table-striped table-hover">
-    <thead>
-        <tr>
-            <th>Imię</th>
-            <th>Nazwisko</th>
-            <th>Numer</th>
-            <th>Narodowość</th>
-            <th>Wzrost</th>
-            <th>Waga</th>
-            <th>Rozegrane mecze</th>
-            <th>Gole</th>
-            <th>Asysty</th>
-            <th>Gole samobójcze</th>
-            <th>Żółte kartki</th>
-            <th>Czerwone kartki</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var footballer in players)
-        {
+<div class="table-responsive">
+    <table class="table table-bordered table-striped table-hover">
+        <thead class="table-success">
             <tr>
-                <td>@footballer.Footballer.FirstName</td>
-                <td>@footballer.Footballer.LastName</td>
-                <td>@footballer.Footballer.ShirtNumber</td>
-                <td>@footballer.Footballer.Nationality</td>
-                <td>@footballer.Footballer.Height</td>
-                <td>@footballer.Footballer.Weight</td>
-                <td>@footballer.MatchesPlayed</td>
-                <td>@footballer.Goals</td>
-                <td>@footballer.Assists</td>
-                <td>@footballer.OwnGoals</td>
-                <td>@footballer.YellowCards</td>
-                <td>@footballer.RedCards</td>
+                <th>Imię</th>
+                <th>Nazwisko</th>
+                <th>Numer</th>
+                <th>Narodowość</th>
+                <th>Wzrost</th>
+                <th>Waga</th>
+                <th>Rozegrane mecze</th>
+                <th>Gole</th>
+                <th>Asysty</th>
+                <th>Gole samobójcze</th>
+                <th>Żółte kartki</th>
+                <th>Czerwone kartki</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var footballer in players)
+            {
+                <tr>
+                    <td>@footballer.Footballer.FirstName</td>
+                    <td>@footballer.Footballer.LastName</td>
+                    <td>@footballer.Footballer.ShirtNumber</td>
+                    <td>@footballer.Footballer.Nationality</td>
+                    <td>@footballer.Footballer.Height</td>
+                    <td>@footballer.Footballer.Weight</td>
+                    <td>@footballer.MatchesPlayed</td>
+                    <td>@footballer.Goals</td>
+                    <td>@footballer.Assists</td>
+                    <td>@footballer.OwnGoals</td>
+                    <td>@footballer.YellowCards</td>
+                    <td>@footballer.RedCards</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
 
 @code {
     [Parameter]
     public List<FootballerStatDTO> players { get; set; }
 }
-
-<style>
-    .table thead {
-        background-color: #4CAF50;
-        color: white;
-    }
-
-    .table tbody tr:nth-child(even) {
-        background-color: #f2f2f2;
-    }
-
-    .table tbody tr:hover {
-        background-color: #f1f1f1;
-    }
-
-    .table th {
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-    }
-
-    .table td, .table th {
-        vertical-align: middle;
-        padding: 12px 15px;
-    }
-</style>
-
-

@@ -2,6 +2,7 @@
 using System_do_zarządzania_ligą_piłkarską.Server.Models;
 using System_do_zarządzania_ligą_piłkarską.Shared.DTOs;
 using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Footballers;
+using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Images;
 using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Leagues;
 using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Matches;
 using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Referees;
@@ -63,7 +64,8 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Mapping
                 .ForMember(dest => dest.TeamName, opt => opt.MapFrom(src => src.Team.Name))
                 .ReverseMap();
 
-
+            CreateMap<NewImageDTO, Image>();
+            CreateMap<Image, ImageDTO>();
         }
     }
 }

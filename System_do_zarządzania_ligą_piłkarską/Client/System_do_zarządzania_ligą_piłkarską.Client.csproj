@@ -96,4 +96,9 @@
     </Content>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\images\footballers\" />
+    <Folder Include="wwwroot\images\referees\" />
+  </ItemGroup>
+
 </Project>

@@ -79,7 +79,9 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
         public async Task<Team> GetTeamToManage(int teamId)
         {
             var team = await _context.Teams.
+                Include(x=>x.Image).
                 Include(x => x.Footballers).
+                ThenInclude(x=>x.Image).
                 FirstOrDefaultAsync(x => x.Id == teamId);
 
             return team;

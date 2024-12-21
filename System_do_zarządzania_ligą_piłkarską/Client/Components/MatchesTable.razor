@@ -69,7 +69,8 @@
 
     public void ShowMatchDetails(int matchId)
     {
-        Navigation.NavigateTo($"/matches/{matchId}");
+        var teamId = Matches.Where(x => x.Id == matchId).Select(x => x.HomeTeamId).FirstOrDefault();
+        Navigation.NavigateTo($"/teams/{teamId}/past-matches/{matchId}");
     }
 }
 

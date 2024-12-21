@@ -9,46 +9,51 @@
 
 <PageTitle>Szczegóły sędziego</PageTitle>
 
-<div class="button-container">
-    <button class="btn btn-primary" @onclick="GoToReferees">Wróć</button>
-</div>
-
-<div class="referee-grid">
-    <div class="referee-details-container">
-        @if (referee == null)
-        {
-            <p><em>Ładowanie...</em></p>
-        }
-        else
-        {
-            <div class="referee-details">
-                <h2>@referee.FirstName @referee.LastName</h2>
-                <p><strong>Data urodzenia:</strong> @referee.DateOfBirth.ToString("dd MMMM yyyy")</p>
-                <p><strong>Narodowość:</strong> @referee.Nationality</p>
-                @if (!string.IsNullOrEmpty(referee.Level))
-                {
-                    <p><strong>Poziom:</strong> @referee.Level</p>
-                }
-                <p><strong>Sędziowane mecze:</strong> @referee.TotalRefereedMatches</p>
-            </div>
-        }
+<div class="container mt-4">
+    <div class="row mb-3">
+        <div class="col text-center">
+            <button class="btn btn-primary" @onclick="GoToReferees">Wróć</button>
+        </div>
     </div>
 
-    <div class="referee-stats-container">
-        @if (referee == null)
-        {
-            <p><em>Ładowanie...</em></p>
-        }
-        else
-        {
-            <div class="referee-stats">
-                <h3>Statystyki kariery</h3>
-                <p><strong>Łączna liczba żółtych kartek:</strong> @referee.TotalYellowCardsGiven</p>
-                <p><strong>Łączna liczba czerwonych kartek:</strong> @referee.TotalRedCardsGiven</p>
-                <p><strong>Łączna liczba przyznanych rzutów karnych:</strong> @referee.TotalPenaltiesAwarded</p>
+    @if (referee == null)
+    {
+        <div class="row">
+            <div class="col text-center">
+                <p><em>Ładowanie...</em></p>
             </div>
-        }
-    </div>
+        </div>
+    }
+    else
+    {
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h2 class="card-title">@referee.FirstName @referee.LastName</h2>
+                        <p class="card-text"><strong>Data urodzenia:</strong> @referee.DateOfBirth.ToString("dd MMMM yyyy")</p>
+                        <p class="card-text"><strong>Narodowość:</strong> @referee.Nationality</p>
+                        @if (!string.IsNullOrEmpty(referee.Level))
+                        {
+                            <p class="card-text"><strong>Poziom:</strong> @referee.Level</p>
+                        }
+                        <p class="card-text"><strong>Sędziowane mecze:</strong> @referee.TotalRefereedMatches</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 mb-4">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h3 class="card-title">Statystyki kariery</h3>
+                        <p class="card-text"><strong>Łączna liczba żółtych kartek:</strong> @referee.TotalYellowCardsGiven</p>
+                        <p class="card-text"><strong>Łączna liczba czerwonych kartek:</strong> @referee.TotalRedCardsGiven</p>
+                        <p class="card-text"><strong>Łączna liczba przyznanych rzutów karnych:</strong> @referee.TotalPenaltiesAwarded</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
 </div>
 
 @code {
@@ -74,95 +79,3 @@
     }
 }
 
-<style>
-    .button-container {
-        display: flex;
-        justify-content: center;
-        margin-bottom: 20px;
-    }
-
-/*     .btn {
-        padding: 10px 20px;
-        background-color: #007bff;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        font-size: 16px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-    } */
-
-    .btn:hover {
-        background-color: #0056b3;
-    }
-
-    .referee-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 20px;
-        max-width: 1000px;
-        margin: 0 auto;
-        padding: 20px;
-        background-color: #f4f4f4;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-
-    .referee-details-container,
-    .referee-stats-container {
-        padding: 20px;
-        background-color: #ffffff;
-        border-radius: 10px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s ease;
-    }
-
-    .referee-details-container:hover,
-    .referee-stats-container:hover {
-        transform: scale(1.02);
-    }
-
-    .referee-details {
-        text-align: center;
-    }
-
-    .referee-details h2 {
-        font-size: 24px;
-        color: #333;
-        margin-bottom: 20px;
-        font-weight: 600;
-    }
-
-    .referee-details p {
-        font-size: 16px;
-        color: #555;
-        margin: 10px 0;
-    }
-
-    .referee-details p strong {
-        color: #000;
-    }
-
-    .referee-stats h3 {
-        font-size: 20px;
-        color: #333;
-        margin-bottom: 20px;
-        text-align: center;
-    }
-
-    .referee-stats p {
-        font-size: 16px;
-        color: #555;
-        margin: 10px 0;
-    }
-
-    .referee-stats p strong {
-        color: #000;
-    }
-
-    @@media (max-width: 768px) {
-        .referee-grid {
-            grid-template-columns: 1fr;
-        }
-    }
-</style>

@@ -4711,3 +4711,8 @@ C:\Users\danbu\Desktop\Prca Inż\Football_league_manager\System_do_zarządzania_
 C:\Users\danbu\Desktop\Prca Inż\Football_league_manager\System_do_zarządzania_ligą_piłkarską\Client\obj\Debug\net8.0\compressed\z84xz8rnf6.gz
 C:\Users\danbu\Desktop\Prca Inż\Football_league_manager\System_do_zarządzania_ligą_piłkarską\Client\obj\Debug\net8.0\compressed\jdrpm26d4b.gz
 C:\Users\danbu\Desktop\Prca Inż\Football_league_manager\System_do_zarządzania_ligą_piłkarską\Client\obj\Debug\net8.0\compressed\knpxofebyz.gz
+C:\Users\danbu\Desktop\Prca Inż\Football_league_manager\System_do_zarządzania_ligą_piłkarską\Client\bin\Debug\net8.0\wwwroot\_framework\Microsoft.AspNetCore.Http.Features.wasm
+C:\Users\danbu\Desktop\Prca Inż\Football_league_manager\System_do_zarządzania_ligą_piłkarską\Client\bin\Debug\net8.0\wwwroot\_framework\Microsoft.AspNetCore.Http.Features.wasm.gz
+C:\Users\danbu\Desktop\Prca Inż\Football_league_manager\System_do_zarządzania_ligą_piłkarską\Client\bin\Debug\net8.0\Microsoft.AspNetCore.Http.Features.dll
+C:\Users\danbu\Desktop\Prca Inż\Football_league_manager\System_do_zarządzania_ligą_piłkarską\Client\obj\Debug\net8.0\webcil\Microsoft.AspNetCore.Http.Features.wasm
+C:\Users\danbu\Desktop\Prca Inż\Football_league_manager\System_do_zarządzania_ligą_piłkarską\Client\obj\Debug\net8.0\compressed\vct0cu1vw1.gz

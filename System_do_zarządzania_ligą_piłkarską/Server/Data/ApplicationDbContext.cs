@@ -24,6 +24,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Data
         public DbSet<Favourite> Favourites { get; set; }
         public DbSet<MatchEvent> MatchEvents { get; set; }
         public DbSet<MatchFootballer> MatchFootballers { get; set; }
+        public DbSet<Image> Images { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options,
             IOptions<OperationalStoreOptions> operationalStoreOptions,
@@ -76,6 +77,8 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Data
                 .WithMany(t => t.AwayMatches)
                 .HasForeignKey(m => m.AwayTeamId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

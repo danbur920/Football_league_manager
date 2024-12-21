@@ -8,6 +8,7 @@
         public string Country { get; set; }
         public Level? Level { get; set; }
         public virtual ApplicationUser LeagueMasterPrimary { get; set; }
+        public virtual Image? Image { get; set; }
         public virtual ICollection<LeagueSeason> LeagueSeasons { get; set; }
     }
 

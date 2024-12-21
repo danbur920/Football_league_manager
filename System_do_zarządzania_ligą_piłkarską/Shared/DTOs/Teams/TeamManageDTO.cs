@@ -5,6 +5,7 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Images;
 using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Matches;
 
 namespace System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Teams
@@ -19,6 +20,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Teams
         public string Country { get; set; }
         public string Stadium { get; set; }
         public int YearOfFoundation { get; set; }
+        public virtual ImageDTO Image { get; set; }
         public virtual ICollection<ShortFootballerInfoDTO> Footballers { get; set; } = new List<ShortFootballerInfoDTO>();
     }
 }

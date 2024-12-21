@@ -17,6 +17,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Models
         public string Country { get; set; }
         public string Stadium { get; set; }
         public int YearOfFoundation { get; set; }
+        public virtual Image? Image { get; set; }
         public virtual ApplicationUser? Coach { get; set; }
         [JsonIgnore]
         public virtual ICollection<Match> HomeMatches { get; set; } = new List<Match>();

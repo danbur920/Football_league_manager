@@ -7,6 +7,7 @@
 @using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Matches
 @using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Footballers
 @using Microsoft.AspNetCore.Authorization
+@using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Images
 
 @page "/league-master/created-teams/{TeamId:int}"
 @layout LeagueMasterLayout
@@ -49,6 +50,21 @@
             <button type="submit" class="btn btn-primary">Zapisz zmiany</button>
         </EditForm>
 
+        @if (team.Image == null)
+        {
+            <label class="btn btn-sm btn-info">
+                Dodaj herb drużyny
+                <InputFile OnChange="e => UploadPhoto(e, team.Id, false)" class="d-none" />
+            </label>
+        }
+        else
+        {
+            <label class="btn btn-sm btn-warning mt-2">
+                Zmień herb drużyny
+                <InputFile OnChange="e => UploadPhoto(e, team.Id, false)" class="d-none" />
+            </label>
+        }
+
         <hr class="my-4" />
 
         <h4>Piłkarze drużyny</h4>
@@ -73,8 +89,23 @@
                         <td>@player.ShirtNumber</td>
                         <td>@PositionHelper.GetDisplayName(player.Position)</td>
                         <td>
-                            @* <button class="btn btn-sm btn-warning" @onclick="() => EditPlayer(player.Id)">Edytuj</button> *@
+                            @if (player.Image == null)
+                            {
+                                <label class="btn btn-sm btn-info">
+                                    Dodaj zdjęcie
+                                    <InputFile OnChange="e => UploadPhoto(e, player.Id, true)" class="d-none" />
+                                </label>
+                            }
+                            else
+                            {
+                                <br />
+                                <label class="btn btn-sm btn-warning mt-2">
+                                    Zmień zdjęcie
+                                    <InputFile OnChange="e => UploadPhoto(e, player.Id, true)" class="d-none" />
+                                </label>
+                            }
                         </td>
+
                     </tr>
                 }
             </tbody>
@@ -136,6 +167,7 @@
     private TeamManageDTO? team;
     private NewFootballerDTO newPlayer = new();
     private EditTeamDTO editTeam = new();
+    private NewImageDTO newImage = new();
 
     protected override async Task OnInitializedAsync()
     {
@@ -187,6 +219,43 @@
         else
         {
             AlertManager.DisplayAlert("Dodanie piłkarza nie powiodło się.", "danger");
+        }
+    }
+
+    private async Task UploadPhoto(InputFileChangeEventArgs e, int entityId, bool refersToFootballer)
+    {
+        if (e.File != null)
+        {
+            var file = e.File; 
+
+            // przesyłanie pliku i danych
+            var formData = new MultipartFormDataContent();
+            var stream = file.OpenReadStream(file.Size); 
+            formData.Add(new StreamContent(stream), "File", file.Name);
+
+
+            if(refersToFootballer)
+            {
+                formData.Add(new StringContent(entityId.ToString()), "FootballerId");
+                formData.Add(new StringContent(ImageType.Footballer.ToString()), "Type");
+            }
+            else
+            {
+                formData.Add(new StringContent(entityId.ToString()), "TeamId");
+                formData.Add(new StringContent(ImageType.Team.ToString()), "Type");
+            }
+
+            var response = await Http.PostAsync("api/images", formData);
+
+            if (response.IsSuccessStatusCode)
+            {
+                AlertManager.DisplayAlert("Zdjęcie zostało dodane.", "success");
+                await LoadTeam(); 
+            }
+            else
+            {
+                AlertManager.DisplayAlert("Nie udało się dodać zdjęcia.", "danger");
+            }
         }
     }
 

@@ -144,9 +144,10 @@
 
     protected override async Task OnInitializedAsync()
     {
-        PaginationManager.PageMax = (int)Math.Ceiling((double)PaginationManager.CollectionCount / PaginationManager.PageSize);
+        CalculateMaxPage();
         await GetUserId();
         await LoadLeagues();
+
         if(_userId != null)
         {
             await RefreshFavourites();
@@ -160,6 +161,11 @@
         allLeagues = response;
 
         return (allLeagues != null && allLeagues.Any());
+    }
+
+    private void CalculateMaxPage()
+    {
+        PaginationManager.PageMax = (int)Math.Ceiling((double)PaginationManager.CollectionCount / PaginationManager.PageSize);
     }
 
     private async Task GetUserId()
