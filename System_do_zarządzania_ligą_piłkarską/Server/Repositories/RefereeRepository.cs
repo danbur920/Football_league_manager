@@ -21,6 +21,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
         {
             var referee = await _context.Referees
                 .Where(x => x.Id == refereeId)
+                .Include(x=>x.Image)
                 .Include(x => x.RefereeStats)
                 .FirstOrDefaultAsync();
 
@@ -57,6 +58,12 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
         public async Task AddRefereeToTheSeason(RefereeStat newRefereeStat)
         {
             await _context.RefereeStats.AddAsync(newRefereeStat);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task AddNewReferee(Referee newReferee)
+        {
+            await _context.Referees.AddAsync(newReferee);
             await _context.SaveChangesAsync();
         }
     }

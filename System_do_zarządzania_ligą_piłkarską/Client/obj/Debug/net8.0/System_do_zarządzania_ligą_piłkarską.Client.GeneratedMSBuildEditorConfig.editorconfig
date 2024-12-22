@@ -46,6 +46,14 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTGVhZ3VlTWFzdGVyXFBhZ2VzXExlYWd1ZXNNYW5hZ2VtZW50XExlYWd1ZXMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/danbu/Desktop/Prca Inż/Football_league_manager/System_do_zarządzania_ligą_piłkarską/Client/Areas/LeagueMaster/Pages/RefereeManagement/CreatedReferees.razor]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTGVhZ3VlTWFzdGVyXFBhZ2VzXFJlZmVyZWVNYW5hZ2VtZW50XENyZWF0ZWRSZWZlcmVlcy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/danbu/Desktop/Prca Inż/Football_league_manager/System_do_zarządzania_ligą_piłkarską/Client/Areas/LeagueMaster/Pages/RefereeManagement/CreateReferee.razor]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTGVhZ3VlTWFzdGVyXFBhZ2VzXFJlZmVyZWVNYW5hZ2VtZW50XENyZWF0ZVJlZmVyZWUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/danbu/Desktop/Prca Inż/Football_league_manager/System_do_zarządzania_ligą_piłkarską/Client/Areas/LeagueMaster/Pages/SeasonManagement/AddMatch.razor]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTGVhZ3VlTWFzdGVyXFBhZ2VzXFNlYXNvbk1hbmFnZW1lbnRcQWRkTWF0Y2gucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 

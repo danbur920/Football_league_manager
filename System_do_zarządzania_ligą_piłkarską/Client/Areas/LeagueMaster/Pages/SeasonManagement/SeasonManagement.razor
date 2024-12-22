@@ -10,64 +10,79 @@
 
 <PageTitle>Zarządzaj sezonem</PageTitle>
 
-<div class="button-container">
-    <button class="btn btn-secondary" @onclick="BackToTheLeague">Wróć</button>
-    @* <button class="btn btn-secondary" @onclick="ShowMatches">Pokaż mecze</button> *@
-    <button class="btn btn-primary" @onclick="GoToNewMatch">Dodaj mecz</button>
-    <button class="btn btn-primary" @onclick="GoToNewReferee">Dodaj sędziego</button>
-    <button class="btn btn-primary" @onclick="GoToNewTeam">Dodaj drużynę</button>
-    <button class="btn btn-primary" @onclick="GoToMatchManagement">Zarządzaj meczami</button>
+<div class="container py-5">
+    <!-- Nagłówek -->
+    <div class="row mb-4 align-items-center">
+        <div class="col-md-9">
+            <h1 class="display-5 fw-bold text-primary">@season?.LeagueInfo.Name</h1>
+            <div class="button-container mt-3">
+                <button class="btn btn-secondary me-2" @onclick="BackToTheLeague">Wróć</button>
+                <button class="btn btn-primary me-2" @onclick="GoToNewMatch">Dodaj mecz</button>
+                <button class="btn btn-primary me-2" @onclick="GoToNewReferee">Dodaj sędziego</button>
+                <button class="btn btn-primary me-2" @onclick="GoToNewTeam">Dodaj drużynę</button>
+                <button class="btn btn-primary" @onclick="GoToMatchManagement">Zarządzaj meczami</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tabela -->
+    <div class="row">
+        <div class="col">
+            <h3 class="text-primary">Aktualna tabela sezonu @($"{season?.Season.ToString()}"):</h3>
+
+            <table class="table table-hover table-bordered shadow-sm mt-4">
+                <thead class="table-primary">
+                    <tr>
+                        <th>#</th>
+                        <th>Drużyna</th>
+                        <th>M</th>
+                        <th>W</th>
+                        <th>R</th>
+                        <th>P</th>
+                        <th>G+/-</th>
+                        <th>Punkty</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (teams == null)
+                    {
+                        <tr>
+                            <td colspan="8" class="text-center">
+                                <span class="spinner-border text-primary" role="status"></span>
+                                <span class="visually-hidden">Ładowanie...</span>
+                            </td>
+                        </tr>
+                    }
+                    else if (teams.Count == 0)
+                    {
+                        <tr>
+                            <td colspan="8" class="text-center">Brak danych do wyświetlenia</td>
+                        </tr>
+                    }
+                    else
+                    {
+                        int position = 1;
+                        foreach (var team in teams)
+                        {
+                            <tr>
+                                <td>@position</td>
+                                <td>@team.TeamName</td>
+                                <td>@team.MatchesPlayed</td>
+                                <td>@team.Wins</td>
+                                <td>@team.Draws</td>
+                                <td>@team.Losses</td>
+                                <td>@team.GoalBalance</td>
+                                <td>@team.Points</td>
+                            </tr>
+                            position++;
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
 
-<h3>Aktualna tabela sezonu @($"{season?.Season.ToString()}"):</h3>
-
-
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>#</th>
-            <th>Drużyna</th>
-            <th>M</th>
-            <th>W</th>
-            <th>R</th>
-            <th>P</th>
-            <th>G+/-</th>
-            <th>Punkty</th>
-        </tr>
-    </thead>
-    <tbody>
-        @if (teams == null)
-        {
-            <tr>
-                <td colspan="8">Ładowanie...</td>
-            </tr>
-        }
-        else if (teams.Count == 0)
-        {
-            <tr>
-                <td colspan="8">Brak danych do wyświetlenia</td>
-            </tr>
-        }
-        else
-        {
-            int position = 1;
-            foreach (var team in teams)
-            {
-                <tr>
-                    <td>@position</td>
-                    <td>@team.TeamName</td>
-                    <td>@team.MatchesPlayed</td>
-                    <td>@team.Wins</td>
-                    <td>@team.Draws</td>
-                    <td>@team.Losses</td>
-                    <td>@team.GoalBalance</td>
-                    <td>@team.Points</td>
-                </tr>
-                position++;
-            }
-        }
-    </tbody>
-</table>
 
 @code {
     [Parameter] public int leagueInfoId { get; set; }

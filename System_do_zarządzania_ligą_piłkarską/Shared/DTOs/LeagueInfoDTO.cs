@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Images;
 
 namespace System_do_zarządzania_ligą_piłkarską.Shared.DTOs
 {
@@ -14,6 +15,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Shared.DTOs
         public string Name { get; set; }
         public string Country { get; set; }
         public Level? Level { get; set; }
+        public virtual ImageDTO Image { get; set; }
         public virtual ApplicationUserDTO LeagueMasterPrimary { get; set; }
         [JsonIgnore]
         public virtual ICollection<LeagueSeasonDTO> LeagueSeasons { get; set; }

@@ -19,58 +19,74 @@
     <Modal Title="Usuń" Body="Czy na pewno chcesz usunąć wybraną ligę? Zmiany są nieodwracalne!" OnConfirm="HandleConfirm" OnCancel="HandleCancel" />
 }
 
-<h3>Twoje ligi</h3>
+<div class="container py-5">
+    <div class="row mb-4">
+        <div class="col text-center">
+            <h3 class="display-5 fw-bold text-primary">Twoje ligi</h3>
+        </div>
+    </div>
 
-<Alert Message="@AlertManager.Message" Type="@AlertManager.Type" IsVisible="@AlertManager.IsVisible" />
+    <Alert Message="@AlertManager.Message" Type="@AlertManager.Type" IsVisible="@AlertManager.IsVisible" />
 
-@if (leagues != null)
-{
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Nazwa</th>
-                <th>Kraj</th>
-                <th>Poziom ligi</th>
-                <th>Przejdź do ligi</th>
-                <th>Działania</th>
-            </tr>
-        </thead>
-        <tbody>
-            @if (leagues.Count == 0)
-            {
+    @if (leagues != null)
+    {
+        <table class="table table-hover table-bordered shadow-sm">
+            <thead class="table-primary">
                 <tr>
-                    <td colspan="8">Brak danych do wyświetlenia</td>
+                    <th class="text-center">Nazwa</th>
+                    <th class="text-center">Kraj</th>
+                    <th class="text-center">Poziom ligi</th>
+                    <th class="text-center">Przejdź do ligi</th>
+                    <th class="text-center">Działania</th>
                 </tr>
-            }
-            else
-            {
-                @foreach (var league in leagues)
+            </thead>
+            <tbody>
+                @if (leagues.Count == 0)
                 {
                     <tr>
-                        <td>@league.Name</td>
-                        <td>@league.Country</td>
-                        <td>@league.Level</td>
-                        <td>
-                            <button class="btn btn-link" @onclick="() => GoToTheLeague(league.Id)">
-                                <i class="fas fa-arrow-right"></i> Zarządzaj ligą
-                            </button>
-                        </td>
-                        <td>
-                            @if (IsPrimaryLeagueMaster(league.LeagueMasterPrimaryId))
-                            {
-                                <button class="btn btn-danger" @onclick="()=>ShowRemoveModal(league.Id)">Usuń ligę</button>
-                            }
-                            else
-                            {
-                                <i class="fas fa-lock text-muted"></i>
-                            }
-                        </td>
+                        <td colspan="5" class="text-center">Brak danych do wyświetlenia</td>
                     </tr>
                 }
-            }
-        </tbody>
-    </table>
-}
+                else
+                {
+                    @foreach (var league in leagues)
+                    {
+                        <tr>
+                            <td class="align-middle text-center">@league.Name</td>
+                            <td class="align-middle text-center">@league.Country</td>
+                            <td class="align-middle text-center">@league.Level</td>
+                            <td class="align-middle text-center">
+                                <button class="btn btn-link text-primary" @onclick="() => GoToTheLeague(league.Id)">
+                                    <i class="fas fa-arrow-right"></i> Zarządzaj ligą
+                                </button>
+                            </td>
+                            <td class="align-middle text-center">
+                                @if (IsPrimaryLeagueMaster(league.LeagueMasterPrimaryId))
+                                {
+                                    <button class="btn btn-danger" @onclick="()=>ShowRemoveModal(league.Id)">
+                                        <i class="fas fa-trash-alt"></i> Usuń ligę
+                                    </button>
+                                }
+                                else
+                                {
+                                    <i class="fas fa-lock text-muted" title="Brak uprawnień do usunięcia"></i>
+                                }
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <div class="text-center">
+            <span class="spinner-border text-primary" role="status"></span>
+            <span class="visually-hidden">Ładowanie...</span>
+        </div>
+    }
+</div>
+
 
 
 

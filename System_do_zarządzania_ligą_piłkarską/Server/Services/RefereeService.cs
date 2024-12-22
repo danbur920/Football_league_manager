@@ -67,6 +67,12 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Services
             var referees = await _refereeRepository.GetAllRefereesFromSpecificSeason(leagueSeasonId);
             return _mapper.Map<List<ShortRefereeInfoDTO>>(referees);
         }
+
+        public async Task AddNewReferee(NewRefereeDTO newReferee)
+        {
+            var mappedReferee = _mapper.Map<Referee>(newReferee);
+            await _refereeRepository.AddNewReferee(mappedReferee);
+        }
     }
 }
 

@@ -1,0 +1,117 @@
+﻿@using System_do_zarządzania_ligą_piłkarską.Shared.DTOs
+@using System_do_zarządzania_ligą_piłkarską.Client.Areas.LeagueMaster.Shared
+@using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Matches
+@using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Referees
+@using System_do_zarządzania_ligą_piłkarską.Client.Extensions
+@using System_do_zarządzania_ligą_piłkarską.Client.Components
+@using Microsoft.AspNetCore.Authorization
+
+@page "/league-master/add-new-referee"
+@layout LeagueMasterLayout
+@inject HttpClient Http
+@inject NavigationManager Navigation
+@inject AlertManager AlertManager
+@attribute [Authorize(Roles = "LeagueMaster")]
+
+<PageTitle>Dodawanie sędziego</PageTitle>
+
+<div class="button-container">
+    <button class="btn btn-secondary" @onclick="BackToStart">Wróć</button>
+</div>
+
+<h3>Dodaj sędziego</h3>
+
+@if (newReferee != null)
+{
+    <EditForm Model="newReferee" OnValidSubmit="HandleValidSubmit">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="firstName" class="form-label fw-bold">Imię</label>
+                <InputText id="firstName" class="form-control shadow-sm" @bind-Value="newReferee.FirstName" />
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label for="lastName" class="form-label fw-bold">Nazwisko</label>
+                <InputText id="lastName" class="form-control shadow-sm" @bind-Value="newReferee.LastName" />
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label for="nationality" class="form-label fw-bold">Narodowość</label>
+                <InputText id="nationality" class="form-control shadow-sm" @bind-Value="newReferee.Nationality" />
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label for="level" class="form-label fw-bold">Poziom</label>
+                <InputText id="level" class="form-control shadow-sm" @bind-Value="newReferee.Level" />
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label for="birthday" class="form-label fw-bold">Data urodzenia</label>
+                <InputDate id="birthday" class="form-control shadow-sm" @bind-Value="newReferee.DateOfBirth" />
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Dodaj nowego sędziego</button>
+    </EditForm>
+}
+else
+{
+    <p>Ładowanie...</p>
+}
+
+<Alert Message="@AlertManager.Message" Type="@AlertManager.Type" IsVisible="@AlertManager.IsVisible" />
+
+
+@code {
+    private NewRefereeDTO newReferee;
+
+    protected override async Task OnInitializedAsync()
+    {
+        newReferee = new NewRefereeDTO();
+        newReferee.DateOfBirth = new DateOnly(1990, 1, 1);
+    }
+
+    private async Task HandleValidSubmit()
+    {
+        try
+        {
+            var response = await Http.PostAsJsonAsync("api/referees/league-master/add-new-referee", newReferee);
+
+            if (response.IsSuccessStatusCode)
+            {
+                AlertManager.DisplayAlert($"Dodano sędziego {RefereeInfo()} do wybranego sezonu!", "success");
+                Clear();
+            }
+            else
+            {
+                AlertManager.DisplayAlert($"Nie udało się dodać sędziego {RefereeInfo()} do wybranego sezonu.", "danger");
+            }
+        }
+        catch (Exception ex)
+        {
+            AlertManager.DisplayAlert($"Nie udało się dodać sędziego {RefereeInfo()} do wybranego sezonu.", "danger");
+        }
+    }
+
+    private string RefereeInfo()
+    {
+        return $"{newReferee.FirstName} {newReferee.LastName}";
+    }
+
+    private void Clear()
+    {
+        newReferee.FirstName = string.Empty;
+        newReferee.LastName = string.Empty;
+        newReferee.Level = string.Empty;
+        newReferee.DateOfBirth = new DateOnly(1990, 1, 1);
+        newReferee.Nationality = string.Empty;
+    }
+
+    private void BackToStart()
+    {
+        Navigation.NavigateTo($"/league-master");
+    }
+}

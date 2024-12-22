@@ -3,6 +3,7 @@
 @using System_do_zarządzania_ligą_piłkarską.Client.Extensions
 @using System_do_zarządzania_ligą_piłkarską.Client.Components
 @using Microsoft.AspNetCore.Authorization
+@using System_do_zarządzania_ligą_piłkarską.Shared.Enums
 
 @page "/league-master/leagues/{leagueInfoId:int}"
 @layout LeagueMasterLayout
@@ -14,90 +15,118 @@
 
 <PageTitle>Sezony</PageTitle>
 
-<div class="button-container">
-    <button class="btn btn-secondary" @onclick="GoBackToTheLeagues">Wróć</button>
-    <button class="btn btn-primary" @onclick="GoToAddNewSeason">Dodaj sezon</button>
-</div>
-
-
-@if(seasons == null)
-{
-    <span>Ładowanie...</span>
-}
-else
-{
-    <h3>Sezony ligi @leagueName:</h3>
-
-    <Alert Message="@AlertManager.Message" Type="@AlertManager.Type" IsVisible="@AlertManager.IsVisible" />
-
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Sezon</th>
-                <th>Rozpoczęcie sezonu</th>
-                <th>Zakończenie sezonu</th>
-                <th>Rozegrane mecze</th>
-                <th>Zarządzaj</th>
-            </tr>
-        </thead>
-        <tbody>
-            @if (seasons == null)
+<div class="container py-5">
+    <div class="row mb-4 align-items-center">
+        <div class="col-md-3 text-center">
+            @if (leagueInfo?.Image?.Path != null)
             {
-                <tr>
-                    <td colspan="8">Ładowanie...</td>
-                </tr>
-            }
-            else if (seasons.Count == 0)
-            {
-                <tr>
-                    <td colspan="8">Brak danych do wyświetlenia</td>
-                </tr>
+                <img src="@leagueInfo.Image.Path" alt="Herb ligi" class="img-fluid rounded shadow" style="max-height: 200px; object-fit: contain;" />
             }
             else
             {
-                @foreach (var season in seasons)
+                <div class="alert alert-warning text-center">
+                    Brak herbu dla tej ligi.
+                </div>
+            }
+        </div>
+        <div class="col-md-9">
+            <h1 class="display-5 fw-bold text-primary">@leagueName</h1>
+            <div class="button-container mt-3">
+                <button class="btn btn-secondary me-2" @onclick="GoBackToTheLeagues">Wróć</button>
+                <button class="btn btn-primary me-2" @onclick="GoToAddNewSeason">Dodaj sezon</button>
+                @if (IsPrimaryLeagueMaster(leagueInfo?.LeagueMasterPrimaryId))
+                {
+                    @if (leagueInfo.Image == null)
+                    {
+                        <label class="btn btn-info me-2">
+                            Dodaj herb ligi
+                            <InputFile OnChange="e => UploadPhoto(e, leagueInfo.Id)" class="d-none" />
+                        </label>
+                    }
+                    else
+                    {
+                        <label class="btn btn-warning">
+                            Zmień herb ligi
+                            <InputFile OnChange="e => UploadPhoto(e, leagueInfo.Id)" class="d-none" />
+                        </label>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+
+    @if (seasons == null)
+    {
+        <div class="text-center">
+            <span class="spinner-border text-primary" role="status"></span>
+            <span class="visually-hidden">Ładowanie...</span>
+        </div>
+    }
+    else
+    {
+        <h3 class="mb-4">Sezony ligi @leagueName:</h3>
+
+        <Alert Message="@AlertManager.Message" Type="@AlertManager.Type" IsVisible="@AlertManager.IsVisible" />
+
+        <table class="table table-hover table-bordered shadow-sm">
+            <thead class="table-primary">
+                <tr>
+                    <th>Sezon</th>
+                    <th>Rozpoczęcie sezonu</th>
+                    <th>Zakończenie sezonu</th>
+                    <th>Rozegrane mecze</th>
+                    <th>Zarządzaj</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (seasons.Count == 0)
                 {
                     <tr>
-                        <td>@season.Season</td>
-                        <td>@season.LeagueStartDate</td>
-                        <td>@season.LeagueEndDate</td>
-                        <td>@season.MatchesPlayed</td>
-                        <td>
-                            <button class="btn btn-link" @onclick="() => GoToTheSeason(season.Id)">
-                                <i class="fas fa-arrow-right"></i> Przejdź do sezonu
-                            </button>
-                             @if (IsPrimaryLeagueMaster(season.LeagueInfo.LeagueMasterPrimaryId) && IsSecondaryLeagueMaster(season.LeagueMasterSecondaryId))
-                            {
-                                // jeśli jest pierwszorzędnym i drugorzędnym to można przypisać drugorzędnego
-
-
-                                <InputText @bind-Value="userEmailToAssign" Placeholder="Wpisz e-mail zarządcy sezonu" />
-                                <button class="btn btn-primary" @onclick="() => AssignUserToManagement(season.Id, userEmailToAssign)">
-                                    Zatwierdź zarządce
-                                </button>
-                            }
-                            else if (IsPrimaryLeagueMaster(season.LeagueInfo.LeagueMasterPrimaryId) && !IsSecondaryLeagueMaster(season.LeagueMasterSecondaryId))
-                            {
-                                <span>@season.LeagueMasterSecondary.FirstName @season.LeagueMasterSecondary.LastName</span>
-                                <button class="btn btn-danger" @onclick="() => DeleteUserFromManagement(season.Id, season.LeagueInfo.LeagueMasterPrimaryId)">
-                                    Usuń zarządce
-                                </button>
-                            }
-                            else if (!IsPrimaryLeagueMaster(season.LeagueInfo.LeagueMasterPrimaryId) && IsSecondaryLeagueMaster(season.LeagueMasterSecondaryId))
-                            {
-                                <span>Jesteś drugorzędnym zarządcą</span>
-                                // jeśli jest drugorzędnym ale nie pierwszorzędnym to może zrezygnować z prowadzenia sezonu i przypisać pierwszorzędnego
-                            } 
-                        </td>
+                        <td colspan="5" class="text-center">Brak danych do wyświetlenia</td>
                     </tr>
                 }
-            }
-        </tbody>
-    </table>
-}
-@* <button class="btn btn-danger" @onclick="()=>ShowRemoveModal(league.LeagueInfoId)">Usuń ligę</button> *@
+                else
+                {
+                    @foreach (var season in seasons)
+                    {
+                        <tr>
+                            <td>@season.Season</td>
+                            <td>@season.LeagueStartDate?.ToString("dd MMM yyyy")</td>
+                            <td>@season.LeagueEndDate?.ToString("dd MMM yyyy")</td>
+                            <td>@season.MatchesPlayed</td>
+                            <td>
+                                <button class="btn btn-link text-primary" @onclick="() => GoToTheSeason(season.Id)">
+                                    <i class="fas fa-arrow-right"></i> Przejdź
+                                </button>
+                                @if (IsPrimaryLeagueMaster(season.LeagueInfo.LeagueMasterPrimaryId) && IsSecondaryLeagueMaster(season.LeagueMasterSecondaryId))
+                                {
+                                    <div class="mt-2">
+                                        <InputText @bind-Value="userEmailToAssign" Placeholder="E-mail zarządcy" class="form-control mb-2" />
+                                        <button class="btn btn-primary" @onclick="() => AssignUserToManagement(season.Id, userEmailToAssign)">
+                                            Przypisz zarządcę
+                                        </button>
+                                    </div>
+                                }
+                                else if (IsPrimaryLeagueMaster(season.LeagueInfo.LeagueMasterPrimaryId) && !IsSecondaryLeagueMaster(season.LeagueMasterSecondaryId))
+                                {
+                                    <span>@season.LeagueMasterSecondary?.FirstName @season.LeagueMasterSecondary?.LastName</span>
+                                    <button class="btn btn-danger mt-2" @onclick="() => DeleteUserFromManagement(season.Id, season.LeagueInfo.LeagueMasterPrimaryId)">
+                                        Usuń zarządcę
+                                    </button>
+                                }
+                                else if (!IsPrimaryLeagueMaster(season.LeagueInfo.LeagueMasterPrimaryId) && IsSecondaryLeagueMaster(season.LeagueMasterSecondaryId))
+                                {
+                                    <span>Jesteś drugorzędnym zarządcą</span>
+                                }
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    }
+</div>
 
-@* <button class="btn btn-danger" @onclick="()=>ShowRemoveModal(league.LeagueInfoId)">Usuń ligę</button> *@
 
 @code {
     [Parameter] public int leagueInfoId { get; set; }
@@ -105,6 +134,7 @@ else
     private string? userEmailToAssign = string.Empty;
 
     private List<LeagueSeasonDTO>? seasons;
+    private LeagueInfoDTO? leagueInfo;
 
     protected override async Task OnInitializedAsync()
     {
@@ -115,6 +145,9 @@ else
     private async Task LoadSeasons()
     {
         seasons = await Http.GetFromJsonAsync<List<LeagueSeasonDTO>>($"api/leagues/league-master/{leagueInfoId}");
+
+        if (seasons != null)
+            leagueInfo = seasons.FirstOrDefault()?.LeagueInfo;
     }
 
     private void AssignLeagueName()
@@ -185,6 +218,31 @@ else
         else
         {
             AlertManager.DisplayAlert($"Nie udało się usunąć zarządcy z wybranego sezonu.", "danger");
+        }
+    }
+
+    private async Task UploadPhoto(InputFileChangeEventArgs e, int entityId)
+    {
+        if (e.File != null)
+        {
+            var file = e.File;
+
+            var formData = new MultipartFormDataContent();
+            var stream = file.OpenReadStream(file.Size);
+            formData.Add(new StreamContent(stream), "File", file.Name);
+            formData.Add(new StringContent(entityId.ToString()), "LeagueId");
+            formData.Add(new StringContent(ImageType.League.ToString()), "Type");
+
+            var response = await Http.PostAsync("api/images", formData);
+
+            if (response.IsSuccessStatusCode)
+            {
+                AlertManager.DisplayAlert("Zdjęcie zostało dodane.", "success");
+            }
+            else
+            {
+                AlertManager.DisplayAlert("Nie udało się dodać zdjęcia.", "danger");
+            }
         }
     }
 }

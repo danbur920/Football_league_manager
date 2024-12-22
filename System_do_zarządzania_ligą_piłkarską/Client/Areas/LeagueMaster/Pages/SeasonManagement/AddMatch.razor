@@ -15,86 +15,98 @@
 
 <PageTitle>Dodawanie meczu</PageTitle>
 
-<div class="button-container">
-    <button class="btn btn-secondary" @onclick="BackToTheSeasonManagement">Wróć</button>
+<div class="container py-5">
+    <div class="row mb-4 align-items-center">
+        <div class="col">
+            <button class="btn btn-secondary" @onclick="BackToTheSeasonManagement">
+                <i class="fas fa-arrow-left"></i> Wróć
+            </button>
+            <h3 class="mt-4 text-primary">Dodaj mecz</h3>
+        </div>
+    </div>
+
+    @if (teams != null && newMatch != null)
+    {
+        <EditForm Model="newMatch" OnValidSubmit="HandleValidSubmit">
+            <DataAnnotationsValidator />
+            <ValidationSummary class="alert alert-danger" />
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="home" class="form-label fw-bold">Gospodarz</label>
+                    <select id="home" class="form-select shadow-sm" @onchange="SetHomeTeamAndStadium">
+                        <option value="">-- Wybierz gospodarza --</option>
+                        @foreach (var home in teams)
+                        {
+                            <option value="@home.TeamId">@home.TeamName</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label for="away" class="form-label fw-bold">Gość</label>
+                    <select id="away" class="form-select shadow-sm" @bind="newMatch.AwayTeamId">
+                        <option value="">-- Wybierz gościa --</option>
+                        @foreach (var away in teams)
+                        {
+                            <option value="@away.TeamId">@away.TeamName</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label for="referee" class="form-label fw-bold">Sędzia</label>
+                    <select id="referee" class="form-select shadow-sm" @bind="newMatch.RefereeId">
+                        <option value="">-- Wybierz sędziego --</option>
+                        @foreach (var referee in referees)
+                        {
+                            <option value="@referee.Id">@referee.FirstName @referee.LastName</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label for="round" class="form-label fw-bold">Kolejka</label>
+                    <select id="round" class="form-select shadow-sm" @bind="newMatch.Round">
+                        <option value="">-- Wybierz kolejkę --</option>
+                        @for (int i = 1; i <= 50; i++)
+                        {
+                            <option value="@i">@i</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label for="matchDate" class="form-label fw-bold">Data meczu</label>
+                    <InputDate id="matchDate" class="form-control shadow-sm" @bind-Value="newMatch.MatchDate" />
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label for="matchTime" class="form-label fw-bold">Godzina meczu</label>
+                    <InputDate Type="InputDateType.Time" id="matchTime" class="form-control shadow-sm" @bind-Value="newMatch.MatchTime" />
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label for="stadium" class="form-label fw-bold">Stadion</label>
+                    <InputText id="stadium" class="form-control shadow-sm" @bind-Value="newMatch.FootballStadium" readonly />
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary mt-3">
+                <i class="fas fa-plus"></i> Dodaj mecz
+            </button>
+        </EditForm>
+    }
+    else
+    {
+        <div class="text-center">
+            <span class="spinner-border text-primary" role="status"></span>
+            <span class="visually-hidden">Ładowanie...</span>
+        </div>
+    }
+
+    <Alert Message="@AlertManager.Message" Type="@AlertManager.Type" IsVisible="@AlertManager.IsVisible" />
 </div>
-
-<h3>Dodaj mecz</h3>
-
-@if (teams != null && newMatch != null)
-{
-    <EditForm Model="newMatch" OnValidSubmit="HandleValidSubmit">
-        <DataAnnotationsValidator />
-        <ValidationSummary />
-
-        <div class="mb-3">
-            <label for="home" class="form-label">Gospodarz</label>
-            <select id="home" class="form-select" @onchange="SetHomeTeamAndStadium">
-                <option value="">-- Wybierz gospodarza --</option> 
-                @foreach (var home in teams)
-                {
-                    <option value="@home.TeamId">@home.TeamName</option>
-                }
-            </select>
-        </div>
-
-        <div class="mb-3">
-            <label for="away" class="form-label">Gość</label>
-            <select id="away" class="form-select" @bind="newMatch.AwayTeamId">
-                <option value="">-- Wybierz gościa --</option>
-                @foreach (var away in teams)
-                {
-                    <option value="@away.TeamId">@away.TeamName</option>
-                }
-            </select>
-        </div>
-
-        <div class="mb-3">
-            <label for="referee" class="form-label">Sędzia</label>
-            <select id="referee" class="form-select" @bind="newMatch.RefereeId">
-                <option value="">-- Wybierz sędziego --</option>
-                @foreach (var referee in referees)
-                {
-                    <option value="@referee.Id">@referee.FirstName @referee.LastName</option>
-                }
-            </select>
-        </div>
-
-        <div class="mb-3">
-            <label for="round" class="form-label">Kolejka</label>
-            <select id="round" class="form-select" @bind="newMatch.Round">
-                <option value="">-- Wybierz kolejkę --</option>
-                @for (int i = 1; i <= 50; i++)
-                {
-                    <option value="@newMatch.Round">@i</option>
-                }
-            </select>
-        </div>
-
-        <div class="mb-3">
-            <label for="matchDate" class="form-label">Data meczu</label>
-            <InputDate id="matchDate" class="form-control" @bind-Value="newMatch.MatchDate" />
-        </div>
-
-        <div class="mb-3">
-            <label for="matchTime" class="form-label">Godzina meczu</label>
-            <InputDate Type="InputDateType.Time" id="matchTime" class="form-control" @bind-Value="newMatch.MatchTime" />
-        </div>
-
-        <div class="mb-3">
-            <label for="stadium" class="form-label">Stadion</label>
-            <InputText id="stadium" class="form-control" @bind-Value="newMatch.FootballStadium" readonly />
-        </div>
-
-        <button type="submit" class="btn btn-primary">Dodaj mecz</button>
-    </EditForm>
-}
-else
-{
-    <p>Ładowanie...</p>
-}
-
-<Alert Message="@AlertManager.Message" Type="@AlertManager.Type" IsVisible="@AlertManager.IsVisible" />
 
 
 @code {
@@ -110,12 +122,18 @@ else
 
     protected override async Task OnInitializedAsync()
     {
+        await LoadData();
+    }
+
+
+    private async Task LoadData()
+    {
         newMatch = new NewMatchDTO();
+        newMatch.MatchDate = new DateOnly(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
         season = await Http.GetFromJsonAsync<LeagueSeasonDTO>($"api/leagues/league-master/{leagueInfoId}/{leagueSeasonId}");
         teams = await Http.GetFromJsonAsync<List<TeamStatDTO>>($"api/leagues/{leagueInfoId}/table");
         referees = await Http.GetFromJsonAsync<List<ShortRefereeInfoDTO>>($"api/referees/league-master/specific-season/{leagueSeasonId}");
     }
-
     private async Task HandleValidSubmit()
     {
         try
@@ -170,7 +188,7 @@ else
         newMatch.Round = default;
         newMatch.HomeTeamId = default;
         newMatch.AwayTeamId = default;
-        newMatch.MatchDate = default;
+        newMatch.MatchDate = new DateOnly(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
         newMatch.MatchTime = default;
         newMatch.FootballStadium = default;
     }

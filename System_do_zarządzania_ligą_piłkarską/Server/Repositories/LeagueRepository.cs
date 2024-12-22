@@ -28,7 +28,10 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
 
         public async Task<LeagueSeason> GetLeagueById(int id)
         {
-            var league = await _context.LeagueSeasons.Include(x => x.LeagueInfo).FirstOrDefaultAsync(x => x.Id == id);
+            var league = await _context.LeagueSeasons.
+                Include(x => x.LeagueInfo).
+                ThenInclude(x => x.Image).
+                FirstOrDefaultAsync(x => x.Id == id);
             return league;
         }
 
@@ -100,8 +103,9 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
         {
             var leagues = await _context.LeagueSeasons.
                 Where(x => (x.LeagueMasterSecondaryId == leagueMasterId || x.LeagueInfo.LeagueMasterPrimaryId == leagueMasterId) && x.LeagueInfoId == leagueInfoId).
-                Include(x=>x.LeagueMasterSecondary).
+                Include(x => x.LeagueMasterSecondary).
                 Include(x => x.LeagueInfo).
+                ThenInclude(x=>x.Image).
                 ToListAsync();
 
             return leagues;
@@ -133,7 +137,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
         public async Task<List<LeagueInfo>> GetLeaguesWithSeasons()
         {
             var leagues = await _context.LeagueInfos.
-                Include(x=>x.LeagueSeasons).
+                Include(x => x.LeagueSeasons).
                 ToListAsync();
             return leagues;
         }

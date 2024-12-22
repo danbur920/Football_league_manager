@@ -66,6 +66,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Mapping
 
             CreateMap<NewImageDTO, Image>();
             CreateMap<Image, ImageDTO>();
+            CreateMap<NewRefereeDTO, Referee>();
         }
     }
 }

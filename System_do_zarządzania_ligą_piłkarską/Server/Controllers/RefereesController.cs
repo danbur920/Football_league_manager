@@ -55,5 +55,12 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Controllers
             await _refereeService.AddRefereeToTheSeason(newRefereeDTO);
             return Ok();
         }
+
+        [HttpPost("league-master/add-new-referee")]
+        public async Task<IActionResult> AddNewReferee(NewRefereeDTO newReferee)
+        {
+            await _refereeService.AddNewReferee(newReferee);
+            return Ok();
+        }
     }
 }

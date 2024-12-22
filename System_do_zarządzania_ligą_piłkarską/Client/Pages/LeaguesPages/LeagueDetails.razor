@@ -7,36 +7,68 @@
 @inject PublicClient PublicClient
 @inject NavigationManager Navigation
 
+<PageTitle>Szczegóły Ligi</PageTitle>
+
 <div class="container py-5">
+    <!-- Nagłówek strony -->
     <div class="text-center mb-5">
         <h1 class="display-4 fw-bold text-primary">Szczegóły Ligi</h1>
     </div>
 
+    <!-- Sekcja z przyciskami nawigacji -->
     <div class="text-center mb-4">
-        <button class="btn btn-primary me-2 shadow-sm" @onclick="ShowTable">
-            <i class="fas fa-table"></i> Tabela
+        <button class="btn btn-primary btn-lg me-2 shadow-sm" @onclick="ShowTable">
+            <i class="fas fa-table me-2"></i> Tabela
         </button>
-        <button class="btn btn-primary me-2 shadow-sm" @onclick="ShowScorers">
-            <i class="fas fa-trophy"></i> Strzelcy
+        <button class="btn btn-primary btn-lg me-2 shadow-sm" @onclick="ShowScorers">
+            <i class="fas fa-trophy me-2"></i> Strzelcy
         </button>
-        <button class="btn btn-secondary shadow-sm" @onclick="GoBack">
-            <i class="fas fa-arrow-left"></i> Wróć
+        <button class="btn btn-secondary btn-lg shadow-sm" @onclick="GoBack">
+            <i class="fas fa-arrow-left me-2"></i> Wróć
         </button>
     </div>
 
+    <!-- Szczegóły ligi -->
     @if (league != null)
     {
-        <div class="card border-0 shadow-sm">
-            <div class="card-body">
-                <h5 class="card-title text-secondary fw-bold mb-4">@league.LeagueInfo.Name</h5>
-                <p><strong>Sezon:</strong> @league.Season</p>
-                <p><strong>Poziom:</strong> @league.LeagueInfo.Level</p>
-                <p><strong>Rozegrane mecze:</strong> @league.MatchesPlayed</p>
-                <p><strong>Start:</strong> @league.LeagueStartDate?.ToString("dd MMM yyyy")</p>
-                <p><strong>Koniec:</strong> @league.LeagueEndDate?.ToString("dd MMM yyyy")</p>
-                <div class="alert alert-info mt-4">
-                    <p><strong>Lider:</strong> N/D</p>
-                    <p><strong>Król strzelców:</strong> N/D</p>
+        <div class="row g-4">
+            <!-- Sekcja herbu -->
+            <div class="col-lg-4">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body text-center">
+                        <h5 class="card-title text-secondary fw-bold mb-4">Herb Ligi</h5>
+                        @if (!string.IsNullOrEmpty(league.LeagueInfo.Image?.Path))
+                        {
+                            <img src="@league.LeagueInfo.Image.Path" alt="Herb Ligi" class="img-fluid rounded shadow-sm mb-3" style="max-height: 300px; object-fit: cover;">
+                        }
+                        else
+                        {
+                            <div class="alert alert-warning" role="alert">
+                                Brak herbu dla tej ligi.
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <!-- Szczegóły ligi -->
+            <div class="col-lg-8">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title text-secondary fw-bold mb-4">@league.LeagueInfo.Name</h5>
+                        <ul class="list-unstyled mb-4">
+                            <li><strong>Sezon:</strong> @league.Season</li>
+                            <li><strong>Poziom:</strong> @league.LeagueInfo.Level</li>
+                            <li><strong>Rozegrane mecze:</strong> @league.MatchesPlayed</li>
+                            <li><strong>Start:</strong> @league.LeagueStartDate?.ToString("dd MMM yyyy")</li>
+                            <li><strong>Koniec:</strong> @league.LeagueEndDate?.ToString("dd MMM yyyy")</li>
+                        </ul>
+
+                        <div class="alert alert-info text-center shadow-sm">
+                            <p class="mb-1"><strong>Lider:</strong> N/D</p>
+                            <p><strong>Król strzelców:</strong> N/D</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -58,7 +90,14 @@
 
     protected override async Task OnInitializedAsync()
     {
-        league = await PublicClient.Client.GetFromJsonAsync<LeagueSeasonDTO>($"api/leagues/{leagueId}");
+        try
+        {
+            league = await PublicClient.Client.GetFromJsonAsync<LeagueSeasonDTO>($"api/leagues/{leagueId}");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Błąd podczas ładowania danych: {ex.Message}");
+        }
     }
 
     private void ShowTable()

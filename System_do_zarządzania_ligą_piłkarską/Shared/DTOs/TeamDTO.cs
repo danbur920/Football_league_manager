@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Images;
 
 namespace System_do_zarządzania_ligą_piłkarską.Shared.DTOs
 {
@@ -17,6 +18,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Shared.DTOs
         public string Country { get; set; }
         public string Stadium { get; set; }
         public int YearOfFoundation { get; set; }
+        public virtual ImageDTO Image {  get; set; }
         public virtual ApplicationUserDTO? Coach { get; set; }
         [JsonIgnore]
         public virtual ICollection<MatchDTO> HomeMatches { get; set; } = new List<MatchDTO>();

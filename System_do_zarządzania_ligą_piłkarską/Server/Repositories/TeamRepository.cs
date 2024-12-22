@@ -49,7 +49,11 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
 
         public async Task<Team> GetTeamById(int teamId)
         {
-            var team = await _context.Teams.FindAsync(teamId);
+            var team = await _context.Teams.
+                Where(x=>x.Id == teamId).
+                Include(x=>x.Image).
+                FirstOrDefaultAsync();
+
             return team;
         }
 

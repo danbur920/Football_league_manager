@@ -7,48 +7,72 @@
 @inject PublicClient PublicClient
 @inject NavigationManager Navigation
 
-<PageTitle>Szczegóły sędziego</PageTitle>
+<PageTitle>Szczegóły Sędziego</PageTitle>
 
-<div class="container mt-4">
-    <div class="row mb-3">
-        <div class="col text-center">
-            <button class="btn btn-primary" @onclick="GoToReferees">Wróć</button>
-        </div>
+<div class="container py-5">
+    <div class="text-center mb-4">
+        <h1 class="display-4 fw-bold text-primary">Szczegóły Sędziego</h1>
+    </div>
+
+    <div class="text-center mb-4">
+        <button class="btn btn-primary btn-lg" @onclick="GoToReferees">Wróć do listy</button>
     </div>
 
     @if (referee == null)
     {
-        <div class="row">
-            <div class="col text-center">
-                <p><em>Ładowanie...</em></p>
+        <div class="d-flex justify-content-center align-items-center" style="min-height: 200px;">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Ładowanie...</span>
             </div>
         </div>
     }
     else
     {
-        <div class="row">
-            <div class="col-md-6 mb-4">
-                <div class="card shadow">
+        <div class="row g-4">
+            <!-- Sekcja danych osobowych -->
+            <div class="col-lg-4">
+                <div class="card border-0 shadow-sm">
                     <div class="card-body">
-                        <h2 class="card-title">@referee.FirstName @referee.LastName</h2>
-                        <p class="card-text"><strong>Data urodzenia:</strong> @referee.DateOfBirth.ToString("dd MMMM yyyy")</p>
-                        <p class="card-text"><strong>Narodowość:</strong> @referee.Nationality</p>
+                        <h5 class="card-title text-secondary fw-bold mb-4">Dane osobowe</h5>
+                        <p><strong>Imię i nazwisko:</strong> @referee.FirstName @referee.LastName</p>
+                        <p><strong>Data urodzenia:</strong> @referee.DateOfBirth.ToString("dd MMMM yyyy")</p>
+                        <p><strong>Narodowość:</strong> @referee.Nationality</p>
                         @if (!string.IsNullOrEmpty(referee.Level))
                         {
-                            <p class="card-text"><strong>Poziom:</strong> @referee.Level</p>
+                            <p><strong>Poziom:</strong> @referee.Level</p>
                         }
-                        <p class="card-text"><strong>Sędziowane mecze:</strong> @referee.TotalRefereedMatches</p>
+                        <p><strong>Sędziowane mecze:</strong> @referee.TotalRefereedMatches</p>
                     </div>
                 </div>
             </div>
 
-            <div class="col-md-6 mb-4">
-                <div class="card shadow">
+            <!-- Sekcja statystyk -->
+            <div class="col-lg-4">
+                <div class="card border-0 shadow-sm">
                     <div class="card-body">
-                        <h3 class="card-title">Statystyki kariery</h3>
-                        <p class="card-text"><strong>Łączna liczba żółtych kartek:</strong> @referee.TotalYellowCardsGiven</p>
-                        <p class="card-text"><strong>Łączna liczba czerwonych kartek:</strong> @referee.TotalRedCardsGiven</p>
-                        <p class="card-text"><strong>Łączna liczba przyznanych rzutów karnych:</strong> @referee.TotalPenaltiesAwarded</p>
+                        <h5 class="card-title text-secondary fw-bold mb-4">Statystyki kariery</h5>
+                        <p><strong>Łączna liczba żółtych kartek:</strong> @referee.TotalYellowCardsGiven</p>
+                        <p><strong>Łączna liczba czerwonych kartek:</strong> @referee.TotalRedCardsGiven</p>
+                        <p><strong>Łączna liczba przyznanych rzutów karnych:</strong> @referee.TotalPenaltiesAwarded</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sekcja zdjęcia sędziego -->
+            <div class="col-lg-4">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body text-center">
+                        <h5 class="card-title text-secondary fw-bold mb-4">Zdjęcie Sędziego</h5>
+                        @if (referee.Image != null)
+                        {
+                            <img src="@referee.Image.Path" alt="Zdjęcie sędziego" class="img-fluid rounded shadow-sm mb-3" style="max-height: 300px; object-fit: cover;">
+                        }
+                        else
+                        {
+                            <div class="alert alert-warning" role="alert">
+                                Brak zdjęcia dla tego sędziego.
+                            </div>
+                        }
                     </div>
                 </div>
             </div>
@@ -78,4 +102,3 @@
         Navigation.NavigateTo("/referees");
     }
 }
-

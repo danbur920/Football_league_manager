@@ -9,43 +9,75 @@
 
 <div class="container py-5">
     <div class="text-center mb-4">
-        <h3 class="display-5 fw-bold text-primary">Szczegóły drużyny</h3>
+        <h1 class="display-4 fw-bold text-primary">Szczegóły Drużyny</h1>
     </div>
 
-    <div class="d-flex justify-content-center flex-wrap gap-3 mb-4">
-        <button class="btn btn-primary" @onclick="ShowPastMatches">Rozegrane mecze</button>
-        <button class="btn btn-primary" @onclick="ShowFutureMatches">Zaplanowane mecze</button>
-        <button class="btn btn-primary" @onclick="ShowTable">Tabela</button>
-        <button class="btn btn-primary" @onclick="ShowLineup">Skład</button>
-        <button class="btn btn-secondary" @onclick="GoBack">Wróć</button>
+    <div class="text-center mb-4">
+        <button class="btn btn-primary btn-lg" @onclick="GoBack">Wróć do listy</button>
     </div>
 
-    @if (team != null)
+    @if (team == null)
     {
-        <div class="card border-0 shadow-sm">
-            <div class="card-body">
-                <h4 class="card-title text-secondary text-center fw-bold mb-4">@team.Name</h4>
-                <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <p class="mb-1"><strong>Miasto:</strong> @team.City</p>
-                        <p class="mb-1"><strong>Kraj:</strong> @team.Country</p>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <p class="mb-1"><strong>Stadion:</strong> @team.Stadium</p>
-                        <p class="mb-1"><strong>Rok założenia:</strong> @team.YearOfFoundation</p>
-                    </div>
-@*                     <div class="col-12">
-                        <p class="mb-1"><strong>Trener:</strong> @team.Coach?.FirstName ?? "Brak trenera"</p>
-                    </div> *@
-                </div>
+        <div class="d-flex justify-content-center align-items-center" style="min-height: 200px;">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Ładowanie...</span>
             </div>
         </div>
     }
     else
     {
-        <div class="d-flex justify-content-center align-items-center" style="min-height: 200px;">
-            <div class="spinner-border text-primary" role="status">
-                <span class="visually-hidden">Ładowanie...</span>
+        <div class="row g-4">
+            <div class="col-lg-4">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body text-center">
+                        <h5 class="card-title text-secondary fw-bold mb-4">Herb Drużyny</h5>
+                        @if (team.Image != null)
+                        {
+                            <img src="@team.Image.Path" alt="Herb drużyny" class="img-fluid rounded shadow-sm mb-3" style="max-height: 300px; object-fit: cover;">
+                        }
+                        else
+                        {
+                            <div class="alert alert-warning" role="alert">
+                                Brak herbu dla tej drużyny.
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title text-secondary fw-bold mb-4">Dane drużyny</h5>
+                        <p><strong>Nazwa:</strong> @team.Name</p>
+                        <p><strong>Miasto:</strong> @team.City</p>
+                        <p><strong>Kraj:</strong> @team.Country</p>
+                        <p><strong>Stadion:</strong> @team.Stadium</p>
+                        <p><strong>Rok założenia:</strong> @team.YearOfFoundation</p>
+                        @if (team.Coach != null)
+                        {
+                            <p><strong>Trener:</strong> @team.Coach.FirstName @team.Coach.LastName</p>
+                        }
+                        else
+                        {
+                            <p><strong>Trener:</strong> Brak trenera</p>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body text-center">
+                        <h5 class="card-title text-secondary fw-bold mb-4">Akcje</h5>
+                        <div class="d-flex flex-column gap-2">
+                            <button class="btn btn-primary" @onclick="ShowPastMatches">Rozegrane mecze</button>
+                            <button class="btn btn-primary" @onclick="ShowFutureMatches">Zaplanowane mecze</button>
+                            <button class="btn btn-primary" @onclick="ShowTable">Tabela</button>
+                            <button class="btn btn-primary" @onclick="ShowLineup">Skład</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     }
@@ -86,84 +118,3 @@
         Navigation.NavigateTo("/teams");
     }
 }
-
-<style>
-    .page-title {
-        text-align: center;
-        font-size: 28px;
-        color: #333;
-        margin-bottom: 20px;
-    }
-
-    .button-container {
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
-        gap: 10px;
-        margin-bottom: 20px;
-    }
-
-/*     .btn {
-        padding: 10px 20px;
-        background-color: #007bff;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        font-size: 16px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-    } */
-
-    .btn:hover {
-        background-color: #0056b3;
-    }
-
-    .team-profile-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 20px;
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 20px;
-    }
-
-    .team-details-container, 
-    .team-additional-info-container {
-        padding: 20px;
-        background-color: #ffffff;
-        border-radius: 10px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s ease;
-    }
-
-    .team-details-container:hover,
-    .team-additional-info-container:hover {
-        transform: scale(1.02);
-    }
-
-    .team-details-container h4,
-    .team-additional-info-container h4 {
-        text-align: center;
-        color: #333;
-        margin-bottom: 20px;
-        font-size: 22px;
-    }
-
-    .team-info p,
-    .team-additional-info-container p {
-        font-size: 16px;
-        color: #555;
-        margin: 10px 0;
-    }
-
-    .team-info p strong,
-    .team-additional-info-container p strong {
-        color: #333;
-    }
-
-    @@media (max-width: 768px) {
-        .team-profile-grid {
-            grid-template-columns: 1fr;
-        }
-    }
-</style>

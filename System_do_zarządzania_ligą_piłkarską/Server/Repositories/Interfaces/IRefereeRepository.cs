@@ -11,5 +11,6 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories.Interface
         Task<List<Referee>> GetAllReferees();
         Task<List<Referee>> GetAllRefereesFromSpecificSeason(int leagueSeasonId);
         Task AddRefereeToTheSeason(RefereeStat newRefereeStat);
+        Task AddNewReferee(Referee newReferee);
     }
 }

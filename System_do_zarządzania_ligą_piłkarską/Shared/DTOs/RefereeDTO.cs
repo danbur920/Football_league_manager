@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Images;
 
 namespace System_do_zarządzania_ligą_piłkarską.Shared.DTOs
 {
@@ -20,6 +21,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Shared.DTOs
         public int TotalRedCardsGiven { get; set; }
         public int TotalRefereedMatches { get; set; }
         public int TotalPenaltiesAwarded { get; set; }
+        public virtual ImageDTO Image {  get; set; }
         public virtual ICollection<RefereeStatDTO> RefereeStats { get; set; } = new List<RefereeStatDTO>();
         public virtual ICollection<MatchDTO> Matches { get; set; } = new List<MatchDTO>();
     }
