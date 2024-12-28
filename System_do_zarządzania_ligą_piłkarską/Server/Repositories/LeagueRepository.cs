@@ -28,11 +28,12 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
 
         public async Task<LeagueSeason> GetLeagueById(int id)
         {
-            var league = await _context.LeagueSeasons.
+            var leagueSeason = await _context.LeagueSeasons.
                 Include(x => x.LeagueInfo).
                 ThenInclude(x => x.Image).
                 FirstOrDefaultAsync(x => x.Id == id);
-            return league;
+
+            return leagueSeason;
         }
 
         public async Task<LeagueSeason> GetLeagueSeasonById(int id)

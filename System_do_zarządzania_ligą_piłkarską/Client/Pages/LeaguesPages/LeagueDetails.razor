@@ -1,8 +1,9 @@
-﻿@page "/leagues/{leagueId:int}"
+﻿@page "/leagues/{leagueSeasonId:int}"
 
 @using System.Net.Http
 @using System_do_zarządzania_ligą_piłkarską.Shared.DTOs
 @using System_do_zarządzania_ligą_piłkarską.Client.Extensions
+@using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Leagues
 
 @inject PublicClient PublicClient
 @inject NavigationManager Navigation
@@ -10,12 +11,10 @@
 <PageTitle>Szczegóły Ligi</PageTitle>
 
 <div class="container py-5">
-    <!-- Nagłówek strony -->
     <div class="text-center mb-5">
         <h1 class="display-4 fw-bold text-primary">Szczegóły Ligi</h1>
     </div>
 
-    <!-- Sekcja z przyciskami nawigacji -->
     <div class="text-center mb-4">
         <button class="btn btn-primary btn-lg me-2 shadow-sm" @onclick="ShowTable">
             <i class="fas fa-table me-2"></i> Tabela
@@ -28,7 +27,6 @@
         </button>
     </div>
 
-    <!-- Szczegóły ligi -->
     @if (league != null)
     {
         <div class="row g-4">
@@ -37,9 +35,9 @@
                 <div class="card border-0 shadow-sm">
                     <div class="card-body text-center">
                         <h5 class="card-title text-secondary fw-bold mb-4">Herb Ligi</h5>
-                        @if (!string.IsNullOrEmpty(league.LeagueInfo.Image?.Path))
+                        @if (!string.IsNullOrEmpty(league.Image?.Path))
                         {
-                            <img src="@league.LeagueInfo.Image.Path" alt="Herb Ligi" class="img-fluid rounded shadow-sm mb-3" style="max-height: 300px; object-fit: cover;">
+                            <img src="@league.Image.Path" alt="Herb Ligi" class="img-fluid rounded shadow-sm mb-3" style="max-height: 300px; object-fit: cover;">
                         }
                         else
                         {
@@ -51,14 +49,13 @@
                 </div>
             </div>
 
-            <!-- Szczegóły ligi -->
             <div class="col-lg-8">
                 <div class="card border-0 shadow-sm">
                     <div class="card-body">
-                        <h5 class="card-title text-secondary fw-bold mb-4">@league.LeagueInfo.Name</h5>
+                        <h5 class="card-title text-secondary fw-bold mb-4">@league.Name</h5>
                         <ul class="list-unstyled mb-4">
                             <li><strong>Sezon:</strong> @league.Season</li>
-                            <li><strong>Poziom:</strong> @league.LeagueInfo.Level</li>
+                            <li><strong>Poziom:</strong> @league.Level</li>
                             <li><strong>Rozegrane mecze:</strong> @league.MatchesPlayed</li>
                             <li><strong>Start:</strong> @league.LeagueStartDate?.ToString("dd MMM yyyy")</li>
                             <li><strong>Koniec:</strong> @league.LeagueEndDate?.ToString("dd MMM yyyy")</li>
@@ -85,14 +82,14 @@
 
 @code {
     [Parameter]
-    public int leagueId { get; set; }
-    private LeagueSeasonDTO league;
+    public int leagueSeasonId { get; set; }
+    private LeagueSeasonProfilDTO? league;
 
     protected override async Task OnInitializedAsync()
     {
         try
         {
-            league = await PublicClient.Client.GetFromJsonAsync<LeagueSeasonDTO>($"api/leagues/{leagueId}");
+            league = await PublicClient.Client.GetFromJsonAsync<LeagueSeasonProfilDTO>($"api/leagues/{leagueSeasonId}");
         }
         catch (Exception ex)
         {
@@ -102,12 +99,12 @@
 
     private void ShowTable()
     {
-        Navigation.NavigateTo($"/leagues/{leagueId}/table");
+        Navigation.NavigateTo($"/leagues/{leagueSeasonId}/table");
     }
 
     private void ShowScorers()
     {
-        Navigation.NavigateTo($"/leagues/{leagueId}/scorers");
+        Navigation.NavigateTo($"/leagues/{leagueSeasonId}/scorers");
     }
 
     private void GoBack()

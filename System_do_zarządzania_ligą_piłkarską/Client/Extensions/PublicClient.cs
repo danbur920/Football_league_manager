@@ -1,4 +1,4 @@
-﻿namespace System_do_zarządzania_ligą_piłkarską.Client.Extensions
+﻿ namespace System_do_zarządzania_ligą_piłkarską.Client.Extensions
 {
     public class PublicClient
     {

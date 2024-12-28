@@ -73,14 +73,6 @@
       "PackagePath": "staticwebassets\\images\\index.jpg"
     },
     {
-      "Id": "C:\\Users\\danbu\\Desktop\\Prca Inż\\Football_league_manager\\System_do_zarządzania_ligą_piłkarską\\Client\\wwwroot\\images\\leagues\\person-default.jpg",
-      "PackagePath": "staticwebassets\\images\\leagues\\person-default.jpg"
-    },
-    {
-      "Id": "C:\\Users\\danbu\\Desktop\\Prca Inż\\Football_league_manager\\System_do_zarządzania_ligą_piłkarską\\Client\\wwwroot\\images\\teams\\club-football-logo-default.jpg",
-      "PackagePath": "staticwebassets\\images\\teams\\club-football-logo-default.jpg"
-    },
-    {
       "Id": "C:\\Users\\danbu\\Desktop\\Prca Inż\\Football_league_manager\\System_do_zarządzania_ligą_piłkarską\\Client\\wwwroot\\index.html",
       "PackagePath": "staticwebassets\\index.html"
     },

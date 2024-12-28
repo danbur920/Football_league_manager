@@ -27,15 +27,17 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Services
         public async Task<List<LeagueSeasonDTO>> GetLeaguesByPage(int pageNumber, int pageSize)
         {
             var leagues = await _leagueRepository.GetLeaguesByPage(pageNumber, pageSize);
-            var leagueSeasonDTOs = _mapper.Map<List<LeagueSeasonDTO>>(leagues);
+            var leagueSeasonDTOs = _mapper.Map<List<LeagueSeasonDTO>>(leagues).
+                OrderBy(x=>x.LeagueInfo.Name).
+                ThenByDescending(x=>x.Season).ToList();
 
             return leagueSeasonDTOs;
         }
 
-        public async Task<LeagueSeasonDTO> GetLeagueById(int id)
+        public async Task<LeagueSeasonProfilDTO> GetLeagueById(int id)
         {
             var league = await _leagueRepository.GetLeagueById(id);
-            return _mapper.Map<LeagueSeasonDTO>(league);
+            return _mapper.Map<LeagueSeasonProfilDTO>(league);
         }
 
         public async Task<List<FootballerStatDTO>> GetLeagueScorers(int leagueId)

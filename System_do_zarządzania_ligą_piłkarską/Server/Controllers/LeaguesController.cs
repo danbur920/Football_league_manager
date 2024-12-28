@@ -25,7 +25,6 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Controllers
         }
 
         [HttpGet]
-        [AllowAnonymous]
         public async Task<ActionResult<List<LeagueSeasonDTO>>> GetLeaguesByPage([FromQuery] int pageNumber, [FromQuery] int pageSize)
         {
             var leagues = await _leagueService.GetLeaguesByPage(pageNumber, pageSize);
@@ -33,7 +32,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Controllers
         }
 
         [HttpGet("{leagueId}")]
-        public async Task<ActionResult<List<LeagueSeasonDTO>>> GetLeagueById(int leagueId)
+        public async Task<IActionResult> GetLeagueById(int leagueId)
         {
             var league = await _leagueService.GetLeagueById(leagueId);
             return Ok(league);

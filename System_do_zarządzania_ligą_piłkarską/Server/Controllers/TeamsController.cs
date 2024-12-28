@@ -28,14 +28,14 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Controllers
         }
 
         [HttpGet("{teamId}")]
-        public async Task<ActionResult<List<LeagueSeasonDTO>>> GetTeamById(int teamId)
+        public async Task<ActionResult<List<LeagueSeasonDTO>>> GetTeamById([FromRoute] int teamId)
         {
             var team = await _teamService.GetTeamById(teamId);
             return Ok(team);
         }
 
         [HttpPost("league-master")]
-        public async Task<IActionResult> AddNewTeam(NewTeamDTO newTeam)
+        public async Task<IActionResult> AddNewTeam([FromBody] NewTeamDTO newTeam)
         {
             await _teamService.AddNewTeam(newTeam);
             return Ok();

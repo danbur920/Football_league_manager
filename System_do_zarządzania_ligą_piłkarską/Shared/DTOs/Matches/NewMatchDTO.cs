@@ -23,6 +23,11 @@ namespace System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Matches
         public DateOnly MatchDate { get; set; }
         [Required(ErrorMessage = "Godzina meczu jest obowiązkowa.")]
         public TimeOnly MatchTime { get; set; }
-        public string FootballStadium { get; set; }
+        [Required(ErrorMessage = "Nazwa stadionu jest obowiązkowa.")]
+        public string? FootballStadium { get; set; }
     }
 }
+
+
+
+

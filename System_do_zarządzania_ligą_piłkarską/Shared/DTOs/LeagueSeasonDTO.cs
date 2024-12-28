@@ -18,10 +18,10 @@ namespace System_do_zarządzania_ligą_piłkarską.Shared.DTOs
         public DateOnly? LeagueEndDate { get; set; }
         public virtual LeagueInfoDTO LeagueInfo { get; set; }
         public virtual ApplicationUserDTO LeagueMasterSecondary { get; set; }
-        public virtual ICollection<MatchDTO> Matches { get; set; } = new List<MatchDTO>();
-        public virtual ICollection<RefereeStatDTO> RefereeStats { get; set; } = new List<RefereeStatDTO>();
-        public virtual ICollection<TeamStatDTO> TeamsStats { get; set; } = new List<TeamStatDTO>();
-        public virtual ICollection<FootballerStatDTO> FootballersStats { get; set; } = new List<FootballerStatDTO>();
+        //public virtual ICollection<MatchDTO> Matches { get; set; } = new List<MatchDTO>();
+        //public virtual ICollection<RefereeStatDTO> RefereeStats { get; set; } = new List<RefereeStatDTO>();
+        //public virtual ICollection<TeamStatDTO> TeamsStats { get; set; } = new List<TeamStatDTO>();
+        //public virtual ICollection<FootballerStatDTO> FootballersStats { get; set; } = new List<FootballerStatDTO>();
     }
     public enum Season
     {

@@ -7,10 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="Other\FavouriteLeagues.razor" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Remove="Areas\LeagueMaster\Shared\AdminLayout.razor.css" />
     <None Remove="Areas\LeagueMaster\Shared\AdminNavMenu.razor.css" />
     <None Remove="Areas\Admin\Shared\AdminLayout.razor.css" />
@@ -24,10 +20,6 @@
     <Content Include="Areas\Admin\Shared\AdminNavMenu.razor.css" />
     <Content Include="Shared\MainLayout.razor.css" />
     <Content Include="Shared\NavMenu.razor.css" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="Other\FavouriteLeagues.razor" />
   </ItemGroup>
 	
   <ItemGroup>
@@ -94,11 +86,6 @@
     <Content Update="Pages\LeaguesPages\Leagues.razor">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
     </Content>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="wwwroot\images\footballers\" />
-    <Folder Include="wwwroot\images\referees\" />
   </ItemGroup>
 
 </Project>
