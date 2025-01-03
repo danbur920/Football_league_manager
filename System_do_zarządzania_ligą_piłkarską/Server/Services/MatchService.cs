@@ -26,6 +26,9 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Services
 
             mappedMatch.IsFinished = false;
             mappedMatch.Result = null;
+            mappedMatch.GoalsHome = 0;
+            mappedMatch.GoalsAway = 0;
+            mappedMatch.GoalsCount = 0;
 
             await _matchRepository.AddNewMatchToTheSeason(mappedMatch);
         }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Identity.Client;
 using System_do_zarządzania_ligą_piłkarską.Server.Data;
 using System_do_zarządzania_ligą_piłkarską.Server.Models;
 using System_do_zarządzania_ligą_piłkarską.Server.Repositories.Interfaces;
@@ -54,6 +55,33 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
         {
             await _context.Footballers.AddAsync(footballer);
             await _context.SaveChangesAsync();
+
+            await AddFootballerStats(footballer);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task AddFootballerStats(Footballer footballer)
+        {
+            var currentTeamStats = await _context.TeamStats.
+                Where(x=>x.TeamId == footballer.TeamId && x.CurrentLeague == true).
+                ToListAsync();
+
+            foreach (var teamStat in currentTeamStats)
+            {
+                var existsFootballerStats = await _context.FootballerStats.
+                    Where(x => x.FootballerId == footballer.Id && x.TeamStatId == teamStat.Id).
+                    FirstOrDefaultAsync();
+
+                if (existsFootballerStats == null)
+                {
+                    await _context.FootballerStats.AddAsync(new FootballerStat
+                    {
+                       FootballerId = footballer.Id,
+                       LeagueSeasonId = teamStat.LeagueSeasonId,
+                       TeamStatId = teamStat.Id
+                    });
+                }
+            }
         }
     }
 }

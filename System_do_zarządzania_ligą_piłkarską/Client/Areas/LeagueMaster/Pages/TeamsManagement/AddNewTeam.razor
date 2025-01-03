@@ -16,49 +16,60 @@
 
 <PageTitle>Stwórz drużynę</PageTitle>
 
-<h3>Stwórz drużynę</h3>
-
-<EditForm Model="newTeam" OnValidSubmit="AddTeam">
-    <DataAnnotationsValidator />
-    <ValidationSummary />
-    <div class="mb-3">
-        <label for="name" class="form-label">Nazwa drużyny</label>
-        <InputText id="name" class="form-control" @bind-Value="newTeam.Name" />
-        <ValidationMessage For="@(()=>newTeam.Name)" class="text-danger" />
+<div class="container py-5">
+    <div class="row mb-4">
+        <div class="col text-center">
+            <h3 class="fw-bold text-primary">Stwórz drużynę</h3>
+        </div>
     </div>
 
-    <div class="mb-3">
-        <label for="city" class="form-label">Miasto</label>
-        <InputText id="city" class="form-control" @bind-Value="newTeam.City" />
-        <ValidationMessage For="@(()=>newTeam.City)" class="text-danger" />
-    </div>
+    <EditForm Model="newTeam" OnValidSubmit="AddTeam">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
 
-    <div class="mb-3">
-        <label for="country" class="form-label">Kraj</label>
-        <InputText id="country" class="form-control" @bind-Value="newTeam.Country" />
-        <ValidationMessage For="@(()=>newTeam.Country)" class="text-danger" />
-    </div>
+        <div class="mb-3">
+            <label for="name" class="form-label">Nazwa drużyny</label>
+            <InputText id="name" class="form-control" @bind-Value="newTeam.Name" />
+            <ValidationMessage For="@(() => newTeam.Name)" class="text-danger" />
+        </div>
 
-    <div class="mb-3">
-        <label for="stadium" class="form-label">Nazwa stadionu</label>
-        <InputText id="stadium" class="form-control" @bind-Value="newTeam.Stadium" />
-        <ValidationMessage For="@(()=>newTeam.Stadium)" class="text-danger" />
-    </div>
+        <div class="mb-3">
+            <label for="city" class="form-label">Miasto</label>
+            <InputText id="city" class="form-control" @bind-Value="newTeam.City" />
+            <ValidationMessage For="@(() => newTeam.City)" class="text-danger" />
+        </div>
 
-    <div class="mb-3">
-        <label for="year" class="form-label">Rok założenia</label>
-        <InputNumber id="year" class="form-control" @bind-Value="newTeam.YearOfFoundation" />
-        <ValidationMessage For="@(()=>newTeam.YearOfFoundation)" class="text-danger" />
-    </div>
+        <div class="mb-3">
+            <label for="country" class="form-label">Kraj</label>
+            <InputText id="country" class="form-control" @bind-Value="newTeam.Country" />
+            <ValidationMessage For="@(() => newTeam.Country)" class="text-danger" />
+        </div>
 
-    <div class="mb-3">
-        <label for="coachEmail" class="form-label">Adres email trenera zespołu (opcjonalne)</label>
-        <InputText id="coachEmail" class="form-control" @bind-Value="newTeam.CoachEmail" />
-        <ValidationMessage For="@(()=>newTeam.CoachEmail)" class="text-danger" />
-    </div>
+        <div class="mb-3">
+            <label for="stadium" class="form-label">Nazwa stadionu</label>
+            <InputText id="stadium" class="form-control" @bind-Value="newTeam.Stadium" />
+            <ValidationMessage For="@(() => newTeam.Stadium)" class="text-danger" />
+        </div>
 
-    <button type="submit" class="btn btn-primary">Dodaj drużynę</button>
-</EditForm>
+        <div class="mb-3">
+            <label for="year" class="form-label">Rok założenia</label>
+            <InputNumber id="year" class="form-control" @bind-Value="newTeam.YearOfFoundation" />
+            <ValidationMessage For="@(() => newTeam.YearOfFoundation)" class="text-danger" />
+        </div>
+
+        <div class="mb-3">
+            <label for="coachEmail" class="form-label">Adres email trenera zespołu (opcjonalne)</label>
+            <InputText id="coachEmail" class="form-control" @bind-Value="newTeam.CoachEmail" />
+            <ValidationMessage For="@(() => newTeam.CoachEmail)" class="text-danger" />
+        </div>
+
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary">Dodaj drużynę</button>
+        </div>
+    </EditForm>
+</div>
+
+
 
 <Alert Message="@AlertManager.Message" Type="@AlertManager.Type" IsVisible="@AlertManager.IsVisible" />
 

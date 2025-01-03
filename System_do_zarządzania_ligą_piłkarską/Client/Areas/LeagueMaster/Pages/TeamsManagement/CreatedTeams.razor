@@ -15,76 +15,89 @@
 
 <PageTitle>Stworzone drużyny</PageTitle>
 
-<Alert Message="@AlertManager.Message" Type="@AlertManager.Type" IsVisible="@AlertManager.IsVisible" />
+<div class="container py-5">
+    <div class="row mb-4">
+        <div class="col text-center">
+            <h3 class="display-5 fw-bold text-primary">Stworzone drużyny</h3>
+        </div>
+    </div>
 
-<h3>Stworzone drużyny</h3>
+    <Alert Message="@AlertManager.Message" Type="@AlertManager.Type" IsVisible="@AlertManager.IsVisible" />
 
-@if (teams != null)
-{
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Nazwa</th>
-                <th>Miasto</th>
-                <th>Kraj</th>
-                <th>Stadion</th>
-                <th>Rok założenia</th>
-                <th>Trener</th>
-                <th>Działania</th>
-            </tr>
-        </thead>
-        <tbody>
-            @if (teams.Count == 0)
-            {
+    @if (teams != null)
+    {
+        <table class="table table-hover table-bordered shadow-sm">
+            <thead class="table-primary">
                 <tr>
-                    <td colspan="5">Brak danych do wyświetlenia</td>
+                    <th class="text-center">Nazwa</th>
+                    <th class="text-center">Miasto</th>
+                    <th class="text-center">Kraj</th>
+                    <th class="text-center">Stadion</th>
+                    <th class="text-center">Rok założenia</th>
+                    <th class="text-center">Trener</th>
+                    <th class="text-center">Działania</th>
                 </tr>
-            }
-            else
-            {
-                @foreach (var team in teams)
+            </thead>
+            <tbody>
+                @if (teams.Count == 0)
                 {
                     <tr>
-                        <td>@team.Name</td>
-                        <td>@team.City</td>
-                        <td>@team.Country</td>
-                        <td>@team.Stadium</td>
-                        <td>@team.YearOfFoundation</td>
-                        @if (team.HasCoach)
-                        {
-                            <td>
-                                <span>@team.Coach.FirstName @team.Coach.LastName</span>
-                                <button class="btn btn-danger" @onclick="() => DeleteCoachFromTeam(team.Id)">
-                                    Usuń trenera
-                                </button>
-                            </td>
-                        }
-                        else
-                        {
-                            <td>
-                                <InputText @bind-Value="coachEmailToAssign" Placeholder="Wpisz e-mail trenera" />
-                                <button class="btn btn-primary" @onclick="() => AssignCoachToTeam(team.Id, coachEmailToAssign)">
-                                    Przypisz trenera
-                                </button>
-                            </td>
-                        }
-                        <td>
-                            <div class="btn-group">
-                                <button class="btn btn-danger" @onclick="() => DeleteTeam(team.Id)">
-                                    Usuń drużynę
-                                </button>
-                                <button class="btn btn-info" @onclick="() => GoToTeamManagement(team.Id)">
-                                    Zarządzaj
-                                </button>
-                            </div>
-
-                        </td>
+                        <td colspan="7" class="text-center">Brak danych do wyświetlenia</td>
                     </tr>
                 }
-            }
-        </tbody>
-    </table>
-}
+                else
+                {
+                    @foreach (var team in teams)
+                    {
+                        <tr>
+                            <td class="align-middle text-center">@team.Name</td>
+                            <td class="align-middle text-center">@team.City</td>
+                            <td class="align-middle text-center">@team.Country</td>
+                            <td class="align-middle text-center">@team.Stadium</td>
+                            <td class="align-middle text-center">@team.YearOfFoundation</td>
+                            <td class="align-middle text-center">
+                                @if (team.HasCoach)
+                                {
+                                    <span>@team.Coach.FirstName @team.Coach.LastName</span>
+                                    <button class="btn btn-danger btn-sm ms-2" @onclick="() => DeleteCoachFromTeam(team.Id)">
+                                        Usuń trenera
+                                    </button>
+                                }
+                                else
+                                {
+                                    <div class="d-flex justify-content-center">
+                                        <InputText @bind-Value="coachEmailToAssign" class="form-control me-2" Placeholder="Wpisz e-mail trenera" />
+                                        <button class="btn btn-primary btn-sm" @onclick="() => AssignCoachToTeam(team.Id, coachEmailToAssign)">
+                                            Przypisz
+                                        </button>
+                                    </div>
+                                }
+                            </td>
+                            <td class="align-middle text-center">
+                                <div class="btn-group">
+                                    <button class="btn btn-danger btn-sm" @onclick="() => DeleteTeam(team.Id)">
+                                        Usuń
+                                    </button>
+                                    <button class="btn btn-info btn-sm" @onclick="() => GoToTeamManagement(team.Id)">
+                                        Zarządzaj
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <div class="text-center">
+            <span class="spinner-border text-primary" role="status"></span>
+            <span class="visually-hidden">Ładowanie...</span>
+        </div>
+    }
+</div>
+
 
 
 

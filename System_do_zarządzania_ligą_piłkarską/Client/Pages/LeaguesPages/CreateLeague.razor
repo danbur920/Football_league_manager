@@ -25,11 +25,13 @@
         <div class="mb-3">
             <label for="name" class="form-label">Nazwa ligi</label>
             <InputText id="name" class="form-control" @bind-Value="newLeague.LeagueInfo.Name" />
+            <ValidationMessage For="@(() => newLeague.LeagueInfo.Name)" class="text-danger" />
         </div>
 
         <div class="mb-3">
             <label for="country" class="form-label">Kraj</label>
             <InputText id="country" class="form-control" @bind-Value="newLeague.LeagueInfo.Country" />
+            <ValidationMessage For="@(() => newLeague.LeagueInfo.Country)" class="text-danger" />
         </div>
 
         <div class="mb-3">
@@ -40,6 +42,7 @@
                     <option value="@level">@level</option>
                 }
             </select>
+            <ValidationMessage For="@(() => newLeague.LeagueInfo.Level)" class="text-danger" />
         </div>
 
         <div class="mb-3">
@@ -50,20 +53,24 @@
                     <option value="@season">@(season.ToString().Substring(1))</option>
                 }
             </select>
+            <ValidationMessage For="@(() => newLeague.LeagueSeason.Season)" class="text-danger" />
         </div>
 
         <div class="mb-3">
             <label for="startDate" class="form-label">Data rozpoczęcia ligi (opcjonalnie)</label>
             <InputDate id="startDate" class="form-control" @bind-Value="newLeague.LeagueSeason.LeagueStartDate" />
+            <ValidationMessage For="@(() => newLeague.LeagueSeason.LeagueStartDate)" class="text-danger" />
         </div>
 
         <div class="mb-3">
             <label for="endDate" class="form-label">Data zakończenia ligi (opcjonalnie)</label>
             <InputDate id="endDate" class="form-control" @bind-Value="newLeague.LeagueSeason.LeagueEndDate" />
+            <ValidationMessage For="@(() => newLeague.LeagueSeason.LeagueEndDate)" class="text-danger" />
         </div>
 
         <button type="submit" class="btn btn-primary">Dodaj ligę</button>
     </EditForm>
+
 
     <div class="mt-4">
         <Alert Message="@AlertManager.Message" Type="@AlertManager.Type" IsVisible="@AlertManager.IsVisible" />
@@ -73,10 +80,10 @@
 @code {
     private string _userId = string.Empty;
     private NewLeagueDTO newLeague = new NewLeagueDTO
-    {
-        LeagueInfo = new NewLeagueInfoDTO(),
-        LeagueSeason = new NewLeagueSeasonDTO()
-    };
+        {
+            LeagueInfo = new NewLeagueInfoDTO(),
+            LeagueSeason = new NewLeagueSeasonDTO()
+        };
 
 
     protected override async Task OnInitializedAsync()

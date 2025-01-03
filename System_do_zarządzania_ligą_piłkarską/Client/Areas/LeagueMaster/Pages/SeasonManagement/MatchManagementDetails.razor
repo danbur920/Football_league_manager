@@ -447,7 +447,7 @@ else
                                     <span>@GetFootballersInfo(eventt.TeamId, eventt.PrimaryFootballerId, eventt.SecondaryFootballerId)</span>
                                     break;
                                 case EventType.MissedPenalty:
-                                    <i class="fas fa-futbol text-info"></i>
+                                    <i class="fas fa-futbol text-warning"></i>
                                     <span>@GetFootballersInfo(eventt.TeamId, eventt.PrimaryFootballerId, eventt.SecondaryFootballerId)</span>
                                     break;
                                 case EventType.YellowCard:
@@ -563,7 +563,7 @@ else
 
     private async Task GetTeams()
     {
-        teams = await Http.GetFromJsonAsync<List<TeamStatDTO>>($"api/leagues/{leagueInfoId}/table");
+        teams = await Http.GetFromJsonAsync<List<TeamStatDTO>>($"api/leagues/{leagueSeasonId}/table");
         teams = teams.Where(x => x.TeamId == editMatch.HomeTeamId || x.TeamId == editMatch.AwayTeamId).ToList();        
     }
 

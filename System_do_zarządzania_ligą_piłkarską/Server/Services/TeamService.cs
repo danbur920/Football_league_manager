@@ -77,19 +77,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Services
         public async Task AddTeamToTheSeason(NewTeamStatDTO newTemStat)
         {
             var teamToAdd = _mapper.Map<TeamStat>(newTemStat);
-
             teamToAdd.CurrentLeague = true;
-
-            // bez przypisywania, gdyż default to 0:
-
-            //teamToAdd.GoalsScored = 0;
-            //teamToAdd.GoalsConceded = 0;
-            //teamToAdd.GoalBalance = 0;
-            //teamToAdd.MatchesPlayed = 0;
-            //teamToAdd.Wins = 0;
-            //teamToAdd.Draws = 0;
-            //teamToAdd.Losses = 0;
-            //teamToAdd.Points = 0;
 
             await _teamRepository.AddTeamToTheSeason(teamToAdd);
         }

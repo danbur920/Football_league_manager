@@ -94,7 +94,7 @@
     protected override async Task OnInitializedAsync()
     {
         season = await Http.GetFromJsonAsync<LeagueSeasonDTO>($"api/leagues/league-master/{leagueInfoId}/{leagueSeasonId}");
-        teams = await Http.GetFromJsonAsync<List<TeamStatDTO>>($"api/leagues/{leagueInfoId}/table");
+        teams = await Http.GetFromJsonAsync<List<TeamStatDTO>>($"api/leagues/{leagueSeasonId}/table");
     }
 
     private void GoToNewMatch()

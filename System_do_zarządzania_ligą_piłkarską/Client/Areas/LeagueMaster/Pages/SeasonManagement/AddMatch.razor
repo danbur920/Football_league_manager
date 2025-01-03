@@ -131,7 +131,7 @@
         newMatch = new NewMatchDTO();
         newMatch.MatchDate = new DateOnly(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
         season = await Http.GetFromJsonAsync<LeagueSeasonDTO>($"api/leagues/league-master/{leagueInfoId}/{leagueSeasonId}");
-        teams = await Http.GetFromJsonAsync<List<TeamStatDTO>>($"api/leagues/{leagueInfoId}/table");
+        teams = await Http.GetFromJsonAsync<List<TeamStatDTO>>($"api/leagues/{leagueSeasonId}/table");
         referees = await Http.GetFromJsonAsync<List<ShortRefereeInfoDTO>>($"api/referees/league-master/specific-season/{leagueSeasonId}");
     }
     private async Task HandleValidSubmit()

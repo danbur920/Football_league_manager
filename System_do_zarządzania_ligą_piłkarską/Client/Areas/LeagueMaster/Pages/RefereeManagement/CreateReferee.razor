@@ -15,52 +15,63 @@
 
 <PageTitle>Dodawanie sędziego</PageTitle>
 
-<div class="button-container">
-    <button class="btn btn-secondary" @onclick="BackToStart">Wróć</button>
+<div class="container py-5">
+    <div class="row mb-4">
+        <div class="col text-center">
+            <h3 class="fw-bold text-primary">Dodaj sędziego</h3>
+        </div>
+    </div>
+
+    @if (newReferee != null)
+    {
+        <EditForm Model="newReferee" OnValidSubmit="HandleValidSubmit">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+
+            <div class="mb-3">
+                <label for="firstName" class="form-label">Imię</label>
+                <InputText id="firstName" class="form-control" @bind-Value="newReferee.FirstName" />
+                <ValidationMessage For="@(() => newReferee.FirstName)" class="text-danger" />
+            </div>
+
+            <div class="mb-3">
+                <label for="lastName" class="form-label">Nazwisko</label>
+                <InputText id="lastName" class="form-control" @bind-Value="newReferee.LastName" />
+                <ValidationMessage For="@(() => newReferee.LastName)" class="text-danger" />
+            </div>
+
+            <div class="mb-3">
+                <label for="nationality" class="form-label">Narodowość</label>
+                <InputText id="nationality" class="form-control" @bind-Value="newReferee.Nationality" />
+                <ValidationMessage For="@(() => newReferee.Nationality)" class="text-danger" />
+            </div>
+
+            <div class="mb-3">
+                <label for="level" class="form-label">Poziom</label>
+                <InputText id="level" class="form-control" @bind-Value="newReferee.Level" />
+                <ValidationMessage For="@(() => newReferee.Level)" class="text-danger" />
+            </div>
+
+            <div class="mb-3">
+                <label for="birthday" class="form-label">Data urodzenia</label>
+                <InputDate id="birthday" class="form-control" @bind-Value="newReferee.DateOfBirth" />
+                <ValidationMessage For="@(() => newReferee.DateOfBirth)" class="text-danger" />
+            </div>
+
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary">Dodaj nowego sędziego</button>
+            </div>
+        </EditForm>
+    }
+    else
+    {
+        <div class="text-center">
+            <span class="spinner-border text-primary" role="status"></span>
+            <span class="visually-hidden">Ładowanie...</span>
+        </div>
+    }
 </div>
 
-<h3>Dodaj sędziego</h3>
-
-@if (newReferee != null)
-{
-    <EditForm Model="newReferee" OnValidSubmit="HandleValidSubmit">
-        <DataAnnotationsValidator />
-        <ValidationSummary />
-
-        <div class="row">
-            <div class="col-md-6 mb-3">
-                <label for="firstName" class="form-label fw-bold">Imię</label>
-                <InputText id="firstName" class="form-control shadow-sm" @bind-Value="newReferee.FirstName" />
-            </div>
-
-            <div class="col-md-6 mb-3">
-                <label for="lastName" class="form-label fw-bold">Nazwisko</label>
-                <InputText id="lastName" class="form-control shadow-sm" @bind-Value="newReferee.LastName" />
-            </div>
-
-            <div class="col-md-6 mb-3">
-                <label for="nationality" class="form-label fw-bold">Narodowość</label>
-                <InputText id="nationality" class="form-control shadow-sm" @bind-Value="newReferee.Nationality" />
-            </div>
-
-            <div class="col-md-6 mb-3">
-                <label for="level" class="form-label fw-bold">Poziom</label>
-                <InputText id="level" class="form-control shadow-sm" @bind-Value="newReferee.Level" />
-            </div>
-
-            <div class="col-md-6 mb-3">
-                <label for="birthday" class="form-label fw-bold">Data urodzenia</label>
-                <InputDate id="birthday" class="form-control shadow-sm" @bind-Value="newReferee.DateOfBirth" />
-            </div>
-        </div>
-
-        <button type="submit" class="btn btn-primary">Dodaj nowego sędziego</button>
-    </EditForm>
-}
-else
-{
-    <p>Ładowanie...</p>
-}
 
 <Alert Message="@AlertManager.Message" Type="@AlertManager.Type" IsVisible="@AlertManager.IsVisible" />
 

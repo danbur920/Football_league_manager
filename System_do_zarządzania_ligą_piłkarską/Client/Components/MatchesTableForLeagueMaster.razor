@@ -48,7 +48,7 @@
 
         if (match == null || match.GoalsHome == null || match.GoalsAway == null || !match.IsFinished)
         {
-            return "-";
+            return "Niezakończony";
         }
         if (match.GoalsHome == match.GoalsAway)
         {
@@ -63,9 +63,6 @@
 
     public string ShowScore(ShortMatchInfoDTO match)
     {
-        if (match.IsFinished == false)
-            return "-";
-
         return $"{match.HomeTeam.Name}  {match.GoalsHome}:{match.GoalsAway}  {match.AwayTeam.Name}";
     }
 
