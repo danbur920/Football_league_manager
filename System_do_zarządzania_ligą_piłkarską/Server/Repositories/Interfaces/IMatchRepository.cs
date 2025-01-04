@@ -9,7 +9,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories.Interface
         Task<Match> GetMatch(int matchId);
         Task UpdateMatch(Match match);
         Task<List<Match>> GetMatchesFromSpecificSeasonForLeagueMaster(int leagueSeasonId);
-        Task<Match> GetExtensiveMatchInfoFromSpecificSeasonForLeagueMaster(int leagueSeasonId, int matchId);
+        Task<Match> GetExtensiveMatchInfo(int matchId);
         Task UpdateMatchInfo(Match editMatch);
         Task AddNewMatchEventToTheSeason(MatchEvent newMatchEvent);
 

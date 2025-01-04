@@ -6,6 +6,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Services.Interfaces
     public interface IMatchService
     {
         Task AddNewMatchToTheSeason(NewMatchDTO newMatch);
+        Task<MatchDetailsDTO> GetMatchDetails(int matchId);
         Task<List<ShortMatchInfoDTO>> GetMatchesFromSpecificSeasonForLeagueMaster(int leagueSeasonId);
         Task<EditMatchDTO> GetExtensiveMatchInfoFromSpecificSeasonForLeagueMaster(int leagueSeasonId, int matchId);
         Task<List<MatchFootballerDTO>> GetLineup(int matchId, int teamId);

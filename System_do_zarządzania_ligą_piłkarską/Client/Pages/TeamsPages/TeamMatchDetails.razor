@@ -17,7 +17,7 @@
 @if (match != null)
 {
     <div class="match-info-container">
-        <h5>Aktualny wynik:</h5>
+        <h5>Aktualny wynik (mecz @(match.IsFinished ? "zakończony" : "niezakończony")):</h5>
         <div class="current-score">
             <span class="team-name">@match.HomeTeam.Name</span>
             <span class="score">@($"{match.GoalsHome}:{match.GoalsAway}")</span>
@@ -153,7 +153,7 @@ else
     [Parameter] public int matchId { get; set; }
 
     private TeamDTO? team;
-    private MatchDTO? match;
+    private MatchDetailsDTO? match;
 
     private List<ShortFootballerInfoDTO>? homeFootballers;
     private List<ShortFootballerInfoDTO>? awayFootballers;
@@ -166,8 +166,7 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        //team = await PublicClient.Client.GetFromJsonAsync<TeamDTO>($"api/teams/{teamId}");
-        match = await PublicClient.Client.GetFromJsonAsync<MatchDTO>($"api/teams/{teamId}/matches?isFinished=true");
+        match = await PublicClient.Client.GetFromJsonAsync<MatchDetailsDTO>($"api/matches/{matchId}");
 
         if(match != null)
         {
@@ -219,6 +218,6 @@ else
 
     private void GoBack()
     {
-        Navigation.NavigateTo($"/teams/{teamId}/past-matches/{matchId:int}");
+        Navigation.NavigateTo($"/teams/{teamId}/past-matches");
     }
 }

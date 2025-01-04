@@ -24,6 +24,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Mapping
             CreateMap<Referee, RefereeDTO>().ReverseMap();
             CreateMap<RefereeStat, RefereeStatDTO>().ReverseMap();
             CreateMap<Match, MatchDTO>().ReverseMap();
+            CreateMap<Match, MatchDetailsDTO>();
             CreateMap<Trophy, TrophyDTO>().ReverseMap();
 
             CreateMap<NewLeagueInfoDTO, LeagueInfo>();

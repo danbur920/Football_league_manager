@@ -70,6 +70,13 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Controllers
             return Ok(matches);
         }
 
+        [HttpGet("{matchId}")]
+        public async Task<IActionResult> GetMatchDetails([FromRoute] int matchId)
+        {
+            var match = await _matchService.GetMatchDetails(matchId);
+            return Ok(match);
+        }
+
         [HttpGet("league-master/match/{leagueSeasonId}/{matchId}")]
         public async Task<IActionResult> GetExtensiveMatchInfoFromSpecificSeasonForLeagueMaster([FromRoute] int leagueSeasonId, [FromRoute] int matchId)
         {

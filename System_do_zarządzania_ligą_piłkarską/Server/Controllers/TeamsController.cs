@@ -78,7 +78,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Controllers
         }
 
         [HttpGet("{teamId}/matches")]
-        public async Task<ActionResult<List<MatchDTO>>> GetMatches(int teamId, [FromQuery] bool isFinished)
+        public async Task<ActionResult<List<MatchDTO>>> GetMatches([FromRoute] int teamId, [FromQuery] bool isFinished)
         {
             var matches = await _teamService.GetMatchesByTeam(teamId, isFinished);
             return Ok(matches);

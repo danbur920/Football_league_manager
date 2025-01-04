@@ -39,10 +39,15 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Services
             return _mapper.Map<List<ShortMatchInfoDTO>>(matches);
         }
 
+        public async Task<MatchDetailsDTO> GetMatchDetails(int matchId)
+        {
+            var match = await _matchRepository.GetExtensiveMatchInfo(matchId);
+            return _mapper.Map<MatchDetailsDTO>(match);
+        }
 
         public async Task<EditMatchDTO> GetExtensiveMatchInfoFromSpecificSeasonForLeagueMaster(int leagueSeasonId, int matchId)
         {
-            var match = await _matchRepository.GetExtensiveMatchInfoFromSpecificSeasonForLeagueMaster(leagueSeasonId, matchId);
+            var match = await _matchRepository.GetExtensiveMatchInfo(matchId);
             return _mapper.Map<EditMatchDTO>(match);
         }
 

@@ -46,7 +46,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
             return matches;
         }
 
-        public async Task<Match> GetExtensiveMatchInfoFromSpecificSeasonForLeagueMaster(int leagueSeasonId, int matchId)
+        public async Task<Match> GetExtensiveMatchInfo(int matchId)
         {
             var match = await _context.Matches.Where(x => x.Id == matchId).
                 Include(x => x.HomeTeam).
