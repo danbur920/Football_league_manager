@@ -21,7 +21,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
         {
             var referee = await _context.Referees
                 .Where(x => x.Id == refereeId)
-                .Include(x=>x.Image)
+                .Include(x => x.Image)
                 .Include(x => x.RefereeStats)
                 .FirstOrDefaultAsync();
 
@@ -45,11 +45,21 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
             return referees;
         }
 
+        public async Task<Referee> GetRefereeToManage(int refereeId)
+        {
+            var referee = await _context.Referees.
+                Include(x=>x.Image).
+                Where(x=>x.Id == refereeId).
+                FirstOrDefaultAsync();
+
+            return referee;
+        }
+
         public async Task<List<Referee>> GetAllRefereesFromSpecificSeason(int leagueSeasonId)
         {
             var referees = await _context.Referees
-                 .Include(r => r.RefereeStats.Where(rs => rs.LeagueSeasonId == leagueSeasonId)) 
-                 .Where(r => r.RefereeStats.Any(rs => rs.LeagueSeasonId == leagueSeasonId)) 
+                 .Include(r => r.RefereeStats.Where(rs => rs.LeagueSeasonId == leagueSeasonId))
+                 .Where(r => r.RefereeStats.Any(rs => rs.LeagueSeasonId == leagueSeasonId))
                  .ToListAsync();
 
             return referees;
@@ -64,6 +74,22 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
         public async Task AddNewReferee(Referee newReferee)
         {
             await _context.Referees.AddAsync(newReferee);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<List<Referee>> GetCreatedRefereesByLeagueMaster(string userId)
+        {
+            var referees = await _context.Referees.
+                Include(x=>x.Image).
+                Where(x => x.CreatorId == userId).
+                ToListAsync();
+
+            return referees;
+        }
+
+        public async Task UpdateReferee(Referee refereeToUpdate)
+        {
+            _context.Referees.Update(refereeToUpdate);
             await _context.SaveChangesAsync();
         }
     }

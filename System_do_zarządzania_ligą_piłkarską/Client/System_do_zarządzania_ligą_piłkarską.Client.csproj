@@ -62,6 +62,9 @@
     <Content Update="Pages\RefereesPages\Referees.razor">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
     </Content>
+    <Content Update="Pages\TeamsPages\TeamSeasonTable.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
     <Content Update="Pages\TeamsPages\TeamFutureMatches.razor">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
     </Content>

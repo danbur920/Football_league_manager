@@ -17,8 +17,16 @@
       "PackagePath": "staticwebassets\\images\\footballers\\footballer-5.jpg"
     },
     {
+      "Id": "C:\\Users\\danbu\\Desktop\\Prca Inż\\Football_league_manager\\System_do_zarządzania_ligą_piłkarską\\Server\\wwwroot\\images\\footballers\\footballer-6.jpg",
+      "PackagePath": "staticwebassets\\images\\footballers\\footballer-6.jpg"
+    },
+    {
       "Id": "C:\\Users\\danbu\\Desktop\\Prca Inż\\Football_league_manager\\System_do_zarządzania_ligą_piłkarską\\Server\\wwwroot\\images\\leagues\\league-2.jpg",
       "PackagePath": "staticwebassets\\images\\leagues\\league-2.jpg"
+    },
+    {
+      "Id": "C:\\Users\\danbu\\Desktop\\Prca Inż\\Football_league_manager\\System_do_zarządzania_ligą_piłkarską\\Server\\wwwroot\\images\\referees\\referee-2.jpg",
+      "PackagePath": "staticwebassets\\images\\referees\\referee-2.jpg"
     },
     {
       "Id": "C:\\Users\\danbu\\Desktop\\Prca Inż\\Football_league_manager\\System_do_zarządzania_ligą_piłkarską\\Server\\wwwroot\\images\\teams\\team-2.jpg",

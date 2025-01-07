@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace System_do_zarządzania_ligą_piłkarską.Server.Models
@@ -9,6 +10,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Models
     public class Referee
     {
         public int Id { get; set; }
+        public string? CreatorId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public DateOnly DateOfBirth { get; set; }

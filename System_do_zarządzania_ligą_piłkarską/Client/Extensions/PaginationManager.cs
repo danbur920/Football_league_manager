@@ -7,7 +7,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Client.Extensions
         public int PageNumber { get; set; } = 1;
         public int PageIndex { get; set; } = 0;
         public int PageMax { get; set; }
-        public int PageSize { get; set; } = 5;
+        public int PageSize { get; set; } = 100;
         public int CollectionCount { get; set; } 
 
         public async Task GoToPage(int pageNumber, Func<Task<bool>> loadResources)

@@ -26,12 +26,8 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Services
         }
         public async Task<List<LeagueSeasonDTO>> GetLeaguesByPage(int pageNumber, int pageSize)
         {
-            var leagues = await _leagueRepository.GetLeaguesByPage(pageNumber, pageSize);
-            var leagueSeasonDTOs = _mapper.Map<List<LeagueSeasonDTO>>(leagues).
-                OrderBy(x=>x.LeagueInfo.Name).
-                ThenByDescending(x=>x.Season).ToList();
-
-            return leagueSeasonDTOs;
+            var leagueSeasons = await _leagueRepository.GetLeaguesByPage(pageNumber, pageSize);
+            return _mapper.Map<List<LeagueSeasonDTO>>(leagueSeasons);
         }
 
         public async Task<LeagueSeasonProfilDTO> GetLeagueById(int id)

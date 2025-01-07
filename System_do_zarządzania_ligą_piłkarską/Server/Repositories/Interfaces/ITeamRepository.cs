@@ -7,6 +7,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories.Interface
     {
         Task<List<Team>> GetAllTeams();
         Task<Team> GetTeamById(int teamId);
+        Task<List<LeagueSeason>> GetSeasonsWithTeamStatsByTeam(int teamId);
         Task AddNewTeam(Team newTeam);
         Task UpdateTeam(Team teamToUpdate);
         Task<List<FootballerStat>> GetCurrentFootballersStats(int teamId);

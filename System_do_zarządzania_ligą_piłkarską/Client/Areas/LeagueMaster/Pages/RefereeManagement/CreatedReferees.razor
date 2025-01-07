@@ -13,105 +13,107 @@
 @inject AlertManager AlertManager
 @attribute [Authorize(Roles = "LeagueMaster")]
 
-<PageTitle>Dodawanie sędziego</PageTitle>
+<PageTitle>Stworzeni sędziowie</PageTitle>
 
-<div class="button-container">
-    <button class="btn btn-secondary" @onclick="BackToStart">Wróć</button>
+<div class="container py-5">
+    <div class="row mb-4">
+        <div class="col text-center">
+            <h3 class="display-5 fw-bold text-primary">Stworzeni sędziowie</h3>
+        </div>
+    </div>
+
+    <Alert Message="@AlertManager.Message" Type="@AlertManager.Type" IsVisible="@AlertManager.IsVisible" />
+
+    @if (referees != null)
+    {
+        <table class="table table-hover table-bordered shadow-sm">
+            <thead class="table-primary">
+                <tr>
+                    <th class="text-center">Imię</th>
+                    <th class="text-center">Nazwisko</th>
+                    <th class="text-center">Data urodzenia</th>
+                    <th class="text-center">Narodowość</th>
+                    <th class="text-center">Poziom</th>
+                    <th class="text-center">Zdjęcie</th>
+                    <th class="text-center">Działania</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (referees.Count == 0)
+                {
+                    <tr>
+                        <td colspan="7" class="text-center">Brak danych do wyświetlenia</td>
+                    </tr>
+                }
+                else
+                {
+                    @foreach (var referee in referees)
+                    {
+                        <tr>
+                            <td class="align-middle text-center">@referee.FirstName</td>
+                            <td class="align-middle text-center">@referee.LastName</td>
+                            <td class="align-middle text-center">@referee.DateOfBirth.ToString("yyyy-MM-dd")</td>
+                            <td class="align-middle text-center">@referee.Nationality</td>
+                            <td class="align-middle text-center">
+                                @if (!string.IsNullOrEmpty(referee.Level))
+                                {
+                                    <span>@referee.Level</span>
+                                }
+                                else
+                                {
+                                    <span class="text-muted">Brak danych</span>
+                                }
+                            </td>
+                            <td class="align-middle text-center">
+                                @if (referee.Image != null)
+                                {
+                                    <img src="@referee.Image.Path" alt="Zdjęcie sędziego" class="img-thumbnail" style="max-width: 100px; max-height: 100px;">
+                                }
+                                else
+                                {
+                                    <span class="text-muted">Brak zdjęcia</span>
+                                }
+                            </td>
+                            <td class="align-middle text-center">
+                                <div class="btn-group">
+                                    <button class="btn btn-danger btn-sm" @onclick="() => DeleteReferee(referee.Id)">
+                                        Usuń
+                                    </button>
+                                    <button class="btn btn-info btn-sm" @onclick="() => GoToRefereeManagement(referee.Id)">
+                                        Zarządzaj
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <div class="text-center">
+            <span class="spinner-border text-primary" role="status"></span>
+            <span class="visually-hidden">Ładowanie...</span>
+        </div>
+    }
 </div>
 
-<h3>Dodaj sędziego</h3>
-
-@if (newReferee != null)
-{
-    <EditForm Model="newReferee" OnValidSubmit="HandleValidSubmit">
-        <DataAnnotationsValidator />
-        <ValidationSummary />
-
-        <div class="row">
-            <div class="col-md-6 mb-3">
-                <label for="firstName" class="form-label fw-bold">Imię</label>
-                <InputText id="firstName" class="form-control shadow-sm" @bind-Value="newReferee.FirstName" />
-            </div>
-
-            <div class="col-md-6 mb-3">
-                <label for="lastName" class="form-label fw-bold">Nazwisko</label>
-                <InputText id="lastName" class="form-control shadow-sm" @bind-Value="newReferee.LastName" />
-            </div>
-
-            <div class="col-md-6 mb-3">
-                <label for="nationality" class="form-label fw-bold">Narodowość</label>
-                <InputText id="nationality" class="form-control shadow-sm" @bind-Value="newReferee.Nationality" />
-            </div>
-
-            <div class="col-md-6 mb-3">
-                <label for="level" class="form-label fw-bold">Poziom</label>
-                <InputText id="level" class="form-control shadow-sm" @bind-Value="newReferee.Level" />
-            </div>
-
-            <div class="col-md-6 mb-3">
-                <label for="birthday" class="form-label fw-bold">Data urodzenia</label>
-                <InputDate id="birthday" class="form-control shadow-sm" @bind-Value="newReferee.DateOfBirth" />
-            </div>
-        </div>
-
-        <button type="submit" class="btn btn-primary">Dodaj nowego sędziego</button>
-    </EditForm>
-}
-else
-{
-    <p>Ładowanie...</p>
-}
-
-<Alert Message="@AlertManager.Message" Type="@AlertManager.Type" IsVisible="@AlertManager.IsVisible" />
-
-
 @code {
-    private NewRefereeDTO newReferee;
+    private List<RefereeInfoDTO>? referees;
 
     protected override async Task OnInitializedAsync()
     {
-        newReferee = new NewRefereeDTO();
-        newReferee.DateOfBirth = new DateOnly(1990, 1, 1);
+        referees = await Http.GetFromJsonAsync<List<RefereeInfoDTO>>("api/referees/league-master/created-referees");
     }
 
-    private async Task HandleValidSubmit()
+    private async Task DeleteReferee(int refereeId)
     {
-        try
-        {
-            var response = await Http.PostAsJsonAsync("api/referees/league-master/add-new-referee", newReferee);
-
-            if (response.IsSuccessStatusCode)
-            {
-                AlertManager.DisplayAlert($"Dodano sędziego {RefereeInfo()} do wybranego sezonu!", "success");
-                Clear();
-            }
-            else
-            {
-                AlertManager.DisplayAlert($"Nie udało się dodać sędziego {RefereeInfo()} do wybranego sezonu.", "danger");
-            }
-        }
-        catch (Exception ex)
-        {
-            AlertManager.DisplayAlert($"Nie udało się dodać sędziego {RefereeInfo()} do wybranego sezonu.", "danger");
-        }
+        
     }
 
-    private string RefereeInfo()
+    private void GoToRefereeManagement(int refereeId)
     {
-        return $"{newReferee.FirstName} {newReferee.LastName}";
-    }
-
-    private void Clear()
-    {
-        newReferee.FirstName = string.Empty;
-        newReferee.LastName = string.Empty;
-        newReferee.Level = string.Empty;
-        newReferee.DateOfBirth = new DateOnly(1990, 1, 1);
-        newReferee.Nationality = string.Empty;
-    }
-
-    private void BackToStart()
-    {
-        Navigation.NavigateTo($"/league-master");
+        Navigation.NavigateTo($"/league-master/created-referees/{refereeId}");
     }
 }

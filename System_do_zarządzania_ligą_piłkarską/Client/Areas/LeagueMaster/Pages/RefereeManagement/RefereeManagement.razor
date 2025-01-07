@@ -1,0 +1,152 @@
+﻿@using System_do_zarządzania_ligą_piłkarską.Shared.DTOs
+@using System_do_zarządzania_ligą_piłkarską.Client.Areas.LeagueMaster.Shared
+@using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Matches
+@using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Referees
+@using System_do_zarządzania_ligą_piłkarską.Client.Extensions
+@using System_do_zarządzania_ligą_piłkarską.Client.Components
+@using Microsoft.AspNetCore.Authorization
+@using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Images
+@using System_do_zarządzania_ligą_piłkarską.Shared.Enums
+ 
+@page "/league-master/created-referees/{RefereeId:int}"
+@layout LeagueMasterLayout
+@inject HttpClient Http
+@inject NavigationManager Navigation
+@inject AlertManager AlertManager
+@attribute [Authorize(Roles = "LeagueMaster")]
+
+<PageTitle>Edytuj sędziego</PageTitle>
+
+<Alert Message="@AlertManager.Message" Type="@AlertManager.Type" IsVisible="@AlertManager.IsVisible" />
+
+<div class="container py-5">
+    <div class="d-flex justify-content-start mb-4">
+        <button class="btn btn-secondary" @onclick="GoBack">
+            <i class="fas fa-arrow-left me-2"></i> Wróć
+        </button>
+    </div>
+
+    @if (referee != null)
+    {
+        <h3 class="text-center text-primary mb-4">Edytuj sędziego</h3>
+
+        <EditForm Model="referee" OnValidSubmit="EditReferee">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="FirstName" class="form-label">Imię</label>
+                    <InputText id="FirstName" class="form-control" @bind-Value="referee.FirstName" />
+                </div>
+                <div class="col-md-6">
+                    <label for="LastName" class="form-label">Nazwisko</label>
+                    <InputText id="LastName" class="form-control" @bind-Value="referee.LastName" />
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="DateOfBirth" class="form-label">Data urodzenia</label>
+                    <InputDate id="DateOfBirth" class="form-control" @bind-Value="referee.DateOfBirth" />
+                </div>
+                <div class="col-md-6">
+                    <label for="Nationality" class="form-label">Narodowość</label>
+                    <InputText id="Nationality" class="form-control" @bind-Value="referee.Nationality" />
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="Level" class="form-label">Poziom</label>
+                    <InputText id="Level" class="form-control" @bind-Value="referee.Level" />
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary px-4">Zapisz zmiany</button>
+        </EditForm>
+
+        <div class="my-4">
+            <h4>Zdjęcie sędziego</h4>
+            @if (referee.Image != null)
+            {
+                <div class="mb-3">
+                    <img src="@referee.Image.Path" alt="Zdjęcie sędziego" class="img-thumbnail" style="max-width: 150px; max-height: 150px;" />
+                </div>
+                <label class="btn btn-sm btn-warning">
+                    Zmień zdjęcie
+                    <InputFile OnChange="e => UploadPhoto(e, referee.Id)" class="d-none" />
+                </label>
+            }
+            else
+            {
+                <label class="btn btn-sm btn-info">
+                    Dodaj zdjęcie
+                    <InputFile OnChange="e => UploadPhoto(e, referee.Id)" class="d-none" />
+                </label>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="text-center">
+            <span class="spinner-border text-primary" role="status"></span>
+            <span class="visually-hidden">Ładowanie...</span>
+        </div>
+    }
+</div>
+
+@code {
+    [Parameter] public int RefereeId { get; set; }
+    private RefereeInfoDTO referee;
+
+    protected override async Task OnInitializedAsync()
+    {
+        referee = await Http.GetFromJsonAsync<RefereeInfoDTO>($"api/referees/league-master/manage-referee/{RefereeId}");
+    }
+
+    private async Task EditReferee()
+    {
+        var response = await Http.PatchAsJsonAsync($"api/referees/league-master/edit-referee", referee);
+        if (response.IsSuccessStatusCode)
+        {
+            AlertManager.DisplayAlert("Zmiany zostały zapisane pomyślnie.", "success");
+        }
+        else
+        {
+            AlertManager.DisplayAlert("Nie udało się zapisać zmian.", "danger");
+        }
+    }
+
+    private async Task UploadPhoto(InputFileChangeEventArgs e, int refereeId)
+    {
+        if (e.File != null)
+        {
+            var file = e.File;
+
+            var formData = new MultipartFormDataContent();
+            var stream = file.OpenReadStream(file.Size);
+            formData.Add(new StreamContent(stream), "File", file.Name);
+            formData.Add(new StringContent(refereeId.ToString()), "RefereeId");
+            formData.Add(new StringContent(ImageType.Referee.ToString()), "Type");
+
+            var response = await Http.PostAsync("api/images", formData);
+
+            if (response.IsSuccessStatusCode)
+            {
+                AlertManager.DisplayAlert("Zdjęcie zostało dodane/zaktualizowane.", "success");
+                referee = await Http.GetFromJsonAsync<RefereeInfoDTO>($"api/referees/league-master/manage-referee/{RefereeId}");
+            }
+            else
+            {
+                AlertManager.DisplayAlert("Nie udało się dodać/zaktualizować zdjęcia.", "danger");
+            }
+        }
+    }
+
+    private void GoBack()
+    {
+        Navigation.NavigateTo("/league-master/created-referees");
+    }
+}
+

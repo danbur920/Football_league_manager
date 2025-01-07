@@ -13,6 +13,7 @@
 @layout LeagueMasterLayout
 @inject HttpClient Http
 @inject AlertManager AlertManager
+@inject NavigationManager Navigation
 @attribute [Authorize(Roles = "LeagueMaster")]
 
 <PageTitle>Zarządzaj drużyną</PageTitle>
@@ -20,6 +21,11 @@
 <Alert Message="@AlertManager.Message" Type="@AlertManager.Type" IsVisible="@AlertManager.IsVisible" />
 
 <div class="container mt-4">
+    <div class="d-flex justify-content-start mb-4">
+        <button class="btn btn-secondary" @onclick="GoBack">
+            <i class="fas fa-arrow-left me-2"></i> Wróć
+        </button>
+    </div>
     <h3>Zarządzaj drużyną</h3>
 
     @if (team != null)
@@ -76,6 +82,7 @@
                     <th>Nazwisko</th>
                     <th>Numer</th>
                     <th>Pozycja</th>
+                    <th>Zdjęcie</th>
                     <th>Akcje</th>
                 </tr>
             </thead>
@@ -88,6 +95,16 @@
                         <td>@player.LastName</td>
                         <td>@player.ShirtNumber</td>
                         <td>@PositionHelper.GetDisplayName(player.Position)</td>
+                        <td>
+                            @if (player.Image != null)
+                            {
+                                <img src="@player.Image.Path" alt="Zdjęcie piłkarza" class="img-thumbnail" style="max-width: 100px; max-height: 100px;">
+                            }
+                            else
+                            {
+                                <span class="text-muted">Brak zdjęcia</span>
+                            }
+                        </td>
                         <td>
                             @if (player.Image == null)
                             {
@@ -184,6 +201,7 @@
     {
         editTeam = new EditTeamDTO
         {
+            Id = team.Id,
             Name = team.Name,
             City = team.City,
             Country = team.Country,
@@ -194,7 +212,7 @@
 
     private async Task UpdateTeam()
     {
-        var response = await Http.PatchAsJsonAsync($"api/teams/league-master/manage-team", editTeam);
+        var response = await Http.PatchAsJsonAsync($"api/teams/league-master/edit-team", editTeam);
         if (response.IsSuccessStatusCode)
         {
             AlertManager.DisplayAlert("Dane drużyny zostały zaktualizowane.", "success");
@@ -259,19 +277,10 @@
         }
     }
 
-    // private async Task EditPlayer(int playerId)
-    // {
-    //     newPlayer.TeamId = TeamId;
-    //     var response = await Http.PostAsJsonAsync($"api/footballers/league-master/edit-footballer", editFootballer);
-    //     if (response.IsSuccessStatusCode)
-    //     {
-    //         AlertManager.DisplayAlert("Edycja piłkarza zakończona powodzeniem.", "success");
-    //         newPlayer = new NewFootballerDTO();
-    //         await LoadTeam();
-    //     }
-    //     else
-    //     {
-    //         AlertManager.DisplayAlert("Edycja piłkarza zakończona niepowodzeniem.", "danger");
-    //     }
-    // }
+    private void GoBack()
+    {
+        Navigation.NavigateTo("/league-master/created-teams");
+    }
 }
+
+

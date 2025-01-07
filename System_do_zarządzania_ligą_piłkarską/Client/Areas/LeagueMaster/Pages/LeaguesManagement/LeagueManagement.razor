@@ -132,12 +132,14 @@
     [Parameter] public int leagueInfoId { get; set; }
     public string? leagueName { get; set; }
     private string? userEmailToAssign = string.Empty;
+    private string? currentUserId;
 
     private List<LeagueSeasonDTO>? seasons;
     private LeagueInfoDTO? leagueInfo;
 
     protected override async Task OnInitializedAsync()
     {
+        currentUserId = await GetUserId();
         await LoadSeasons();
         AssignLeagueName();
     }
@@ -180,14 +182,12 @@
 
     private bool IsPrimaryLeagueMaster(string leagueMasterPrimaryId)
     {
-        var userId = GetUserId().Result;
-        return leagueMasterPrimaryId == userId;
+        return currentUserId == leagueMasterPrimaryId;
     }
 
     private bool IsSecondaryLeagueMaster(string leagueMasterSecondaryId)
     {
-        var userId = GetUserId().Result;
-        return leagueMasterSecondaryId == userId;
+        return currentUserId == leagueMasterSecondaryId;
     }
 
     private async Task AssignUserToManagement(int leagueSeasonId, string leagueMasterSecondaryEmail)

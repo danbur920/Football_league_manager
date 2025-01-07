@@ -44,6 +44,12 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Services
 
         // League Master Panel:
 
+        public async Task<RefereeInfoDTO> GetRefereeToManage(int refereeId)
+        {
+            var referee = await _refereeRepository.GetRefereeToManage(refereeId);
+            return _mapper.Map<RefereeInfoDTO>(referee);
+        }
+
         public async Task<List<ShortRefereeInfoDTO>> GetAllRefereesForLeagueMaster()
         {
             var referees = await _refereeRepository.GetAllReferees();
@@ -72,6 +78,25 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Services
         {
             var mappedReferee = _mapper.Map<Referee>(newReferee);
             await _refereeRepository.AddNewReferee(mappedReferee);
+        }
+
+        public async Task<List<RefereeInfoDTO>> GetCreatedRefereesByLeagueMaster(string userId)
+        {
+            var referees = await _refereeRepository.GetCreatedRefereesByLeagueMaster(userId);
+            return _mapper.Map<List<RefereeInfoDTO>>(referees);
+        }
+
+        public async Task EditReferee(RefereeInfoDTO editReferee)
+        {
+            var currentReferee = await _refereeRepository.GetRefereeToManage(editReferee.Id);
+
+            currentReferee.FirstName = editReferee.FirstName;
+            currentReferee.LastName =  editReferee.LastName;
+            currentReferee.Nationality = editReferee.Nationality;
+            currentReferee.DateOfBirth = editReferee.DateOfBirth;
+            currentReferee.Level = editReferee.Level;
+
+            await _refereeRepository.UpdateReferee(currentReferee);
         }
     }
 }

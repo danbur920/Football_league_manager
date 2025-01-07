@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Images;
 
 namespace System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Teams
 {
@@ -17,6 +18,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Teams
         public string Country { get; set; }
         public string Stadium { get; set; }
         public int YearOfFoundation { get; set; }
+        public ImageDTO? Image { get; set; }
         [NotMapped]
         public bool HasCoach { get; set; }
         [NotMapped]

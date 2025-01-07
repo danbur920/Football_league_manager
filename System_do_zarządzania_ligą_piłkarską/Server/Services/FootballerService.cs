@@ -19,10 +19,16 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Services
             _mapper = mapper;
         }
 
-        public async Task<FootballerStatDTO> GetFootballerInfoById(int footballerId)
+        public async Task<FootballerProfileDTO> GetFootballerInfoById(int footballerId)
         {
             var footballer = await _footballerRepository.GetFootballerInfoById(footballerId);
-            return _mapper.Map<FootballerStatDTO>(footballer);
+            return _mapper.Map<FootballerProfileDTO>(footballer);
+        }
+
+        public async Task<List<FootballerStatProfileDTO>> GetFootballerStatsById(int footballerId)
+        {
+            var footballerStats = await _footballerRepository.GetFootballerStatsById(footballerId);
+            return _mapper.Map<List<FootballerStatProfileDTO>>(footballerStats);
         }
 
         public async Task<List<FootballerDTO>> GetPlayersByPage(int pageNumber, int pageSize)

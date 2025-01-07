@@ -52,6 +52,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
                 Include(x => x.HomeTeam).
                 Include(x => x.AwayTeam).
                 Include(x => x.MatchEvents).
+                Include(x => x.Referee).
                 FirstOrDefaultAsync();
 
             return match;
@@ -332,7 +333,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
             var matchToUpdate = await _context.Matches.FindAsync(matchStateUpdate.Match.Id);
             matchToUpdate.IsFinished = matchStateUpdate.Match.IsFinished;
             matchToUpdate.Result = matchStateUpdate.Match.Result;
-                
+
             //var matchEntity = new Match
             //{
             //    Id = matchStateUpdate.Match.Id,
@@ -420,7 +421,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
                 {
                     Console.WriteLine($"Entity: {entry.Entity.GetType().Name}, State: {entry.State}");
                 }
-                throw; 
+                throw;
             }
             catch (Exception ex)
             {

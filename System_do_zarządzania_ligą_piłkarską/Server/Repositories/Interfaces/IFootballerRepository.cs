@@ -6,9 +6,10 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories.Interface
     {
         Task<List<Footballer>> GetPlayersByPage(int pageNumber, int pageSize);
         Task<int> GetTotalPlayersCount();
-        Task<FootballerStat> GetFootballerInfoById(int footballerId);
+        Task<Footballer> GetFootballerInfoById(int footballerId);
+        Task<List<FootballerStat>> GetFootballerStatsById(int footballerId);
         Task<List<Footballer>> GetFootballersFromSpecificTeam(int teamId);
         Task AddFootballer(Footballer footballer);
-        Task AddFootballerStats (Footballer footballer);
+        Task AddFootballerStats(Footballer footballer);
     }
 }

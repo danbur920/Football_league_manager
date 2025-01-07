@@ -16,6 +16,12 @@ namespace System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Matches
         public int? GoalsHome { get; set; }
         public int? GoalsAway { get; set; }
         public bool IsFinished { get; set; }
+        public int HomeTeamSubstitutions { get; set; }
+        public int AwayTeamSubstitutions { get; set; }
+        public int HomeTeamYellowCards { get; set; }
+        public int AwayTeamYellowCards { get; set; }
+        public int HomeTeamRedCards { get; set; }
+        public int AwayTeamRedCards { get; set; }
         public DateOnly? MatchDate { get; set; }
         public TimeOnly? MatchTime { get; set; }
         public virtual ShortRefereeInfoDTO? Referee { get; set; }

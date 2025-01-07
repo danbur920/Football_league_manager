@@ -5,6 +5,7 @@
 @using System.Threading.Tasks
 @using Microsoft.AspNetCore.Components
 @using System_do_zarządzania_ligą_piłkarską.Client.Extensions
+@using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Footballers
 
 @inject PublicClient PublicClient
 @inject NavigationManager Navigation
@@ -20,7 +21,7 @@
         <button class="btn btn-primary btn-lg" @onclick="GoToFootballers">Wróć do listy</button>
     </div>
 
-    @if (footballer == null)
+    @if (footballer == null || footballerStats == null)
     {
         <div class="d-flex justify-content-center align-items-center" style="min-height: 200px;">
             <div class="spinner-border text-primary" role="status">
@@ -35,9 +36,9 @@
                 <div class="card border-0 shadow-sm">
                     <div class="card-body text-center">
                         <h5 class="card-title text-secondary fw-bold mb-4">Zdjęcie Piłkarza</h5>
-                        @if (footballer.Footballer.Image != null)
+                        @if (footballer.Image != null)
                         {
-                            <img src="@footballer.Footballer.Image.Path" alt="Zdjęcie piłkarza" class="img-fluid rounded shadow-sm mb-3" style="max-height: 300px; object-fit: cover;">
+                            <img src="@footballer.Image.Path" alt="Zdjęcie piłkarza" class="img-fluid rounded shadow-sm mb-3" style="max-height: 300px; object-fit: cover;">
                         }
                         else
                         {
@@ -49,47 +50,60 @@
                 </div>
             </div>
 
-            <!-- Sekcja danych osobowych -->
             <div class="col-lg-4">
                 <div class="card border-0 shadow-sm">
                     <div class="card-body">
                         <h5 class="card-title text-secondary fw-bold mb-4">Dane osobowe</h5>
-                        <p><strong>Imię i nazwisko:</strong> @footballer.Footballer.FirstName @footballer.Footballer.LastName</p>
-                        @if (!string.IsNullOrEmpty(footballer.Footballer.NickName))
+                        <p><strong>Imię i nazwisko:</strong> @footballer.FirstName @footballer.LastName</p>
+                        @if (!string.IsNullOrEmpty(footballer.NickName))
                         {
-                            <p><strong>Pseudonim:</strong> @footballer.Footballer.NickName</p>
+                            <p><strong>Pseudonim:</strong> @footballer.NickName</p>
                         }
-                        <p><strong>Numer na koszulce:</strong> @footballer.Footballer.ShirtNumber</p>
-                        <p><strong>Data urodzenia:</strong> @footballer.Footballer.DateOfBirth.ToString("dd MMMM yyyy")</p>
-                        <p><strong>Narodowość:</strong> @footballer.Footballer.Nationality</p>
-                        <p><strong>Pozycja:</strong> @footballer.Footballer.Position</p>
-                        @if (footballer.Footballer.Height.HasValue)
+                        <p><strong>Numer na koszulce:</strong> @footballer.ShirtNumber</p>
+                        <p><strong>Data urodzenia:</strong> @footballer.DateOfBirth.ToString("dd MMMM yyyy")</p>
+                        <p><strong>Narodowość:</strong> @footballer.Nationality</p>
+                        <p><strong>Pozycja:</strong> @footballer.Position</p>
+                        @if (footballer.Height.HasValue)
                         {
-                            <p><strong>Wzrost:</strong> @footballer.Footballer.Height.Value cm</p>
+                            <p><strong>Wzrost:</strong> @footballer.Height.Value cm</p>
                         }
-                        @if (footballer.Footballer.Weight.HasValue)
+                        @if (footballer.Weight.HasValue)
                         {
-                            <p><strong>Waga:</strong> @footballer.Footballer.Weight.Value kg</p>
+                            <p><strong>Waga:</strong> @footballer.Weight.Value kg</p>
                         }
-                        @if (footballer.Footballer.Team != null)
+                        @if (footballer.TeamName != null)
                         {
-                            <p><strong>Klub:</strong> @footballer.Footballer.Team.Name</p>
+                            <p><strong>Klub:</strong> @footballer.TeamName</p>
                         }
                     </div>
                 </div>
             </div>
 
-            <!-- Sekcja statystyk -->
             <div class="col-lg-4">
                 <div class="card border-0 shadow-sm">
                     <div class="card-body">
-                        <h5 class="card-title text-secondary fw-bold mb-4">Statystyki obecnego sezonu</h5>
-                        <p><strong>Gole:</strong> @footballer.Goals</p>
-                        <p><strong>Gole samobójcze:</strong> @footballer.OwnGoals</p>
-                        <p><strong>Asysty:</strong> @footballer.Assists</p>
-                        <p><strong>Rozegrane mecze:</strong> @footballer.MatchesPlayed</p>
-                        <p><strong>Żółte kartki:</strong> @footballer.YellowCards</p>
-                        <p><strong>Czerwone kartki:</strong> @footballer.RedCards</p>
+                        <h5 class="card-title text-secondary fw-bold mb-4">Statystyki sezonu</h5>
+
+                        <div class="mb-3">
+                            <label for="seasonSelector" class="form-label"><strong>Wybierz sezon:</strong></label>
+                            <select id="seasonSelector" class="form-select" @onchange="OnSeasonChanged">
+                                @foreach (var stat in footballerStats)
+                                {
+                                    <option value="@stat.LeagueSeason.Id" selected="@(currentFootballerStat?.LeagueSeason?.Id == stat.LeagueSeason?.Id)">
+                                        @stat.LeagueSeason?.Name @stat.LeagueSeason?.Season.ToString().Substring(1)
+                                    </option>
+                                }
+                            </select>
+                        </div>
+
+                        <p><strong>Gole:</strong> @currentFootballerStat.Goals</p>
+                        <p><strong>Gole samobójcze:</strong> @currentFootballerStat.OwnGoals</p>
+                        <p><strong>Asysty:</strong> @currentFootballerStat.Assists</p>
+                        <p><strong>Żółte kartki:</strong> @currentFootballerStat.YellowCards</p>
+                        <p><strong>Czerwone kartki:</strong> @currentFootballerStat.RedCards</p>
+                        <p><strong>Rozegrane mecze:</strong> @currentFootballerStat.MatchesPlayed</p>
+                        <p><strong>Wyjściowa 11:</strong> @currentFootballerStat.StartingAppearances</p>
+                        <p><strong>Wejście z ławki:</strong> @currentFootballerStat.SubstituteAppearances</p>
                     </div>
                 </div>
             </div>
@@ -101,15 +115,29 @@
     [Parameter]
     public int footballerId { get; set; }
 
-    private FootballerStatDTO? footballer;
+    private FootballerProfileDTO? footballer;
+    private List<FootballerStatProfileDTO>? footballerStats;
+    private FootballerStatProfileDTO? currentFootballerStat;
 
     protected override async Task OnInitializedAsync()
     {
-        footballer = await PublicClient.Client.GetFromJsonAsync<FootballerStatDTO>($"api/footballers/{footballerId}");
+        footballer = await PublicClient.Client.GetFromJsonAsync<FootballerProfileDTO>($"api/footballers/{footballerId}");
+        footballerStats = await PublicClient.Client.GetFromJsonAsync<List<FootballerStatProfileDTO>>($"api/footballers/stats/{footballerId}");
+
+        if (footballerStats != null)
+            currentFootballerStat = footballerStats.FirstOrDefault();
     }
 
     private void GoToFootballers()
     {
         Navigation.NavigateTo("/footballers");
+    }
+
+    private void OnSeasonChanged(ChangeEventArgs e)
+    {
+        if (int.TryParse(e.Value?.ToString(), out int selectedId) && footballerStats != null)
+        {
+            currentFootballerStat = footballerStats.FirstOrDefault(stat => stat.LeagueSeason.Id == selectedId);
+        }
     }
 }

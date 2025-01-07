@@ -23,6 +23,5 @@ namespace System_do_zarządzania_ligą_piłkarską.Shared.DTOs
         public int TotalPenaltiesAwarded { get; set; }
         public virtual ImageDTO Image {  get; set; }
         public virtual ICollection<RefereeStatDTO> RefereeStats { get; set; } = new List<RefereeStatDTO>();
-        public virtual ICollection<MatchDTO> Matches { get; set; } = new List<MatchDTO>();
     }
 }

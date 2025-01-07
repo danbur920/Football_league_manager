@@ -34,6 +34,14 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Controllers
             return Ok(team);
         }
 
+        [HttpGet("{teamId}/seasons")]
+        public async Task<IActionResult> GetSeasonsWithTeamStatsByTeam([FromRoute] int teamId)
+        {
+            var seasonsTeamStats = await _teamService.GetSeasonsWithTeamStatsByTeam(teamId);
+            return Ok(seasonsTeamStats);
+        }
+        //GetSeasonsWithTeamStatsByTeam
+
         [HttpPost("league-master")]
         public async Task<IActionResult> AddNewTeam([FromBody] NewTeamDTO newTeam)
         {

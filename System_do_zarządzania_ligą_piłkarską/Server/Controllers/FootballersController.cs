@@ -22,7 +22,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetPlayersByPage(int pageNumber = 1, int pageSize = 2)
+        public async Task<IActionResult> GetPlayersByPage([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 2)
         {
             var players = await _footballerService.GetPlayersByPage(pageNumber, pageSize);
             return Ok(players);
@@ -48,7 +48,14 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Controllers
             var footballer = await _footballerService.GetFootballerInfoById(footballerId);
             return Ok(footballer);
         }
-        
+
+        [HttpGet("stats/{footballerId}")]
+        public async Task<IActionResult> GetFootballerStatsById(int footballerId)
+        {
+            var footballerStats = await _footballerService.GetFootballerStatsById(footballerId);
+            return Ok(footballerStats);
+        }
+
         [HttpPost("league-master/add-new-footballer-to-team")]
         public async Task<IActionResult> AddNewFootballerToTeam([FromBody] NewFootballerDTO newFootballer)
         {

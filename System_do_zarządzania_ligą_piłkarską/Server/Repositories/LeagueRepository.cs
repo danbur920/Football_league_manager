@@ -21,6 +21,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
                 Skip((pageNumber - 1) * pageSize).
                 Take(pageSize).
                 Include(x => x.LeagueInfo).
+                OrderBy(x=>x.LeagueInfo.Name).
                 ToListAsync();
 
             return leagues;

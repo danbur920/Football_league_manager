@@ -47,7 +47,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Mapping
             CreateMap<ApplicationUser, ShortCoachInfoDTO>();
             CreateMap<NewMatchFootballerDTO, MatchFootballer>();
             CreateMap<TeamStat, TeamStatDTO>()
-                .ForMember(dest => dest.TeamName, 
+                .ForMember(dest => dest.TeamName,
                  opt => opt.MapFrom(src => src.Team.Name))
                 .ReverseMap();
 
@@ -77,6 +77,18 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Mapping
                 .ForMember(dest => dest.Country, opt => opt.MapFrom(src => src.LeagueInfo.Country))
                 .ForMember(dest => dest.Level, opt => opt.MapFrom(src => src.LeagueInfo.Level))
                 .ForMember(dest => dest.Image, opt => opt.MapFrom(src => src.LeagueInfo.Image));
+
+            CreateMap<LeagueSeason, LeagueSeasonDateDTO>()
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.LeagueInfo.Name));
+
+            CreateMap<FootballerStat, FootballerStatProfileDTO>();
+            CreateMap<Footballer, FootballerProfileDTO>()
+                .ForMember(dest => dest.TeamName, opt => opt.MapFrom(src => src.Team.Name));
+            CreateMap<LeagueSeason, SeasonTeamStatsDTO>();
+            CreateMap<LeagueInfo, ShortLeagueInfoDTO>();
+            CreateMap<TeamStat, TeamStatInfoDTO>()
+                .ForMember(dest => dest.TeamName, opt => opt.MapFrom(src => src.Team.Name));
+            CreateMap<Referee, RefereeInfoDTO>().ReverseMap();
         }
     }
 }

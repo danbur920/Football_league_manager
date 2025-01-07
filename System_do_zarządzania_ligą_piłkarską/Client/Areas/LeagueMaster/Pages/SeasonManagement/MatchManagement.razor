@@ -12,22 +12,39 @@
 
 <PageTitle>Zarządzanie meczami</PageTitle>
 
-<div class="button-container">
-    <button class="btn btn-secondary" @onclick="BackToTheSeasonManagement">Wróć</button>
-</div>
+<div class="container py-4">
+    <div class="row mb-4">
+        <div class="col text-center">
+            <h3 class="display-6 fw-bold text-primary">Zarządzanie meczami</h3>
+        </div>
+    </div>
 
-@if (matches != null)
-{
-    <h3>Mecze:</h3>
-    <MatchesTableForLeagueMaster Matches="matches"
-                                 LeagueInfoId="leagueInfoId"
-                                 LeagueSeasonId="leagueSeasonId">
-    </MatchesTableForLeagueMaster>
-}
-else
-{
-    <p>Ładowanie...</p>
-}
+    <div class="d-flex justify-content-start mb-4">
+        <button class="btn btn-secondary" @onclick="BackToTheSeasonManagement">
+            <i class="fas fa-arrow-left me-2"></i> Wróć
+        </button>
+    </div>
+
+    @if (matches != null)
+    {
+        <div class="row">
+            <div class="col">
+                <h5 class="fw-bold text-secondary mb-3">Mecze:</h5>
+                <MatchesTableForLeagueMaster Matches="matches"
+                                             LeagueInfoId="leagueInfoId"
+                                             LeagueSeasonId="leagueSeasonId">
+                </MatchesTableForLeagueMaster>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="d-flex justify-content-center align-items-center">
+            <span class="spinner-border text-primary" role="status"></span>
+            <span class="visually-hidden">Ładowanie...</span>
+        </div>
+    }
+</div>
 
 @code {
     [Parameter] public int leagueInfoId { get; set; }

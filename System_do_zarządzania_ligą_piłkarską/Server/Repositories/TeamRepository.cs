@@ -33,6 +33,23 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
             await _context.SaveChangesAsync();
         }
 
+        public async Task<List<LeagueSeason>> GetSeasonsWithTeamStatsByTeam(int teamId)
+        {
+            var leagueSeasonsIds = await _context.TeamStats
+                .Where(x => x.TeamId == teamId)
+                .Select(x => x.LeagueSeasonId)
+                .ToListAsync();
+
+            var leagueSeasons = await _context.LeagueSeasons
+                .Where(x => leagueSeasonsIds.Contains(x.Id)) 
+                .Include(x => x.TeamsStats)                 
+                    .ThenInclude(ts => ts.Team)             
+                .Include(x => x.LeagueInfo)                 
+                .ToListAsync();
+
+            return leagueSeasons;
+        }
+
         public async Task<List<FootballerStat>> GetCurrentFootballersStats(int teamId)
         {
             var currentTeamStatsId = _context.TeamStats.
@@ -51,8 +68,8 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
         public async Task<Team> GetTeamById(int teamId)
         {
             var team = await _context.Teams.
-                Where(x=>x.Id == teamId).
-                Include(x=>x.Image).
+                Where(x => x.Id == teamId).
+                Include(x => x.Image).
                 FirstOrDefaultAsync();
 
             return team;
@@ -74,6 +91,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
                 Where(x => (x.AwayTeamId == teamId || x.HomeTeamId == teamId) && x.IsFinished == isFinished).
                 Include(x => x.HomeTeam).
                 Include(x => x.AwayTeam).
+                OrderByDescending(x => x.MatchDate).
                 ToListAsync();
 
             return matches;
@@ -84,9 +102,9 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
         public async Task<Team> GetTeamToManage(int teamId)
         {
             var team = await _context.Teams.
-                Include(x=>x.Image).
+                Include(x => x.Image).
                 Include(x => x.Footballers).
-                ThenInclude(x=>x.Image).
+                ThenInclude(x => x.Image).
                 FirstOrDefaultAsync(x => x.Id == teamId);
 
             return team;
@@ -118,7 +136,8 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
         {
             var teams = await _context.Teams.
                 Where(x => x.CreatorId == userId).
-                Include(x=>x.Coach).
+                Include(x => x.Coach).
+                Include(x=>x.Image).
                 ToListAsync();
 
             return teams;

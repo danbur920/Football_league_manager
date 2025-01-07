@@ -73,7 +73,7 @@
 
     private TeamStatDTO[]? teamStats;
 
-    protected override async Task OnInitializedAsync() 
+    protected override async Task OnInitializedAsync()
     {
         teamStats = await PublicClient.Client.GetFromJsonAsync<TeamStatDTO[]>($"api/leagues/{leagueId}/table");
     }

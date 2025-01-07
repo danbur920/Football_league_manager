@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.Design;
+using System.Security.Claims;
 using System_do_zarządzania_ligą_piłkarską.Server.Services;
 using System_do_zarządzania_ligą_piłkarską.Server.Services.Interfaces;
 using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Leagues;
 using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Referees;
+using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Teams;
 
 namespace System_do_zarządzania_ligą_piłkarską.Server.Controllers
 {
@@ -33,7 +35,16 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Controllers
             return Ok(referee);
         }
 
+
+
         // League Master Panel:
+
+        [HttpGet("league-master/manage-referee/{refereeId}")]
+        public async Task<IActionResult> GetRefereeToManage(int refereeId)
+        {
+            var referee = await _refereeService.GetRefereeToManage(refereeId);
+            return Ok(referee);
+        }
 
         [HttpGet("league-master/all")]
         public async Task<IActionResult> GetAllRefereesForLeagueMaster()
@@ -60,6 +71,21 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Controllers
         public async Task<IActionResult> AddNewReferee(NewRefereeDTO newReferee)
         {
             await _refereeService.AddNewReferee(newReferee);
+            return Ok();
+        }
+
+        [HttpGet("league-master/created-referees")]
+        public async Task<IActionResult> GetCreatedRefereesByLeagueMaster()
+        {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var referees = await _refereeService.GetCreatedRefereesByLeagueMaster(userId);
+            return Ok(referees);
+        }
+
+        [HttpPatch("league-master/edit-referee")]
+        public async Task<IActionResult> EditReferee([FromBody] RefereeInfoDTO editReferee)
+        {
+            await _refereeService.EditReferee(editReferee);
             return Ok();
         }
     }

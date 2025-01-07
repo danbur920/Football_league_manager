@@ -48,6 +48,12 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Services
             return _mapper.Map<List<MatchDTO>>(matches);
         }
 
+        public async Task<List<SeasonTeamStatsDTO>> GetSeasonsWithTeamStatsByTeam(int teamId)
+        {
+            var leagueSeasons = await _teamRepository.GetSeasonsWithTeamStatsByTeam(teamId);
+            return _mapper.Map<List<SeasonTeamStatsDTO>>(leagueSeasons);
+        }
+
         // League Master Panel:
 
         public async Task<List<ShortTeamInfoDTO>> GetAllTeamsForLeagueMaster()
@@ -137,8 +143,15 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Services
 
         public async Task EditTeam(EditTeamDTO editTeam)
         {
-            //var mappedEditTeam = _mapper.Map<Team>(editTeam);
-            //await _teamRepository.
+            var currentTeam = await _teamRepository.GetTeamById(editTeam.Id);
+
+            currentTeam.Stadium = editTeam.Stadium;
+            currentTeam.Name = editTeam.Name;
+            currentTeam.YearOfFoundation = editTeam.YearOfFoundation;
+            currentTeam.City = editTeam.City;
+            currentTeam.Country = editTeam.Country;
+
+            await _teamRepository.UpdateTeam(currentTeam);
         }
     }
 }

@@ -94,9 +94,11 @@
     private List<LeagueInfoDTO>? leagues;
     private bool showModal = false;
     private int leagueIdToDelete;
+    private string? currentUserId;
 
     protected override async Task OnInitializedAsync()
     {
+        currentUserId = await GetUserId();
         await LoadLeagues();
     }
 
@@ -112,14 +114,12 @@
 
     private bool IsPrimaryLeagueMaster(string leagueMasterPrimaryId)
     {
-        var userId = GetUserId().Result;
-        return leagueMasterPrimaryId == userId;
+        return currentUserId == leagueMasterPrimaryId;
     }
 
     private bool IsSecondaryLeagueMaster(string leagueMasterSecondaryId)
     {
-        var userId = GetUserId().Result;
-        return leagueMasterSecondaryId == userId;
+        return currentUserId == leagueMasterSecondaryId;
     }
 
     private async Task<string> GetUserId()

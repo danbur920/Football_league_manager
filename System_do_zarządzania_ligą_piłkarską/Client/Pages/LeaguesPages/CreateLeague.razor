@@ -1,5 +1,6 @@
 ﻿@page "/create-league"
 
+@using Microsoft.AspNetCore.Authorization
 @using Microsoft.AspNetCore.Components.Forms
 @using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Leagues
 @using System_do_zarządzania_ligą_piłkarską.Client.Components
@@ -10,6 +11,7 @@
 @inject NavigationManager Navigation
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject AlertManager AlertManager
+@attribute [Authorize]
 
 <PageTitle>Stwórz Ligę</PageTitle>
 

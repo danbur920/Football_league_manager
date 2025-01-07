@@ -1,9 +1,10 @@
 ﻿@using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Matches
 @inject NavigationManager Navigation
 
-<table class="table table-striped table-hover">
-    <thead>
-        <tr>
+<table class="table table-hover table-bordered shadow-sm mt-4">
+    <thead class="table-primary">
+        <tr class="text-center">
+            <th>#</th>
             <th>Kolejka</th>
             <th>Data</th>
             <th>Godzina</th>
@@ -15,23 +16,43 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var match in Matches)
+        @if (Matches == null)
         {
             <tr>
-                <td>@match.Round</td>
-                <td>@match.MatchDate</td>
-                <td>@match.MatchTime</td>
-                <td>@match.HomeTeam.Name</td>
-                <td>@match.AwayTeam.Name</td>
-                <td>@ShowScore(match)</td>
-                <td>@ShowResult(match.Id)</td>
-                <td>
-                    <button class="btn btn-link" @onclick="() => GoToManagement(match.Id)">
-                        <i class="fas fa-arrow-right"></i> Zarządzaj meczem
-                    </button>
+                <td colspan="9" class="text-center">
+                    <span class="spinner-border text-primary" role="status"></span>
+                    <span class="visually-hidden">Ładowanie...</span>
                 </td>
-
             </tr>
+        }
+        else if (Matches.Count == 0)
+        {
+            <tr>
+                <td colspan="9" class="text-center">Brak danych do wyświetlenia</td>
+            </tr>
+        }
+        else
+        {
+            int index = 1;
+            foreach (var match in Matches)
+            {
+                <tr class="text-center align-middle">
+                    <td>@index</td>
+                    <td>@match.Round</td>
+                    <td>@match.MatchDate</td>
+                    <td>@match.MatchTime</td>
+                    <td>@match.HomeTeam.Name</td>
+                    <td>@match.AwayTeam.Name</td>
+                    <td>@ShowScore(match)</td>
+                    <td>@ShowResult(match.Id)</td>
+                    <td>
+                        <button class="btn btn-primary btn-sm" @onclick="() => GoToManagement(match.Id)">
+                            <i class="fas fa-edit me-1"></i> Zarządzaj
+                        </button>
+                    </td>
+                </tr>
+                index++;
+            }
         }
     </tbody>
 </table>

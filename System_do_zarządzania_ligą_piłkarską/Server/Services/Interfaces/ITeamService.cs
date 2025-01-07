@@ -10,6 +10,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Services.Interfaces
     {
         Task<List<TeamDTO>> GetAllTeams();
         Task<TeamDTO> GetTeamById(int teamId);
+        Task<List<SeasonTeamStatsDTO>> GetSeasonsWithTeamStatsByTeam(int teamId);
         Task<List<FootballerStatDTO>> GetCurrentFootballersStats(int teamId);
         Task<List<MatchDTO>> GetMatchesByTeam(int teamId, bool isFinished);
 

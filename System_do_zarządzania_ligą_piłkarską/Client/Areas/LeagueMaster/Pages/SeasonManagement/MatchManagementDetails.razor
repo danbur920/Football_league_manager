@@ -20,15 +20,21 @@
 <h3>Zarządzaj meczem </h3>
 
 
-<div class="button-container">
-    <button class="btn btn-secondary" @onclick="BackToTheMatchManagement">Wróć</button>
-    @if(editMatch != null && editMatch.IsFinished == false)
+<div class="d-flex justify-content-between mb-4">
+    <button class="btn btn-secondary" @onclick="BackToTheMatchManagement">
+        <i class="fas fa-arrow-left me-2"></i> Wróć
+    </button>
+    @if (editMatch != null && editMatch.IsFinished == false)
     {
-        <button class="btn btn-success" @onclick="() => ConfirmMatch(matchId)">Zatwierdź mecz</button>
+        <button class="btn btn-success" @onclick="() => ConfirmMatch(matchId)">
+            <i class="fas fa-check me-2"></i> Zatwierdź mecz
+        </button>
     }
-    else if(editMatch != null)
+    else if (editMatch != null)
     {
-        <button class="btn btn-warning" @onclick="()=> UncommitMatch(matchId)">Cofnij zatwierdzenie meczu</button>
+        <button class="btn btn-warning" @onclick="()=> UncommitMatch(matchId)">
+            <i class="fas fa-undo me-2"></i> Cofnij zatwierdzenie meczu
+        </button>
     }
 </div>
 
@@ -251,7 +257,7 @@
                     <button type="submit" class="btn btn-primary">Dodaj zawodnika</button>
                 </EditForm>
 
-                <MatchLineup players="homeLineup" LoadLineupsCallback="LoadLineups"></MatchLineup>
+                <MatchLineup players="homeLineup" LoadLineupsCallback="LoadLineups" LineupForLeagueMaster="true"></MatchLineup>
             </div>
 
             <div class="form-card">
@@ -279,7 +285,7 @@
                     <button type="submit" class="btn btn-primary">Dodaj zawodnika</button>
                 </EditForm>
 
-                <MatchLineup players="awayLineup" LoadLineupsCallback="LoadLineups"></MatchLineup>
+                <MatchLineup players="awayLineup" LoadLineupsCallback="LoadLineups" LineupForLeagueMaster="true"></MatchLineup>
             </div>
         }
 

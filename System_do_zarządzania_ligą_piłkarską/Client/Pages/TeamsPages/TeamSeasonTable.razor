@@ -1,0 +1,114 @@
+﻿@page "/teams/{teamId:int}/seasons"
+
+@using System.Net.Http
+@using System_do_zarządzania_ligą_piłkarską.Shared.DTOs
+@using System_do_zarządzania_ligą_piłkarską.Client.Extensions
+@using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Teams
+
+@inject PublicClient PublicClient
+@inject NavigationManager Navigation
+
+<div class="container py-5">
+    <div class="text-center mb-4">
+        <h1 class="display-4 fw-bold text-primary">Tabela Ligi</h1>
+    </div>
+
+    <button class="btn btn-secondary mb-3" @onclick="GoBack">
+        <i class="fas fa-arrow-left"></i> Wróć
+    </button>
+
+    <div class="mb-4">
+        <label for="seasonSelector" class="form-label fw-bold">Wybierz sezon:</label>
+        <select id="seasonSelector" class="form-select" @onchange="OnSeasonChanged">
+            @if (seasons != null)
+            {
+                foreach (var season in seasons)
+                {
+                    bool isSelected = currentSeason?.Id == season.Id;
+                    <option value="@season.Id" selected="@(isSelected ? "selected" : null)">
+                        @season.LeagueInfo.Name | @season.Season.ToString().Substring(1)
+                    </option>
+                }
+            }
+        </select>
+    </div>
+
+
+    <div class="table-responsive">
+        <table class="table table-striped align-middle">
+            <thead class="table-primary text-center">
+                <tr>
+                    <th>#</th>
+                    <th>Drużyna</th>
+                    <th>M</th>
+                    <th>W</th>
+                    <th>R</th>
+                    <th>P</th>
+                    <th>G+/-</th>
+                    <th>Punkty</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (currentSeason == null || currentSeason.TeamsStats == null)
+                {
+                    <tr>
+                        <td colspan="8" class="text-center text-muted">Ładowanie...</td>
+                    </tr>
+                }
+                else if (currentSeason.TeamsStats.Count == 0)
+                {
+                    <tr>
+                        <td colspan="8" class="text-center text-muted">Brak danych do wyświetlenia</td>
+                    </tr>
+                }
+                else
+                {
+                    int position = 1;
+                    foreach (var teamStat in currentSeason.TeamsStats)
+                    {
+                        <tr class="text-center">
+                            <td>@position</td>
+                            <td>@teamStat.TeamName</td>
+                            <td>@teamStat.MatchesPlayed</td>
+                            <td>@teamStat.Wins</td>
+                            <td>@teamStat.Draws</td>
+                            <td>@teamStat.Losses</td>
+                            <td>@teamStat.GoalBalance</td>
+                            <td>@teamStat.Points</td>
+                        </tr>
+                        position++;
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@code {
+    [Parameter] public int teamId { get; set; }
+    private List<SeasonTeamStatsDTO>? seasons { get; set; }
+    private SeasonTeamStatsDTO? currentSeason { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        seasons = await PublicClient.Client.GetFromJsonAsync<List<SeasonTeamStatsDTO>>($"api/teams/{teamId}/seasons");
+
+        if (seasons != null && seasons.Count > 0)
+        {
+            currentSeason = seasons[0];
+        }
+    }
+
+    private void OnSeasonChanged(ChangeEventArgs e)
+    {
+        if (int.TryParse(e.Value?.ToString(), out int selectedSeasonId))
+        {
+            currentSeason = seasons?.FirstOrDefault(s => s.Id == selectedSeasonId);
+        }
+    }
+
+    private void GoBack()
+    {
+        Navigation.NavigateTo($"/teams/{teamId}");
+    }
+}

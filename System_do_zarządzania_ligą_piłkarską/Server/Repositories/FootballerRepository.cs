@@ -15,15 +15,26 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
             _context = context;
         }
 
-        public async Task<FootballerStat> GetFootballerInfoById(int footballerId)
+        public async Task<Footballer> GetFootballerInfoById(int footballerId)
         {
-            var footballer = await _context.FootballerStats.
+            var footballer = await _context.Footballers.
                 Where(x => x.Id == footballerId).
-                Include(x => x.Footballer).
-                ThenInclude(x=>x.Image).
-                FirstOrDefaultAsync(); // zmienić lub usunąć - na ten moment nie ma to większego sensu
+                Include(x=>x.Team).
+                Include(x => x.Image).
+                FirstOrDefaultAsync(); 
 
             return footballer;
+        }
+
+        public async Task<List<FootballerStat>> GetFootballerStatsById(int footballerId)
+        {
+            var footballerStats = await _context.FootballerStats.
+                Where(x => x.FootballerId == footballerId).
+                Include(x => x.LeagueSeason).
+                ThenInclude(x=>x.LeagueInfo).
+                ToListAsync();
+
+            return footballerStats;
         }
 
         public async Task<List<Footballer>> GetPlayersByPage(int pageNumber, int pageSize)
@@ -32,6 +43,9 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
                 Include(x => x.Team).
                 Skip((pageNumber - 1) * pageSize).
                 Take(pageSize).
+                OrderBy(x => x.Team.Name).
+                ThenBy(x => x.FirstName).
+                ThenBy(x => x.LastName).
                 ToListAsync();
             return players;
         }
@@ -63,7 +77,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
         public async Task AddFootballerStats(Footballer footballer)
         {
             var currentTeamStats = await _context.TeamStats.
-                Where(x=>x.TeamId == footballer.TeamId && x.CurrentLeague == true).
+                Where(x => x.TeamId == footballer.TeamId && x.CurrentLeague == true).
                 ToListAsync();
 
             foreach (var teamStat in currentTeamStats)
@@ -76,9 +90,9 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
                 {
                     await _context.FootballerStats.AddAsync(new FootballerStat
                     {
-                       FootballerId = footballer.Id,
-                       LeagueSeasonId = teamStat.LeagueSeasonId,
-                       TeamStatId = teamStat.Id
+                        FootballerId = footballer.Id,
+                        LeagueSeasonId = teamStat.LeagueSeasonId,
+                        TeamStatId = teamStat.Id
                     });
                 }
             }
