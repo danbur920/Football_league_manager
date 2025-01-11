@@ -61,6 +61,7 @@
                                 <th>Typ</th>
                                 <th>Posiadacz</th>
                                 <th>Rok wygrania</th>
+                                <th>Zdjęcie</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -79,6 +80,16 @@
                                     <td>@ShowTrophyType(trophy)</td>
                                     <td>@ShowOwner(trophy)</td>
                                     <td>@trophy.YearWon</td>
+                                    <td>
+                                        @if (trophy.Image != null)
+                                        {
+                                            <img src="@trophy.Image.Path" alt="Zdjęcie trofeum" class="img-thumbnail" style="max-width: 100px; max-height: 100px;">
+                                        }
+                                        else
+                                        {
+                                            <span class="text-muted">Brak zdjęcia</span>
+                                        }
+                                    </td>
                                 </tr>
                             }
                         </tbody>

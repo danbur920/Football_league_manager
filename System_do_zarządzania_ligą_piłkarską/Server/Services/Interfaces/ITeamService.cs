@@ -3,6 +3,7 @@ using System_do_zarządzania_ligą_piłkarską.Server.Models;
 using System_do_zarządzania_ligą_piłkarską.Shared.DTOs;
 using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Referees;
 using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Teams;
+using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Trophies;
 
 namespace System_do_zarządzania_ligą_piłkarską.Server.Services.Interfaces
 {
@@ -25,5 +26,6 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Services.Interfaces
         Task EditTeam(EditTeamDTO editTeam);
         Task DeleteCoachFromTeam(int teamId);
         Task<bool> AssignCoachToTeam(int teamId, string coachEmail);
+        Task<List<TeamTrophyCandidateDTO>> GetBasicTeamInfoFromSpecificSeason(int leagueSeasonId);
     }
 }

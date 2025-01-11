@@ -1,0 +1,167 @@
+﻿@using System_do_zarządzania_ligą_piłkarską.Shared.DTOs
+@using System_do_zarządzania_ligą_piłkarską.Client.Areas.LeagueMaster.Shared
+@using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Matches
+@using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Teams
+@using System_do_zarządzania_ligą_piłkarską.Client.Extensions
+@using System_do_zarządzania_ligą_piłkarską.Client.Components
+@using Microsoft.AspNetCore.Authorization
+@using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Trophies
+@using System_do_zarządzania_ligą_piłkarską.Shared.Enums
+
+@page "/league-master/leagues/{leagueInfoId:int}/{leagueSeasonId:int}/add-trophy"
+@layout LeagueMasterLayout
+@inject HttpClient Http
+@inject NavigationManager Navigation
+@inject AlertManager AlertManager
+@attribute [Authorize(Roles = "LeagueMaster")]
+
+<PageTitle>Dodaj trofeum</PageTitle>
+
+<div class="button-container">
+    <button class="btn btn-secondary" @onclick="BackToTheSeasonManagement">Wróć</button>
+</div>
+
+<h3>Przyznaj trofeum</h3>
+
+@if (newTrophy != null && teams != null && footballers != null)
+{
+    <EditForm Model="newTrophy" OnValidSubmit="HandleValidSubmit">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <div class="mb-3">
+            <label for="trophyName" class="form-label">Nazwa trofeum</label>
+            <InputText id="trophyName" class="form-control" @bind-Value="newTrophy.TrophyName" Placeholder="Wpisz nazwę trofeum..." />
+            <ValidationMessage For="@(() => newTrophy.TrophyName)" class="text-danger" />
+        </div>
+
+        <div class="mb-3">
+            <label for="year" class="form-label">Rok</label>
+            <select id="year" class="form-select" @bind="newTrophy.YearWon">
+                <option value="">-- Wybierz rok zdobycia trofeum --</option>
+                <option value="@(DateTime.Now.Year - 1)">Poprzedni rok (@(DateTime.Now.Year - 1))</option>
+                <option value="@DateTime.Now.Year">Aktualny rok (@DateTime.Now.Year)</option>
+                <option value="@(DateTime.Now.Year + 1)">Przyszły rok (@(DateTime.Now.Year + 1))</option>
+                @for (int i = 1980; i <= 2050; i++)
+                {
+                    <option value="@i">@i</option>
+                }
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="owner" class="form-label">Posiadacz</label>
+            <select id="owner" class="form-select" @onchange="OwnerChange">
+                <option value="">-- Wybierz posiadacza trofeum --</option>
+                @foreach (var trophyOwner in Enum.GetValues(typeof(TrophyOwner)).Cast<TrophyOwner>())
+                {
+                    <option value="@trophyOwner">@trophyOwner</option>
+                }
+            </select>
+            <ValidationMessage For="@(() => newTrophy.TrophyOwner)" class="text-danger" />
+        </div>
+
+        @if (newTrophy.TrophyOwner == TrophyOwner.Footballer)
+        {
+            <div class="mb-3">
+                <label for="footballer" class="form-label">Piłkarz</label>
+                <select id="footballer" class="form-select" @bind="newTrophy.FootballerId">
+                    <option value="">-- Wybierz piłkarza --</option>
+                    @foreach (var footballer in footballers)
+                    {
+                        <option value="@footballer.Id">@footballer.FirstName @footballer.LastName (urodz. @footballer.DateOfBirth)</option>
+                    }
+                </select>
+            </div>
+        }
+        else if (newTrophy.TrophyOwner == TrophyOwner.Team)
+        {
+            <div class="mb-3">
+                <label for="team" class="form-label">Drużyna</label>
+                <select id="team" class="form-select" @bind="newTrophy.TeamId">
+                    <option value="">-- Wybierz drużynę --</option>
+                    @foreach (var team in teams)
+                    {
+                        <option value="@team.Id">@team.Name</option>
+                    }
+                </select>
+            </div>
+        }
+
+        <button type="submit" class="btn btn-primary">Przyznaj trofeum</button>
+    </EditForm>
+}
+else
+{
+    <p>Ładowanie...</p>
+}
+
+<Alert Message="@AlertManager.Message" Type="@AlertManager.Type" IsVisible="@AlertManager.IsVisible" />
+
+@code {
+    [Parameter] public int leagueInfoId { get; set; }
+    [Parameter] public int leagueSeasonId { get; set; }
+
+    private NewTrophyDTO newTrophy = new NewTrophyDTO();
+
+    private List<FootballerTrophyCandidateDTO> footballers = new List<FootballerTrophyCandidateDTO>();
+    private List<TeamTrophyCandidateDTO> teams = new List<TeamTrophyCandidateDTO>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        newTrophy.LeagueSeasonId = leagueSeasonId;
+        await LoadCandidates();
+    }
+
+    private async Task LoadCandidates()
+    {
+        footballers = await Http.GetFromJsonAsync<List<FootballerTrophyCandidateDTO>>($"api/footballers/season/{leagueSeasonId}");
+        teams = await Http.GetFromJsonAsync<List<TeamTrophyCandidateDTO>>($"api/teams/season/{leagueSeasonId}");
+    }
+
+    private async Task OwnerChange(ChangeEventArgs e)
+    {
+        newTrophy.TrophyOwner = Enum.TryParse<TrophyOwner>(e.Value?.ToString(), out var selectedOwner)
+            ? selectedOwner
+            : null;
+
+        newTrophy.FootballerId = null;
+        newTrophy.TeamId = null;
+    }
+
+    private async Task HandleValidSubmit()
+    {
+        try
+        {
+            var response = await Http.PostAsJsonAsync("api/trophies", newTrophy);
+
+            if (response.IsSuccessStatusCode)
+            {
+                AlertManager.DisplayAlert($"Przyznano trofeum!", "success");
+                Clear();
+            }
+            else
+            {
+                AlertManager.DisplayAlert($"Nie udało się przyznać trofeum.", "danger");
+            }
+        }
+        catch (Exception ex)
+        {
+            AlertManager.DisplayAlert($"Nie udało się przyznać trofeum.", "danger");
+        }
+    }
+
+    private void Clear()
+    {
+        newTrophy.YearWon = default;
+        newTrophy.TrophyOwner = default;
+        newTrophy.TrophyName = string.Empty;
+        newTrophy.FootballerId = null;
+        newTrophy.TeamId = null;
+    }
+
+    private void BackToTheSeasonManagement()
+    {
+        Navigation.NavigateTo($"/league-master/leagues/{leagueInfoId}/{leagueSeasonId}");
+    }
+}

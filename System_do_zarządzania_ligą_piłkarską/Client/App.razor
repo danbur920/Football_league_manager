@@ -5,11 +5,15 @@
                 <NotAuthorized>
                     @if (context.User.Identity?.IsAuthenticated != true)
                     {
-                        <p role="alert">Please log in to access this page.</p>
+                        <div class="alert alert-warning" role="alert">
+                            <strong>Uwaga!</strong> Zaloguj się, aby odwiedzić tę stronę.
+                        </div>
                     }
                     else
                     {
-                        <p role="alert">You are not authorized to access this resource.</p>
+                        <div class="alert alert-danger" role="alert">
+                            <strong>Brak dostępu!</strong> Nie masz uprawnień do tego zasobu.
+                        </div>
                     }
                 </NotAuthorized>
             </AuthorizeRouteView>
@@ -18,9 +22,12 @@
         <NotFound>
             <PageTitle>Not found</PageTitle>
             <LayoutView Layout="@typeof(MainLayout)">
-                <p role="alert">Sorry, there's nothing at this address.</p>
+                <div class="alert alert-info text-center" role="alert">
+                    <strong>Przepraszamy!</strong> Nie znaleziono strony pod tym adresem.
+                </div>
             </LayoutView>
         </NotFound>
+
     </Router>
 </CascadingAuthenticationState>
 

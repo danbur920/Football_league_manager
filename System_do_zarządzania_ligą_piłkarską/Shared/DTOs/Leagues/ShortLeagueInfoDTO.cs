@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Images;
+using System_do_zarządzania_ligą_piłkarską.Shared.Enums;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Leagues

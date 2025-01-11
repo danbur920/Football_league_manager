@@ -1,0 +1,159 @@
+﻿<div class="container mt-5" style="margin-bottom: 3rem">
+    <div class="text-center mb-5">
+        <h1 class="fw-bold text-primary">@GetTitle()</h1>
+        <p class="lead text-muted">
+            Twórz, zarządzaj ligami piłkarskimi i odkrywaj fascynujący świat futbolu!
+        </p>
+    </div>
+
+    @*  
+    <div class="text-center mb-5">
+    <img src="images/index.jpg" class="img-fluid rounded shadow" alt="Obraz główny" />
+    </div> *@
+
+    <div class="row g-4">
+        <div class="col-md-6">
+            <div class="card shadow-sm border-0 h-100">
+                <div class="card-body">
+                    <h4 class="card-title text-primary">📋 Panel użytkownika</h4>
+                    <p class="card-text">
+                        Po lewej stronie znajdziesz <strong>panel użytkownika</strong>, gdzie możesz przeglądać różne sekcje aplikacji.
+                        Jeśli się zalogujesz, będziesz mógł <strong>dodawać swoich faworytów</strong>, aby łatwiej do nich wracać.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card shadow-sm border-0 h-100">
+                <div class="card-body">
+                    <h4 class="card-title text-primary">🔐 Logowanie i rejestracja</h4>
+                    <p class="card-text">
+                        U góry po prawej stronie znajdziesz przyciski umożliwiające <strong>logowanie</strong> lub <strong>rejestrację</strong>.
+                        Po zalogowaniu możesz korzystać z wszystkich funkcji aplikacji <strong>zupełnie za darmo</strong>!
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card shadow-sm border-0 h-100">
+                <div class="card-body">
+                    <h4 class="card-title text-primary">🏆 Tworzenie i zarządzanie ligami</h4>
+                    <p class="card-text">
+                        Po zalogowaniu możesz stworzyć własną ligę piłkarską i zarządzać nią!
+                        Możesz także przypisać innych użytkowników, aby <strong>wspólnie zarządzać sezonem</strong>.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card shadow-sm border-0 h-100">
+                <div class="card-body">
+                    <h4 class="card-title text-primary">👥 Drużyny i zawodnicy</h4>
+                    <p class="card-text">
+                        Dodawaj drużyny, przypisuj do nich zawodników i <strong>zarządzaj zdjęciami piłkarzy</strong>.
+                        Twórz zróżnicowane składy i zarządzaj nimi w czasie rzeczywistym.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card shadow-sm border-0 h-100">
+                <div class="card-body">
+                    <h4 class="card-title text-primary">🏅 Trofea dla piłkarzy i drużyn</h4>
+                    <p class="card-text">
+                        Wyróżnij najlepszych! Możesz <strong>nadawać trofea</strong> piłkarzom i drużynom oraz <strong>dodawać zdjęcia</strong> do trofeów, by jeszcze lepiej uwiecznić ich sukcesy.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card shadow-sm border-0 h-100">
+                <div class="card-body">
+                    <h4 class="card-title text-primary">⚖️ Zarządzanie sędziami</h4>
+                    <p class="card-text">
+                        Twórz profile sędziów i <strong>przypisuj ich do meczów</strong>. Dzięki temu każda gra będzie miała swojego arbitra, a organizacja rozgrywek stanie się jeszcze bardziej profesjonalna!
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+                    <h4 class="card-title text-primary">⚽ Organizacja meczów</h4>
+                    <p class="card-text">
+                        Dzięki naszej aplikacji możesz tworzyć i zarządzać meczami w swojej lidze.
+                        Ustalaj harmonogramy, wyniki i śledź przebieg sezonu z łatwością!
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @if (UserType == "User")
+    {
+        <div class="text-center mt-5">
+            <h2 class="text-primary">Rozpocznij swoją przygodę z ligą piłkarską!</h2>
+            <p class="lead text-muted">
+                Możesz teraz tworzyć własne ligi i zarządzać nimi, a także dodawać ulubione drużyny, piłkarzy, sędziów i ligi, by mieć do nich szybki dostęp.
+            </p>
+            <a href="/create-league" class="btn btn-primary btn-lg shadow">
+                Stwórz swoją ligę! 🏆
+            </a>
+        </div>
+    }
+    else if (UserType == "LeagueMaster")
+    {
+        <div class="text-center mt-5">
+            <h2 class="text-primary">Zarządzaj swoimi ligami!</h2>
+            <p class="lead text-muted">
+                Przejdź do panelu zarządcy ligi, aby tworzyć sezony, zarządzać drużynami, zawodnikami, sędziami i organizować rozgrywki.
+            </p>
+            <a href="/league-master/start" class="btn btn-primary btn-lg shadow">
+                Przejdź do panelu zarządcy 🛠️
+            </a>
+        </div>
+    }
+    else if (UserType == "Admin")
+    {
+
+        <div class="text-center mt-5">
+            <h2 class="text-primary">Panel administracyjny</h2>
+            <p class="lead text-muted">
+                Przejdź do panelu administratora, aby zarządzać użytkownikami.
+            </p>
+            <a href="/admin/start" class="btn btn-primary btn-lg shadow">
+                Przejdź do panelu admina 🔧
+            </a>
+        </div>
+    }
+    else
+    {
+        <div class="text-center mt-5">
+            <h2 class="text-primary">Dołącz już dziś!</h2>
+            <p class="lead text-muted">
+                Stwórz swoją pierwszą ligę, dodaj drużyny, zawodników, trofea oraz organizuj mecze i rozgrywki z pełną kontrolą.
+            </p>
+            <a href="Identity/Account/Register" class="btn btn-primary btn-lg shadow">
+                Zarejestruj się teraz za darmo! 🚀
+            </a>
+        </div>
+    }
+</div>
+
+@code {
+    [Parameter] public string? UserType { get; set; }
+
+    private string GetTitle()
+    {
+        if (UserType != "")
+            return $"Witaj!";
+
+        return "⚽ System do zarządzania ligą piłkarską ⚽";
+    }
+}

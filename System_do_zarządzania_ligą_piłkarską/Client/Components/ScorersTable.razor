@@ -1,0 +1,57 @@
+﻿@using System_do_zarządzania_ligą_piłkarską.Shared.DTOs
+
+<div class="container py-5">
+    <div class="text-center mb-4">
+        <h1 class="display-4 fw-bold text-primary">Strzelcy</h1>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-striped align-middle">
+            <thead class="table-primary text-center">
+                <tr>
+                    <th>#</th>
+                    <th>Zawodnik</th>
+                    <th>Drużyna</th>
+                    <th>Bramki</th>
+                    <th>Asysty</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Scorers == null)
+                {
+                    <tr>
+                        <td colspan="5" class="text-center text-muted">Ładowanie...</td>
+                    </tr>
+                }
+                else if (Scorers.Count == 0)
+                {
+                    <tr>
+                        <td colspan="5" class="text-center text-muted">Brak danych do wyświetlenia</td>
+                    </tr>
+                }
+                else
+                {
+                    int position = 1;
+                    foreach (var scorer in Scorers)
+                    {
+                        <tr class="text-center">
+                            <td>@position</td>
+                            <td>@scorer.Footballer.FirstName @scorer.Footballer.LastName</td>
+                            <td>@scorer.Footballer.Team.Name</td>
+                            <td>@scorer.Goals</td>
+                            <td>@scorer.Assists</td>
+                        </tr>
+                        position++;
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@code {
+    [Parameter] public List<FootballerStatDTO>? Scorers { get; set; }
+}
+
+
+

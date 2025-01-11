@@ -130,18 +130,31 @@
 
         <h4>Dodaj nowego piłkarza</h4>
         <EditForm Model="newPlayer" OnValidSubmit="AddPlayer">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+
             <div class="row g-3 mb-3">
                 <div class="col-md-3">
                     <label for="firstName" class="form-label">Imię</label>
                     <InputText id="firstName" class="form-control" @bind-Value="newPlayer.FirstName" />
+                    <ValidationMessage For="@(() => newPlayer.FirstName)" class="text-danger" />
+
                 </div>
                 <div class="col-md-3">
                     <label for="lastName" class="form-label">Nazwisko</label>
                     <InputText id="lastName" class="form-control" @bind-Value="newPlayer.LastName" />
+                    <ValidationMessage For="@(() => newPlayer.LastName)" class="text-danger" />
+
+                </div>
+                <div class="col-md-3">
+                    <label for="nickName" class="form-label">Pseudonim</label>
+                    <InputText id="nickName" class="form-control" @bind-Value="newPlayer.NickName" />
                 </div>
                 <div class="col-md-3">
                     <label for="nationality" class="form-label">Narodowość</label>
                     <InputText id="nationality" class="form-control" @bind-Value="newPlayer.Nationality" />
+                    <ValidationMessage For="@(() => newPlayer.Nationality)" class="text-danger" />
+
                 </div>
                 <div class="col-md-2">
                     <label for="shirtNumber" class="form-label">Numer</label>
@@ -165,7 +178,7 @@
                     <InputNumber id="weight" class="form-control" @bind-Value="newPlayer.Weight" />
                 </div>
 
-                <div class="col-md-1">
+                <div class="col-md-4">
                     <label for="birthday" class="form-label">Data urodzenia</label>
                     <InputDate id="birthday" class="form-control" @bind-Value="@newPlayer.DateOfBirth" />
                 </div>
@@ -200,14 +213,14 @@
     private async Task LoadEditTeam()
     {
         editTeam = new EditTeamDTO
-        {
-            Id = team.Id,
-            Name = team.Name,
-            City = team.City,
-            Country = team.Country,
-            Stadium = team.Stadium,
-            YearOfFoundation = team.YearOfFoundation
-        };
+            {
+                Id = team.Id,
+                Name = team.Name,
+                City = team.City,
+                Country = team.Country,
+                Stadium = team.Stadium,
+                YearOfFoundation = team.YearOfFoundation
+            };
     }
 
     private async Task UpdateTeam()
@@ -244,15 +257,15 @@
     {
         if (e.File != null)
         {
-            var file = e.File; 
+            var file = e.File;
 
             // przesyłanie pliku i danych
             var formData = new MultipartFormDataContent();
-            var stream = file.OpenReadStream(file.Size); 
+            var stream = file.OpenReadStream(file.Size);
             formData.Add(new StreamContent(stream), "File", file.Name);
 
 
-            if(refersToFootballer)
+            if (refersToFootballer)
             {
                 formData.Add(new StringContent(entityId.ToString()), "FootballerId");
                 formData.Add(new StringContent(ImageType.Footballer.ToString()), "Type");
@@ -268,7 +281,7 @@
             if (response.IsSuccessStatusCode)
             {
                 AlertManager.DisplayAlert("Zdjęcie zostało dodane.", "success");
-                await LoadTeam(); 
+                await LoadTeam();
             }
             else
             {

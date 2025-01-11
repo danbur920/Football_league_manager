@@ -1,7 +1,42 @@
 ﻿@page "/"
+@using System_do_zarządzania_ligą_piłkarską.Client.Components
+@using Microsoft.AspNet.Identity
+@using System.Security.Claims
+@using System_do_zarządzania_ligą_piłkarską.Client.Extensions
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject PublicClient PublicHttpClient
 
 <PageTitle>Strona główna</PageTitle>
 
-<h1 class="text-center fw-bold">System do zarządzania ligą piłkarską</h1>
+<HomePage UserType="@userRole"></HomePage>
+ 
+@code{
+    private string? userRole;
+    protected override async Task OnInitializedAsync()
+    {
+        AuthenticationStateProvider.AuthenticationStateChanged += OnAuthenticationStateChanged;
+        userRole = await CheckUserRole();
+    }
 
-<img src="images/index.jpg" alt="Obraz główny" style="max-width:100%; height:auto;" />
+    private async void OnAuthenticationStateChanged(Task<AuthenticationState> task)
+    {
+        var authState = await task;
+        var user = authState.User;
+
+        userRole = await CheckUserRole();
+        StateHasChanged();
+    }
+
+    private async Task<string> CheckUserRole()
+    {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+
+        return user.IsInRole("Admin") ? "Admin" : user.IsInRole("LeagueMaster") ? "LeagueMaster" : user.IsInRole("User") ? "User" : "";
+    }
+
+    public void Dispose()
+    {
+        AuthenticationStateProvider.AuthenticationStateChanged -= OnAuthenticationStateChanged;
+    }
+}

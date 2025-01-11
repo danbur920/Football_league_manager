@@ -18,5 +18,8 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Models
 
         public int? LeagueId { get; set; }
         public virtual LeagueInfo? League { get; set; }
+
+        public int? TrophyId { get; set; }
+        public virtual Trophy? Trophy { get; set; }
     }
 }

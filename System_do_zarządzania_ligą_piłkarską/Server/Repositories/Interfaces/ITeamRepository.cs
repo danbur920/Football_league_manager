@@ -20,5 +20,6 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories.Interface
         Task AddTeamToTheSeason(TeamStat newTeamStat);
         Task<List<Team>> GetCreatedTeamsByLeagueMaster(string userId);
         Task DeleteTeam(Team teamToDelete);
+        Task<List<Team>> GetTeamsFromSpecificSeason(int leagueSeasonId);
     }
 }

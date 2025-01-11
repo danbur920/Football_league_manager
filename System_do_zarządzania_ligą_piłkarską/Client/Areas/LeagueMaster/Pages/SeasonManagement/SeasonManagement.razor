@@ -21,6 +21,7 @@
                 <button class="btn btn-primary me-2" @onclick="GoToNewReferee">Dodaj sędziego</button>
                 <button class="btn btn-primary me-2" @onclick="GoToNewTeam">Dodaj drużynę</button>
                 <button class="btn btn-primary" @onclick="GoToMatchManagement">Zarządzaj meczami</button>
+                <button class="btn btn-success" @onclick="GoToNewTrophy">Przyznaj trofeum</button>
             </div>
         </div>
     </div>
@@ -110,6 +111,11 @@
     private void GoToNewTeam()
     {
         Navigation.NavigateTo($"/league-master/leagues/{leagueInfoId}/{leagueSeasonId}/add-team");
+    }
+
+    private void GoToNewTrophy()
+    {
+        Navigation.NavigateTo($"/league-master/leagues/{leagueInfoId}/{leagueSeasonId}/add-trophy");
     }
 
     private void GoToMatchManagement()

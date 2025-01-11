@@ -1,4 +1,6 @@
-﻿namespace System_do_zarządzania_ligą_piłkarską.Server.Models
+﻿using System_do_zarządzania_ligą_piłkarską.Shared.Enums;
+
+namespace System_do_zarządzania_ligą_piłkarską.Server.Models
 {
     public class LeagueInfo
     {
@@ -10,16 +12,5 @@
         public virtual ApplicationUser LeagueMasterPrimary { get; set; }
         public virtual Image? Image { get; set; }
         public virtual ICollection<LeagueSeason> LeagueSeasons { get; set; }
-    }
-
-    public enum Level
-    {
-        Brak,
-        Lokalna,
-        Okręgowa,
-        Regionalna,
-        Krajowa,
-        Kontynentalna,
-        Międzykontynentalna
     }
 }

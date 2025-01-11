@@ -9,6 +9,7 @@
 
 .navbar-brand {
     font-size: 1.1rem;
+    padding-left: 1.5rem;
 }
 
 .oi {
@@ -18,17 +19,21 @@
     top: -2px;
 }
 
+
 .nav-info {
-    font-size: 1rem; /* Zwiêkszenie rozmiaru czcionki */
+    font-size: 1rem;
     color: #ffffff;
     padding: 0.75rem 0;
-    text-align: center;
-    background-color: rgba(0, 0, 0, 0.6); /* T³o dla sekcji faworytów */
-    border-top: 1px solid rgba(255, 255, 255, 0.3); /* Linia oddzielaj¹ca */
-    border-bottom: 1px solid rgba(255, 255, 255, 0.3); /* Linia oddzielaj¹ca */
+    background-color: rgba(0, 0, 0, 0.6);
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
     margin-top: 1rem;
     margin-bottom: 0.5rem;
-    letter-spacing: 0.05rem; /* Dodanie odstêpów miêdzy literami */
+    letter-spacing: 0.05rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 
 .nav-item {
@@ -51,7 +56,7 @@
         display: flex;
         align-items: center;
         line-height: 3rem;
-        padding: 0 0.75rem; /* Dodanie wewnêtrznego odstêpu */
+        padding: 0 0.75rem;
     }
 
         .nav-item ::deep a.active {
@@ -70,12 +75,10 @@
     }
 
     .collapse {
-        /* Nigdy nie zwijaj paska bocznego na szerokich ekranach */
         display: block;
     }
 
     .nav-scrollable {
-        /* Umo¿liwia przewijanie paska bocznego dla wysokich menu */
         height: calc(100vh - 3.5rem);
         overflow-y: auto;
     }

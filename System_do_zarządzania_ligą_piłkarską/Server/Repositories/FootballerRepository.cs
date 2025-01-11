@@ -19,9 +19,9 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
         {
             var footballer = await _context.Footballers.
                 Where(x => x.Id == footballerId).
-                Include(x=>x.Team).
+                Include(x => x.Team).
                 Include(x => x.Image).
-                FirstOrDefaultAsync(); 
+                FirstOrDefaultAsync();
 
             return footballer;
         }
@@ -31,7 +31,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
             var footballerStats = await _context.FootballerStats.
                 Where(x => x.FootballerId == footballerId).
                 Include(x => x.LeagueSeason).
-                ThenInclude(x=>x.LeagueInfo).
+                ThenInclude(x => x.LeagueInfo).
                 ToListAsync();
 
             return footballerStats;
@@ -96,6 +96,18 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
                     });
                 }
             }
+        }
+
+        public async Task<List<Footballer>> GetFootballersFromSpecificSeason(int leagueSeasonId)
+        {
+            var footballers = await _context.LeagueSeasons
+             .Where(x => x.Id == leagueSeasonId)
+             .Include(x => x.FootballersStats)
+             .ThenInclude(x => x.Footballer)
+             .SelectMany(x => x.FootballersStats.Select(x => x.Footballer))
+             .ToListAsync();
+
+            return footballers;
         }
     }
 }

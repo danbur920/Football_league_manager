@@ -410,6 +410,18 @@ else
                                     <i class="fas fa-futbol"></i>
                                     <span>@GetFootballersInfo(eventt.TeamId, eventt.PrimaryFootballerId, eventt.SecondaryFootballerId)</span>
                                     break;
+                                case EventType.OwnGoal:
+                                    <i class="fas fa-futbol text-danger"></i>
+                                    <span>@GetFootballersInfo(eventt.TeamId, eventt.PrimaryFootballerId, eventt.SecondaryFootballerId)</span>
+                                    break;
+                                case EventType.Penalty:
+                                    <i class="fas fa-futbol text-info"></i>
+                                    <span>@GetFootballersInfo(eventt.TeamId, eventt.PrimaryFootballerId, eventt.SecondaryFootballerId)</span>
+                                    break;
+                                case EventType.MissedPenalty:
+                                    <i class="fas fa-futbol text-warning"></i>
+                                    <span>@GetFootballersInfo(eventt.TeamId, eventt.PrimaryFootballerId, eventt.SecondaryFootballerId)</span>
+                                    break;
                                 case EventType.YellowCard:
                                     <i class="fas fa-exclamation-triangle text-warning"></i>
                                     <span>@GetFootballersInfo(eventt.TeamId, eventt.PrimaryFootballerId, eventt.SecondaryFootballerId)</span>

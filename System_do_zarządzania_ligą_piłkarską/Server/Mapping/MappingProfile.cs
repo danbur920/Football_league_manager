@@ -7,6 +7,7 @@ using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Leagues;
 using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Matches;
 using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Referees;
 using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Teams;
+using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Trophies;
 using System_do_zarządzania_ligą_piłkarską.Shared.Enums;
 
 namespace System_do_zarządzania_ligą_piłkarską.Server.Mapping
@@ -89,6 +90,10 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Mapping
             CreateMap<TeamStat, TeamStatInfoDTO>()
                 .ForMember(dest => dest.TeamName, opt => opt.MapFrom(src => src.Team.Name));
             CreateMap<Referee, RefereeInfoDTO>().ReverseMap();
+
+            CreateMap<Footballer, FootballerTrophyCandidateDTO>();
+            CreateMap<Team, TeamTrophyCandidateDTO>();
+            CreateMap<NewTrophyDTO, Trophy>();
         }
     }
 }

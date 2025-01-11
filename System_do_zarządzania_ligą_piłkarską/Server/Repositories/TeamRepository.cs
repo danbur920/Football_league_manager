@@ -148,5 +148,17 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
             _context.Teams.Remove(teamToDelete);
             await _context.SaveChangesAsync();
         }
+
+        public async Task<List<Team>> GetTeamsFromSpecificSeason(int leagueSeasonId)
+        {
+            var teams = await _context.LeagueSeasons
+             .Where(x => x.Id == leagueSeasonId)
+             .Include(x => x.TeamsStats)
+             .ThenInclude(x => x.Team)
+             .SelectMany(x => x.TeamsStats.Select(x => x.Team))
+             .ToListAsync();
+
+            return teams;
+        }
     }
 }

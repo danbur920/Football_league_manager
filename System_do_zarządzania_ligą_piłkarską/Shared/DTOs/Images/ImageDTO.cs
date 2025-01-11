@@ -13,5 +13,6 @@ namespace System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Images
         public int? TeamId { get; set; }
         public int? RefereeId { get; set; }
         public int? LeagueId { get; set; }
+        public int? TrophyId { get; set; }
     }
 }

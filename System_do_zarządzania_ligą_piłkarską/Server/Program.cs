@@ -122,6 +122,7 @@ builder.Services.AddIdentityServer()
     .AddApiAuthorization<ApplicationUser, ApplicationDbContext>(options =>
     {
         options.IdentityResources["openid"].UserClaims.Add("role");
+        
         options.ApiResources.Single().UserClaims.Add("role");
     });
 

@@ -109,6 +109,13 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Controllers
             return Ok(teams);
         }
 
+        [HttpGet("season/{leagueSeasonId}")]
+        public async Task<IActionResult> GetBasicTeamInfoFromSpecificSeason([FromRoute] int leagueSeasonId)
+        {
+            var teams = await _teamService.GetBasicTeamInfoFromSpecificSeason(leagueSeasonId);
+            return Ok(teams);
+        }
+
         [HttpPost("league-master/add-team-to-season")]
         public async Task<IActionResult> AddTeamToTheSeason(NewTeamStatDTO newTeamStatDTO)
         {

@@ -70,6 +70,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTGVhZ3VlTWFzdGVyXFBhZ2VzXFNlYXNvbk1hbmFnZW1lbnRcQWRkVGVhbS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/danbu/Desktop/Prca Inż/Football_league_manager/System_do_zarządzania_ligą_piłkarską/Client/Areas/LeagueMaster/Pages/SeasonManagement/AddTrophy.razor]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTGVhZ3VlTWFzdGVyXFBhZ2VzXFNlYXNvbk1hbmFnZW1lbnRcQWRkVHJvcGh5LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/danbu/Desktop/Prca Inż/Football_league_manager/System_do_zarządzania_ligą_piłkarską/Client/Areas/LeagueMaster/Pages/SeasonManagement/MatchManagement.razor]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTGVhZ3VlTWFzdGVyXFBhZ2VzXFNlYXNvbk1hbmFnZW1lbnRcTWF0Y2hNYW5hZ2VtZW50LnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
@@ -98,8 +102,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTGVhZ3VlTWFzdGVyXFBhZ2VzXFRlYW1zTWFuYWdlbWVudFxUZWFtTWFuYWdlbWVudC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/danbu/Desktop/Prca Inż/Football_league_manager/System_do_zarządzania_ligą_piłkarską/Client/Areas/LeagueMaster/Pages/Trophies/CreatedTrophies.razor]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTGVhZ3VlTWFzdGVyXFBhZ2VzXFRyb3BoaWVzXENyZWF0ZWRUcm9waGllcy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/danbu/Desktop/Prca Inż/Football_league_manager/System_do_zarządzania_ligą_piłkarską/Client/Components/Alert.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xBbGVydC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/danbu/Desktop/Prca Inż/Football_league_manager/System_do_zarządzania_ligą_piłkarską/Client/Components/HomePage.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xIb21lUGFnZS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/danbu/Desktop/Prca Inż/Football_league_manager/System_do_zarządzania_ligą_piłkarską/Client/Components/Lineup.razor]
@@ -124,6 +136,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/danbu/Desktop/Prca Inż/Football_league_manager/System_do_zarządzania_ligą_piłkarską/Client/Components/PaginationBar.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdpbmF0aW9uQmFyLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/danbu/Desktop/Prca Inż/Football_league_manager/System_do_zarządzania_ligą_piłkarską/Client/Components/ScorersTable.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xTY29yZXJzVGFibGUucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/danbu/Desktop/Prca Inż/Football_league_manager/System_do_zarządzania_ligą_piłkarską/Client/Pages/Authentication.razor]

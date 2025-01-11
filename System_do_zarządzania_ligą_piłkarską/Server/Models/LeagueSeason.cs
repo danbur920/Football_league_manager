@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using System_do_zarządzania_ligą_piłkarską.Shared.Enums;
 
 namespace System_do_zarządzania_ligą_piłkarską.Server.Models
 {
@@ -22,25 +23,5 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Models
         public virtual ICollection<RefereeStat> RefereeStats { get; set; } = new List<RefereeStat>();
         public virtual ICollection<TeamStat> TeamsStats { get; set; } = new List<TeamStat>();
         public virtual ICollection<FootballerStat> FootballersStats { get; set; } = new List<FootballerStat>();
-    }
-
-    public enum Season
-    {
-        _Brak,
-        _2023,
-        _2023_2024,
-        _2024,
-        _2024_2025,
-        _2025,
-        _2025_2026,
-        _2026,
-        _2026_2027,
-        _2027,
-        _2027_2028,
-        _2028,
-        _2028_2029,
-        _2029,
-        _2029_2030,
-        _2030
     }
 }

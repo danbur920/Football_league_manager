@@ -30,6 +30,8 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Areas.Identity.Pages.A
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
         ///     directly from your code. This API may change or be removed in future releases.
         /// </summary>
+        /// 
+        [Display(Name ="Nazwa użytkownika")]
         public string Username { get; set; }
 
         /// <summary>
@@ -57,7 +59,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Areas.Identity.Pages.A
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
             [Phone]
-            [Display(Name = "Phone number")]
+            [Display(Name = "Numer telefonu")]
             public string PhoneNumber { get; set; }
         }
 
@@ -79,7 +81,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Areas.Identity.Pages.A
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
-                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+                return NotFound($"Nie można wczytać użytkownika z identyfikatorem: '{_userManager.GetUserId(User)}'.");
             }
 
             await LoadAsync(user);
@@ -91,7 +93,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Areas.Identity.Pages.A
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
-                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+                return NotFound($"Nie można wczytać użytkownika z identyfikatorem: '{_userManager.GetUserId(User)}'.");
             }
 
             if (!ModelState.IsValid)
@@ -106,13 +108,13 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Areas.Identity.Pages.A
                 var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, Input.PhoneNumber);
                 if (!setPhoneResult.Succeeded)
                 {
-                    StatusMessage = "Unexpected error when trying to set phone number.";
+                    StatusMessage = "Nieoczekiwany błąd podczas próby ustawienia numeru telefonu.";
                     return RedirectToPage();
                 }
             }
 
             await _signInManager.RefreshSignInAsync(user);
-            StatusMessage = "Your profile has been updated";
+            StatusMessage = "Twój profil został zaktualizowany.";
             return RedirectToPage();
         }
     }

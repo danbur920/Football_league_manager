@@ -23,7 +23,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Models
         public int? Weight { get; set; } // [kg] 
         public virtual Team? Team { get; set; }
         public virtual Image? Image { get; set; }
-        //public virtual ICollection<FootballerStat> FootballerStats { get; set; } = new List<FootballerStat>(); // to było zakomentowane
+        //public virtual ICollection<FootballerStat> FootballerStats { get; set; } = new List<FootballerStat>(); 
         //public virtual ICollection<Trophy> Trophies { get; set; } = new List<Trophy>();
     }
 }

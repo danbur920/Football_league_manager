@@ -5,5 +5,8 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories.Interface
     public interface ITrophyRepository
     {
         Task<List<Trophy>> GetTrophies();
+        Task AddTrophy(Trophy trophy);
+        Task DeleteTrophy(int trophyId);
+        Task<List<Trophy>> GetCreatedTrophiesByLeagueMaster(string userId);
     }
 }

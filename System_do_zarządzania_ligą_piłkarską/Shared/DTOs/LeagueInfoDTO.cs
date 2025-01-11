@@ -5,6 +5,7 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Images;
+using System_do_zarządzania_ligą_piłkarską.Shared.Enums;
 
 namespace System_do_zarządzania_ligą_piłkarską.Shared.DTOs
 {
@@ -19,16 +20,5 @@ namespace System_do_zarządzania_ligą_piłkarską.Shared.DTOs
         public virtual ApplicationUserDTO LeagueMasterPrimary { get; set; }
         [JsonIgnore]
         public virtual ICollection<LeagueSeasonDTO> LeagueSeasons { get; set; }
-    }
-
-    public enum Level
-    {
-        Brak,
-        Lokalna,       
-        Okręgowa,       
-        Regionalna,     
-        Krajowa,        
-        Kontynentalna, 
-        Międzykontynentalna 
     }
 }

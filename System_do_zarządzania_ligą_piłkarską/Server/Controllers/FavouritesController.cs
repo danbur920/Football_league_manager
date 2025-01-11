@@ -8,8 +8,8 @@ using System_do_zarządzania_ligą_piłkarską.Server.Models;
 using System_do_zarządzania_ligą_piłkarską.Server.Services;
 using System_do_zarządzania_ligą_piłkarską.Server.Services.Interfaces;
 using System_do_zarządzania_ligą_piłkarską.Shared.DTOs;
+using System_do_zarządzania_ligą_piłkarską.Shared.Enums;
 using static System.Net.WebRequestMethods;
-using FavouriteType = System_do_zarządzania_ligą_piłkarską.Shared.DTOs.FavouriteType;
 
 namespace System_do_zarządzania_ligą_piłkarską.Server.Controllers
 {

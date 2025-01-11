@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "c/0JLWaQik6RDjzLdUIL/0M0c5kLgqyWhZsXWKhWGBY=",
+  "Hash": "rCDuY3FWSxYhtLBEbrOQINW+02X3VFNfmyopTXFj21I=",
   "Source": "System_do_zarządzania_ligą_piłkarską.Client",
   "BasePath": "/",
   "Mode": "Root",
@@ -12196,6 +12196,25 @@
       "OriginalItemSpec": "wwwroot\\icon-192.png"
     },
     {
+      "Identity": "C:\\Users\\danbu\\Desktop\\Prca Inż\\Football_league_manager\\System_do_zarządzania_ligą_piłkarską\\Client\\wwwroot\\images\\admin-start.jpg",
+      "SourceId": "System_do_zarządzania_ligą_piłkarską.Client",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\danbu\\Desktop\\Prca Inż\\Football_league_manager\\System_do_zarządzania_ligą_piłkarską\\Client\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "images/admin-start.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\admin-start.jpg"
+    },
+    {
       "Identity": "C:\\Users\\danbu\\Desktop\\Prca Inż\\Football_league_manager\\System_do_zarządzania_ligą_piłkarską\\Client\\wwwroot\\images\\index.jpg",
       "SourceId": "System_do_zarządzania_ligą_piłkarską.Client",
       "SourceType": "Discovered",
@@ -12232,6 +12251,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\league-master-start.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\danbu\\Desktop\\Prca Inż\\Football_league_manager\\System_do_zarządzania_ligą_piłkarską\\Client\\wwwroot\\images\\logo.jpg",
+      "SourceId": "System_do_zarządzania_ligą_piłkarską.Client",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\danbu\\Desktop\\Prca Inż\\Football_league_manager\\System_do_zarządzania_ligą_piłkarską\\Client\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "images/logo.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\logo.jpg"
     },
     {
       "Identity": "C:\\Users\\danbu\\Desktop\\Prca Inż\\Football_league_manager\\System_do_zarządzania_ligą_piłkarską\\Client\\wwwroot\\index.html",

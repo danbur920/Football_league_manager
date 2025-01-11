@@ -4,6 +4,7 @@
 @using System_do_zarządzania_ligą_piłkarską.Shared.DTOs
 @using System_do_zarządzania_ligą_piłkarską.Client.Extensions
 @using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Teams
+@using System_do_zarządzania_ligą_piłkarską.Client.Components
 
 @inject PublicClient PublicClient
 @inject NavigationManager Navigation
@@ -14,7 +15,11 @@
     </div>
 
     <button class="btn btn-secondary mb-3" @onclick="GoBack">
-        <i class="fas fa-arrow-left"></i> Wróć
+        <i class="fas fa-arrow-left"></i> 
+    </button>
+
+    <button class="btn btn-success mb-3" @onclick="ToggleScorers">
+        @scorersText
     </button>
 
     <div class="mb-4">
@@ -32,7 +37,6 @@
             }
         </select>
     </div>
-
 
     <div class="table-responsive">
         <table class="table table-striped align-middle">
@@ -82,12 +86,19 @@
             </tbody>
         </table>
     </div>
+    @if (currentSeason != null && scorers != null && showScorers)
+    {
+        <ScorersTable Scorers="scorers"></ScorersTable>
+    }
 </div>
 
 @code {
     [Parameter] public int teamId { get; set; }
     private List<SeasonTeamStatsDTO>? seasons { get; set; }
     private SeasonTeamStatsDTO? currentSeason { get; set; }
+    private List<FootballerStatDTO>? scorers = new List<FootballerStatDTO>();
+    private bool showScorers = false;
+    private string scorersText = "Pokaż strzelców";
 
     protected override async Task OnInitializedAsync()
     {
@@ -96,15 +107,31 @@
         if (seasons != null && seasons.Count > 0)
         {
             currentSeason = seasons[0];
+            await LoadScorers();
         }
     }
 
-    private void OnSeasonChanged(ChangeEventArgs e)
+    private async Task LoadScorers()
+    {
+        scorers = await PublicClient.Client.GetFromJsonAsync<List<FootballerStatDTO>>($"api/leagues/{currentSeason.Id}/scorers");
+    }
+
+    private async Task OnSeasonChanged(ChangeEventArgs e)
     {
         if (int.TryParse(e.Value?.ToString(), out int selectedSeasonId))
         {
             currentSeason = seasons?.FirstOrDefault(s => s.Id == selectedSeasonId);
+            if (currentSeason != null)
+            {
+                await LoadScorers();
+            }
         }
+    }
+
+    private void ToggleScorers()
+    {
+        showScorers = !showScorers;
+        scorersText = showScorers ? "Ukryj strzelców" : "Pokaż strzelców";
     }
 
     private void GoBack()

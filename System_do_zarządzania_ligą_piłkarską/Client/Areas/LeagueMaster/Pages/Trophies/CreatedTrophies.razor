@@ -1,0 +1,156 @@
+﻿@using System_do_zarządzania_ligą_piłkarską.Shared.DTOs
+@using System_do_zarządzania_ligą_piłkarską.Client.Areas.LeagueMaster.Shared
+@using System_do_zarządzania_ligą_piłkarską.Client.Components
+@using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Teams
+@using System_do_zarządzania_ligą_piłkarską.Client.Extensions
+@using Microsoft.AspNetCore.Authorization
+@using System_do_zarządzania_ligą_piłkarską.Shared.Enums
+
+@page "/league-master/created-trophies"
+@layout LeagueMasterLayout
+@inject HttpClient Http
+@inject NavigationManager Navigation
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject AlertManager AlertManager
+@attribute [Authorize(Roles = "LeagueMaster")]
+
+<PageTitle>Stworzone trofea</PageTitle>
+
+<div class="container py-5">
+    <div class="row mb-4">
+        <div class="col text-center">
+            <h3 class="display-5 fw-bold text-primary">Stworzone trofea</h3>
+        </div>
+    </div>
+
+    <Alert Message="@AlertManager.Message" Type="@AlertManager.Type" IsVisible="@AlertManager.IsVisible" />
+
+    @if (trophies != null)
+    {
+        <table class="table table-hover table-bordered shadow-sm">
+            <thead class="table-primary">
+                <tr>
+                    <th class="text-center">Nazwa trofeum</th>
+                    <th class="text-center">Rok</th>
+                    <th class="text-center">Posiadacz</th>
+                    <th class="text-center">Zdjęcie</th>
+                    <th class="text-center">Działania</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (trophies.Count == 0)
+                {
+                    <tr>
+                        <td colspan="7" class="text-center">Brak danych do wyświetlenia</td>
+                    </tr>
+                }
+                else
+                {
+                    @foreach (var trophy in trophies)
+                    {
+                        <tr>
+                            <td class="align-middle text-center">@trophy.TrophyName</td>
+                            <td class="align-middle text-center">@trophy.YearWon</td>
+                            <td class="align-middle text-center">@trophy.TrophyOwner</td>
+                            <td class="align-middle text-center">
+                                @if (trophy.Image != null)
+                                {
+                                    <img src="@trophy.Image.Path" alt="Zdjęcie trofeum" class="img-thumbnail" style="max-width: 100px; max-height: 100px;">
+                                }
+                                else
+                                {
+                                    <span class="text-muted">Brak zdjęcia</span>
+                                }
+                            </td>
+                            <td class="align-middle text-center">
+                                <div class="btn-group">
+                                    <button class="btn btn-danger btn-sm" @onclick="() => DeleteTrophy(trophy.Id)">
+                                        Usuń
+                                    </button>
+                                    @if (trophy.Image == null)
+                                    {
+                                        <label class="btn btn-sm btn-info">
+                                            Dodaj zdjęcie trofeum
+                                            <InputFile OnChange="e => UploadPhoto(e, trophy.Id)" class="d-none" />
+                                        </label>
+                                    }
+                                    else
+                                    {
+                                        <label class="btn btn-sm btn-warning mt-2">
+                                            Zmień zdjęcie trofeum
+                                            <InputFile OnChange="e => UploadPhoto(e, trophy.Id)" class="d-none" />
+                                        </label>
+                                    }
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <div class="text-center">
+            <span class="spinner-border text-primary" role="status"></span>
+            <span class="visually-hidden">Ładowanie...</span>
+        </div>
+    }
+</div>
+
+
+@code {
+    private List<TrophyDTO>? trophies = new List<TrophyDTO>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadTrophies();
+    }
+
+    private async Task LoadTrophies()
+    {
+        trophies = await Http.GetFromJsonAsync<List<TrophyDTO>>("api/trophies/league-master/created-trophies");
+    }
+
+    private async Task DeleteTrophy(int trophyId)
+    {
+        var result = await Http.DeleteAsync($"api/trophies/league-master/{trophyId}");
+
+        if (result.IsSuccessStatusCode)
+        {
+            AlertManager.DisplayAlert($"Usunięto trofeum!", "success");
+            await LoadTrophies();
+        }
+        else
+        {
+            AlertManager.DisplayAlert($"Nie udało się usunąć trofeum.", "danger");
+        }
+    }
+
+    private async Task UploadPhoto(InputFileChangeEventArgs e, int trophyId)
+    {
+        if (e.File != null)
+        {
+            var file = e.File;
+
+            var formData = new MultipartFormDataContent();
+            var stream = file.OpenReadStream(file.Size);
+            formData.Add(new StreamContent(stream), "File", file.Name);
+
+            formData.Add(new StringContent(trophyId.ToString()), "TrophyId");
+            formData.Add(new StringContent(ImageType.Trophy.ToString()), "Type");
+
+            var response = await Http.PostAsync("api/images", formData);
+
+            if (response.IsSuccessStatusCode)
+            {
+                AlertManager.DisplayAlert("Zdjęcie zostało dodane.", "success");
+                await LoadTrophies();
+            }
+            else
+            {
+                AlertManager.DisplayAlert("Nie udało się dodać zdjęcia.", "danger");
+            }
+        }
+    }
+}

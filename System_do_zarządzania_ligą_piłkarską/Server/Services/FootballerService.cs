@@ -5,6 +5,7 @@ using System_do_zarządzania_ligą_piłkarską.Server.Services.Interfaces;
 using System_do_zarządzania_ligą_piłkarską.Shared.DTOs;
 using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Footballers;
 using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Matches;
+using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Trophies;
 
 namespace System_do_zarządzania_ligą_piłkarską.Server.Services
 {
@@ -46,6 +47,12 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Services
         {
             var footballers = await _footballerRepository.GetFootballersFromSpecificTeam(teamId);
             return _mapper.Map<List<ShortFootballerInfoDTO>>(footballers);
+        }
+
+        public async Task<List<FootballerTrophyCandidateDTO>> GetBasicFootballerInfoFromSpecificSeason(int leagueSeasonId)
+        {
+            var footballers = await _footballerRepository.GetFootballersFromSpecificSeason(leagueSeasonId);
+            return _mapper.Map<List<FootballerTrophyCandidateDTO>>(footballers);
         }
 
         public async Task AddNewFootballerToTeam(NewFootballerDTO newFootballer) // Dodać logikę do dodawania footballers stats!

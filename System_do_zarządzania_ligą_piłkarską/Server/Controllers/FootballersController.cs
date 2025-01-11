@@ -35,6 +35,13 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Controllers
             return Ok(players);
         }
 
+        [HttpGet("season/{leagueSeasonId}")]
+        public async Task<IActionResult> GetBasicFootballerInfoFromSpecificSeason([FromRoute] int leagueSeasonId)
+        {
+            var players = await _footballerService.GetBasicFootballerInfoFromSpecificSeason(leagueSeasonId);
+            return Ok(players);
+        }
+
         [HttpGet("count")]
         public async Task<IActionResult> GetTotalPlayersCount()
         {

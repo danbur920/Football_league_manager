@@ -9,6 +9,7 @@
 
 .navbar-brand[b-iodi5cxajw] {
     font-size: 1.1rem;
+    padding-left: 1.5rem;
 }
 
 .oi[b-iodi5cxajw] {
@@ -18,17 +19,21 @@
     top: -2px;
 }
 
+
 .nav-info[b-iodi5cxajw] {
-    font-size: 1rem; /* Zwi�kszenie rozmiaru czcionki */
+    font-size: 1rem;
     color: #ffffff;
     padding: 0.75rem 0;
-    text-align: center;
-    background-color: rgba(0, 0, 0, 0.6); /* T�o dla sekcji faworyt�w */
-    border-top: 1px solid rgba(255, 255, 255, 0.3); /* Linia oddzielaj�ca */
-    border-bottom: 1px solid rgba(255, 255, 255, 0.3); /* Linia oddzielaj�ca */
+    background-color: rgba(0, 0, 0, 0.6);
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
     margin-top: 1rem;
     margin-bottom: 0.5rem;
-    letter-spacing: 0.05rem; /* Dodanie odst�p�w mi�dzy literami */
+    letter-spacing: 0.05rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 
 .nav-item[b-iodi5cxajw] {
@@ -51,7 +56,7 @@
         display: flex;
         align-items: center;
         line-height: 3rem;
-        padding: 0 0.75rem; /* Dodanie wewn�trznego odst�pu */
+        padding: 0 0.75rem;
     }
 
         .nav-item[b-iodi5cxajw]  a.active {
@@ -70,12 +75,10 @@
     }
 
     .collapse[b-iodi5cxajw] {
-        /* Nigdy nie zwijaj paska bocznego na szerokich ekranach */
         display: block;
     }
 
     .nav-scrollable[b-iodi5cxajw] {
-        /* Umo�liwia przewijanie paska bocznego dla wysokich menu */
         height: calc(100vh - 3.5rem);
         overflow-y: auto;
     }

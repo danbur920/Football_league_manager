@@ -6,25 +6,37 @@
 
 <AuthorizeView>
     <Authorized>
-        <a href="/" class="btn btn-info m-1">Strona główna</a>
-        <a href="authentication/profile" class="btn btn-dark m-1">Zarządzaj kontem</a>
+        <div class="header-container">
+            <span class="header-text">⚽ System do zarządzania ligą piłkarską ⚽</span>
+            <div class="action-buttons">
+                <a href="/" class="btn btn-light m-1">Strona główna</a>
+                <a href="authentication/profile" class="btn btn-light m-1">Zarządzaj kontem</a>
 
-        @if (checkUserRole == "Admin")
-        {
-            <a href="admin/start" class="btn btn-dark m-1">Admin Panel</a>
-        }
-        else if (checkUserRole == "LeagueMaster")
-        {
-            <a href="league-master/start" class="btn btn-dark m-1">League Master Panel</a>
-        }
+                @if (checkUserRole == "Admin")
+                {
+                    <a href="admin/start" class="btn btn-primary m-1">Panel Admina</a>
+                }
+                else if (checkUserRole == "LeagueMaster")
+                {
+                    <a href="league-master/start" class="btn btn-primary m-1">Panel zarządcy</a>
+                }
 
-        <button class="btn btn-dark m-1" @onclick="BeginLogOut">Wyloguj się</button>
+                <button class="btn btn-outline-light m-1" @onclick="BeginLogOut">Wyloguj się</button>
+            </div>
+        </div>
     </Authorized>
     <NotAuthorized>
-        <a href="authentication/register" class="btn btn-secondary m-1">Register</a>
-        <a href="authentication/login" class="btn btn-primary m-1">Log in</a>
+        <div class="header-container">
+            <span class="header-text">⚽ System do zarządzania ligą piłkarską ⚽</span>
+            <div class="action-buttons">
+                <a href="authentication/register" class="btn btn-outline-light m-1">Rejestracja</a>
+                <a href="authentication/login" class="btn btn-outline-light m-1">Logowanie</a>
+            </div>
+        </div>
     </NotAuthorized>
 </AuthorizeView>
+
+
 
 @code {
     string checkUserRole;
@@ -62,3 +74,26 @@
         AuthenticationStateProvider.AuthenticationStateChanged -= OnAuthenticationStateChanged;
     }
 }
+<style>
+    .header-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        padding: 0 1rem;
+        box-sizing: border-box;
+    }
+
+    .header-text {
+        font-size: 1.25rem;
+        font-weight: bold;
+        color: white;
+        flex-shrink: 0;
+    }
+
+    .action-buttons {
+        display: flex;
+        gap: 0.5rem;
+        justify-content: flex-end;
+    }
+</style>

@@ -1,7 +1,7 @@
 ﻿using System.Security.Claims;
 using System_do_zarządzania_ligą_piłkarską.Server.Repositories.Interfaces;
 using System_do_zarządzania_ligą_piłkarską.Shared.DTOs;
-using FavouriteType = System_do_zarządzania_ligą_piłkarską.Shared.DTOs.FavouriteType;
+using System_do_zarządzania_ligą_piłkarską.Shared.Enums;
 
 namespace System_do_zarządzania_ligą_piłkarską.Server.Services.Interfaces
 {

@@ -529,6 +529,9 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Data.Migrations
                     b.Property<int?>("TeamId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("TrophyId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("FootballerId")
@@ -546,6 +549,10 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Data.Migrations
                     b.HasIndex("TeamId")
                         .IsUnique()
                         .HasFilter("[TeamId] IS NOT NULL");
+
+                    b.HasIndex("TrophyId")
+                        .IsUnique()
+                        .HasFilter("[TrophyId] IS NOT NULL");
 
                     b.ToTable("Images");
                 });
@@ -948,7 +955,13 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("CreatorId")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int?>("FootballerId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("LeagueSeasonId")
                         .HasColumnType("int");
 
                     b.Property<int?>("TeamId")
@@ -968,6 +981,8 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("FootballerId");
+
+                    b.HasIndex("LeagueSeasonId");
 
                     b.HasIndex("TeamId");
 
@@ -1090,6 +1105,10 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Data.Migrations
                         .WithOne("Image")
                         .HasForeignKey("System_do_zarządzania_ligą_piłkarską.Server.Models.Image", "TeamId");
 
+                    b.HasOne("System_do_zarządzania_ligą_piłkarską.Server.Models.Trophy", "Trophy")
+                        .WithOne("Image")
+                        .HasForeignKey("System_do_zarządzania_ligą_piłkarską.Server.Models.Image", "TrophyId");
+
                     b.Navigation("Footballer");
 
                     b.Navigation("League");
@@ -1097,6 +1116,8 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Data.Migrations
                     b.Navigation("Referee");
 
                     b.Navigation("Team");
+
+                    b.Navigation("Trophy");
                 });
 
             modelBuilder.Entity("System_do_zarządzania_ligą_piłkarską.Server.Models.LeagueInfo", b =>
@@ -1251,11 +1272,17 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Data.Migrations
                         .WithMany()
                         .HasForeignKey("FootballerId");
 
+                    b.HasOne("System_do_zarządzania_ligą_piłkarską.Server.Models.LeagueSeason", "LeagueSeason")
+                        .WithMany()
+                        .HasForeignKey("LeagueSeasonId");
+
                     b.HasOne("System_do_zarządzania_ligą_piłkarską.Server.Models.Team", "Team")
                         .WithMany("Trophies")
                         .HasForeignKey("TeamId");
 
                     b.Navigation("Footballer");
+
+                    b.Navigation("LeagueSeason");
 
                     b.Navigation("Team");
                 });
@@ -1322,6 +1349,11 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Data.Migrations
             modelBuilder.Entity("System_do_zarządzania_ligą_piłkarską.Server.Models.TeamStat", b =>
                 {
                     b.Navigation("FootballersStats");
+                });
+
+            modelBuilder.Entity("System_do_zarządzania_ligą_piłkarską.Server.Models.Trophy", b =>
+                {
+                    b.Navigation("Image");
                 });
 #pragma warning restore 612, 618
         }

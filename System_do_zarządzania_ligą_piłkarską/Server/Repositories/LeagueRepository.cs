@@ -34,6 +34,7 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Repositories
                 ThenInclude(x => x.Image).
                 FirstOrDefaultAsync(x => x.Id == id);
 
+            Console.WriteLine("test");
             return leagueSeason;
         }
 

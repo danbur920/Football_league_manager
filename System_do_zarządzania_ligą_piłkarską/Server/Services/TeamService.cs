@@ -6,6 +6,7 @@ using System_do_zarządzania_ligą_piłkarską.Server.Services.Interfaces;
 using System_do_zarządzania_ligą_piłkarską.Shared.DTOs;
 using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Referees;
 using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Teams;
+using System_do_zarządzania_ligą_piłkarską.Shared.DTOs.Trophies;
 
 namespace System_do_zarządzania_ligą_piłkarską.Server.Services
 {
@@ -152,6 +153,12 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Services
             currentTeam.Country = editTeam.Country;
 
             await _teamRepository.UpdateTeam(currentTeam);
+        }
+
+        public async Task<List<TeamTrophyCandidateDTO>> GetBasicTeamInfoFromSpecificSeason(int leagueSeasonId)
+        {
+            var teams = await _teamRepository.GetTeamsFromSpecificSeason(leagueSeasonId);
+            return _mapper.Map<List<TeamTrophyCandidateDTO>>(teams);
         }
     }
 }

@@ -10,9 +10,9 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Models
         public int? PrimaryFootballerId { get; set; } // strzelec gola,
                                                       // żółta/czerwona kartka,
                                                       // wykonawca rzutu karnego,
-                                                      // zawodnik schodzący
+                                                      // zawodnik wchodzący
         public int? SecondaryFootballerId { get; set; } // asystent gola,
-                                                        // zawodnik wchodzący
+                                                        // zawodnik schodzący
         public int? TeamId { get; set; } 
         public int? RefereeId { get; set; }
         public int? LeagueSeasonId { get; set; }
@@ -22,16 +22,4 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Models
         [JsonIgnore]
         public Match? Match { get; set; }
     }
-
-
-    //public enum EventType
-    //{
-    //    Goal,
-    //    YellowCard,
-    //    RedCard,
-    //    Penalty,
-    //    Substitution
-    //}
 }
-
-// Info: faule nie będą zdarzeniem meczowym. Ilość fauli będzie można wpisać podczas wpisywania wyniku meczu.

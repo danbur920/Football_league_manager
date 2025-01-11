@@ -1,4 +1,6 @@
-﻿namespace System_do_zarządzania_ligą_piłkarską.Server.Models
+﻿using System_do_zarządzania_ligą_piłkarską.Shared.Enums;
+
+namespace System_do_zarządzania_ligą_piłkarską.Server.Models
 {
     public class Favourite
     {
@@ -7,14 +9,5 @@
         public FavouriteType FavouriteType { get; set; }
         public int FavouriteId { get; set; }
         public virtual ApplicationUser? User { get; set; }
-    }
-
-    public enum FavouriteType
-    {
-        League,
-        Footballer,
-        Team,
-        Match,
-        Referee
     }
 }

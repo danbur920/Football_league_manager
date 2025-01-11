@@ -48,6 +48,11 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Services
                     imageTypeFolder = "referees";
                     imageEntityId = newImage.RefereeId;
                 }
+                else if (newImage.Type == ImageType.Trophy)
+                {
+                    imageTypeFolder = "trophies";
+                    imageEntityId = newImage.TrophyId;
+                }
 
                 imageName = $"{imageTypeFolder.Substring(0, imageTypeFolder.Length - 1)}-{imageEntityId}";
                 var relativePath = Path.Combine("images", imageTypeFolder, $"{imageName}.jpg");
@@ -69,14 +74,14 @@ namespace System_do_zarządzania_ligą_piłkarską.Server.Services
                     await newImage.File.CopyToAsync(stream);
                 }
 
-                // Zapis ścieżki względnej w bazie
                 var imageEntity = new Image
                 {
                     Path = relativePath.Replace("\\", "/"), 
                     FootballerId = newImage.FootballerId,
                     TeamId = newImage.TeamId,
                     RefereeId = newImage.RefereeId,
-                    LeagueId = newImage.LeagueId
+                    LeagueId = newImage.LeagueId,
+                    TrophyId = newImage.TrophyId
                 };
 
                 await _imageRepository.AddPhoto(imageEntity);

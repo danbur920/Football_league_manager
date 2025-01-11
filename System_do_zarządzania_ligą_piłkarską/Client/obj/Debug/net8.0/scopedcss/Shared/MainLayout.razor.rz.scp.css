@@ -6,6 +6,7 @@
 
 main[b-v94di5oln4] {
     flex: 1;
+    background-color: #f7f7f7;
 }
 
 .sidebar[b-v94di5oln4] {
@@ -13,14 +14,50 @@ main[b-v94di5oln4] {
 }
 
 .top-row[b-v94di5oln4] {
-    background-color: #f7f7f7;
-    border-bottom: 1px solid #d6d5d5;
+    background-color: #04163d;
+    border-bottom: 0px solid #d6d5d5;
     justify-content: flex-end;
     height: 3.5rem;
     display: flex;
     align-items: center;
     padding: 0 1rem;
 }
+
+/*.page {
+    display: flex;
+    flex-direction: column;  Uk�ad w pionie 
+    height: 100vh;  Wysoko�� pe�nego widoku 
+}
+
+.top-row {
+    background-color: #04163d;  Kolor t�a 
+    color: white;  Kolor tekstu 
+    padding: 1rem;  Odst�p wewn�trzny 
+    text-align: center;  Wy�rodkowanie tekstu 
+    width: 100%;  Rozci�gni�cie na ca�� szeroko�� 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);  Cie� 
+}
+
+.content-container {
+    display: flex;  Uk�ad poziomy 
+    flex: 1;  Rozci�gni�cie na ca�� dost�pn� przestrze� 
+}
+
+.sidebar {
+    width: 200px;  Szeroko�� paska bocznego 
+    background-color: #3a0647;  Kolor t�a 
+    color: white;  Kolor tekstu 
+    overflow-y: auto;  Scrollowanie w pionie 
+    padding: 1rem;  Odst�p wewn�trzny 
+    box-shadow: 2px 0 4px rgba(0, 0, 0, 0.1);  Cie� 
+}
+
+main {
+    flex: 1;  Rozci�ganie g��wnej sekcji 
+    background-color: #f7f7f7;  T�o 
+    padding: 1rem;  Odst�p wewn�trzny 
+    overflow-y: auto;  Scrollowanie w pionie 
+}*/
 
     .top-row[b-v94di5oln4]  a,
     .top-row[b-v94di5oln4]  .btn-link {
@@ -40,6 +77,46 @@ main[b-v94di5oln4] {
             text-overflow: ellipsis;
         }
 
+
+/*.layout-container {
+    display: flex;
+    flex-direction: column;*/ /* Uk�ad pionowy */
+    /*height: 100vh;*/ /* Ca�a wysoko�� widoku */
+    /*overflow: hidden;
+}
+
+.layout-header {
+    background-color: #211656;*/ /* Kolor t�a nag��wka */
+    /*color: white;*/ /* Kolor tekstu w nag��wku */
+    /*padding: 0.5rem 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);*/ /* Cie� nag��wka */
+    /*z-index: 10;*/ /* Wy�szy poziom, �eby nag��wek by� zawsze widoczny */
+/*}
+
+.layout-body {
+    display: flex;
+    flex: 1;*/ /* Rozci�ga si� na ca�� reszt� miejsca */
+    /*overflow: hidden;
+}
+
+.layout-sidebar {
+    padding-top: 0;*/ /* Usuwa padding z g�ry */
+    /*padding-bottom: 0;*/ /* Usuwa padding z do�u */
+    /*width: 250px;*/ /* Szeroko�� paska bocznego */
+    /*background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%);
+    color: white;
+    box-shadow: 2px 0 4px rgba(0, 0, 0, 0.1);
+}
+
+.layout-content {
+    flex: 1;
+    padding: 1rem;
+    overflow-y: auto;
+    background-color: #f7f7f7;
+}*/
+
+
+
 @media (max-width: 640.98px) {
     .top-row:not(.auth)[b-v94di5oln4] {
         display: none;
@@ -53,6 +130,7 @@ main[b-v94di5oln4] {
     .top-row[b-v94di5oln4]  a, .top-row[b-v94di5oln4]  .btn-link {
     }
 }
+
 
 @media (min-width: 641px) {
     .page[b-v94di5oln4] {
@@ -79,8 +157,7 @@ main[b-v94di5oln4] {
             width: auto;
         }
 
-    .top-row[b-v94di5oln4], article[b-v94di5oln4] {
-        padding-left: 2rem !important;
+    article[b-v94di5oln4] {
         padding-right: 1.5rem !important;
     }
 }
